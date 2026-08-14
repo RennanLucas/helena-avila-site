@@ -1167,10 +1167,11 @@ img {
 
 @media (max-width: 480px) {
     .testimonials-carousel-wrapper {
-        padding: 0 1rem;
+        padding: 0 2rem;
     }
     .testimonials-carousel-wrapper .carousel-btn {
-        display: none;
+        width: 40px;
+        height: 40px;
     }
 }
 
@@ -2596,10 +2597,24 @@ body {
 
 @media (max-width: 480px) {
     .credentials-slider-container {
-        padding: 0 1rem;
+        padding: 0 1.5rem;
     }
     .credentials-slider-container .cred-nav-btn {
-        display: none; /* Em telas muito pequenas o swipe nativo é melhor */
+        width: 40px;
+        height: 40px;
+    }
+    .credentials-slider-container .cred-nav-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+.mobile-only-btn {
+    display: none !important;
+}
+@media (max-width: 768px) {
+    .mobile-only-btn {
+        display: flex !important;
     }
 }
 

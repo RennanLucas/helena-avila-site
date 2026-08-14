@@ -162,7 +162,12 @@
                 <p class="section-subtitle">Uma fusão precisa entre ciência moderna e psicodinâmica profunda.</p>
             </div>
             
-            <div class="methodology-grid">
+            <div class="methodology-slider-wrapper" style="position: relative; max-width: 100%;">
+                <button class="cred-nav-btn mobile-only-btn" id="methodPrevBtn" aria-label="Anterior" style="position: absolute; left: 0px; top: 50%; transform: translateY(-50%); z-index: 10;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
+
+                <div class="methodology-grid" id="methodologyGrid">
                 <!-- Diferencial 1 -->
                 <div class="method-card reveal-left reveal-delay-1">
                     <div class="method-header">
@@ -214,6 +219,11 @@
                     <span class="method-tag">Constelação Familiar</span>
                     <p>A abordagem sistêmica permite olhar para além do indivíduo, identificando e curando padrões transmitidos através da história da família.</p>
                 </div>
+                </div>
+                
+                <button class="cred-nav-btn mobile-only-btn" id="methodNextBtn" aria-label="Próximo" style="position: absolute; right: 0px; top: 50%; transform: translateY(-50%); z-index: 10;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
             </div>
         </div>
     </section>

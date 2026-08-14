@@ -401,4 +401,20 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- 9. Lógica do Carrossel de Metodologia (Mobile) ---
+    const methodSlider = document.getElementById('methodologyGrid');
+    const methodPrevBtn = document.getElementById('methodPrevBtn');
+    const methodNextBtn = document.getElementById('methodNextBtn');
+
+    if (methodSlider && methodPrevBtn && methodNextBtn) {
+        methodPrevBtn.addEventListener('click', () => {
+            const cardWidth = methodSlider.querySelector('.method-card').offsetWidth + 20;
+            methodSlider.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+        });
+        methodNextBtn.addEventListener('click', () => {
+            const cardWidth = methodSlider.querySelector('.method-card').offsetWidth + 20;
+            methodSlider.scrollBy({ left: cardWidth, behavior: 'smooth' });
+        });
+    }
+
 });

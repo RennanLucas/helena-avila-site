@@ -1173,6 +1173,12 @@ img {
         width: 40px;
         height: 40px;
     }
+    .testimonials-carousel-wrapper .carousel-btn.prev {
+        left: -10px;
+    }
+    .testimonials-carousel-wrapper .carousel-btn.next {
+        right: -10px;
+    }
 }
 
 .testimonials-slider {
@@ -1214,7 +1220,7 @@ img {
 
 @media (max-width: 640px) {
     .testimonial-card {
-        flex: 0 0 92%;
+        flex: 0 0 76%;
         min-width: 260px;
     }
 }
@@ -3163,10 +3169,18 @@ body {
     .methodology-grid::-webkit-scrollbar, .specialties-grid::-webkit-scrollbar, .videos-grid::-webkit-scrollbar { 
         display: none; 
     }
-    .method-card, .specialty-card, .video-card {
-        flex: 0 0 88%;
-        min-width: 280px;
+    .method-card, .specialty-card, .video-card, .credential-card {
+        flex: 0 0 76% !important;
+        min-width: 260px !important;
         scroll-snap-align: center;
+    }
+    
+    .credentials-slider-container .cred-nav-btn, .methodology-slider-wrapper .cred-nav-btn {
+        left: -18px !important;
+    }
+    .credentials-slider-container #credNextBtn, .methodology-slider-wrapper #methodNextBtn {
+        left: auto !important;
+        right: -18px !important;
     }
 
     /* 4. Contact & Location */

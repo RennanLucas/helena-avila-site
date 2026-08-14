@@ -232,92 +232,100 @@
                 <p class="credentials-subtitle">Cada sessão é conduzida com o rigor de quem domina múltiplas abordagens terapêuticas, unindo ciência e profundidade clínica.</p>
             </div>
             
-            <!-- Grid de credenciais (7 Pilares Terapêuticos) -->
-            <div class="credentials-grid">
-                <!-- Card 01 -->
-                <div class="credential-card reveal reveal-delay-1">
-                    <div class="credential-number">01</div>
-                    <div class="credential-icon">
-                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
-                    </div>
-                    <h3 class="credential-name">Hipnose e PNL</h3>
-                    <p class="credential-desc">Técnicas avançadas de hipnose clínica e programação neurolinguística para acessar o subconsciente, reprogramar padrões limitantes e promover mudanças profundas e duradouras no comportamento e pensamento.</p>
-                    <div class="credential-badge">Reprogramação Subconsciente</div>
-                    <div class="credential-arrow">&rarr;</div>
-                </div>
+            <!-- Slider de credenciais (7 Pilares Terapêuticos) -->
+            <div class="credentials-slider-container" style="position: relative; max-width: 100%;">
+                <button class="carousel-btn prev-btn" id="credPrevBtn" aria-label="Pilar Anterior" style="position: absolute; left: -20px; top: 50%; transform: translateY(-50%); z-index: 10;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
 
-                <!-- Card 02 -->
-                <div class="credential-card reveal reveal-delay-2">
-                    <div class="credential-number">02</div>
-                    <div class="credential-icon">
-                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                <div class="credentials-slider" id="credentialsSlider" style="display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; gap: 1.5rem; padding: 1rem 0 2rem 0; scrollbar-width: none; -ms-overflow-style: none;">
+                    
+                    <!-- Card 01 -->
+                    <div class="credential-card reveal reveal-delay-1" style="flex: 0 0 340px; scroll-snap-align: start;">
+                        <div class="credential-number">01</div>
+                        <div class="credential-icon">
+                            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+                        </div>
+                        <h3 class="credential-name">Hipnose e PNL</h3>
+                        <p class="credential-desc">Técnicas avançadas de hipnose clínica e programação neurolinguística para acessar o subconsciente, reprogramar padrões limitantes e promover mudanças profundas e duradouras no comportamento e pensamento.</p>
+                        <div class="credential-badge">Reprogramação Subconsciente</div>
                     </div>
-                    <h3 class="credential-name">Constelação Sistêmica Familiar</h3>
-                    <p class="credential-desc">Método terapêutico que revela e transforma dinâmicas familiares inconscientes, identificando padrões hereditários que influenciam comportamentos atuais e promovendo cura sistêmica através da compreensão das relações familiares.</p>
-                    <div class="credential-badge">Cura Sistêmica</div>
-                    <div class="credential-arrow">&rarr;</div>
-                </div>
 
-                <!-- Card 03 -->
-                <div class="credential-card reveal reveal-delay-3">
-                    <div class="credential-number">03</div>
-                    <div class="credential-icon">
-                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"></path><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"></path></svg>
+                    <!-- Card 02 -->
+                    <div class="credential-card reveal reveal-delay-2" style="flex: 0 0 340px; scroll-snap-align: start;">
+                        <div class="credential-number">02</div>
+                        <div class="credential-icon">
+                            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                        </div>
+                        <h3 class="credential-name">Constelação Sistêmica Familiar</h3>
+                        <p class="credential-desc">Método terapêutico que revela e transforma dinâmicas familiares inconscientes, identificando padrões hereditários que influenciam comportamentos atuais e promovendo cura sistêmica através da compreensão das relações familiares.</p>
+                        <div class="credential-badge">Cura Sistêmica</div>
                     </div>
-                    <h3 class="credential-name">Neurociência</h3>
-                    <p class="credential-desc">Aplicação de descobertas neurocientíficas modernas para compreender como o cérebro processa emoções e memórias, utilizando técnicas baseadas em evidências para promover neuroplasticidade e facilitar mudanças duradouras nos padrões neurais.</p>
-                    <div class="credential-badge">Base Científica</div>
-                    <div class="credential-arrow">&rarr;</div>
-                </div>
 
-                <!-- Card 04 -->
-                <div class="credential-card reveal reveal-delay-4">
-                    <div class="credential-number">04</div>
-                    <div class="credential-icon">
-                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.72-8.72 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                    <!-- Card 03 -->
+                    <div class="credential-card reveal reveal-delay-3" style="flex: 0 0 340px; scroll-snap-align: start;">
+                        <div class="credential-number">03</div>
+                        <div class="credential-icon">
+                            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"></path><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"></path></svg>
+                        </div>
+                        <h3 class="credential-name">Neurociência</h3>
+                        <p class="credential-desc">Aplicação de descobertas neurocientíficas modernas para compreender como o cérebro processa emoções e memórias, utilizando técnicas baseadas em evidências para promover neuroplasticidade e facilitar mudanças duradouras nos padrões neurais.</p>
+                        <div class="credential-badge">Base Científica</div>
                     </div>
-                    <h3 class="credential-name">Inteligência Emocional</h3>
-                    <p class="credential-desc">Desenvolvimento da capacidade de reconhecer, compreender e gerenciar emoções de forma saudável, fortalecendo habilidades de autorregulação, empatia e comunicação assertiva para relacionamentos mais equilibrados e satisfatórios.</p>
-                    <div class="credential-badge">Gestão Emocional</div>
-                    <div class="credential-arrow">&rarr;</div>
-                </div>
 
-                <!-- Card 05 -->
-                <div class="credential-card reveal reveal-delay-1">
-                    <div class="credential-number">05</div>
-                    <div class="credential-icon">
-                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                    <!-- Card 04 -->
+                    <div class="credential-card reveal reveal-delay-4" style="flex: 0 0 340px; scroll-snap-align: start;">
+                        <div class="credential-number">04</div>
+                        <div class="credential-icon">
+                            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.72-8.72 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+                        </div>
+                        <h3 class="credential-name">Inteligência Emocional</h3>
+                        <p class="credential-desc">Desenvolvimento da capacidade de reconhecer, compreender e gerenciar emoções de forma saudável, fortalecendo habilidades de autorregulação, empatia e comunicação assertiva para relacionamentos mais equilibrados e satisfatórios.</p>
+                        <div class="credential-badge">Gestão Emocional</div>
                     </div>
-                    <h3 class="credential-name">TCC - Terapia Cognitivo Comportamental</h3>
-                    <p class="credential-desc">Abordagem estruturada que identifica e modifica padrões de pensamento disfuncionais, desenvolvendo estratégias práticas para mudança comportamental e oferecendo ferramentas concretas para lidar com ansiedade, depressão e outros desafios emocionais.</p>
-                    <div class="credential-badge">Ferramentas Práticas</div>
-                    <div class="credential-arrow">&rarr;</div>
-                </div>
 
-                <!-- Card 06 -->
-                <div class="credential-card reveal reveal-delay-2">
-                    <div class="credential-number">06</div>
-                    <div class="credential-icon">
-                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+                    <!-- Card 05 -->
+                    <div class="credential-card reveal reveal-delay-1" style="flex: 0 0 340px; scroll-snap-align: start;">
+                        <div class="credential-number">05</div>
+                        <div class="credential-icon">
+                            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                        </div>
+                        <h3 class="credential-name">TCC - Terapia Cognitivo Comportamental</h3>
+                        <p class="credential-desc">Abordagem estruturada que identifica e modifica padrões de pensamento disfuncionais, desenvolvendo estratégias práticas para mudança comportamental e oferecendo ferramentas concretas para lidar com ansiedade, depressão e outros desafios emocionais.</p>
+                        <div class="credential-badge">Ferramentas Práticas</div>
                     </div>
-                    <h3 class="credential-name">Psicanálise</h3>
-                    <p class="credential-desc">Exploração profunda do inconsciente através da análise do ser, associações livres e transferência, revelando conflitos internos e padrões inconscientes que influenciam comportamentos, promovendo insight e transformação psíquica duradoura.</p>
-                    <div class="credential-badge">Análise Profunda</div>
-                    <div class="credential-arrow">&rarr;</div>
-                </div>
 
-                <!-- Card 07 -->
-                <div class="credential-card reveal reveal-delay-3">
-                    <div class="credential-number">07</div>
-                    <div class="credential-icon">
-                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    <!-- Card 06 -->
+                    <div class="credential-card reveal reveal-delay-2" style="flex: 0 0 340px; scroll-snap-align: start;">
+                        <div class="credential-number">06</div>
+                        <div class="credential-icon">
+                            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+                        </div>
+                        <h3 class="credential-name">Psicanálise</h3>
+                        <p class="credential-desc">Exploração profunda do inconsciente através da análise do ser, associações livres e transferência, revelando conflitos internos e padrões inconscientes que influenciam comportamentos, promovendo insight e transformação psíquica duradoura.</p>
+                        <div class="credential-badge">Análise Profunda</div>
                     </div>
-                    <h3 class="credential-name">Psicodrama</h3>
-                    <p class="credential-desc">Técnica terapêutica que utiliza representação cênica e dramatização para explorar conflitos internos, permitindo a vivência de diferentes perspectivas e facilitando a resolução de questões emocionais através da expressão corporal e teatral.</p>
-                    <div class="credential-badge">Expressão Cênica</div>
-                    <div class="credential-arrow">&rarr;</div>
+
+                    <!-- Card 07 -->
+                    <div class="credential-card reveal reveal-delay-3" style="flex: 0 0 340px; scroll-snap-align: start;">
+                        <div class="credential-number">07</div>
+                        <div class="credential-icon">
+                            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        </div>
+                        <h3 class="credential-name">Psicodrama</h3>
+                        <p class="credential-desc">Técnica terapêutica que utiliza representação cênica e dramatização para explorar conflitos internos, permitindo a vivência de diferentes perspectivas e facilitando a resolução de questões emocionais através da expressão corporal e teatral.</p>
+                        <div class="credential-badge">Expressão Cênica</div>
+                    </div>
                 </div>
+                
+                <button class="carousel-btn next-btn" id="credNextBtn" aria-label="Próximo Pilar" style="position: absolute; right: -20px; top: 50%; transform: translateY(-50%); z-index: 10;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
             </div>
+            
+            <style>
+                .credentials-slider::-webkit-scrollbar { display: none; }
+            </style>
             
             <!-- Frase de autoridade -->
             <div class="credentials-quote reveal">

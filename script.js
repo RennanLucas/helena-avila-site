@@ -385,4 +385,20 @@ document.addEventListener('DOMContentLoaded', () => {
         el.addEventListener('mouseleave', () => cursorDot.classList.remove('cursor-hover'));
     });
 
+    // --- 8. Lógica do Carrossel de Credenciais ---
+    const credSlider = document.getElementById('credentialsSlider');
+    const credPrevBtn = document.getElementById('credPrevBtn');
+    const credNextBtn = document.getElementById('credNextBtn');
+
+    if (credSlider && credPrevBtn && credNextBtn) {
+        credPrevBtn.addEventListener('click', () => {
+            const cardWidth = credSlider.querySelector('.credential-card').offsetWidth + 24;
+            credSlider.scrollBy({ left: -cardWidth, behavior: 'smooth' });
+        });
+        credNextBtn.addEventListener('click', () => {
+            const cardWidth = credSlider.querySelector('.credential-card').offsetWidth + 24;
+            credSlider.scrollBy({ left: cardWidth, behavior: 'smooth' });
+        });
+    }
+
 });

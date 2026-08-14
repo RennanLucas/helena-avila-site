@@ -234,11 +234,7 @@
             
             <!-- Slider de credenciais (7 Pilares Terapêuticos) -->
             <div class="credentials-slider-container" style="position: relative; max-width: 100%;">
-                <button class="carousel-btn prev-btn" id="credPrevBtn" aria-label="Pilar Anterior" style="position: absolute; left: -20px; top: 50%; transform: translateY(-50%); z-index: 10;">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
-                </button>
-
-                <div class="credentials-slider" id="credentialsSlider" style="display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; gap: 1.5rem; padding: 1rem 0 2rem 0; scrollbar-width: none; -ms-overflow-style: none;">
+                <div class="credentials-slider" id="credentialsSlider" style="display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; gap: 1.5rem; padding: 1rem 0; scrollbar-width: none; -ms-overflow-style: none;">
                     
                     <!-- Card 01 -->
                     <div class="credential-card reveal reveal-delay-1" style="flex: 0 0 340px; scroll-snap-align: start;">
@@ -318,9 +314,15 @@
                     </div>
                 </div>
                 
-                <button class="carousel-btn next-btn" id="credNextBtn" aria-label="Próximo Pilar" style="position: absolute; right: -20px; top: 50%; transform: translateY(-50%); z-index: 10;">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
-                </button>
+                <!-- Botões fora dos cards para evitar sobreposição -->
+                <div class="cred-nav-controls" style="display: flex; gap: 1rem; justify-content: center; margin-top: 2rem;">
+                    <button class="cred-nav-btn" id="credPrevBtn" aria-label="Pilar Anterior">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+                    </button>
+                    <button class="cred-nav-btn" id="credNextBtn" aria-label="Próximo Pilar">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+                    </button>
+                </div>
             </div>
             
             <style>

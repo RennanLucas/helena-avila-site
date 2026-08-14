@@ -2437,6 +2437,8 @@ body {
     position: relative;
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
 }
 
 .credential-arrow {
@@ -2535,6 +2537,8 @@ body {
 /* Badge do Pilar */
 .credential-badge {
     display: inline-block;
+    align-self: flex-start;
+    margin-top: auto;
     font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 0.12em;
@@ -2558,6 +2562,29 @@ body {
     margin: 0 auto;
     text-align: center;
     position: relative;
+}
+
+/* Botões do Carrossel de Credenciais */
+.cred-nav-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: transparent;
+    border: 1px solid rgba(197, 160, 89, 0.3);
+    color: rgba(197, 160, 89, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cred-nav-btn:hover {
+    background: var(--color-terracotta);
+    color: #FFFFFF;
+    border-color: var(--color-terracotta);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(197, 160, 89, 0.25);
 }
 
 .credentials-quote-line {

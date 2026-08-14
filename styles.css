@@ -3169,16 +3169,16 @@ body {
     .methodology-grid::-webkit-scrollbar, .specialties-grid::-webkit-scrollbar, .videos-grid::-webkit-scrollbar { 
         display: none; 
     }
-    .method-card, .specialty-card, .video-card, .credential-card {
+    .method-card, .specialty-card, .video-card {
         flex: 0 0 76% !important;
         min-width: 260px !important;
         scroll-snap-align: center;
     }
     
-    .credentials-slider-container .cred-nav-btn, .methodology-slider-wrapper .cred-nav-btn {
+    .methodology-slider-wrapper .cred-nav-btn {
         left: -18px !important;
     }
-    .credentials-slider-container #credNextBtn, .methodology-slider-wrapper #methodNextBtn {
+    .methodology-slider-wrapper #methodNextBtn {
         left: auto !important;
         right: -18px !important;
     }

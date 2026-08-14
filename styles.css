@@ -2564,27 +2564,59 @@ body {
     position: relative;
 }
 
-/* Botões do Carrossel de Credenciais */
+/* Botões do Carrossel de Credenciais — Premium */
 .cred-nav-btn {
-    width: 48px;
-    height: 48px;
+    width: 52px;
+    height: 52px;
     border-radius: 50%;
-    background: transparent;
-    border: 1px solid rgba(197, 160, 89, 0.3);
-    color: rgba(197, 160, 89, 0.6);
+    background: rgba(197, 160, 89, 0.06);
+    border: 1.5px solid rgba(197, 160, 89, 0.2);
+    color: var(--color-terracotta);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.cred-nav-btn svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
 }
 
 .cred-nav-btn:hover {
     background: var(--color-terracotta);
     color: #FFFFFF;
     border-color: var(--color-terracotta);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(197, 160, 89, 0.25);
+    transform: scale(1.08);
+    box-shadow: 0 0 0 4px rgba(197, 160, 89, 0.12), 0 8px 24px rgba(197, 160, 89, 0.2);
+}
+
+.cred-nav-btn:hover svg {
+    transform: scale(1.15);
+}
+
+.cred-nav-btn:active {
+    transform: scale(0.95);
+}
+
+/* Linha decorativa entre os botões */
+.cred-nav-controls {
+    position: relative;
+}
+
+.cred-nav-controls::before {
+    content: '';
+    width: 40px;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent, rgba(197, 160, 89, 0.3), transparent);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .credentials-quote-line {

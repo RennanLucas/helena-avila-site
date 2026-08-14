@@ -2564,6 +2564,28 @@ body {
     position: relative;
 }
 
+/* Container do Slider de Credenciais */
+.credentials-slider-container {
+    position: relative;
+    max-width: 100%;
+    padding: 0 4rem;
+}
+
+@media (max-width: 768px) {
+    .credentials-slider-container {
+        padding: 0 3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .credentials-slider-container {
+        padding: 0 1rem;
+    }
+    .credentials-slider-container .cred-nav-btn {
+        display: none; /* Em telas muito pequenas o swipe nativo é melhor */
+    }
+}
+
 /* Botões do Carrossel de Credenciais — Premium */
 .cred-nav-btn {
     width: 52px;

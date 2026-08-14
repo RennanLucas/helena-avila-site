@@ -1156,6 +1156,22 @@ img {
 .testimonials-carousel-wrapper {
     position: relative;
     margin-top: 3.5rem;
+    padding: 0 4rem;
+}
+
+@media (max-width: 768px) {
+    .testimonials-carousel-wrapper {
+        padding: 0 3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .testimonials-carousel-wrapper {
+        padding: 0 1rem;
+    }
+    .testimonials-carousel-wrapper .carousel-btn {
+        display: none;
+    }
 }
 
 .testimonials-slider {
@@ -1222,20 +1238,11 @@ img {
 }
 
 .carousel-btn.prev-btn {
-    left: -26px;
+    left: 0;
 }
 
 .carousel-btn.next-btn {
-    right: -26px;
-}
-
-@media (max-width: 1024px) {
-    .carousel-btn.prev-btn {
-        left: -12px;
-    }
-    .carousel-btn.next-btn {
-        right: -12px;
-    }
+    right: 0;
 }
 
 .carousel-btn:hover {

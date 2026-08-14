@@ -3160,12 +3160,26 @@ body {
         scroll-snap-type: x mandatory;
         gap: 1.25rem;
         padding-bottom: 2rem;
+        scrollbar-width: none;
+    }
+    
+    .methodology-slider-wrapper {
+        margin-left: -1.75rem;
+        margin-right: -1.75rem;
+    }
+    
+    .methodology-grid {
+        padding-left: 4rem;
+        padding-right: 4rem;
+    }
+    
+    .specialties-grid, .videos-grid {
         margin-left: -1.75rem;
         margin-right: -1.75rem;
         padding-left: 1.75rem;
         padding-right: 1.75rem;
-        scrollbar-width: none;
     }
+
     .methodology-grid::-webkit-scrollbar, .specialties-grid::-webkit-scrollbar, .videos-grid::-webkit-scrollbar { 
         display: none; 
     }
@@ -3176,11 +3190,11 @@ body {
     }
     
     .methodology-slider-wrapper .cred-nav-btn {
-        left: -18px !important;
+        left: 12px !important;
     }
     .methodology-slider-wrapper #methodNextBtn {
         left: auto !important;
-        right: -18px !important;
+        right: 12px !important;
     }
 
     /* 4. Contact & Location */

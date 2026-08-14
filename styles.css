@@ -1193,7 +1193,7 @@ img {
 .testimonial-card {
     flex: 0 0 calc(33.333% - 1.2rem);
     min-width: 310px;
-    scroll-snap-align: start;
+    scroll-snap-align: center;
     background: #FFFFFF;
     padding: 2.2rem;
     border-radius: var(--radius-md);
@@ -1213,8 +1213,8 @@ img {
 
 @media (max-width: 640px) {
     .testimonial-card {
-        flex: 0 0 88%;
-        min-width: 280px;
+        flex: 0 0 92%;
+        min-width: 260px;
     }
 }
 

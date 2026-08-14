@@ -767,11 +767,31 @@ img {
     background: var(--color-bg-surface);
 }
 
+.methodology-slider-wrapper {
+    position: relative;
+    width: 100%;
+    margin-top: 4rem;
+}
+
+.methodology-slider-wrapper .cred-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.methodology-slider-wrapper #methodPrevBtn {
+    left: 0;
+}
+
+.methodology-slider-wrapper #methodNextBtn {
+    right: 0;
+}
+
 .methodology-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 2rem;
-    margin-top: 4rem;
 }
 
 .method-card {

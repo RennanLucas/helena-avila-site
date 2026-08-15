@@ -3174,8 +3174,12 @@ body {
     /* 2. Hero Section Refinements */
     .hero-stats {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: center;
+        text-align: center;
         gap: 1.5rem;
+    }
+    .stat-item {
+        align-items: center;
     }
     .stat-divider { display: none; }
     .hero-image-box { height: 420px; }
@@ -3183,40 +3187,54 @@ body {
     .badge-1 { top: 20px; left: -10px; }
     .badge-2 { bottom: 20px; right: -10px; }
 
-    /* 3. Methodology & Specialties - Swipeable Sliders */
-    .methodology-grid, .specialties-grid, .videos-grid {
+    /* 3. Methodology, Specialties, Videos, Credentials & Testimonials - Swipeable Sliders */
+    .cred-nav-btn, .carousel-btn {
+        width: 36px !important;
+        height: 36px !important;
+    }
+    .cred-nav-btn svg, .carousel-btn svg {
+        width: 16px !important;
+        height: 16px !important;
+    }
+    
+    .methodology-slider-wrapper,
+    .credentials-slider-container,
+    .testimonials-carousel-wrapper,
+    .specialties-grid,
+    .videos-grid {
+        margin-left: -1.75rem !important;
+        margin-right: -1.75rem !important;
+        width: auto !important;
+        padding: 0 !important;
+    }
+    
+    .methodology-grid, 
+    .credentials-slider, 
+    .testimonials-slider,
+    .specialties-grid,
+    .videos-grid {
         display: flex !important;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        gap: 1.25rem;
-        padding-bottom: 2rem;
-        scrollbar-width: none;
+        overflow-x: auto !important;
+        scroll-snap-type: x mandatory !important;
+        gap: 1.25rem !important;
+        padding-bottom: 2rem !important;
+        scrollbar-width: none !important;
+        padding-left: 14vw !important;
+        padding-right: 14vw !important;
     }
     
-    .methodology-slider-wrapper {
-        margin-left: -1.75rem;
-        margin-right: -1.75rem;
+    .methodology-grid::-webkit-scrollbar, 
+    .specialties-grid::-webkit-scrollbar, 
+    .videos-grid::-webkit-scrollbar, 
+    .credentials-slider::-webkit-scrollbar, 
+    .testimonials-slider::-webkit-scrollbar { 
+        display: none !important; 
     }
     
-    .methodology-grid {
-        padding-left: 4rem;
-        padding-right: 4rem;
-    }
-    
-    .specialties-grid, .videos-grid {
-        margin-left: -1.75rem;
-        margin-right: -1.75rem;
-        padding-left: 1.75rem;
-        padding-right: 1.75rem;
-    }
-
-    .methodology-grid::-webkit-scrollbar, .specialties-grid::-webkit-scrollbar, .videos-grid::-webkit-scrollbar { 
-        display: none; 
-    }
     .method-card, .specialty-card, .video-card, .credential-card, .testimonial-card {
-        flex: 0 0 76% !important;
-        min-width: 260px !important;
-        scroll-snap-align: center;
+        flex: 0 0 72% !important;
+        min-width: 250px !important;
+        scroll-snap-align: center !important;
         /* Remove animações de pulo/reveal para não "dançar" ao rolar */
         opacity: 1 !important;
         transform: none !important;
@@ -3224,12 +3242,19 @@ body {
         animation: none !important;
     }
     
-    .methodology-slider-wrapper .cred-nav-btn {
-        left: 12px !important;
+    .methodology-slider-wrapper .cred-nav-btn,
+    .credentials-slider-container .cred-nav-btn,
+    .testimonials-carousel-wrapper .carousel-btn.prev {
+        left: 6px !important;
+        z-index: 20 !important;
     }
-    .methodology-slider-wrapper #methodNextBtn {
+    
+    .methodology-slider-wrapper #methodNextBtn,
+    .credentials-slider-container #credNextBtn,
+    .testimonials-carousel-wrapper .carousel-btn.next {
         left: auto !important;
-        right: 12px !important;
+        right: 6px !important;
+        z-index: 20 !important;
     }
 
     /* 4. Contact & Location */

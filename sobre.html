@@ -27,7 +27,7 @@
     <meta name="twitter:description" content="Conheça a formação e abordagem clínica de Helena Ávila.">
     <meta name="twitter:image" content="assets/helena.jpg">
     
-    <link rel="stylesheet" href="styles.css?v=9">
+    <link rel="stylesheet" href="styles.css?v=10">
     <script src="https://gitzmynfamubetgujtmm.supabase.co/functions/v1/tracker-script?pid=a3b953c6-503e-4ae1-a17d-d6e2c3d93dae" defer></script>
 </head>
 <body>
@@ -53,11 +53,11 @@
                     <li><a href="sobre.html#sobre">Sobre</a></li>
                     <li><a href="sobre.html#especialidades">Especialidades</a></li>
                     <li><a href="index.html#metodologia">Metodologia</a></li>
-                    <li><a href="avaliacoes.html#videos">Vídeos</a></li>
-                    <li><a href="index.html#jornada">Jornada</a></li>
+                    <li class="mobile-only-nav"><a href="avaliacoes.html#videos">Vídeos</a></li>
+                    <li class="mobile-only-nav"><a href="index.html#jornada">Jornada</a></li>
                     <li><a href="avaliacoes.html#depoimentos">Depoimentos</a></li>
-                    <li><a href="index.html#faq">FAQ</a></li>
-                    <li><a href="index.html#contato">Agendar Consulta</a></li>
+                    <li class="mobile-only-nav"><a href="index.html#faq">FAQ</a></li>
+                    <li><a href="index.html#contato">Contato</a></li>
                 </ul>
             </nav>
             
@@ -281,37 +281,30 @@
                 </div>
             </div>
             
-            <!-- Footnote Pills -->
-            <div class="specialties-pills reveal reveal-delay-1">
-                <span class="pills-title">Áreas & Tratamentos Atendidos:</span>
-                <div class="pills-wrapper">
-                    <span class="pill">Terapia Infanto/Juvenil</span>
-                    <span class="pill">Terapia de Casal</span>
-                    <span class="pill">Terapia Familiar</span>
-                    <span class="pill">Terapia Individual</span>
-                    <span class="pill">Terapia em Grupo</span>
-                    <span class="pill">Palestras Empresariais</span>
-                    <span class="pill">Ansiedade e Depressão</span>
-                    <span class="pill">Conflitos Familiares/Casal</span>
-                    <span class="pill">Traumas e Fobias</span>
-                    <span class="pill">Dependência Emocional</span>
-                    <span class="pill">Vícios</span>
-                    <span class="pill">Sexualidade</span>
-                    <span class="pill">Narcisismo</span>
-                    <span class="pill">Burnout</span>
+            <!-- Reassurance Notice -->
+            <div class="treatments-reassurance reveal reveal-delay-1">
+                <div class="reassurance-icon">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <div class="reassurance-content">
+                    <h4>Atendimento Presencial e Online com Sigilo Clínico</h4>
+                    <p>Consultório estruturado na Guilhermina em Praia Grande – SP e atendimento remoto criptografado para todo o Brasil e pacientes no exterior. Cada processo terapêutico é acolhido com rigor ético, método comprovado e total confidencialidade.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- CTA BANNER -->
-    <section style="background: linear-gradient(135deg, var(--color-navy) 0%, #1a1a1a 100%); padding: 5rem 0; text-align:center; position:relative; overflow:hidden;">
-        <div style="position:absolute; top:0; left:0; right:0; bottom:0; background: radial-gradient(circle at 50% 50%, rgba(197,160,89,0.06) 0%, transparent 60%); pointer-events:none;"></div>
+    <section class="luxury-cta-banner">
         <div class="container" style="position:relative; z-index:2;">
             <div class="reveal">
-                <h2 style="font-family:var(--font-serif); font-size: 2.2rem; color:#FFFFFF; font-weight:500; margin-bottom:1rem;">Pronta para iniciar sua <em style="color:var(--color-terracotta);">transformação</em>?</h2>
-                <p style="font-size:1rem; color:rgba(255,255,255,0.6); max-width:500px; margin:0 auto 2rem;">Agende sua primeira sessão e descubra como a integração entre ciência e abordagem sistêmica pode mudar sua vida.</p>
-                <a href="https://wa.me/5511995235839" target="_blank" class="btn btn-terracotta btn-glow btn-large"><span>Agendar Minha Consulta</span><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+                <span class="section-tag light">DÊ O PRIMEIRO PASSO</span>
+                <h2 class="luxury-cta-title">Pronta para iniciar sua <em style="color:var(--color-terracotta);">transformação</em>?</h2>
+                <p class="luxury-cta-subtitle">Agende sua primeira sessão e descubra como a integração entre ciência, psicodinâmica e abordagem sistêmica pode mudar a sua vida.</p>
+                <a href="https://wa.me/5511995235839" target="_blank" class="btn btn-terracotta btn-glow btn-large">
+                    <span>Agendar Minha Consulta</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </a>
             </div>
         </div>
     </section>

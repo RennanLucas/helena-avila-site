@@ -27,7 +27,7 @@
     <meta name="twitter:description" content="Psicoterapia integrativa com base em Neurociência e Psicanálise. Atendimento presencial e online.">
     <meta name="twitter:image" content="assets/helena.jpg">
     
-    <link rel="stylesheet" href="styles.css?v=9">
+    <link rel="stylesheet" href="styles.css?v=10">
     <script src="https://gitzmynfamubetgujtmm.supabase.co/functions/v1/tracker-script?pid=a3b953c6-503e-4ae1-a17d-d6e2c3d93dae" defer></script>
 </head>
 <body>
@@ -53,11 +53,11 @@
                     <li><a href="sobre.html#sobre">Sobre</a></li>
                     <li><a href="sobre.html#especialidades">Especialidades</a></li>
                     <li><a href="index.html#metodologia">Metodologia</a></li>
-                    <li><a href="avaliacoes.html#videos">Vídeos</a></li>
-                    <li><a href="index.html#jornada">Jornada</a></li>
+                    <li class="mobile-only-nav"><a href="avaliacoes.html#videos">Vídeos</a></li>
+                    <li class="mobile-only-nav"><a href="index.html#jornada">Jornada</a></li>
                     <li><a href="avaliacoes.html#depoimentos">Depoimentos</a></li>
-                    <li><a href="index.html#faq">FAQ</a></li>
-                    <li><a href="index.html#contato">Agendar Consulta</a></li>
+                    <li class="mobile-only-nav"><a href="index.html#faq">FAQ</a></li>
+                    <li><a href="index.html#contato">Contato</a></li>
                 </ul>
             </nav>
             
@@ -232,17 +232,15 @@
             </div>
             
             <!-- Slider de credenciais (7 Pilares Terapêuticos) -->
-            <div class="credentials-slider-container" style="position: relative; max-width: 100%;">
-                
+            <div class="credentials-slider-container">
                 <!-- Botão Anterior (Esquerda) -->
-                <button class="cred-nav-btn" id="credPrevBtn" aria-label="Pilar Anterior" style="position: absolute; left: 0; top: 50%; transform: translateY(-50%); z-index: 10;">
+                <button class="cred-nav-btn cred-prev" id="credPrevBtn" aria-label="Pilar Anterior">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
                 </button>
 
-                <div class="credentials-slider" id="credentialsSlider" style="display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth; gap: 1.5rem; padding: 1rem 0; scrollbar-width: none; -ms-overflow-style: none;">
-                    
+                <div class="credentials-slider" id="credentialsSlider">
                     <!-- Card 01 -->
-                    <div class="credential-card reveal reveal-delay-1" style="flex: 0 0 340px; scroll-snap-align: center;">
+                    <div class="credential-card reveal reveal-delay-1">
                         <div class="credential-number">01</div>
                         <div class="credential-icon">
                             <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
@@ -253,7 +251,7 @@
                     </div>
 
                     <!-- Card 02 -->
-                    <div class="credential-card reveal reveal-delay-2" style="flex: 0 0 340px; scroll-snap-align: center;">
+                    <div class="credential-card reveal reveal-delay-2">
                         <div class="credential-number">02</div>
                         <div class="credential-icon">
                             <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
@@ -264,7 +262,7 @@
                     </div>
 
                     <!-- Card 03 -->
-                    <div class="credential-card reveal reveal-delay-3" style="flex: 0 0 340px; scroll-snap-align: center;">
+                    <div class="credential-card reveal reveal-delay-3">
                         <div class="credential-number">03</div>
                         <div class="credential-icon">
                             <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.98-3A2.5 2.5 0 0 1 9.5 2Z"></path><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.98-3A2.5 2.5 0 0 0 14.5 2Z"></path></svg>
@@ -275,7 +273,7 @@
                     </div>
 
                     <!-- Card 04 -->
-                    <div class="credential-card reveal reveal-delay-4" style="flex: 0 0 340px; scroll-snap-align: center;">
+                    <div class="credential-card reveal reveal-delay-4">
                         <div class="credential-number">04</div>
                         <div class="credential-icon">
                             <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l8.72-8.72 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
@@ -286,7 +284,7 @@
                     </div>
 
                     <!-- Card 05 -->
-                    <div class="credential-card reveal reveal-delay-1" style="flex: 0 0 340px; scroll-snap-align: center;">
+                    <div class="credential-card reveal reveal-delay-1">
                         <div class="credential-number">05</div>
                         <div class="credential-icon">
                             <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
@@ -297,7 +295,7 @@
                     </div>
 
                     <!-- Card 06 -->
-                    <div class="credential-card reveal reveal-delay-2" style="flex: 0 0 340px; scroll-snap-align: center;">
+                    <div class="credential-card reveal reveal-delay-2">
                         <div class="credential-number">06</div>
                         <div class="credential-icon">
                             <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
@@ -307,7 +305,8 @@
                         <div class="credential-badge">Análise Profunda</div>
                     </div>
 
-                    <div class="credential-card reveal reveal-delay-3" style="flex: 0 0 340px; scroll-snap-align: center;">
+                    <!-- Card 07 -->
+                    <div class="credential-card reveal reveal-delay-3">
                         <div class="credential-number">07</div>
                         <div class="credential-icon">
                             <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
@@ -319,14 +318,10 @@
                 </div>
                 
                 <!-- Botão Próximo (Direita) -->
-                <button class="cred-nav-btn" id="credNextBtn" aria-label="Próximo Pilar" style="position: absolute; right: 0; top: 50%; transform: translateY(-50%); z-index: 10;">
+                <button class="cred-nav-btn cred-next" id="credNextBtn" aria-label="Próximo Pilar">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
                 </button>
             </div>
-            
-            <style>
-                .credentials-slider::-webkit-scrollbar { display: none; }
-            </style>
             
             <!-- Frase de autoridade -->
             <div class="credentials-quote reveal">
@@ -449,19 +444,18 @@
     </section>
 
     <!-- CTA PREMIUM -->
-    <section style="background: linear-gradient(135deg, var(--color-navy) 0%, #1a1a1a 50%, var(--color-navy) 100%); padding: 6rem 0; text-align:center; position:relative; overflow:hidden;">
-        <div style="position:absolute; top:0; left:0; right:0; bottom:0; background: radial-gradient(circle at 50% 50%, rgba(197,160,89,0.08) 0%, transparent 60%); pointer-events:none;"></div>
+    <section class="luxury-cta-banner">
         <div class="container" style="position:relative; z-index:2;">
             <div class="reveal">
                 <span class="section-tag light">COMECE SUA TRANSFORMAÇÃO</span>
-                <h2 style="font-family:var(--font-serif); font-size: 2.8rem; color:#FFFFFF; font-weight:500; margin-bottom:1.25rem; line-height:1.15;">
+                <h2 class="luxury-cta-title">
                     Sua mente não domina você.<br>
                     <span style="color: var(--color-terracotta); font-style:italic;">Você é o dono da sua história.</span>
                 </h2>
-                <p style="font-size:1.1rem; color:rgba(255,255,255,0.65); max-width:600px; margin:0 auto 2.5rem;">
+                <p class="luxury-cta-subtitle">
                     Agende sua primeira sessão e descubra como a integração entre ciência e abordagem sistêmica pode transformar a sua vida.
                 </p>
-                <a href="https://wa.me/5511995235839" target="_blank" class="btn btn-terracotta btn-glow btn-large" style="font-size:1.05rem; padding:1.2rem 2.8rem;">
+                <a href="https://wa.me/5511995235839" target="_blank" class="btn btn-terracotta btn-glow btn-large">
                     <span>Agendar Minha Consulta</span>
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
                 </a>
@@ -589,6 +583,11 @@
                         <button type="submit" class="btn btn-terracotta btn-block btn-large">
                             <span>Enviar Mensagem</span>
                         </button>
+                        
+                        <p class="form-privacy-note">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                            <span>Seus dados e mensagem são estritamente confidenciais sob sigilo profissional.</span>
+                        </p>
                     </form>
                 </div>
             </div>

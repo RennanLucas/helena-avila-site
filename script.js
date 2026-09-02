@@ -251,37 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- 6. Cursor personalizado dourado (apenas em dispositivos desktop com mouse) ---
-    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-        const cursorDot = document.createElement('div');
-        cursorDot.className = 'cursor-dot';
-        document.body.appendChild(cursorDot);
-        
-        let mouseX = 0, mouseY = 0, dotX = 0, dotY = 0;
-        
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
-        
-        function animateCursor() {
-            dotX += (mouseX - dotX) * 0.15;
-            dotY += (mouseY - dotY) * 0.15;
-            cursorDot.style.left = dotX + 'px';
-            cursorDot.style.top = dotY + 'px';
-            requestAnimationFrame(animateCursor);
-        }
-        animateCursor();
-
-        // Grow cursor on interactive elements
-        const interactiveElements = document.querySelectorAll('a, button, .method-card, .faq-item, .specialty-card, .video-card');
-        interactiveElements.forEach(el => {
-            el.addEventListener('mouseenter', () => cursorDot.classList.add('cursor-hover'));
-            el.addEventListener('mouseleave', () => cursorDot.classList.remove('cursor-hover'));
-        });
-    }
-
-    // --- 7. Lógica do Carrossel de Credenciais ---
+    // --- 6. Lógica do Carrossel de Credenciais ---
     const credSlider = document.getElementById('credentialsSlider');
     const credPrevBtn = document.getElementById('credPrevBtn');
     const credNextBtn = document.getElementById('credNextBtn');

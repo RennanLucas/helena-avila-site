@@ -188,6 +188,23 @@ img {
     color: #FFFFFF;
 }
 
+.btn-secondary,
+.btn-google-review {
+    background: #FFFFFF;
+    color: var(--color-navy);
+    border: 1.5px solid rgba(22, 42, 59, 0.15);
+    box-shadow: 0 4px 14px rgba(22, 42, 59, 0.06);
+}
+
+.btn-secondary:hover,
+.btn-google-review:hover {
+    background: #FFFFFF;
+    color: var(--color-terracotta);
+    border-color: var(--color-terracotta);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(193, 127, 95, 0.16);
+}
+
 .btn-large {
     padding: 1.1rem 2.2rem;
     font-size: 1rem;
@@ -2293,36 +2310,6 @@ img {
 }
 
 /* ==========================================================================
-   CURSOR PERSONALIZADO DOURADO (PREMIUM)
-   ========================================================================== */
-.cursor-dot {
-    position: fixed;
-    width: 10px;
-    height: 10px;
-    background: var(--color-terracotta);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    mix-blend-mode: difference;
-    transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
-    transform: translate(-50%, -50%);
-    opacity: 0.7;
-}
-
-.cursor-dot.cursor-hover {
-    width: 40px;
-    height: 40px;
-    opacity: 0.3;
-}
-
-/* Esconder no mobile / touch */
-@media (hover: none) {
-    .cursor-dot {
-        display: none;
-    }
-}
-
-/* ==========================================================================
    LINHA DOURADA ANIMADA (UNDERLINE REVEAL)
    ========================================================================== */
 .section-title {
@@ -2854,6 +2841,15 @@ body {
     display: none;
 }
 
+.credentials-slider .credential-card {
+    flex: 0 0 340px !important;
+    min-width: 340px !important;
+    max-width: 340px !important;
+    width: 340px !important;
+    box-sizing: border-box;
+    scroll-snap-align: center;
+}
+
 .credentials-slider-container .cred-prev {
     position: absolute;
     left: 0;
@@ -2874,11 +2870,23 @@ body {
     .credentials-slider-container {
         padding: 0 3rem;
     }
+    .credentials-slider .credential-card {
+        flex: 0 0 300px !important;
+        min-width: 300px !important;
+        max-width: 300px !important;
+        width: 300px !important;
+    }
 }
 
 @media (max-width: 480px) {
     .credentials-slider-container {
         padding: 0 1.5rem;
+    }
+    .credentials-slider .credential-card {
+        flex: 0 0 280px !important;
+        min-width: 280px !important;
+        max-width: 280px !important;
+        width: 280px !important;
     }
     .credentials-slider-container .cred-nav-btn {
         width: 40px;

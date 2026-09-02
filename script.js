@@ -70,9 +70,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const text = `Olá Helena, meu nome é *${nome}*.\n\n*E-mail:* ${email}\n*Telefone:* ${telefone}\n*Mensagem:* ${mensagem}`;
             const encodedText = encodeURIComponent(text);
             
-            // Redirect to Helena's direct WhatsApp
+            // Redirect to Helena's direct WhatsApp (using location.href to prevent popup blocking on mobile)
             const waUrl = `https://wa.me/5511995235839?text=${encodedText}`;
-            window.open(waUrl, '_blank');
+            window.location.href = waUrl;
 
             contactForm.reset();
         });
@@ -136,73 +136,6 @@ document.addEventListener('DOMContentLoaded', () => {
         nextReviewBtn.addEventListener('click', () => {
             const cardWidth = testimonialsSlider.querySelector('.testimonial-card').offsetWidth + 32;
             testimonialsSlider.scrollBy({ left: cardWidth, behavior: 'smooth' });
-        });
-        
-        // Load saved reviews from localStorage
-        const savedReviews = JSON.parse(localStorage.getItem('helena_reviews') || '[]');
-        savedReviews.forEach(review => {
-            renderReviewCard(review, true);
-        });
-    }
-
-    // --- Review Submission Modal Interactivity ---
-    const reviewModal = document.getElementById('reviewModal');
-    const openReviewModalBtn = document.getElementById('openReviewModalBtn');
-    const closeReviewModalBtn = document.getElementById('closeReviewModalBtn');
-    const submitReviewForm = document.getElementById('submitReviewForm');
-
-    if (reviewModal && openReviewModalBtn && closeReviewModalBtn) {
-        openReviewModalBtn.addEventListener('click', () => {
-            reviewModal.classList.add('active');
-        });
-
-        closeReviewModalBtn.addEventListener('click', () => {
-            reviewModal.classList.remove('active');
-        });
-
-        // Close on clicking outside modal content
-        reviewModal.addEventListener('click', (e) => {
-            if (e.target === reviewModal) {
-                reviewModal.classList.remove('active');
-            }
-        });
-    }
-
-    if (submitReviewForm && testimonialsSlider) {
-        submitReviewForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const nome = document.getElementById('reviewName').value;
-            const nota = parseInt(document.querySelector('input[name="nota"]:checked').value);
-            const depoimento = document.getElementById('reviewComment').value;
-
-            // Generate avatar letter and random color
-            const colors = ['#004D40', '#455A64', '#5C6BC0', '#26A69A', '#EC407A', '#7E57C2', '#FF7043', '#AB47BC', '#29B6F6'];
-            const randomColor = colors[Math.floor(Math.random() * colors.length)];
-
-            const newReview = {
-                nome: nome,
-                nota: nota,
-                depoimento: depoimento,
-                color: randomColor,
-                date: 'Avaliação recente'
-            };
-
-            // Save to localStorage
-            const savedReviews = JSON.parse(localStorage.getItem('helena_reviews') || '[]');
-            savedReviews.push(newReview);
-            localStorage.setItem('helena_reviews', JSON.stringify(savedReviews));
-
-            // Render to carousel
-            renderReviewCard(newReview, true);
-
-            // Scroll to the new review card
-            testimonialsSlider.scrollTo({ left: 0, behavior: 'smooth' });
-
-            // Close modal & reset form
-            reviewModal.classList.remove('active');
-            submitReviewForm.reset();
-
-            alert('Muito obrigado! Sua avaliação foi recebida com sucesso e adicionada de forma permanente ao carrossel.');
         });
     }
 
@@ -280,46 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 4. Smooth counter animation para stats ---
-    const statNumbers = document.querySelectorAll('.stat-number');
-    
-    if (statNumbers.length > 0) {
-        const counterObserver = new IntersectionObserver(function(entries, observer) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const el = entry.target;
-                    const text = el.textContent;
-                    const match = text.match(/^(\d+)/);
-                    
-                    if (match) {
-                        const target = parseInt(match[1]);
-                        const suffix = text.replace(match[1], '');
-                        let current = 0;
-                        const duration = 1500;
-                        const start = performance.now();
-                        
-                        function animate(now) {
-                            const elapsed = now - start;
-                            const progress = Math.min(elapsed / duration, 1);
-                            const eased = 1 - Math.pow(1 - progress, 3);
-                            current = Math.round(eased * target);
-                            el.textContent = current + suffix;
-                            
-                            if (progress < 1) {
-                                requestAnimationFrame(animate);
-                            }
-                        }
-                        requestAnimationFrame(animate);
-                    }
-                    observer.unobserve(el);
-                }
-            });
-        }, { threshold: 0.5 });
-        
-        statNumbers.forEach(el => counterObserver.observe(el));
-    }
-
-    // --- 5. Smooth reveal para links de navegação (scroll suave refinado) ---
+    // --- 4. Smooth reveal para links de navegação (scroll suave refinado) ---
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             const target = document.querySelector(this.getAttribute('href'));
@@ -357,35 +251,37 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- 7. Cursor personalizado dourado (linha premium) ---
-    const cursorDot = document.createElement('div');
-    cursorDot.className = 'cursor-dot';
-    document.body.appendChild(cursorDot);
-    
-    let mouseX = 0, mouseY = 0, dotX = 0, dotY = 0;
-    
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    });
-    
-    function animateCursor() {
-        dotX += (mouseX - dotX) * 0.15;
-        dotY += (mouseY - dotY) * 0.15;
-        cursorDot.style.left = dotX + 'px';
-        cursorDot.style.top = dotY + 'px';
-        requestAnimationFrame(animateCursor);
+    // --- 6. Cursor personalizado dourado (apenas em dispositivos desktop com mouse) ---
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        const cursorDot = document.createElement('div');
+        cursorDot.className = 'cursor-dot';
+        document.body.appendChild(cursorDot);
+        
+        let mouseX = 0, mouseY = 0, dotX = 0, dotY = 0;
+        
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+        
+        function animateCursor() {
+            dotX += (mouseX - dotX) * 0.15;
+            dotY += (mouseY - dotY) * 0.15;
+            cursorDot.style.left = dotX + 'px';
+            cursorDot.style.top = dotY + 'px';
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // Grow cursor on interactive elements
+        const interactiveElements = document.querySelectorAll('a, button, .method-card, .faq-item, .specialty-card, .video-card');
+        interactiveElements.forEach(el => {
+            el.addEventListener('mouseenter', () => cursorDot.classList.add('cursor-hover'));
+            el.addEventListener('mouseleave', () => cursorDot.classList.remove('cursor-hover'));
+        });
     }
-    animateCursor();
 
-    // Grow cursor on interactive elements
-    const interactiveElements = document.querySelectorAll('a, button, .method-card, .faq-item');
-    interactiveElements.forEach(el => {
-        el.addEventListener('mouseenter', () => cursorDot.classList.add('cursor-hover'));
-        el.addEventListener('mouseleave', () => cursorDot.classList.remove('cursor-hover'));
-    });
-
-    // --- 8. Lógica do Carrossel de Credenciais ---
+    // --- 7. Lógica do Carrossel de Credenciais ---
     const credSlider = document.getElementById('credentialsSlider');
     const credPrevBtn = document.getElementById('credPrevBtn');
     const credNextBtn = document.getElementById('credNextBtn');
@@ -401,7 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 9. Lógica do Carrossel de Metodologia (Mobile) ---
+    // --- 8. Lógica do Carrossel de Metodologia (Mobile) ---
     const methodSlider = document.getElementById('methodologyGrid');
     const methodPrevBtn = document.getElementById('methodPrevBtn');
     const methodNextBtn = document.getElementById('methodNextBtn');
@@ -414,6 +310,41 @@ document.addEventListener('DOMContentLoaded', () => {
         methodNextBtn.addEventListener('click', () => {
             const cardWidth = methodSlider.querySelector('.method-card').offsetWidth + 20;
             methodSlider.scrollBy({ left: cardWidth, behavior: 'smooth' });
+        });
+    }
+
+    // --- 9. Modal Lightbox de Vídeos do YouTube ---
+    const videoCards = document.querySelectorAll('.video-card[data-video-id]');
+    const videoModal = document.getElementById('videoModal');
+    const videoModalIframe = document.getElementById('videoModalIframe');
+    const videoModalClose = document.getElementById('videoModalClose');
+    const videoModalBackdrop = document.getElementById('videoModalBackdrop');
+
+    if (videoModal && videoCards.length > 0) {
+        function closeVideoModal() {
+            videoModal.classList.remove('active');
+            videoModal.setAttribute('aria-hidden', 'true');
+            if (videoModalIframe) videoModalIframe.src = '';
+        }
+
+        videoCards.forEach(card => {
+            card.addEventListener('click', (e) => {
+                e.preventDefault();
+                const videoId = card.getAttribute('data-video-id');
+                if (videoId && videoModalIframe) {
+                    videoModalIframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
+                    videoModal.classList.add('active');
+                    videoModal.setAttribute('aria-hidden', 'false');
+                }
+            });
+        });
+
+        if (videoModalClose) videoModalClose.addEventListener('click', closeVideoModal);
+        if (videoModalBackdrop) videoModalBackdrop.addEventListener('click', closeVideoModal);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && videoModal.classList.contains('active')) {
+                closeVideoModal();
+            }
         });
     }
 

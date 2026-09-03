@@ -1,13 +1,27 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Mobile Menu Toggle ---
+    // --- Mobile Menu Toggle with Scroll Lock & ARIA ---
     const mobileMenuBtn = document.getElementById('mobile-menu-btn');
     const nav = document.getElementById('nav');
     const navLinks = document.querySelectorAll('.nav-list a');
 
-    if (mobileMenuBtn) {
-        mobileMenuBtn.addEventListener('click', () => {
-            nav.classList.toggle('active');
-            const isActive = nav.classList.contains('active');
+    function closeMobileMenu() {
+        if (nav && nav.classList.contains('active')) {
+            nav.classList.remove('active');
+            document.body.classList.remove('no-scroll');
+            if (mobileMenuBtn) {
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                mobileMenuBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
+            }
+        }
+    }
+
+    if (mobileMenuBtn && nav) {
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        mobileMenuBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const isActive = nav.classList.toggle('active');
+            document.body.classList.toggle('no-scroll', isActive);
+            mobileMenuBtn.setAttribute('aria-expanded', isActive ? 'true' : 'false');
             
             if (isActive) {
                 mobileMenuBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
@@ -15,15 +29,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 mobileMenuBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
             }
         });
+
+        // Close when clicking outside
+        document.addEventListener('click', (e) => {
+            if (nav.classList.contains('active') && !nav.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                closeMobileMenu();
+            }
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeMobileMenu();
+            }
+        });
     }
 
     navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            if (nav.classList.contains('active')) {
-                nav.classList.remove('active');
-                mobileMenuBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
-            }
-        });
+        link.addEventListener('click', closeMobileMenu);
     });
 
     // --- Header Blur on Scroll ---
@@ -34,26 +57,51 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             header.classList.remove('scrolled');
         }
-    });
+    }, { passive: true });
 
-    // --- FAQ Accordion Interactivity ---
+    // --- FAQ Accordion Interactivity with ARIA ---
     const faqItems = document.querySelectorAll('.faq-item');
     faqItems.forEach(item => {
         const questionBtn = item.querySelector('.faq-question');
         if (questionBtn) {
+            questionBtn.setAttribute('aria-expanded', item.classList.contains('active') ? 'true' : 'false');
             questionBtn.addEventListener('click', () => {
                 const isOpen = item.classList.contains('active');
                 
                 // Close other items
-                faqItems.forEach(otherItem => otherItem.classList.remove('active'));
+                faqItems.forEach(otherItem => {
+                    otherItem.classList.remove('active');
+                    const otherBtn = otherItem.querySelector('.faq-question');
+                    if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+                });
                 
                 // Toggle current item
                 if (!isOpen) {
                     item.classList.add('active');
+                    questionBtn.setAttribute('aria-expanded', 'true');
+                } else {
+                    questionBtn.setAttribute('aria-expanded', 'false');
                 }
             });
         }
     });
+
+    // --- Automatic Phone / WhatsApp Mask: (XX) XXXXX-XXXX ---
+    const phoneInput = document.getElementById('telefone');
+    if (phoneInput) {
+        phoneInput.addEventListener('input', (e) => {
+            let val = e.target.value.replace(/\D/g, '');
+            if (val.length > 11) val = val.substring(0, 11);
+            if (val.length > 6) {
+                val = `(${val.substring(0, 2)}) ${val.substring(2, 7)}-${val.substring(7)}`;
+            } else if (val.length > 2) {
+                val = `(${val.substring(0, 2)}) ${val.substring(2)}`;
+            } else if (val.length > 0) {
+                val = `(${val}`;
+            }
+            e.target.value = val;
+        });
+    }
 
     // --- High-Conversion Form to WhatsApp Redirect ---
     const contactForm = document.getElementById('contactForm');

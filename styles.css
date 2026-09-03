@@ -63,6 +63,12 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+body.no-scroll {
+    overflow: hidden !important;
+    height: 100vh;
+    touch-action: none;
+}
+
 h1, h2, h3, h4 {
     font-family: var(--font-serif);
     color: var(--color-navy);

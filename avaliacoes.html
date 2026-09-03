@@ -51,12 +51,10 @@
             <nav class="nav" id="nav">
                 <ul class="nav-list">
                     <li><a href="index.html#inicio">Início</a></li>
-                    <li><a href="sobre.html#sobre">Sobre</a></li>
-                    <li><a href="sobre.html#especialidades">Especialidades</a></li>
+                    <li><a href="sobre.html">Sobre</a></li>
                     <li><a href="index.html#metodologia">Metodologia</a></li>
-                    <li class="mobile-only-nav"><a href="avaliacoes.html#videos">Vídeos</a></li>
-                    <li class="mobile-only-nav"><a href="index.html#jornada">Jornada</a></li>
-                    <li><a href="avaliacoes.html#depoimentos">Depoimentos</a></li>
+                    <li><a href="avaliacoes.html" class="active">Depoimentos</a></li>
+                    <li><a href="videos.html">Vídeos</a></li>
                     <li class="mobile-only-nav"><a href="index.html#faq">FAQ</a></li>
                     <li><a href="index.html#contato">Contato</a></li>
                 </ul>
@@ -76,87 +74,12 @@
     </header>
 
     <!-- PAGE HERO BANNER -->
-    <section class="page-hero" id="videos">
+    <section class="page-hero" id="avaliacoes">
         <div class="container">
             <div class="page-hero-content reveal">
-                <span class="section-tag light">PROVA SOCIAL</span>
-                <h1 class="page-hero-title">Avaliações & Conteúdo</h1>
-                <p class="page-hero-subtitle">Veja os vídeos educativos e leia os depoimentos reais de pacientes que transformaram suas vidas com a psicoterapia integrativa.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- SEÇÃO VÍDEOS & CONTEÚDOS DO YOUTUBE -->
-    <section class="videos section-padding">
-        <div class="container">
-            <div class="section-header text-center reveal reveal-delay-1">
-                <span class="section-tag">CONTEÚDO EM VÍDEO</span>
-                <h2 class="section-title">Vídeos & Reflexões em Destaque</h2>
-                <p class="section-subtitle">Assista a explicações sobre como a psicoterapia integrativa pode transformar a sua relação com o cérebro, com as emoções e com a sua família.</p>
-            </div>
-
-            <div class="videos-grid">
-                <!-- Video 1 -->
-                <a href="https://www.youtube.com/watch?v=1FaBYdoXabM" data-video-id="1FaBYdoXabM" class="video-card reveal reveal-delay-1" aria-label="Assistir vídeo: Transformação & Abordagem Terapêutica">
-                    <div class="video-thumb-container">
-                        <img src="https://img.youtube.com/vi/1FaBYdoXabM/hqdefault.jpg" alt="Transformação & Abordagem Terapêutica" class="video-thumb" width="480" height="360" loading="lazy" decoding="async">
-                        <div class="play-overlay">
-                            <div class="play-btn-circle">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                            </div>
-                            <span>Assistir Vídeo</span>
-                        </div>
-                    </div>
-                    <div class="video-info">
-                        <h3>Transformação & Abordagem Terapêutica</h3>
-                        <p>Assista e entenda como a integração entre Neurociência e Psicanálise gera mudanças duradouras.</p>
-                    </div>
-                </a>
-
-                <!-- Video 2 -->
-                <a href="https://www.youtube.com/shorts/lGebZYXiK84" data-video-id="lGebZYXiK84" class="video-card reveal reveal-delay-1" aria-label="Assistir vídeo: Reflexão Sobre Emoções & Comportamento">
-                    <div class="video-thumb-container">
-                        <img src="https://img.youtube.com/vi/lGebZYXiK84/hqdefault.jpg" alt="Reflexão Sobre Emoções & Comportamento" class="video-thumb" width="480" height="360" loading="lazy" decoding="async">
-                        <div class="play-overlay">
-                            <div class="play-btn-circle">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                            </div>
-                            <span>Assistir Vídeo</span>
-                        </div>
-                    </div>
-                    <div class="video-info">
-                        <h3>Reflexão Sobre Emoções & Comportamento</h3>
-                        <p>Um olhar prático sobre como reavaliar padrões emocionais e assumir o controle da sua jornada.</p>
-                    </div>
-                </a>
-
-                <!-- Video 3 -->
-                <a href="https://www.youtube.com/watch?v=DATwetrFynE" data-video-id="DATwetrFynE" class="video-card reveal reveal-delay-1" aria-label="Assistir vídeo: Cura Sistêmica & Autoconhecimento">
-                    <div class="video-thumb-container">
-                        <img src="https://img.youtube.com/vi/DATwetrFynE/hqdefault.jpg" alt="Cura Sistêmica & Autoconhecimento" class="video-thumb" width="480" height="360" loading="lazy" decoding="async">
-                        <div class="play-overlay">
-                            <div class="play-btn-circle">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                            </div>
-                            <span>Assistir Vídeo</span>
-                        </div>
-                    </div>
-                    <div class="video-info">
-                        <h3>Cura Sistêmica & Autoconhecimento</h3>
-                        <p>Compreenda como as ordens do amor e a visão sistêmica apoiam o seu crescimento pessoal.</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-
-        <!-- Modal Lightbox de Vídeo Embutido -->
-        <div class="video-modal" id="videoModal" aria-hidden="true" role="dialog" aria-label="Player de vídeo">
-            <div class="video-modal-backdrop" id="videoModalBackdrop"></div>
-            <div class="video-modal-container">
-                <button class="video-modal-close" id="videoModalClose" aria-label="Fechar Vídeo">&times;</button>
-                <div class="video-modal-frame">
-                    <iframe id="videoModalIframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Vídeo Helena Ávila"></iframe>
-                </div>
+                <span class="section-tag light">AVALIAÇÕES & PROVA SOCIAL</span>
+                <h1 class="page-hero-title">O Que Dizem os Pacientes</h1>
+                <p class="page-hero-subtitle">Depoimentos reais e avaliações 5.0 estrelas no Google de quem vivenciou a acolhida e a transformação com a psicoterapia de Helena Ávila.</p>
             </div>
         </div>
     </section>
@@ -335,6 +258,17 @@
                 <span>Avaliar no Google</span>
             </a>
         </div>
+
+        <!-- Card de Ligação para a Seção de Vídeos -->
+        <div class="video-bridge-card reveal" style="margin-top: 4.5rem; text-align: center; background: #FFFFFF; padding: 2.5rem 2rem; border-radius: var(--radius-md); border: 1px solid rgba(22,42,59,0.06); box-shadow: var(--shadow-subtle); max-width: 780px; margin-left: auto; margin-right: auto;">
+            <span class="section-tag">CONTEÚDO EM VÍDEO</span>
+            <h3 style="font-family: var(--font-serif); font-size: 1.6rem; color: var(--color-navy); margin: 0.6rem 0 0.5rem;">Conheça a abordagem de Helena em vídeo</h3>
+            <p style="color: var(--color-text-muted); max-width: 540px; margin: 0 auto 1.5rem; font-size: 0.95rem;">Assista às análises clínicas sobre projeção, narcisismo, ansiedade e comportamento humano diretamente na nova área de vídeos.</p>
+            <a href="videos.html" class="btn btn-outline">
+                <span>Assistir Vídeos & Reflexões</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+        </div>
     </div>
 </section>
 
@@ -355,13 +289,12 @@
                 <h4>Navegação</h4>
                 <ul>
                     <li><a href="index.html#inicio">Início</a></li>
-                    <li><a href="sobre.html#sobre">Sobre a Helena</a></li>
-                    <li><a href="sobre.html#especialidades">Especialidades</a></li>
-                    <li><a href="index.html#metodologia">A Metodologia</a></li>
-                    <li><a href="index.html#jornada">Jornada do Paciente</a></li>
-                    <li><a href="avaliacoes.html#depoimentos">Depoimentos</a></li>
-                    <li><a href="index.html#faq">FAQ</a></li>
-                    <li><a href="index.html#contato">Agendar Consulta</a></li>
+                    <li><a href="sobre.html">Sobre Mim</a></li>
+                    <li><a href="index.html#metodologia">Metodologia</a></li>
+                    <li><a href="avaliacoes.html">Avaliações Google</a></li>
+                    <li><a href="videos.html">Vídeos & Canal</a></li>
+                    <li><a href="index.html#faq">Perguntas Frequentes</a></li>
+                    <li><a href="index.html#contato">Contato</a></li>
                 </ul>
             </div>
             
@@ -391,7 +324,7 @@
                 </div>
                 <div class="footer-legal">
                     <a href="privacidade.html">Políticas de Privacidade</a>
-                    <a href="#videos">Voltar ao Topo &uarr;</a>
+                    <a href="#avaliacoes">Voltar ao Topo &uarr;</a>
                 </div>
             </div>
         </div>

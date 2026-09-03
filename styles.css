@@ -1209,6 +1209,117 @@ img {
     color: var(--color-text-body);
 }
 
+.video-category-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-terracotta);
+    background: rgba(193, 127, 95, 0.08);
+    padding: 0.25rem 0.65rem;
+    border-radius: var(--radius-pill);
+    margin-bottom: 0.6rem;
+    border: 1px solid rgba(193, 127, 95, 0.2);
+}
+
+/* --- YOUTUBE CHANNEL BANNER CARD --- */
+.youtube-channel-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+    border-radius: var(--radius-lg);
+    padding: 2.2rem 2.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    gap: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.youtube-channel-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(255, 0, 0, 0.12) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.yt-card-content {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.yt-icon-badge {
+    width: 64px;
+    height: 64px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.yt-card-text h3 {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: #FFFFFF;
+    margin-bottom: 0.35rem;
+}
+
+.yt-card-text p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.95rem;
+    max-width: 580px;
+    line-height: 1.5;
+}
+
+.btn-youtube-subscribe {
+    background: #FF0000;
+    color: #FFFFFF;
+    font-weight: 600;
+    padding: 0.9rem 1.6rem;
+    border-radius: var(--radius-pill);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: var(--transition);
+    box-shadow: 0 6px 20px rgba(255, 0, 0, 0.35);
+    flex-shrink: 0;
+}
+
+.btn-youtube-subscribe:hover {
+    background: #CC0000;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 0, 0, 0.5);
+    color: #FFFFFF;
+}
+
+@media (max-width: 840px) {
+    .youtube-channel-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem 1.5rem;
+    }
+    .yt-card-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    .btn-youtube-subscribe {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
 /* --- NEW SECTION 1: JORNADA DO PACIENTE --- */
 /* --- JORNADA DO PACIENTE - TIMELINE HORIZONTAL PROFISSIONAL --- */
 .journey-steps {

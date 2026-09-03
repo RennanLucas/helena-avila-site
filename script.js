@@ -366,4 +366,101 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // --- 10. LGPD / Consentimento de Cookies & Analytics (Kuboweb) ---
+    function sendKubowebConsent(granted) {
+        if (window.kuboweb && typeof window.kuboweb.consent === 'function') {
+            window.kuboweb.consent(granted);
+        } else {
+            // Se o script da Kuboweb ainda estiver carregando via defer:
+            let attempts = 0;
+            const interval = setInterval(() => {
+                attempts++;
+                if (window.kuboweb && typeof window.kuboweb.consent === 'function') {
+                    window.kuboweb.consent(granted);
+                    clearInterval(interval);
+                } else if (attempts > 30) {
+                    clearInterval(interval);
+                }
+            }, 150);
+        }
+    }
+
+    const consentKey = 'kuboweb_cookie_consent';
+    const storedConsent = localStorage.getItem(consentKey);
+
+    if (storedConsent === 'granted') {
+        sendKubowebConsent(true);
+    } else if (storedConsent === 'denied') {
+        sendKubowebConsent(false);
+    } else {
+        // Exibir banner de consentimento após breve delay natural
+        setTimeout(showCookieBanner, 800);
+    }
+
+    function showCookieBanner() {
+        if (document.getElementById('cookieConsentBanner')) {
+            document.getElementById('cookieConsentBanner').classList.add('visible');
+            return;
+        }
+
+        const banner = document.createElement('aside');
+        banner.id = 'cookieConsentBanner';
+        banner.className = 'cookie-banner';
+        banner.setAttribute('role', 'region');
+        banner.setAttribute('aria-label', 'Consentimento de Cookies e Privacidade');
+        banner.innerHTML = `
+            <div class="cookie-banner-content">
+                <div class="cookie-banner-header">
+                    <div class="cookie-icon-wrapper">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+                    </div>
+                    <h4>Privacidade & Cookies</h4>
+                </div>
+                <p class="cookie-banner-text">
+                    Utilizamos cookies e tecnologias analíticas para mensurar o tráfego e aprimorar sua experiência de navegação, em estrito acordo com a LGPD. Você pode aceitar ou recusar.
+                </p>
+                <div class="cookie-banner-actions">
+                    <button type="button" class="btn-cookie-accept" id="btnAcceptCookies">Aceitar Todos</button>
+                    <button type="button" class="btn-cookie-decline" id="btnDeclineCookies">Recusar</button>
+                    <a href="privacidade.html" class="cookie-privacy-link">Políticas de Privacidade</a>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(banner);
+
+        requestAnimationFrame(() => {
+            banner.classList.add('visible');
+        });
+
+        document.getElementById('btnAcceptCookies').addEventListener('click', () => {
+            localStorage.setItem(consentKey, 'granted');
+            sendKubowebConsent(true);
+            hideCookieBanner(banner);
+        });
+
+        document.getElementById('btnDeclineCookies').addEventListener('click', () => {
+            localStorage.setItem(consentKey, 'denied');
+            sendKubowebConsent(false);
+            hideCookieBanner(banner);
+        });
+    }
+
+    function hideCookieBanner(banner) {
+        if (!banner) banner = document.getElementById('cookieConsentBanner');
+        if (banner) {
+            banner.classList.remove('visible');
+            setTimeout(() => {
+                banner.remove();
+            }, 400);
+        }
+    }
+
+    // Permitir reabertura a partir de botões "Preferências de Cookies"
+    document.querySelectorAll('.manage-cookies-trigger').forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            showCookieBanner();
+        });
+    });
+
 });

@@ -1978,6 +1978,18 @@ img {
     transition: var(--transition);
 }
 
+.kuboweb-link {
+    color: rgba(255, 255, 255, 0.75);
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.25s ease, text-decoration 0.25s ease;
+}
+
+.kuboweb-link:hover {
+    color: var(--color-terracotta);
+    text-decoration: underline;
+}
+
 .footer-legal a:hover {
     color: var(--color-terracotta);
 }

@@ -1345,6 +1345,15 @@ img {
     border-radius: var(--radius-pill);
     box-shadow: 0 4px 15px rgba(0,0,0,0.04);
     border: 1px solid rgba(22, 42, 59, 0.08);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.google-rating-badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    border-color: rgba(193, 127, 95, 0.35);
 }
 
 .google-rating-badge .score {

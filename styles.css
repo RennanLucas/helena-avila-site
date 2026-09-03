@@ -1956,6 +1956,26 @@ img {
     box-shadow: 0 8px 20px rgba(225, 48, 108, 0.3);
 }
 
+.facebook-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.75rem 1.4rem;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-pill);
+    color: #FFFFFF;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: var(--transition);
+}
+
+.facebook-btn:hover {
+    background: #1877F2;
+    border-color: #1877F2;
+    box-shadow: 0 8px 20px rgba(24, 119, 242, 0.3);
+}
+
 .footer-bottom {
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     padding: 1.75rem 0;
@@ -3567,7 +3587,7 @@ body {
     .footer-logo { justify-content: center; }
     .footer-audience { margin: 0 auto; }
     .social-info { margin-top: 1rem; }
-    .instagram-btn { width: 100%; justify-content: center; }
+    .instagram-btn, .facebook-btn { width: 100%; justify-content: center; }
 }
 
 /* ==========================================================================

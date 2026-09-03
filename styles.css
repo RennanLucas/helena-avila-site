@@ -2251,27 +2251,51 @@ img {
 }
 
 @media (max-width: 768px) {
+    .header-inner {
+        position: relative;
+    }
+    
+    .brand {
+        position: relative;
+        z-index: 1002;
+    }
+
     .nav {
         display: none;
-        position: absolute;
-        top: 100%;
+        position: fixed;
+        top: 0;
         left: 0;
         width: 100%;
-        background: rgba(250, 248, 245, 0.98);
-        backdrop-filter: blur(20px);
-        padding: 2rem;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-        border-bottom: 1px solid rgba(22, 42, 59, 0.08);
+        height: 100vh;
+        height: 100dvh;
+        background: #FAF8F5;
+        padding: 6rem 2rem 3rem;
+        box-shadow: none;
+        border-bottom: none;
+        z-index: 1000;
+        overflow-y: auto;
     }
     
     .nav.active {
-        display: block;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
     
     .nav-list {
         flex-direction: column;
         align-items: center;
-        gap: 1.5rem;
+        gap: 1.6rem;
+        width: 100%;
+    }
+
+    .nav-list a {
+        font-size: 1.25rem;
+        font-weight: 500;
+        color: var(--color-navy);
+        padding: 0.4rem 1.2rem;
+        text-align: center;
     }
     
     .header-cta {
@@ -2280,6 +2304,8 @@ img {
     
     .mobile-menu-btn {
         display: block;
+        position: relative;
+        z-index: 1002;
     }
     
     .hero-stats {
@@ -3644,29 +3670,58 @@ body {
     }
     
     .method-card, .specialty-card, .video-card, .credential-card, .testimonial-card {
-        flex: 0 0 72% !important;
+        flex: 0 0 78% !important;
         min-width: 0 !important;
         scroll-snap-align: center !important;
-        /* Remove animações de pulo/reveal para não "dançar" ao rolar */
         opacity: 1 !important;
         transform: none !important;
         transition: none !important;
         animation: none !important;
     }
-    
-    .methodology-slider-wrapper .cred-nav-btn,
-    .credentials-slider-container .cred-nav-btn,
-    .testimonials-carousel-wrapper .carousel-btn.prev {
-        left: 2px !important;
-        z-index: 20 !important;
+
+    /* Garantir 100% de visibilidade, nitidez imediata e sem tela branca no mobile */
+    .reveal,
+    .reveal-left,
+    .reveal-right,
+    .reveal-scale,
+    .section-header,
+    .section-title,
+    .contact-info-col,
+    .contact-form-col,
+    .journey-step,
+    .faq-accordion,
+    .faq-item {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
     }
     
-    .methodology-slider-wrapper #methodNextBtn,
-    .credentials-slider-container #credNextBtn,
-    .testimonials-carousel-wrapper .carousel-btn.next {
-        left: auto !important;
-        right: 2px !important;
-        z-index: 20 !important;
+    /* Ocultar botões sobrepostos de slider no mobile (usuário usa gesto natural de arrastar) */
+    .methodology-slider-wrapper .cred-nav-btn,
+    .credentials-slider-container .cred-nav-btn,
+    .testimonials-carousel-wrapper .carousel-btn {
+        display: none !important;
+    }
+
+    /* Botão flutuante do WhatsApp otimizado para mobile */
+    .floating-whatsapp {
+        bottom: 18px !important;
+        right: 18px !important;
+        width: 50px !important;
+        height: 50px !important;
+        z-index: 990 !important;
+    }
+    .floating-whatsapp svg {
+        width: 26px !important;
+        height: 26px !important;
+    }
+    .wa-tooltip {
+        display: none !important;
+    }
+    body.no-scroll .floating-whatsapp {
+        opacity: 0 !important;
+        pointer-events: none !important;
+        transform: scale(0.7) !important;
     }
 
     /* Treatments Responsive */

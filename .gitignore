@@ -1,0 +1,7 @@
+# Test & audit files
+mobile_*.png
+audit_*.py
+.vercel
+node_modules/
+.DS_Store
+Thumbs.db

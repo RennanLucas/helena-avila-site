@@ -387,4 +387,106 @@ document.addEventListener('DOMContentLoaded', () => {
     // Coleta total de dados e métricas para identificar visitantes com potencial
     sendKubowebConsent(true);
 
+    // --- 11. Feed Dinâmico & Luxuoso de Reels do Instagram (@psihelenaavila) ---
+    const instaGrid = document.getElementById('instagramFeedGrid');
+    if (instaGrid) {
+        const BEHOLD_FEED_URL = 'https://feeds.behold.so/oPeaUWUGBRU0YXSGihg0';
+
+        function sanitizeText(str) {
+            if (!str) return '';
+            const temp = document.createElement('div');
+            temp.textContent = str;
+            return temp.innerHTML;
+        }
+
+        fetch(BEHOLD_FEED_URL)
+            .then(res => {
+                if (!res.ok) throw new Error('HTTP error ' + res.status);
+                return res.json();
+            })
+            .then(data => {
+                if (!data || !data.posts || data.posts.length === 0) return;
+
+                const cardsHtml = data.posts.slice(0, 6).map(post => {
+                    const rawCaption = post.prunedCaption || post.caption || '';
+                    const lines = rawCaption.split('\n').map(l => l.trim()).filter(Boolean);
+
+                    // Título editorial limpo extraído do início da legenda
+                    let title = lines[0] || 'Reflexão Clínica';
+                    if (title.length > 80) {
+                        title = title.slice(0, 78) + '...';
+                    }
+
+                    // Resumo explicativo da reflexão clínica
+                    let desc = '';
+                    for (let i = 1; i < lines.length; i++) {
+                        const line = lines[i];
+                        if (!line.startsWith('#') && !line.startsWith('http') && line.length > 15) {
+                            desc = line;
+                            break;
+                        }
+                    }
+                    if (!desc && lines.length > 1) desc = lines[1];
+                    if (desc.length > 115) desc = desc.slice(0, 112) + '...';
+
+                    // Categoria temática
+                    let category = 'Saúde Mental & Emoções';
+                    if (post.hashtags && post.hashtags.length > 0) {
+                        const h = post.hashtags[0].toLowerCase();
+                        if (h.includes('casal')) category = 'Terapia de Casal';
+                        else if (h.includes('auto')) category = 'Autoconhecimento';
+                        else if (h.includes('mente') || h.includes('saude')) category = 'Saúde Mental & Emoções';
+                        else if (h.includes('psico')) category = 'Psicanálise Clínica';
+                        else category = post.hashtags[0].replace(/^#/, '');
+                    } else if (post.mediaType === 'VIDEO') {
+                        category = 'Reel Clínico';
+                    }
+
+                    const isVideo = post.mediaType === 'VIDEO';
+                    const typeBadgeLabel = isVideo ? 'Reel' : 'Carrossel';
+                    const typeBadgeIcon = isVideo
+                        ? '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>'
+                        : '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>';
+
+                    const thumbUrl = (post.sizes && post.sizes.medium && post.sizes.medium.mediaUrl)
+                        || post.thumbnailUrl
+                        || post.mediaUrl;
+
+                    return `
+                        <a href="${post.permalink}" target="_blank" rel="noopener noreferrer" class="insta-luxury-card" aria-label="Ver no Instagram: ${sanitizeText(title)}">
+                            <div class="insta-card-media">
+                                <img src="${thumbUrl}" alt="${sanitizeText(title)}" class="insta-card-img" loading="lazy" decoding="async">
+                                <span class="insta-type-badge">${typeBadgeIcon} ${typeBadgeLabel}</span>
+                                <div class="insta-card-overlay">
+                                    <div class="insta-play-btn" title="Assistir no Instagram">
+                                        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="insta-card-body">
+                                <span class="insta-card-category">${sanitizeText(category)}</span>
+                                <h3 class="insta-card-title">${sanitizeText(title)}</h3>
+                                <p class="insta-card-desc">${sanitizeText(desc)}</p>
+                                <div class="insta-card-footer">
+                                    <div class="insta-profile-tag">
+                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+                                        <span>@psihelenaavila</span>
+                                    </div>
+                                    <span class="insta-cta-link">
+                                        <span>${isVideo ? 'Assistir Reel' : 'Ver Post'}</span>
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+                    `;
+                }).join('');
+
+                instaGrid.innerHTML = cardsHtml;
+            })
+            .catch(err => {
+                console.warn('Could not load custom Instagram feed:', err);
+            });
+    }
+
 });

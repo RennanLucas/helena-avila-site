@@ -30,15 +30,6 @@
     <link rel="canonical" href="https://helena-avila-site.vercel.app/videos.html">
     <link rel="stylesheet" href="styles.css?v=17">
     <script src="https://gitzmynfamubetgujtmm.supabase.co/functions/v1/tracker-script?pid=a3b953c6-503e-4ae1-a17d-d6e2c3d93dae" defer></script>
-    
-    <!-- Behold.so Instagram Widget Script -->
-    <script>
-      (() => {
-        if(window.__bhldScript)return;window.__bhldScript=true;
-        const d=document,s=d.createElement("script");s.type="module";
-        s.src="https://w.behold.so/widget.js";setTimeout(()=>{d.head.append(s);},0);
-      })();
-    </script>
 </head>
 <body>
 
@@ -105,13 +96,40 @@
                     </svg>
                     <span>FEED EM TEMPO REAL • @PSIHELENAAVILA</span>
                 </div>
-                <h2 class="section-title">Reels & Vídeos do Instagram</h2>
-                <p class="section-subtitle">Acompanhe novos conteúdos, pílulas de conhecimento e reflexões clínicas atualizadas automaticamente em tempo real direto do Instagram.</p>
+                <h2 class="section-title">Reels & Reflexões no Instagram</h2>
+                <p class="section-subtitle">Pílulas de autoconhecimento, inteligência emocional e reflexões clínicas atualizadas em tempo real direto de @psihelenaavila.</p>
             </div>
 
-            <!-- CONTAINER WIDGET BEHOLD -->
-            <div class="instagram-widget-card reveal reveal-delay-1">
-                <behold-widget feed-id="oPeaUWUGBRU0YXSGihg0"></behold-widget>
+            <!-- GRID DE REELS & CONTEÚDOS CLÍNICOS LUXO -->
+            <div class="instagram-custom-grid reveal reveal-delay-1" id="instagramFeedGrid">
+                <!-- Skeleton Shimmer Cards enquanto carrega a API em milissegundos -->
+                <div class="insta-skeleton-card">
+                    <div class="insta-skeleton-media"></div>
+                    <div class="insta-skeleton-body">
+                        <div class="insta-skeleton-line short"></div>
+                        <div class="insta-skeleton-line title"></div>
+                        <div class="insta-skeleton-line desc-1"></div>
+                        <div class="insta-skeleton-line desc-2"></div>
+                    </div>
+                </div>
+                <div class="insta-skeleton-card">
+                    <div class="insta-skeleton-media"></div>
+                    <div class="insta-skeleton-body">
+                        <div class="insta-skeleton-line short"></div>
+                        <div class="insta-skeleton-line title"></div>
+                        <div class="insta-skeleton-line desc-1"></div>
+                        <div class="insta-skeleton-line desc-2"></div>
+                    </div>
+                </div>
+                <div class="insta-skeleton-card">
+                    <div class="insta-skeleton-media"></div>
+                    <div class="insta-skeleton-body">
+                        <div class="insta-skeleton-line short"></div>
+                        <div class="insta-skeleton-line title"></div>
+                        <div class="insta-skeleton-line desc-1"></div>
+                        <div class="insta-skeleton-line desc-2"></div>
+                    </div>
+                </div>
             </div>
 
             <div class="instagram-follow-cta text-center reveal reveal-delay-2">
@@ -314,7 +332,7 @@
         <span class="wa-tooltip">Falar com a Helena no WhatsApp</span>
     </a>
 
-    <script src="script.js?v=16"></script>
+    <script src="script.js?v=17"></script>
 </body>
 </html>
 

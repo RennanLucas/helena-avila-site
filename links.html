@@ -168,18 +168,93 @@
 
         .profile-photo-container {
             position: relative;
-            width: 116px;
-            height: 116px;
-            margin-bottom: 1.25rem;
+            width: 126px;
+            height: 126px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            cursor: pointer;
         }
 
-        .profile-photo-frame {
-            width: 100%;
-            height: 100%;
+        /* Efeito de Brilho / Aura do Ao Vivo */
+        .live-ring-glow {
+            position: absolute;
+            inset: -4px;
             border-radius: 50%;
-            padding: 4px;
-            background: linear-gradient(135deg, var(--color-gold) 0%, #FAF8F5 50%, var(--color-terracotta) 100%);
+            background: conic-gradient(
+                from 0deg,
+                #FF2A6D,
+                #FF6200,
+                #FFC700,
+                #C4704F,
+                #9B51E0,
+                #FF2A6D
+            );
+            filter: blur(8px);
+            opacity: 0.5;
+            animation: rotate-live 3.5s linear infinite, pulse-live-glow 2s ease-in-out infinite alternate;
+            z-index: 1;
+        }
+
+        /* Círculo Rotativo Gradiente 'Ao Vivo' (Estilo Instagram Live / Stories) */
+        .live-ring-border {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: conic-gradient(
+                from 0deg,
+                #FF2A6D 0deg,
+                #FF6200 60deg,
+                #FFC700 120deg,
+                #C4704F 180deg,
+                #9B51E0 240deg,
+                #FF2A6D 300deg,
+                #FF6200 360deg
+            );
+            animation: rotate-live 3s linear infinite;
+            z-index: 2;
+        }
+
+        @keyframes rotate-live {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes pulse-live-glow {
+            0% {
+                opacity: 0.35;
+                transform: scale(0.96);
+            }
+            100% {
+                opacity: 0.7;
+                transform: scale(1.04);
+            }
+        }
+
+        /* Borda de respiro branca para a foto ficar nítida */
+        .profile-photo-frame {
+            position: relative;
+            z-index: 3;
+            width: 114px;
+            height: 114px;
+            border-radius: 50%;
+            padding: 3px;
+            background: #FFFFFF;
             box-shadow: 0 8px 24px rgba(22, 42, 59, 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-photo-container:hover .profile-photo-frame {
+            transform: scale(1.03);
         }
 
         .profile-photo-img {
@@ -188,7 +263,54 @@
             border-radius: 50%;
             object-fit: cover;
             display: block;
+        }
+
+        /* Selo 'AO VIVO' no anel da foto */
+        .live-status-tag {
+            position: absolute;
+            bottom: -3px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, #FF2A6D 0%, #FF6200 100%);
+            color: #FFFFFF;
+            font-size: 0.62rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
             border: 2px solid #FFFFFF;
+            box-shadow: 0 2px 8px rgba(255, 42, 109, 0.45);
+            z-index: 4;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .live-status-tag::before {
+            content: '';
+            width: 5px;
+            height: 5px;
+            background: #FFFFFF;
+            border-radius: 50%;
+            animation: pulse-live-dot 1.2s infinite;
+        }
+
+        @keyframes pulse-live-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.4; transform: scale(0.7); }
+        }
+
+        /* Card do Facebook */
+        .facebook-icon-box {
+            background: rgba(24, 119, 242, 0.08);
+            color: #1877F2;
+        }
+
+        .facebook-card:hover .facebook-icon-box {
+            background: #1877F2;
+            color: #FFFFFF;
         }
 
         /* Status Clínico Discreto */
@@ -747,12 +869,17 @@
 
         <!-- Apresentação do Perfil Clínico -->
         <header class="profile-card">
-            <div class="profile-photo-container">
+            <a href="https://www.instagram.com/psihelenaavila/" target="_blank" rel="noopener noreferrer"
+                class="profile-photo-container" title="Instagram de Helena Ávila (@psihelenaavila)">
+                <!-- Círculo Rotativo Ao Vivo / Stories -->
+                <div class="live-ring-glow"></div>
+                <div class="live-ring-border"></div>
                 <div class="profile-photo-frame">
                     <img src="assets/helena.jpg" alt="Foto profissional de Helena Ávila" class="profile-photo-img"
                         width="116" height="116">
                 </div>
-            </div>
+                <span class="live-status-tag">AO VIVO</span>
+            </a>
 
             <div class="clinic-status-pill">
                 <span class="status-dot"></span>
@@ -856,17 +983,18 @@
                 </svg>
             </a>
 
-            <!-- 3. Vídeos Clínicos -->
-            <a href="videos.html" class="clinical-card">
-                <div class="clinical-icon-box">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+            <!-- 3. Página no Facebook -->
+            <a href="https://www.facebook.com/share/1CoARC91qZ/?mibextid=wwXIfr" target="_blank"
+                rel="noopener noreferrer" class="clinical-card facebook-card" id="btnFacebookBio">
+                <div class="clinical-icon-box facebook-icon-box">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
                     </svg>
                 </div>
                 <div class="card-copy">
-                    <div class="card-headline">Vídeos & Análises Clínicas</div>
-                    <div class="card-description">Aulas sobre narcisismo, ansiedade e comportamento</div>
+                    <div class="card-headline">Página no Facebook</div>
+                    <div class="card-description">Acompanhe reflexões, publicações e conteúdos diários</div>
                 </div>
                 <svg class="card-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

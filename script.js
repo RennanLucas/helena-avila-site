@@ -407,7 +407,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(data => {
                 if (!data || !data.posts || data.posts.length === 0) return;
 
-                const cardsHtml = data.posts.slice(0, 6).map(post => {
+                const cardsHtml = data.posts.slice(0, 6).map((post, idx) => {
                     const rawCaption = post.prunedCaption || post.caption || '';
                     const lines = rawCaption.split('\n').map(l => l.trim()).filter(Boolean);
 
@@ -453,7 +453,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         || post.mediaUrl;
 
                     return `
-                        <a href="${post.permalink}" target="_blank" rel="noopener noreferrer" class="insta-luxury-card" aria-label="Ver no Instagram: ${sanitizeText(title)}">
+                        <a href="${post.permalink}" target="_blank" rel="noopener noreferrer" class="insta-luxury-card" style="animation-delay: ${idx * 0.09}s;" aria-label="Ver no Instagram: ${sanitizeText(title)}">
                             <div class="insta-card-media">
                                 <img src="${thumbUrl}" alt="${sanitizeText(title)}" class="insta-card-img" loading="lazy" decoding="async">
                                 <span class="insta-type-badge">${typeBadgeIcon} ${typeBadgeLabel}</span>

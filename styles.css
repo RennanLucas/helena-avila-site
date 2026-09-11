@@ -4212,6 +4212,18 @@ textarea:focus-visible {
     color: inherit;
     position: relative;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: insta-card-fade-in 0.65s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+@keyframes insta-card-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(24px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .insta-luxury-card::after {

@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Helena Ávila | Links & Agendamento</title>
+    <meta name="description"
+        content="Mini site e links oficiais de Helena Ávila. Psicoterapeuta Integrativa e Psicanalista. Agende sua sessão presencial em Praia Grande ou online para todo o Brasil e exterior.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://helenaavila.com.br/bio.html">
+
+    <!-- Open Graph / Meta Compartilhamento -->
+    <meta property="og:title" content="Helena Ávila | Links & Agendamento">
+    <meta property="og:description"
+        content="Psicoterapeuta Integrativa e Psicanalista. Agende sua consulta presencial ou online.">
+    <meta property="og:image" content="https://helenaavila.com.br/assets/helena.jpg">
+    <meta property="og:type" content="profile">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Kuboweb Analytics Tracker -->
+    <script
+        src="https://gitzmynfamubetgujtmm.supabase.co/functions/v1/tracker-script?pid=a3b953c6-503e-4ae1-a17d-d6e2c3d93dae"
+        defer></script>
+
+    <style>
+        :root {
+            --color-navy: #162A3B;
+            --color-navy-dark: #0d1a25;
+            --color-navy-deep: #081119;
+            --color-terracotta: #C17F5F;
+            --color-terracotta-hover: #b06f50;
+            --color-gold: #C5A059;
+            --color-gold-light: #E8D5B5;
+            --color-whatsapp: #25D366;
+            --color-whatsapp-dark: #1EBE5D;
+            --color-surface: rgba(255, 255, 255, 0.05);
+            --color-surface-hover: rgba(255, 255, 255, 0.09);
+            --color-border: rgba(197, 160, 89, 0.18);
+            --color-border-hover: rgba(197, 160, 89, 0.45);
+            --color-text-main: #FFFFFF;
+            --color-text-muted: rgba(255, 255, 255, 0.65);
+            --font-serif: 'Playfair Display', Georgia, serif;
+            --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --radius-card: 16px;
+            --radius-pill: 50px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: linear-gradient(180deg, var(--color-navy-dark) 0%, var(--color-navy-deep) 100%);
+            color: var(--color-text-main);
+            min-height: 100vh;
+            min-height: 100dvh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2.5rem 1.25rem 3rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Ambient Glow Background Orbs */
+        .ambient-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.35;
+        }
+
+        .ambient-orb-1 {
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 320px;
+            height: 320px;
+            background: radial-gradient(circle, rgba(197, 160, 89, 0.4) 0%, transparent 70%);
+        }
+
+        .ambient-orb-2 {
+            bottom: 10%;
+            right: -80px;
+            width: 260px;
+            height: 260px;
+            background: radial-gradient(circle, rgba(193, 127, 95, 0.3) 0%, transparent 70%);
+        }
+
+        .ambient-orb-3 {
+            top: 40%;
+            left: -80px;
+            width: 240px;
+            height: 240px;
+            background: radial-gradient(circle, rgba(37, 211, 102, 0.15) 0%, transparent 70%);
+        }
+
+        /* Content Container */
+        .bio-container {
+            width: 100%;
+            max-width: 440px;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 auto;
+        }
+
+        /* Top Action Bar (Share) */
+        .bio-top-bar {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 1rem;
+        }
+
+        .share-btn {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #FFFFFF;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+        }
+
+        .share-btn:hover,
+        .share-btn:active {
+            background: rgba(197, 160, 89, 0.2);
+            border-color: var(--color-gold);
+            transform: scale(1.06);
+        }
+
+        /* Profile Header */
+        .profile-section {
+            text-align: center;
+            margin-bottom: 2rem;
+            width: 100%;
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            width: 112px;
+            height: 112px;
+            margin: 0 auto 1.25rem;
+        }
+
+        .avatar-ring {
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--color-gold), var(--color-terracotta), var(--color-gold));
+            animation: rotate-ring 8s linear infinite;
+            z-index: 1;
+        }
+
+        @keyframes rotate-ring {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            position: relative;
+            z-index: 2;
+            border: 3px solid var(--color-navy-dark);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Status Badge */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(37, 211, 102, 0.12);
+            border: 1px solid rgba(37, 211, 102, 0.3);
+            color: #4ADE80;
+            font-size: 0.76rem;
+            font-weight: 600;
+            padding: 0.35rem 0.9rem;
+            border-radius: var(--radius-pill);
+            margin-bottom: 0.85rem;
+            letter-spacing: 0.02em;
+            backdrop-filter: blur(8px);
+        }
+
+        .status-pulse {
+            width: 8px;
+            height: 8px;
+            background: #22C55E;
+            border-radius: 50%;
+            box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+            animation: pulse-green 2s infinite;
+        }
+
+        @keyframes pulse-green {
+            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
+            70% { box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        }
+
+        .profile-name {
+            font-family: var(--font-serif);
+            font-size: 1.85rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.35rem;
+            color: #FFFFFF;
+        }
+
+        .profile-title {
+            font-size: 0.94rem;
+            color: var(--color-gold-light);
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+        }
+
+        .profile-pills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .pill-tag {
+            font-size: 0.72rem;
+            padding: 0.25rem 0.65rem;
+            border-radius: var(--radius-pill);
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--color-text-muted);
+        }
+
+        /* Google Rating Chip */
+        .google-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(197, 160, 89, 0.25);
+            padding: 0.35rem 0.85rem;
+            border-radius: var(--radius-pill);
+            font-size: 0.78rem;
+            color: #FFFFFF;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .google-chip:hover {
+            border-color: var(--color-gold);
+            background: rgba(197, 160, 89, 0.12);
+        }
+
+        .google-chip .stars {
+            color: #FBBC04;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+        }
+
+        /* Primary Highlight CTA (WhatsApp Vip) */
+        .primary-cta-card {
+            width: 100%;
+            background: linear-gradient(135deg, #1f9d55 0%, #15733c 100%);
+            border: 1.5px solid rgba(255, 255, 255, 0.35);
+            border-radius: var(--radius-card);
+            padding: 1.25rem 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: #FFFFFF;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.35);
+            margin-bottom: 1.4rem;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .primary-cta-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+            animation: cta-shimmer 3.5s infinite;
+        }
+
+        @keyframes cta-shimmer {
+            0% { left: -100%; }
+            30% { left: 100%; }
+            100% { left: 100%; }
+        }
+
+        .primary-cta-card:hover,
+        .primary-cta-card:active {
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 16px 36px rgba(37, 211, 102, 0.45);
+            border-color: #FFFFFF;
+        }
+
+        .cta-icon-box {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .cta-content {
+            flex-grow: 1;
+            min-width: 0;
+        }
+
+        .cta-badge {
+            display: inline-block;
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            background: rgba(255, 255, 255, 0.25);
+            padding: 0.15rem 0.45rem;
+            border-radius: 4px;
+            margin-bottom: 0.2rem;
+        }
+
+        .cta-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            line-height: 1.25;
+            margin-bottom: 0.15rem;
+        }
+
+        .cta-subtitle {
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.88);
+            line-height: 1.3;
+        }
+
+        .cta-arrow {
+            color: #FFFFFF;
+            opacity: 0.85;
+            flex-shrink: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .primary-cta-card:hover .cta-arrow {
+            transform: translateX(4px);
+        }
+
+        /* Links List */
+        .links-group {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .bio-link-card {
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-radius: var(--radius-card);
+            padding: 1.1rem 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+            color: #FFFFFF;
+            position: relative;
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .bio-link-card:hover,
+        .bio-link-card:active {
+            background: var(--color-surface-hover);
+            border-color: var(--color-border-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25), 0 0 15px rgba(197, 160, 89, 0.1);
+        }
+
+        .link-icon-box {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(197, 160, 89, 0.1);
+            border: 1px solid rgba(197, 160, 89, 0.22);
+            color: var(--color-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .bio-link-card:hover .link-icon-box {
+            background: var(--color-terracotta);
+            border-color: var(--color-terracotta);
+            color: #FFFFFF;
+            transform: scale(1.05);
+        }
+
+        .link-icon-box.youtube {
+            background: rgba(255, 0, 0, 0.1);
+            border-color: rgba(255, 0, 0, 0.25);
+            color: #FF4D4D;
+        }
+
+        .bio-link-card:hover .link-icon-box.youtube {
+            background: #FF0000;
+            border-color: #FF0000;
+            color: #FFFFFF;
+        }
+
+        .link-icon-box.instagram {
+            background: rgba(225, 48, 108, 0.1);
+            border-color: rgba(225, 48, 108, 0.25);
+            color: #E1306C;
+        }
+
+        .bio-link-card:hover .link-icon-box.instagram {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            border-color: transparent;
+            color: #FFFFFF;
+        }
+
+        .link-text {
+            flex-grow: 1;
+            min-width: 0;
+        }
+
+        .link-title {
+            font-size: 0.98rem;
+            font-weight: 600;
+            color: #FFFFFF;
+            margin-bottom: 0.15rem;
+            line-height: 1.3;
+        }
+
+        .link-desc {
+            font-size: 0.75rem;
+            color: var(--color-text-muted);
+            line-height: 1.35;
+        }
+
+        .link-chevron {
+            color: var(--color-text-muted);
+            opacity: 0.6;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+
+        .bio-link-card:hover .link-chevron {
+            color: var(--color-gold);
+            opacity: 1;
+            transform: translateX(3px);
+        }
+
+        /* Consultation Info Box */
+        .info-box {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: var(--radius-card);
+            padding: 1.1rem 1.25rem;
+            margin-bottom: 1.75rem;
+            text-align: center;
+        }
+
+        .info-box-title {
+            font-family: var(--font-serif);
+            font-size: 0.92rem;
+            color: var(--color-gold);
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+        }
+
+        .info-box-text {
+            font-size: 0.78rem;
+            color: var(--color-text-muted);
+            line-height: 1.55;
+        }
+
+        /* Social Icons Row */
+        .social-icons-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1.1rem;
+            margin-bottom: 2rem;
+            width: 100%;
+        }
+
+        .social-icon-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: var(--color-text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon-btn:hover {
+            color: #FFFFFF;
+            background: var(--color-terracotta);
+            border-color: var(--color-terracotta);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(193, 127, 95, 0.3);
+        }
+
+        /* Footer */
+        .bio-footer {
+            text-align: center;
+            font-size: 0.74rem;
+            color: rgba(255, 255, 255, 0.4);
+            line-height: 1.6;
+            width: 100%;
+        }
+
+        .bio-footer a {
+            color: var(--color-gold);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .bio-footer a:hover {
+            color: #FFFFFF;
+            text-decoration: underline;
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #1E293B;
+            border: 1px solid rgba(197, 160, 89, 0.4);
+            color: #FFFFFF;
+            font-size: 0.85rem;
+            font-weight: 500;
+            padding: 0.65rem 1.25rem;
+            border-radius: var(--radius-pill);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Background glow elements -->
+    <div class="ambient-orb ambient-orb-1"></div>
+    <div class="ambient-orb ambient-orb-2"></div>
+    <div class="ambient-orb ambient-orb-3"></div>
+
+    <main class="bio-container">
+        <!-- Top Bar with Share Button -->
+        <div class="bio-top-bar">
+            <button class="share-btn" id="shareBtn" title="Compartilhar Link" aria-label="Compartilhar">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="18" cy="5" r="3"></circle>
+                    <circle cx="6" cy="12" r="3"></circle>
+                    <circle cx="18" cy="19" r="3"></circle>
+                    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Profile Section -->
+        <header class="profile-section">
+            <div class="avatar-wrapper">
+                <div class="avatar-ring"></div>
+                <img src="assets/helena.jpg" alt="Helena Ávila" class="avatar-img" width="112" height="112">
+            </div>
+
+            <div class="status-badge">
+                <span class="status-pulse"></span>
+                <span>Atendimento Online & Presencial</span>
+            </div>
+
+            <h1 class="profile-name">Helena Ávila</h1>
+            <p class="profile-title">Psicoterapeuta Integrativa & Psicanalista</p>
+
+            <div class="profile-pills">
+                <span class="pill-tag">Neurociência</span>
+                <span class="pill-tag">Psicanálise</span>
+                <span class="pill-tag">PNL Clínica</span>
+                <span class="pill-tag">Hipnose</span>
+                <span class="pill-tag">Constelação</span>
+            </div>
+
+            <a href="avaliacoes.html" class="google-chip" title="Ver avaliações no Google">
+                <svg width="15" height="15" viewBox="0 0 24 24">
+                    <path fill="#4285F4"
+                        d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                    <path fill="#34A853"
+                        d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                    <path fill="#FBBC05"
+                        d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z" />
+                    <path fill="#EA4335"
+                        d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
+                </svg>
+                <span class="stars">★★★★★</span>
+                <span><strong>5.0</strong> no Google (Excelente)</span>
+            </a>
+        </header>
+
+        <!-- HIGHLIGHT: WhatsApp Direct CTA -->
+        <a href="https://wa.me/5511995235839?text=Ol%C3%A1%20Helena,%20vim%20pelo%20link%20da%20Bio%20e%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20as%20sess%C3%B5es."
+            target="_blank" rel="noopener noreferrer" class="primary-cta-card" id="btnWhatsappBio">
+            <div class="cta-icon-box">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+                    <path
+                        d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.205 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
+                </svg>
+            </div>
+            <div class="cta-content">
+                <span class="cta-badge">Canal Direto</span>
+                <div class="cta-title">Agendar Consulta no WhatsApp</div>
+                <div class="cta-subtitle">Presencial em Praia Grande ou Online</div>
+            </div>
+            <svg class="cta-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+        </a>
+
+        <!-- Main Bio Links Navigation -->
+        <nav class="links-group">
+            <!-- 1. Site Oficial -->
+            <a href="index.html" class="bio-link-card">
+                <div class="link-icon-box">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path
+                            d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                        </path>
+                    </svg>
+                </div>
+                <div class="link-text">
+                    <div class="link-title">Site Oficial Completo</div>
+                    <div class="link-desc">Metodologia clínica, tratamentos e artigos</div>
+                </div>
+                <svg class="link-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </a>
+
+            <!-- 2. Avaliações dos Pacientes -->
+            <a href="avaliacoes.html" class="bio-link-card">
+                <div class="link-icon-box">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon
+                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                        </polygon>
+                    </svg>
+                </div>
+                <div class="link-text">
+                    <div class="link-title">O Que Dizem os Pacientes</div>
+                    <div class="link-desc">Depoimentos reais e nota 5.0 no Google</div>
+                </div>
+                <svg class="link-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </a>
+
+            <!-- 3. Vídeos & Conteúdos -->
+            <a href="videos.html" class="bio-link-card">
+                <div class="link-icon-box">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                    </svg>
+                </div>
+                <div class="link-text">
+                    <div class="link-title">Vídeos & Reflexões Clínicas</div>
+                    <div class="link-desc">Análises sobre narcisismo, ansiedade e mente</div>
+                </div>
+                <svg class="link-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </a>
+
+            <!-- 4. Sobre Helena Ávila -->
+            <a href="sobre.html" class="bio-link-card">
+                <div class="link-icon-box">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                </div>
+                <div class="link-text">
+                    <div class="link-title">Sobre Helena Ávila</div>
+                    <div class="link-desc">Conheça a trajetória e credenciais clínicas</div>
+                </div>
+                <svg class="link-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </a>
+
+            <!-- 5. Localização do Consultório -->
+            <a href="https://www.google.com/maps/place/Praiagrandepsi/@-24.0033653,-46.4264921,17z/data=!4m18!1m9!3m8!1s0x94ce1db57f46091d:0x496f5e3bb13f9293!2sPraiagrandepsi!8m2!3d-24.0033653!4d-46.4217285!9m1!1b1!16s%2Fg%2F11bwhb7x9n!3m7!1s0x94ce1db57f46091d:0x496f5e3bb13f9293!8m2!3d-24.0033653!4d-46.4217285!9m1!1b1!16s%2Fg%2F11bwhb7x9n"
+                target="_blank" rel="noopener noreferrer" class="bio-link-card">
+                <div class="link-icon-box">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                </div>
+                <div class="link-text">
+                    <div class="link-title">Consultório em Praia Grande</div>
+                    <div class="link-desc">Rua Botafogo, 442 - Guilhermina, SP</div>
+                </div>
+                <svg class="link-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </a>
+
+            <!-- 6. Canal no YouTube -->
+            <a href="https://www.youtube.com/@psicoterapeutahelenaavila" target="_blank" rel="noopener noreferrer"
+                class="bio-link-card">
+                <div class="link-icon-box youtube">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                    </svg>
+                </div>
+                <div class="link-text">
+                    <div class="link-title">Canal Oficial no YouTube</div>
+                    <div class="link-desc">Inscreva-se para novos vídeos e análises</div>
+                </div>
+                <svg class="link-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+            </a>
+        </nav>
+
+        <!-- Quick Clinic Info Box -->
+        <div class="info-box">
+            <div class="info-box-title">Horário de Atendimento</div>
+            <div class="info-box-text">
+                Segunda a Sexta: 08h às 20h<br>
+                Sábados: 08h às 13h<br>
+                <span style="color: var(--color-gold-light); font-size: 0.72rem; display: block; margin-top: 0.35rem;">
+                    Sessões presenciais e online por videoconferência criptografada.
+                </span>
+            </div>
+        </div>
+
+        <!-- Social Media Icons -->
+        <div class="social-icons-row">
+            <a href="https://wa.me/5511995235839" target="_blank" rel="noopener noreferrer" class="social-icon-btn"
+                title="WhatsApp" aria-label="WhatsApp">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.205 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
+                </svg>
+            </a>
+            <a href="https://www.instagram.com/psihelenaavila/" target="_blank" rel="noopener noreferrer"
+                class="social-icon-btn" title="Instagram" aria-label="Instagram">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                </svg>
+            </a>
+            <a href="https://www.facebook.com/share/1CoARC91qZ/?mibextid=wwXIfr" target="_blank"
+                rel="noopener noreferrer" class="social-icon-btn" title="Facebook" aria-label="Facebook">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                </svg>
+            </a>
+            <a href="https://www.youtube.com/@psicoterapeutahelenaavila" target="_blank" rel="noopener noreferrer"
+                class="social-icon-btn" title="YouTube" aria-label="YouTube">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+                </svg>
+            </a>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bio-footer">
+            <p>&copy; 2026 Helena Ávila. Todos os direitos reservados.</p>
+            <p style="margin-top: 0.25rem;">
+                Desenvolvido por <a href="https://kuboweb.com.br/" target="_blank" rel="noopener noreferrer">Kuboweb</a>
+            </p>
+        </footer>
+    </main>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">Link copiado com sucesso!</div>
+
+    <!-- Script de Compartilhamento & Analytics -->
+    <script>
+        // Confirmação de rastreamento automático para 100% dos cliques
+        (function initKuboweb() {
+            let attempts = 0;
+            const timer = setInterval(() => {
+                attempts++;
+                if (window.kuboweb && typeof window.kuboweb.consent === 'function') {
+                    window.kuboweb.consent(true);
+                    clearInterval(timer);
+                }
+                if (attempts > 30) clearInterval(timer);
+            }, 150);
+        })();
+
+        // Botão de Compartilhar
+        const shareBtn = document.getElementById('shareBtn');
+        const toast = document.getElementById('toast');
+
+        function showToast(msg) {
+            toast.innerText = msg;
+            toast.classList.add('show');
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 2500);
+        }
+
+        if (shareBtn) {
+            shareBtn.addEventListener('click', async () => {
+                const shareData = {
+                    title: 'Helena Ávila | Psicoterapeuta Integrativa & Psicanalista',
+                    text: 'Agende sua consulta presencial ou online com Helena Ávila:',
+                    url: window.location.href
+                };
+
+                if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
+                    try {
+                        await navigator.share(shareData);
+                    } catch (err) {
+                        if (err.name !== 'AbortError') {
+                            copyToClipboard(window.location.href);
+                        }
+                    }
+                } else {
+                    copyToClipboard(window.location.href);
+                }
+            });
+        }
+
+        function copyToClipboard(text) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showToast('Link copiado para a área de transferência! ✨');
+                }).catch(() => {
+                    fallbackCopy(text);
+                });
+            } else {
+                fallbackCopy(text);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const temp = document.createElement('input');
+            temp.value = text;
+            document.body.appendChild(temp);
+            temp.select();
+            document.execCommand('copy');
+            document.body.removeChild(temp);
+            showToast('Link copiado! ✨');
+        }
+    </script>
+</body>
+
+</html>

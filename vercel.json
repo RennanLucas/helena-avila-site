@@ -1,0 +1,17 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/bio",
+      "destination": "/bio.html"
+    },
+    {
+      "source": "/links",
+      "destination": "/bio.html"
+    },
+    {
+      "source": "/link",
+      "destination": "/bio.html"
+    }
+  ]
+}

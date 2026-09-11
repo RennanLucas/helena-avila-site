@@ -168,56 +168,55 @@
 
         .profile-photo-container {
             position: relative;
-            width: 126px;
-            height: 126px;
-            margin: 0 auto 1.5rem;
+            width: 124px;
+            height: 124px;
+            margin: 0 auto 1.35rem;
             display: flex;
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            cursor: pointer;
         }
 
-        /* Efeito de Brilho / Aura do Ao Vivo */
-        .live-ring-glow {
+        /* Halo Dourado Nobre - Brilho Sutil e Acolhedor */
+        .pro-halo-glow {
             position: absolute;
-            inset: -4px;
+            inset: -3px;
             border-radius: 50%;
             background: conic-gradient(
                 from 0deg,
-                #FF2A6D,
-                #FF6200,
-                #FFC700,
-                #C4704F,
-                #9B51E0,
-                #FF2A6D
+                rgba(197, 160, 89, 0.45),
+                rgba(196, 112, 79, 0.3),
+                rgba(240, 230, 210, 0.7),
+                rgba(197, 160, 89, 0.5),
+                rgba(196, 112, 79, 0.25),
+                rgba(197, 160, 89, 0.45)
             );
-            filter: blur(8px);
-            opacity: 0.5;
-            animation: rotate-live 3.5s linear infinite, pulse-live-glow 2s ease-in-out infinite alternate;
+            filter: blur(7px);
+            opacity: 0.65;
+            animation: rotate-gold-halo 9s linear infinite;
             z-index: 1;
         }
 
-        /* Círculo Rotativo Gradiente 'Ao Vivo' (Estilo Instagram Live / Stories) */
-        .live-ring-border {
+        /* Anel Metálico Ouro Champagne & Terracota Suave */
+        .pro-halo-ring {
             position: absolute;
             inset: 0;
             border-radius: 50%;
             background: conic-gradient(
                 from 0deg,
-                #FF2A6D 0deg,
-                #FF6200 60deg,
-                #FFC700 120deg,
-                #C4704F 180deg,
-                #9B51E0 240deg,
-                #FF2A6D 300deg,
-                #FF6200 360deg
+                #C5A059 0deg,
+                #FAF4EA 50deg,
+                #C4704F 120deg,
+                #FAF8F5 180deg,
+                #C5A059 240deg,
+                #E2C889 310deg,
+                #C5A059 360deg
             );
-            animation: rotate-live 3s linear infinite;
+            animation: rotate-gold-halo 9s linear infinite;
             z-index: 2;
         }
 
-        @keyframes rotate-live {
+        @keyframes rotate-gold-halo {
             0% {
                 transform: rotate(0deg);
             }
@@ -226,27 +225,16 @@
             }
         }
 
-        @keyframes pulse-live-glow {
-            0% {
-                opacity: 0.35;
-                transform: scale(0.96);
-            }
-            100% {
-                opacity: 0.7;
-                transform: scale(1.04);
-            }
-        }
-
-        /* Borda de respiro branca para a foto ficar nítida */
+        /* Moldura de Alta Resolução */
         .profile-photo-frame {
             position: relative;
             z-index: 3;
-            width: 114px;
-            height: 114px;
+            width: 116px;
+            height: 116px;
             border-radius: 50%;
             padding: 3px;
             background: #FFFFFF;
-            box-shadow: 0 8px 24px rgba(22, 42, 59, 0.12);
+            box-shadow: 0 10px 28px rgba(22, 42, 59, 0.12);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -254,7 +242,7 @@
         }
 
         .profile-photo-container:hover .profile-photo-frame {
-            transform: scale(1.03);
+            transform: scale(1.025);
         }
 
         .profile-photo-img {
@@ -265,41 +253,27 @@
             display: block;
         }
 
-        /* Selo 'AO VIVO' no anel da foto */
-        .live-status-tag {
+        /* Selo Oficial de Verificação Profissional */
+        .verified-pro-badge {
             position: absolute;
-            bottom: -3px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(135deg, #FF2A6D 0%, #FF6200 100%);
-            color: #FFFFFF;
-            font-size: 0.62rem;
-            font-weight: 800;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            padding: 0.2rem 0.6rem;
-            border-radius: 20px;
-            border: 2px solid #FFFFFF;
-            box-shadow: 0 2px 8px rgba(255, 42, 109, 0.45);
-            z-index: 4;
-            white-space: nowrap;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.3rem;
-        }
-
-        .live-status-tag::before {
-            content: '';
-            width: 5px;
-            height: 5px;
-            background: #FFFFFF;
+            bottom: 2px;
+            right: 4px;
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #162A3B 0%, #2A4863 100%);
+            border: 2.5px solid #FFFFFF;
             border-radius: 50%;
-            animation: pulse-live-dot 1.2s infinite;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(22, 42, 59, 0.28);
+            z-index: 4;
+            color: #C5A059;
+            transition: transform 0.25s ease;
         }
 
-        @keyframes pulse-live-dot {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(0.7); }
+        .profile-photo-container:hover .verified-pro-badge {
+            transform: scale(1.12);
         }
 
         /* Card do Facebook */
@@ -871,14 +845,20 @@
         <header class="profile-card">
             <a href="https://www.instagram.com/psihelenaavila/" target="_blank" rel="noopener noreferrer"
                 class="profile-photo-container" title="Instagram de Helena Ávila (@psihelenaavila)">
-                <!-- Círculo Rotativo Ao Vivo / Stories -->
-                <div class="live-ring-glow"></div>
-                <div class="live-ring-border"></div>
+                <!-- Halo Dourado Metálico de Prestígio -->
+                <div class="pro-halo-glow"></div>
+                <div class="pro-halo-ring"></div>
                 <div class="profile-photo-frame">
-                    <img src="assets/helena.jpg" alt="Foto profissional de Helena Ávila" class="profile-photo-img"
-                        width="116" height="116">
+                    <img src="assets/helena.jpg" alt="Helena Ávila - Psicoterapeuta Integrativa e Psicanalista"
+                        class="profile-photo-img" width="116" height="116">
                 </div>
-                <span class="live-status-tag">AO VIVO</span>
+                <!-- Selo de Verificação Profissional Oficial -->
+                <div class="verified-pro-badge" title="Profissional Certificada & Verificada">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="3.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </div>
             </a>
 
             <div class="clinic-status-pill">

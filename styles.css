@@ -4161,3 +4161,84 @@ textarea:focus-visible {
         margin-top: 0.25rem;
     }
 }
+
+/* ==========================================================================
+   INSTAGRAM DYNAMIC FEED SECTION (BEHOLD.SO WIDGET)
+   ========================================================================== */
+.instagram-feed-section {
+    background: var(--color-bg-surface);
+    border-top: 1px solid rgba(22, 42, 59, 0.05);
+    border-bottom: 1px solid rgba(22, 42, 59, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.instagram-badge-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.45rem 1.2rem;
+    border-radius: var(--radius-pill);
+    background: linear-gradient(135deg, rgba(225, 48, 108, 0.08) 0%, rgba(197, 160, 89, 0.12) 100%);
+    border: 1px solid rgba(225, 48, 108, 0.22);
+    color: #D62976;
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.instagram-badge-pill svg {
+    color: #D62976;
+}
+
+.instagram-widget-card {
+    background: #FFFFFF;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(197, 160, 89, 0.22);
+    box-shadow: 0 12px 35px rgba(22, 42, 59, 0.04);
+    padding: 2rem;
+    margin-top: 2.5rem;
+    min-height: 280px;
+    position: relative;
+    transition: var(--transition);
+}
+
+.instagram-widget-card:hover {
+    border-color: rgba(197, 160, 89, 0.35);
+    box-shadow: 0 16px 45px rgba(22, 42, 59, 0.07);
+}
+
+.instagram-follow-cta {
+    margin-top: 2.5rem;
+}
+
+.btn-instagram-follow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.9rem 2rem;
+    border-radius: var(--radius-pill);
+    background: linear-gradient(135deg, #E1306C 0%, #C13584 50%, #833AB4 100%);
+    color: #FFFFFF !important;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    box-shadow: 0 6px 20px rgba(225, 48, 108, 0.25);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-instagram-follow:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(225, 48, 108, 0.35);
+    color: #FFFFFF !important;
+}
+
+@media (max-width: 768px) {
+    .instagram-widget-card {
+        padding: 1.15rem 0.85rem;
+        border-radius: var(--radius-md);
+    }
+}
+

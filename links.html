@@ -4,27 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Helena Ávila | Links & Agendamento</title>
+    <title>Helena Ávila | Psicoterapia Integrativa & Psicanálise</title>
     <meta name="description"
-        content="Mini site e links oficiais de Helena Ávila. Psicoterapeuta Integrativa e Psicanalista. Agende sua sessão presencial em Praia Grande ou online para todo o Brasil e exterior.">
+        content="Consultório clínico de Helena Ávila. Psicoterapeuta Integrativa e Psicanalista. Agendamento de sessões presenciais em Praia Grande - SP e online para todo o Brasil e exterior.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://helenaavila.com.br/bio.html">
 
-    <!-- Open Graph / Meta Compartilhamento -->
-    <meta property="og:title" content="Helena Ávila | Links & Agendamento">
+    <!-- Open Graph -->
+    <meta property="og:title" content="Helena Ávila | Psicoterapia Integrativa & Psicanálise">
     <meta property="og:description"
-        content="Psicoterapeuta Integrativa e Psicanalista. Agende sua consulta presencial ou online.">
+        content="Agende sua consulta presencial ou online com Helena Ávila. Psicanálise, Neurociência e PNL.">
     <meta property="og:image" content="https://helenaavila.com.br/assets/helena.jpg">
     <meta property="og:type" content="profile">
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts: Playfair Display + Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Inter:wght@400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
 
     <!-- Kuboweb Analytics Tracker -->
@@ -34,25 +34,28 @@
 
     <style>
         :root {
+            --color-bg: #FAF8F5;
+            --color-surface: #FFFFFF;
+            --color-surface-soft: #F4EFEA;
             --color-navy: #162A3B;
-            --color-navy-dark: #0d1a25;
-            --color-navy-deep: #081119;
+            --color-navy-dark: #0D1B26;
+            --color-navy-light: #2A4865;
             --color-terracotta: #C17F5F;
-            --color-terracotta-hover: #b06f50;
+            --color-terracotta-dark: #A56446;
             --color-gold: #C5A059;
-            --color-gold-light: #E8D5B5;
-            --color-whatsapp: #25D366;
-            --color-whatsapp-dark: #1EBE5D;
-            --color-surface: rgba(255, 255, 255, 0.05);
-            --color-surface-hover: rgba(255, 255, 255, 0.09);
-            --color-border: rgba(197, 160, 89, 0.18);
-            --color-border-hover: rgba(197, 160, 89, 0.45);
-            --color-text-main: #FFFFFF;
-            --color-text-muted: rgba(255, 255, 255, 0.65);
+            --color-gold-soft: rgba(197, 160, 89, 0.2);
+            --color-gold-rich: #A68037;
+            --color-text-main: #162A3B;
+            --color-text-body: #4A5B6A;
+            --color-text-muted: #788998;
+            --color-border: rgba(197, 160, 89, 0.24);
+            --color-border-hover: rgba(197, 160, 89, 0.6);
             --font-serif: 'Playfair Display', Georgia, serif;
             --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             --radius-card: 16px;
-            --radius-pill: 50px;
+            --radius-pill: 40px;
+            --shadow-card: 0 4px 20px rgba(22, 42, 59, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02);
+            --shadow-hover: 0 12px 32px rgba(22, 42, 59, 0.1), 0 2px 6px rgba(197, 160, 89, 0.12);
         }
 
         * {
@@ -64,325 +67,342 @@
 
         body {
             font-family: var(--font-sans);
-            background: linear-gradient(180deg, var(--color-navy-dark) 0%, var(--color-navy-deep) 100%);
+            background-color: var(--color-bg);
+            background-image: 
+                radial-gradient(at 50% 0%, rgba(197, 160, 89, 0.08) 0%, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(193, 127, 95, 0.05) 0%, transparent 40%);
             color: var(--color-text-main);
             min-height: 100vh;
             min-height: 100dvh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 2.5rem 1.25rem 3rem;
+            padding: 2.25rem 1.25rem 3.5rem;
             position: relative;
-            overflow-x: hidden;
         }
 
-        /* Ambient Glow Background Orbs */
-        .ambient-orb {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(80px);
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.35;
-        }
-
-        .ambient-orb-1 {
-            top: -50px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 320px;
-            height: 320px;
-            background: radial-gradient(circle, rgba(197, 160, 89, 0.4) 0%, transparent 70%);
-        }
-
-        .ambient-orb-2 {
-            bottom: 10%;
-            right: -80px;
-            width: 260px;
-            height: 260px;
-            background: radial-gradient(circle, rgba(193, 127, 95, 0.3) 0%, transparent 70%);
-        }
-
-        .ambient-orb-3 {
-            top: 40%;
-            left: -80px;
-            width: 240px;
-            height: 240px;
-            background: radial-gradient(circle, rgba(37, 211, 102, 0.15) 0%, transparent 70%);
-        }
-
-        /* Content Container */
-        .bio-container {
+        /* Container centralizado com proporções perfeitas para mobile */
+        .bio-wrapper {
             width: 100%;
-            max-width: 440px;
-            position: relative;
-            z-index: 2;
+            max-width: 480px;
+            margin: 0 auto;
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin: 0 auto;
+            position: relative;
+            z-index: 2;
         }
 
-        /* Top Action Bar (Share) */
-        .bio-top-bar {
+        /* Barra Superior: Monograma Clínico e Botão Compartilhar */
+        .bio-header-bar {
             width: 100%;
             display: flex;
-            justify-content: flex-end;
-            margin-bottom: 1rem;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.75rem;
+            padding-bottom: 0.85rem;
+            border-bottom: 1px solid rgba(22, 42, 59, 0.06);
+        }
+
+        .clinic-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            text-decoration: none;
+        }
+
+        .brand-monogram {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--color-navy);
+            color: #FFFFFF;
+            font-family: var(--font-serif);
+            font-size: 0.95rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--color-gold);
+            letter-spacing: 0.5px;
+        }
+
+        .brand-text {
+            font-family: var(--font-serif);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--color-navy);
+            letter-spacing: 0.02em;
         }
 
         .share-btn {
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            color: #FFFFFF;
-            width: 40px;
-            height: 40px;
+            background: #FFFFFF;
+            border: 1px solid var(--color-border);
+            color: var(--color-navy);
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(8px);
+            transition: all 0.25s ease;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
         }
 
-        .share-btn:hover,
-        .share-btn:active {
-            background: rgba(197, 160, 89, 0.2);
+        .share-btn:hover {
             border-color: var(--color-gold);
-            transform: scale(1.06);
+            background: var(--color-surface-soft);
+            transform: scale(1.05);
         }
 
-        /* Profile Header */
-        .profile-section {
+        /* Foto de Perfil com Anel Duplo em Ouro Nobre */
+        .profile-card {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.85rem;
             width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .avatar-wrapper {
+        .profile-photo-container {
             position: relative;
-            width: 112px;
-            height: 112px;
-            margin: 0 auto 1.25rem;
+            width: 116px;
+            height: 116px;
+            margin-bottom: 1.25rem;
         }
 
-        .avatar-ring {
-            position: absolute;
-            top: -4px;
-            left: -4px;
-            right: -4px;
-            bottom: -4px;
+        .profile-photo-frame {
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--color-gold), var(--color-terracotta), var(--color-gold));
-            animation: rotate-ring 8s linear infinite;
-            z-index: 1;
+            padding: 4px;
+            background: linear-gradient(135deg, var(--color-gold) 0%, #FAF8F5 50%, var(--color-terracotta) 100%);
+            box-shadow: 0 8px 24px rgba(22, 42, 59, 0.12);
         }
 
-        @keyframes rotate-ring {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .avatar-img {
+        .profile-photo-img {
             width: 100%;
             height: 100%;
             border-radius: 50%;
             object-fit: cover;
-            position: relative;
-            z-index: 2;
-            border: 3px solid var(--color-navy-dark);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+            display: block;
+            border: 2px solid #FFFFFF;
         }
 
-        /* Status Badge */
-        .status-badge {
+        /* Status Clínico Discreto */
+        .clinic-status-pill {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            background: rgba(37, 211, 102, 0.12);
-            border: 1px solid rgba(37, 211, 102, 0.3);
-            color: #4ADE80;
-            font-size: 0.76rem;
+            gap: 0.45rem;
+            background: #FFFFFF;
+            border: 1px solid rgba(15, 157, 88, 0.25);
+            color: #0E6238;
+            font-size: 0.74rem;
             font-weight: 600;
-            padding: 0.35rem 0.9rem;
+            padding: 0.35rem 0.85rem;
             border-radius: var(--radius-pill);
+            box-shadow: 0 2px 8px rgba(15, 157, 88, 0.08);
             margin-bottom: 0.85rem;
             letter-spacing: 0.02em;
-            backdrop-filter: blur(8px);
         }
 
-        .status-pulse {
-            width: 8px;
-            height: 8px;
-            background: #22C55E;
+        .status-dot {
+            width: 7px;
+            height: 7px;
+            background: #0F9D58;
             border-radius: 50%;
-            box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
-            animation: pulse-green 2s infinite;
+            box-shadow: 0 0 0 2px rgba(15, 157, 88, 0.2);
+            animation: pulse-dot 2s infinite;
         }
 
-        @keyframes pulse-green {
-            0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
-            70% { box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
+        @keyframes pulse-dot {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.3); opacity: 0.7; }
         }
 
         .profile-name {
             font-family: var(--font-serif);
-            font-size: 1.85rem;
+            font-size: 2rem;
             font-weight: 600;
+            color: var(--color-navy);
             letter-spacing: -0.01em;
             margin-bottom: 0.35rem;
-            color: #FFFFFF;
+            line-height: 1.2;
         }
 
-        .profile-title {
-            font-size: 0.94rem;
-            color: var(--color-gold-light);
-            font-weight: 500;
+        .profile-subtitle {
+            font-size: 0.95rem;
+            color: var(--color-terracotta);
+            font-weight: 600;
             margin-bottom: 0.75rem;
+            letter-spacing: 0.01em;
         }
 
-        .profile-pills {
+        .profile-bio-text {
+            font-size: 0.84rem;
+            color: var(--color-text-body);
+            line-height: 1.55;
+            max-width: 400px;
+            margin: 0 auto 1.1rem;
+        }
+
+        /* Pílulas de Especialidades Elegantes */
+        .specialties-chips {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 0.4rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.15rem;
         }
 
-        .pill-tag {
+        .specialty-chip {
             font-size: 0.72rem;
+            font-weight: 500;
+            color: var(--color-navy);
+            background: #FFFFFF;
+            border: 1px solid rgba(22, 42, 59, 0.1);
             padding: 0.25rem 0.65rem;
             border-radius: var(--radius-pill);
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: var(--color-text-muted);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
         }
 
-        /* Google Rating Chip */
-        .google-chip {
+        /* Selo Google de Prova Social */
+        .google-verified-seal {
             display: inline-flex;
             align-items: center;
-            gap: 0.45rem;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(197, 160, 89, 0.25);
-            padding: 0.35rem 0.85rem;
+            gap: 0.5rem;
+            background: #FFFFFF;
+            border: 1px solid var(--color-border);
+            padding: 0.38rem 0.95rem;
             border-radius: var(--radius-pill);
             font-size: 0.78rem;
-            color: #FFFFFF;
+            color: var(--color-navy);
             text-decoration: none;
-            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            transition: all 0.25s ease;
         }
 
-        .google-chip:hover {
+        .google-verified-seal:hover {
             border-color: var(--color-gold);
-            background: rgba(197, 160, 89, 0.12);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(197, 160, 89, 0.18);
         }
 
-        .google-chip .stars {
-            color: #FBBC04;
+        .google-verified-seal .stars {
+            color: #F59E0B;
             letter-spacing: 1px;
             font-size: 0.85rem;
         }
 
-        /* Primary Highlight CTA (WhatsApp Vip) */
-        .primary-cta-card {
+        /* CARD PRINCIPAL (CONCIERGE & AGENDAMENTO EXECUTIVO) */
+        .primary-booking-card {
             width: 100%;
-            background: linear-gradient(135deg, #1f9d55 0%, #15733c 100%);
-            border: 1.5px solid rgba(255, 255, 255, 0.35);
+            background: linear-gradient(135deg, #162A3B 0%, #1F3B52 100%);
+            border: 1.5px solid rgba(197, 160, 89, 0.4);
             border-radius: var(--radius-card);
-            padding: 1.25rem 1.4rem;
+            padding: 1.35rem 1.4rem;
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 1.1rem;
             text-decoration: none;
             color: #FFFFFF;
+            margin-bottom: 1.6rem;
+            box-shadow: 0 12px 30px rgba(22, 42, 59, 0.18), 0 0 15px rgba(197, 160, 89, 0.15);
             position: relative;
             overflow: hidden;
-            box-shadow: 0 12px 30px rgba(37, 211, 102, 0.35);
-            margin-bottom: 1.4rem;
             transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .primary-cta-card::after {
+        .primary-booking-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--color-gold), transparent);
+        }
+
+        .primary-booking-card::after {
             content: '';
             position: absolute;
             top: 0;
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
-            animation: cta-shimmer 3.5s infinite;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.12), transparent);
+            animation: shimmer-light 4s infinite;
         }
 
-        @keyframes cta-shimmer {
+        @keyframes shimmer-light {
             0% { left: -100%; }
             30% { left: 100%; }
             100% { left: 100%; }
         }
 
-        .primary-cta-card:hover,
-        .primary-cta-card:active {
-            transform: translateY(-3px) scale(1.01);
-            box-shadow: 0 16px 36px rgba(37, 211, 102, 0.45);
-            border-color: #FFFFFF;
+        .primary-booking-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 18px 40px rgba(22, 42, 59, 0.25), 0 0 20px rgba(197, 160, 89, 0.3);
+            border-color: var(--color-gold);
         }
 
-        .cta-icon-box {
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.2);
+        .booking-icon-shield {
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+            background: linear-gradient(135deg, #25D366 0%, #1EBE5D 100%);
             display: flex;
             align-items: center;
             justify-content: center;
+            color: #FFFFFF;
             flex-shrink: 0;
+            box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
         }
 
-        .cta-content {
+        .booking-details {
             flex-grow: 1;
             min-width: 0;
         }
 
-        .cta-badge {
+        .booking-tag {
             display: inline-block;
             font-size: 0.65rem;
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.08em;
-            background: rgba(255, 255, 255, 0.25);
-            padding: 0.15rem 0.45rem;
-            border-radius: 4px;
+            color: var(--color-gold);
             margin-bottom: 0.2rem;
         }
 
-        .cta-title {
+        .booking-title {
+            font-family: var(--font-sans);
             font-size: 1.05rem;
             font-weight: 700;
-            line-height: 1.25;
-            margin-bottom: 0.15rem;
-        }
-
-        .cta-subtitle {
-            font-size: 0.78rem;
-            color: rgba(255, 255, 255, 0.88);
-            line-height: 1.3;
-        }
-
-        .cta-arrow {
             color: #FFFFFF;
-            opacity: 0.85;
+            line-height: 1.25;
+            margin-bottom: 0.2rem;
+        }
+
+        .booking-subtitle {
+            font-size: 0.78rem;
+            color: rgba(255, 255, 255, 0.75);
+            line-height: 1.35;
+        }
+
+        .booking-arrow {
+            color: var(--color-gold);
             flex-shrink: 0;
             transition: transform 0.3s ease;
         }
 
-        .primary-cta-card:hover .cta-arrow {
+        .primary-booking-card:hover .booking-arrow {
             transform: translateX(4px);
         }
 
-        /* Links List */
-        .links-group {
+        /* GRID DE AÇÕES CLÍNICAS (CARDS BRANCOS COM BORDA DOURADA) */
+        .action-cards-list {
             width: 100%;
             display: flex;
             flex-direction: column;
@@ -390,38 +410,34 @@
             margin-bottom: 1.75rem;
         }
 
-        .bio-link-card {
-            background: var(--color-surface);
+        .clinical-card {
+            background: #FFFFFF;
             border: 1px solid var(--color-border);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
             border-radius: var(--radius-card);
-            padding: 1.1rem 1.25rem;
+            padding: 1.15rem 1.3rem;
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 1.05rem;
             text-decoration: none;
-            color: #FFFFFF;
+            color: var(--color-navy);
+            box-shadow: var(--shadow-card);
             position: relative;
-            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .bio-link-card:hover,
-        .bio-link-card:active {
-            background: var(--color-surface-hover);
+        .clinical-card:hover {
             border-color: var(--color-border-hover);
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25), 0 0 15px rgba(197, 160, 89, 0.1);
+            box-shadow: var(--shadow-hover);
         }
 
-        .link-icon-box {
+        .clinical-icon-box {
             width: 44px;
             height: 44px;
             border-radius: 12px;
-            background: rgba(197, 160, 89, 0.1);
-            border: 1px solid rgba(197, 160, 89, 0.22);
-            color: var(--color-gold);
+            background: var(--color-surface-soft);
+            border: 1px solid rgba(197, 160, 89, 0.25);
+            color: var(--color-terracotta);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -429,167 +445,208 @@
             transition: all 0.3s ease;
         }
 
-        .bio-link-card:hover .link-icon-box {
+        .clinical-card:hover .clinical-icon-box {
             background: var(--color-terracotta);
             border-color: var(--color-terracotta);
             color: #FFFFFF;
             transform: scale(1.05);
         }
 
-        .link-icon-box.youtube {
-            background: rgba(255, 0, 0, 0.1);
-            border-color: rgba(255, 0, 0, 0.25);
-            color: #FF4D4D;
+        .clinical-icon-box.youtube {
+            background: #FFF5F5;
+            border-color: rgba(255, 0, 0, 0.18);
+            color: #E60000;
         }
 
-        .bio-link-card:hover .link-icon-box.youtube {
-            background: #FF0000;
-            border-color: #FF0000;
+        .clinical-card:hover .clinical-icon-box.youtube {
+            background: #E60000;
+            border-color: #E60000;
             color: #FFFFFF;
         }
 
-        .link-icon-box.instagram {
-            background: rgba(225, 48, 108, 0.1);
-            border-color: rgba(225, 48, 108, 0.25);
-            color: #E1306C;
-        }
-
-        .bio-link-card:hover .link-icon-box.instagram {
-            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-            border-color: transparent;
-            color: #FFFFFF;
-        }
-
-        .link-text {
+        .card-copy {
             flex-grow: 1;
             min-width: 0;
         }
 
-        .link-title {
+        .card-headline {
             font-size: 0.98rem;
             font-weight: 600;
-            color: #FFFFFF;
-            margin-bottom: 0.15rem;
+            color: var(--color-navy);
             line-height: 1.3;
+            margin-bottom: 0.15rem;
         }
 
-        .link-desc {
-            font-size: 0.75rem;
+        .card-description {
+            font-size: 0.76rem;
             color: var(--color-text-muted);
             line-height: 1.35;
         }
 
-        .link-chevron {
-            color: var(--color-text-muted);
-            opacity: 0.6;
+        .card-chevron {
+            color: var(--color-gold);
+            opacity: 0.7;
             flex-shrink: 0;
             transition: all 0.3s ease;
         }
 
-        .bio-link-card:hover .link-chevron {
-            color: var(--color-gold);
+        .clinical-card:hover .card-chevron {
             opacity: 1;
             transform: translateX(3px);
         }
 
-        /* Consultation Info Box */
-        .info-box {
+        /* MODALIDADES DE ATENDIMENTO (MINI DOSSIÊ) */
+        .modalities-container {
             width: 100%;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: #FFFFFF;
+            border: 1px solid var(--color-border);
             border-radius: var(--radius-card);
-            padding: 1.1rem 1.25rem;
+            padding: 1.25rem 1.3rem;
             margin-bottom: 1.75rem;
-            text-align: center;
+            box-shadow: var(--shadow-card);
         }
 
-        .info-box-title {
+        .modalities-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
             font-family: var(--font-serif);
-            font-size: 0.92rem;
-            color: var(--color-gold);
-            margin-bottom: 0.4rem;
+            font-size: 0.96rem;
             font-weight: 600;
+            color: var(--color-navy);
+            margin-bottom: 0.85rem;
+            border-bottom: 1px solid rgba(22, 42, 59, 0.06);
+            padding-bottom: 0.5rem;
         }
 
-        .info-box-text {
-            font-size: 0.78rem;
+        .modalities-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .modality-item {
+            background: var(--color-bg);
+            border: 1px solid rgba(197, 160, 89, 0.18);
+            border-radius: 12px;
+            padding: 0.8rem 0.85rem;
+        }
+
+        .modality-title {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--color-navy);
+            margin-bottom: 0.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .modality-desc {
+            font-size: 0.72rem;
+            color: var(--color-text-body);
+            line-height: 1.4;
+        }
+
+        /* HORÁRIOS & SIGILO */
+        .clinic-info-bar {
+            width: 100%;
+            text-align: center;
+            font-size: 0.76rem;
             color: var(--color-text-muted);
-            line-height: 1.55;
+            line-height: 1.5;
+            margin-bottom: 1.6rem;
+            padding: 0 0.5rem;
         }
 
-        /* Social Icons Row */
-        .social-icons-row {
+        .clinic-info-bar strong {
+            color: var(--color-navy);
+        }
+
+        /* REDES SOCIAIS (CÍRCULOS DISCRETOS DE ALTO PADRÃO) */
+        .social-links-row {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 1.1rem;
-            margin-bottom: 2rem;
+            gap: 1rem;
+            margin-bottom: 2.25rem;
             width: 100%;
         }
 
-        .social-icon-btn {
-            width: 44px;
-            height: 44px;
+        .social-pill-btn {
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.06);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            color: var(--color-text-muted);
+            background: #FFFFFF;
+            border: 1px solid var(--color-border);
+            color: var(--color-navy);
             display: flex;
             align-items: center;
             justify-content: center;
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
         }
 
-        .social-icon-btn:hover {
+        .social-pill-btn:hover {
             color: #FFFFFF;
-            background: var(--color-terracotta);
-            border-color: var(--color-terracotta);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(193, 127, 95, 0.3);
+            background: var(--color-navy);
+            border-color: var(--color-navy);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(22, 42, 59, 0.15);
         }
 
-        /* Footer */
-        .bio-footer {
+        /* RODAPÉ INSTITUCIONAL */
+        .institutional-footer {
             text-align: center;
-            font-size: 0.74rem;
-            color: rgba(255, 255, 255, 0.4);
+            font-size: 0.72rem;
+            color: var(--color-text-muted);
             line-height: 1.6;
             width: 100%;
+            border-top: 1px solid rgba(22, 42, 59, 0.06);
+            padding-top: 1.5rem;
         }
 
-        .bio-footer a {
-            color: var(--color-gold);
+        .institutional-footer a {
+            color: var(--color-terracotta);
             text-decoration: none;
-            transition: color 0.2s ease;
+            font-weight: 500;
         }
 
-        .bio-footer a:hover {
-            color: #FFFFFF;
+        .institutional-footer a:hover {
             text-decoration: underline;
         }
 
-        /* Toast notification */
-        .toast {
+        .ethical-seal {
+            font-size: 0.68rem;
+            color: var(--color-text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.4rem;
+            display: block;
+        }
+
+        /* Notificação Toast */
+        .toast-msg {
             position: fixed;
             bottom: 24px;
             left: 50%;
             transform: translateX(-50%) translateY(100px);
-            background: #1E293B;
-            border: 1px solid rgba(197, 160, 89, 0.4);
+            background: var(--color-navy);
+            border: 1px solid var(--color-gold);
             color: #FFFFFF;
-            font-size: 0.85rem;
+            font-size: 0.82rem;
             font-weight: 500;
-            padding: 0.65rem 1.25rem;
+            padding: 0.65rem 1.3rem;
             border-radius: var(--radius-pill);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 10px 30px rgba(22, 42, 59, 0.25);
             z-index: 1000;
             opacity: 0;
             pointer-events: none;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .toast.show {
+        .toast-msg.visible {
             transform: translateX(-50%) translateY(0);
             opacity: 1;
         }
@@ -597,16 +654,15 @@
 </head>
 
 <body>
-    <!-- Background glow elements -->
-    <div class="ambient-orb ambient-orb-1"></div>
-    <div class="ambient-orb ambient-orb-2"></div>
-    <div class="ambient-orb ambient-orb-3"></div>
-
-    <main class="bio-container">
-        <!-- Top Bar with Share Button -->
-        <div class="bio-top-bar">
-            <button class="share-btn" id="shareBtn" title="Compartilhar Link" aria-label="Compartilhar">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+    <main class="bio-wrapper">
+        <!-- Barra Superior com Monograma & Compartilhar -->
+        <div class="bio-header-bar">
+            <a href="index.html" class="clinic-brand" title="Ir para Helena Ávila Site Oficial">
+                <div class="brand-monogram">HÁ</div>
+                <div class="brand-text">Helena Ávila</div>
+            </a>
+            <button class="share-btn" id="shareBtn" title="Compartilhar Perfil" aria-label="Compartilhar">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="18" cy="5" r="3"></circle>
                     <circle cx="6" cy="12" r="3"></circle>
@@ -617,31 +673,38 @@
             </button>
         </div>
 
-        <!-- Profile Section -->
-        <header class="profile-section">
-            <div class="avatar-wrapper">
-                <div class="avatar-ring"></div>
-                <img src="assets/helena.jpg" alt="Helena Ávila" class="avatar-img" width="112" height="112">
+        <!-- Apresentação do Perfil Clínico -->
+        <header class="profile-card">
+            <div class="profile-photo-container">
+                <div class="profile-photo-frame">
+                    <img src="assets/helena.jpg" alt="Foto profissional de Helena Ávila" class="profile-photo-img"
+                        width="116" height="116">
+                </div>
             </div>
 
-            <div class="status-badge">
-                <span class="status-pulse"></span>
-                <span>Atendimento Online & Presencial</span>
+            <div class="clinic-status-pill">
+                <span class="status-dot"></span>
+                <span>Atendimento Presencial & Online</span>
             </div>
 
             <h1 class="profile-name">Helena Ávila</h1>
-            <p class="profile-title">Psicoterapeuta Integrativa & Psicanalista</p>
+            <p class="profile-subtitle">Psicoterapeuta Integrativa & Psicanalista</p>
 
-            <div class="profile-pills">
-                <span class="pill-tag">Neurociência</span>
-                <span class="pill-tag">Psicanálise</span>
-                <span class="pill-tag">PNL Clínica</span>
-                <span class="pill-tag">Hipnose</span>
-                <span class="pill-tag">Constelação</span>
+            <p class="profile-bio-text">
+                Tratamento clínico focado em resultados reais para superação da ansiedade, depressão, relacionamentos e autoconhecimento.
+            </p>
+
+            <div class="specialties-chips">
+                <span class="specialty-chip">Neurociência</span>
+                <span class="specialty-chip">Psicanálise Clínica</span>
+                <span class="specialty-chip">PNL</span>
+                <span class="specialty-chip">Terapia de Casal</span>
+                <span class="specialty-chip">Hipnose</span>
+                <span class="specialty-chip">Constelação</span>
             </div>
 
-            <a href="avaliacoes.html" class="google-chip" title="Ver avaliações no Google">
-                <svg width="15" height="15" viewBox="0 0 24 24">
+            <a href="avaliacoes.html" class="google-verified-seal" title="Ver 10 avaliações no Google">
+                <svg width="16" height="16" viewBox="0 0 24 24">
                     <path fill="#4285F4"
                         d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
                     <path fill="#34A853"
@@ -652,35 +715,35 @@
                         d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" />
                 </svg>
                 <span class="stars">★★★★★</span>
-                <span><strong>5.0</strong> no Google (Excelente)</span>
+                <span><strong>5.0 no Google</strong> • 100% Positiva</span>
             </a>
         </header>
 
-        <!-- HIGHLIGHT: WhatsApp Direct CTA -->
+        <!-- AÇÃO PRINCIPAL: CONCIERGE WHATSAPP EXECUTIVO -->
         <a href="https://wa.me/5511995235839?text=Ol%C3%A1%20Helena,%20vim%20pelo%20link%20da%20Bio%20e%20gostaria%20de%20informa%C3%A7%C3%B5es%20sobre%20as%20sess%C3%B5es."
-            target="_blank" rel="noopener noreferrer" class="primary-cta-card" id="btnWhatsappBio">
-            <div class="cta-icon-box">
-                <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+            target="_blank" rel="noopener noreferrer" class="primary-booking-card" id="btnAgendarWhatsapp">
+            <div class="booking-icon-shield">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
                     <path
                         d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.205 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
                 </svg>
             </div>
-            <div class="cta-content">
-                <span class="cta-badge">Canal Direto</span>
-                <div class="cta-title">Agendar Consulta no WhatsApp</div>
-                <div class="cta-subtitle">Presencial em Praia Grande ou Online</div>
+            <div class="booking-details">
+                <span class="booking-tag">Atendimento Prioritário</span>
+                <div class="booking-title">Agendar Consulta no WhatsApp</div>
+                <div class="booking-subtitle">Converse diretamente sobre horários e sessões</div>
             </div>
-            <svg class="cta-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            <svg class="booking-arrow" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                 stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
         </a>
 
-        <!-- Main Bio Links Navigation -->
-        <nav class="links-group">
+        <!-- LINKS CLÍNICOS E NAVEGAÇÃO -->
+        <nav class="action-cards-list">
             <!-- 1. Site Oficial -->
-            <a href="index.html" class="bio-link-card">
-                <div class="link-icon-box">
+            <a href="index.html" class="clinical-card">
+                <div class="clinical-icon-box">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="12" cy="12" r="10"></circle>
@@ -690,19 +753,19 @@
                         </path>
                     </svg>
                 </div>
-                <div class="link-text">
-                    <div class="link-title">Site Oficial Completo</div>
-                    <div class="link-desc">Metodologia clínica, tratamentos e artigos</div>
+                <div class="card-copy">
+                    <div class="card-headline">Site Oficial & Consultório</div>
+                    <div class="card-description">Conheça os protocolos, metodologia e artigos</div>
                 </div>
-                <svg class="link-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                <svg class="card-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
             </a>
 
             <!-- 2. Avaliações dos Pacientes -->
-            <a href="avaliacoes.html" class="bio-link-card">
-                <div class="link-icon-box">
+            <a href="avaliacoes.html" class="clinical-card">
+                <div class="clinical-icon-box">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <polygon
@@ -710,48 +773,48 @@
                         </polygon>
                     </svg>
                 </div>
-                <div class="link-text">
-                    <div class="link-title">O Que Dizem os Pacientes</div>
-                    <div class="link-desc">Depoimentos reais e nota 5.0 no Google</div>
+                <div class="card-copy">
+                    <div class="card-headline">Avaliações & Depoimentos Reais</div>
+                    <div class="card-description">Leia os relatos dos pacientes atendidos no Google</div>
                 </div>
-                <svg class="link-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                <svg class="card-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
             </a>
 
-            <!-- 3. Vídeos & Conteúdos -->
-            <a href="videos.html" class="bio-link-card">
-                <div class="link-icon-box">
+            <!-- 3. Vídeos Clínicos -->
+            <a href="videos.html" class="clinical-card">
+                <div class="clinical-icon-box">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <polygon points="5 3 19 12 5 21 5 3"></polygon>
                     </svg>
                 </div>
-                <div class="link-text">
-                    <div class="link-title">Vídeos & Reflexões Clínicas</div>
-                    <div class="link-desc">Análises sobre narcisismo, ansiedade e mente</div>
+                <div class="card-copy">
+                    <div class="card-headline">Vídeos & Análises Clínicas</div>
+                    <div class="card-description">Aulas sobre narcisismo, ansiedade e comportamento</div>
                 </div>
-                <svg class="link-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                <svg class="card-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
             </a>
 
-            <!-- 4. Sobre Helena Ávila -->
-            <a href="sobre.html" class="bio-link-card">
-                <div class="link-icon-box">
+            <!-- 4. Sobre a Profissional -->
+            <a href="sobre.html" class="clinical-card">
+                <div class="clinical-icon-box">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                         <circle cx="12" cy="7" r="4"></circle>
                     </svg>
                 </div>
-                <div class="link-text">
-                    <div class="link-title">Sobre Helena Ávila</div>
-                    <div class="link-desc">Conheça a trajetória e credenciais clínicas</div>
+                <div class="card-copy">
+                    <div class="card-headline">Sobre Helena Ávila</div>
+                    <div class="card-description">Conheça a trajetória, formações e abordagem integrativa</div>
                 </div>
-                <svg class="link-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                <svg class="card-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
@@ -759,19 +822,19 @@
 
             <!-- 5. Localização do Consultório -->
             <a href="https://www.google.com/maps/place/Praiagrandepsi/@-24.0033653,-46.4264921,17z/data=!4m18!1m9!3m8!1s0x94ce1db57f46091d:0x496f5e3bb13f9293!2sPraiagrandepsi!8m2!3d-24.0033653!4d-46.4217285!9m1!1b1!16s%2Fg%2F11bwhb7x9n!3m7!1s0x94ce1db57f46091d:0x496f5e3bb13f9293!8m2!3d-24.0033653!4d-46.4217285!9m1!1b1!16s%2Fg%2F11bwhb7x9n"
-                target="_blank" rel="noopener noreferrer" class="bio-link-card">
-                <div class="link-icon-box">
+                target="_blank" rel="noopener noreferrer" class="clinical-card">
+                <div class="clinical-icon-box">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
                         <circle cx="12" cy="10" r="3"></circle>
                     </svg>
                 </div>
-                <div class="link-text">
-                    <div class="link-title">Consultório em Praia Grande</div>
-                    <div class="link-desc">Rua Botafogo, 442 - Guilhermina, SP</div>
+                <div class="card-copy">
+                    <div class="card-headline">Consultório em Praia Grande - SP</div>
+                    <div class="card-description">Rua Botafogo, 442 - Guilhermina (Abrir no GPS)</div>
                 </div>
-                <svg class="link-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                <svg class="card-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
@@ -779,85 +842,109 @@
 
             <!-- 6. Canal no YouTube -->
             <a href="https://www.youtube.com/@psicoterapeutahelenaavila" target="_blank" rel="noopener noreferrer"
-                class="bio-link-card">
-                <div class="link-icon-box youtube">
+                class="clinical-card">
+                <div class="clinical-icon-box youtube">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
                         <path
                             d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
                     </svg>
                 </div>
-                <div class="link-text">
-                    <div class="link-title">Canal Oficial no YouTube</div>
-                    <div class="link-desc">Inscreva-se para novos vídeos e análises</div>
+                <div class="card-copy">
+                    <div class="card-headline">Canal no YouTube</div>
+                    <div class="card-description">Vídeos semanais e reflexões aprofundadas</div>
                 </div>
-                <svg class="link-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                <svg class="card-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <polyline points="9 18 15 12 9 6"></polyline>
                 </svg>
             </a>
         </nav>
 
-        <!-- Quick Clinic Info Box -->
-        <div class="info-box">
-            <div class="info-box-title">Horário de Atendimento</div>
-            <div class="info-box-text">
-                Segunda a Sexta: 08h às 20h<br>
-                Sábados: 08h às 13h<br>
-                <span style="color: var(--color-gold-light); font-size: 0.72rem; display: block; margin-top: 0.35rem;">
-                    Sessões presenciais e online por videoconferência criptografada.
-                </span>
+        <!-- MINI DOSSIÊ: MODALIDADES CLÍNICAS -->
+        <div class="modalities-container">
+            <div class="modalities-header">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                <span>Modalidades de Atendimento</span>
+            </div>
+            <div class="modalities-grid">
+                <div class="modality-item">
+                    <div class="modality-title">
+                        <span>🏛️</span> Presencial
+                    </div>
+                    <p class="modality-desc">
+                        Consultório privativo em Praia Grande – SP com conforto e discrição total.
+                    </p>
+                </div>
+                <div class="modality-item">
+                    <div class="modality-title">
+                        <span>🌐</span> Online
+                    </div>
+                    <p class="modality-desc">
+                        Videoconferência criptografada para pacientes em todo o Brasil e exterior.
+                    </p>
+                </div>
             </div>
         </div>
 
-        <!-- Social Media Icons -->
-        <div class="social-icons-row">
-            <a href="https://wa.me/5511995235839" target="_blank" rel="noopener noreferrer" class="social-icon-btn"
+        <!-- Horários de Atendimento e Sigilo -->
+        <div class="clinic-info-bar">
+            <strong>Horários:</strong> Seg a Sex das 08h às 20h • Sábados das 08h às 13h<br>
+            Atendimento exclusivamente com agendamento prévio.
+        </div>
+
+        <!-- Redes Sociais Oficiais -->
+        <div class="social-links-row">
+            <a href="https://wa.me/5511995235839" target="_blank" rel="noopener noreferrer" class="social-pill-btn"
                 title="WhatsApp" aria-label="WhatsApp">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor">
                     <path
                         d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.205 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
                 </svg>
             </a>
             <a href="https://www.instagram.com/psihelenaavila/" target="_blank" rel="noopener noreferrer"
-                class="social-icon-btn" title="Instagram" aria-label="Instagram">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                class="social-pill-btn" title="Instagram" aria-label="Instagram">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                     stroke-linecap="round" stroke-linejoin="round">
                     <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
                     <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
                     <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                 </svg>
             </a>
-            <a href="https://www.facebook.com/share/1CoARC91qZ/?mibextid=wwXIfr" target="_blank"
-                rel="noopener noreferrer" class="social-icon-btn" title="Facebook" aria-label="Facebook">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                    <path
-                        d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                </svg>
-            </a>
             <a href="https://www.youtube.com/@psicoterapeutahelenaavila" target="_blank" rel="noopener noreferrer"
-                class="social-icon-btn" title="YouTube" aria-label="YouTube">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                class="social-pill-btn" title="YouTube" aria-label="YouTube">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor">
                     <path
                         d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
                 </svg>
             </a>
+            <a href="https://www.facebook.com/share/1CoARC91qZ/?mibextid=wwXIfr" target="_blank"
+                rel="noopener noreferrer" class="social-pill-btn" title="Facebook" aria-label="Facebook">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                </svg>
+            </a>
         </div>
 
-        <!-- Footer -->
-        <footer class="bio-footer">
-            <p>&copy; 2026 Helena Ávila. Todos os direitos reservados.</p>
+        <!-- Rodapé Institucional com Selo de Ética -->
+        <footer class="institutional-footer">
+            <span class="ethical-seal">🔒 Sigilo Profissional & Ética Médica Garantidos</span>
+            <p>&copy; 2026 Helena Ávila • Psicoterapia Integrativa & Psicanálise</p>
             <p style="margin-top: 0.25rem;">
                 Desenvolvido por <a href="https://kuboweb.com.br/" target="_blank" rel="noopener noreferrer">Kuboweb</a>
             </p>
         </footer>
     </main>
 
-    <!-- Toast Notification -->
-    <div class="toast" id="toast">Link copiado com sucesso!</div>
+    <!-- Notificação Toast -->
+    <div class="toast-msg" id="toastMsg">Link copiado com sucesso! ✨</div>
 
-    <!-- Script de Compartilhamento & Analytics -->
+    <!-- Scripts de Rastreamento & Interatividade -->
     <script>
-        // Confirmação de rastreamento automático para 100% dos cliques
+        // Rastreamento automático 100% Kuboweb
         (function initKuboweb() {
             let attempts = 0;
             const timer = setInterval(() => {
@@ -870,60 +957,56 @@
             }, 150);
         })();
 
-        // Botão de Compartilhar
+        // Compartilhamento
         const shareBtn = document.getElementById('shareBtn');
-        const toast = document.getElementById('toast');
+        const toastMsg = document.getElementById('toastMsg');
 
-        function showToast(msg) {
-            toast.innerText = msg;
-            toast.classList.add('show');
+        function triggerToast(text) {
+            toastMsg.innerText = text;
+            toastMsg.classList.add('visible');
             setTimeout(() => {
-                toast.classList.remove('show');
+                toastMsg.classList.remove('visible');
             }, 2500);
         }
 
         if (shareBtn) {
             shareBtn.addEventListener('click', async () => {
                 const shareData = {
-                    title: 'Helena Ávila | Psicoterapeuta Integrativa & Psicanalista',
-                    text: 'Agende sua consulta presencial ou online com Helena Ávila:',
+                    title: 'Helena Ávila | Psicoterapia Integrativa & Psicanálise',
+                    text: 'Agende sua consulta presencial em Praia Grande ou online com Helena Ávila:',
                     url: window.location.href
                 };
 
                 if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
                     try {
                         await navigator.share(shareData);
-                    } catch (err) {
-                        if (err.name !== 'AbortError') {
-                            copyToClipboard(window.location.href);
-                        }
+                    } catch (e) {
+                        if (e.name !== 'AbortError') copyLink();
                     }
                 } else {
-                    copyToClipboard(window.location.href);
+                    copyLink();
                 }
             });
         }
 
-        function copyToClipboard(text) {
+        function copyLink() {
             if (navigator.clipboard && navigator.clipboard.writeText) {
-                navigator.clipboard.writeText(text).then(() => {
-                    showToast('Link copiado para a área de transferência! ✨');
-                }).catch(() => {
-                    fallbackCopy(text);
-                });
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    triggerToast('Link copiado para a área de transferência! ✨');
+                }).catch(() => fallbackCopy());
             } else {
-                fallbackCopy(text);
+                fallbackCopy();
             }
         }
 
-        function fallbackCopy(text) {
-            const temp = document.createElement('input');
-            temp.value = text;
-            document.body.appendChild(temp);
-            temp.select();
+        function fallbackCopy() {
+            const input = document.createElement('input');
+            input.value = window.location.href;
+            document.body.appendChild(input);
+            input.select();
             document.execCommand('copy');
-            document.body.removeChild(temp);
-            showToast('Link copiado! ✨');
+            document.body.removeChild(input);
+            triggerToast('Link copiado! ✨');
         }
     </script>
 </body>

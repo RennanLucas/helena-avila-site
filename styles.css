@@ -748,19 +748,24 @@ img {
 .card-icon-wrapper {
     width: 56px;
     height: 56px;
-    background: rgba(107, 132, 115, 0.1);
-    color: var(--color-navy);
+    background: linear-gradient(135deg, rgba(197, 160, 89, 0.12) 0%, rgba(193, 127, 95, 0.08) 100%);
+    color: var(--color-terracotta);
+    border: 1px solid rgba(197, 160, 89, 0.25);
     border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 1.75rem;
     transition: var(--transition);
+    box-shadow: 0 4px 12px rgba(197, 160, 89, 0.08);
 }
 
 .specialty-card:hover .card-icon-wrapper {
     background: var(--color-navy);
-    color: #FFFFFF;
+    color: #E8D3A2;
+    border-color: var(--color-terracotta);
+    transform: scale(1.08) rotate(3deg);
+    box-shadow: 0 8px 20px rgba(22, 42, 59, 0.22);
 }
 
 .specialty-card h3 {
@@ -778,12 +783,28 @@ img {
 }
 
 .card-link {
-    font-size: 0.85rem;
+    font-size: 0.88rem;
     font-weight: 700;
     color: var(--color-terracotta);
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.45rem;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+    background: rgba(193, 127, 95, 0.07);
+    border: 1px solid rgba(193, 127, 95, 0.18);
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    align-self: flex-start;
+    margin-top: auto;
+}
+
+.specialty-card:hover .card-link {
+    background: var(--color-terracotta);
+    color: #FFFFFF;
+    border-color: var(--color-terracotta);
+    box-shadow: 0 4px 14px var(--color-terracotta-glow);
+    transform: translateX(4px);
 }
 
 .specialty-card:hover .card-link span {
@@ -1064,25 +1085,40 @@ img {
 }
 
 .method-icon-box {
-    width: 48px;
-    height: 48px;
-    background: var(--color-bg-surface);
-    border-radius: 12px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, rgba(197, 160, 89, 0.1) 0%, rgba(193, 127, 95, 0.08) 100%);
+    border: 1px solid rgba(197, 160, 89, 0.22);
+    border-radius: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.35s ease;
+    box-shadow: 0 4px 12px rgba(197, 160, 89, 0.08);
+}
+
+.method-card:hover .method-icon-box {
+    background: var(--color-navy);
+    border-color: var(--color-terracotta);
+    transform: scale(1.08) rotate(-3deg);
+    box-shadow: 0 6px 18px rgba(22, 42, 59, 0.2);
+}
+
+.method-card:hover .method-icon-box svg {
+    stroke: #E8D3A2;
 }
 
 .method-number {
     font-family: var(--font-serif);
     font-size: 2.8rem;
     font-weight: 700;
-    color: rgba(197, 160, 89, 0.15);
+    color: rgba(197, 160, 89, 0.2);
     transition: var(--transition);
 }
 
 .method-card:hover .method-number {
-    color: rgba(197, 160, 89, 0.35);
+    color: var(--color-terracotta);
+    opacity: 0.7;
 }
 
 .method-card h3 {
@@ -1561,6 +1597,21 @@ img {
     justify-content: space-between;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     border: 1px solid rgba(197, 160, 89, 0.22);
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonial-card::after {
+    content: '“';
+    position: absolute;
+    bottom: -15px;
+    right: 15px;
+    font-family: var(--font-serif);
+    font-size: 7.5rem;
+    line-height: 1;
+    color: rgba(197, 160, 89, 0.07);
+    pointer-events: none;
+    font-weight: 700;
 }
 
 @media (max-width: 992px) {
@@ -3697,18 +3748,35 @@ body {
     .hero-text h1 { font-size: 2.2rem !important; line-height: 1.2; }
     .section-title { font-size: 2rem; line-height: 1.2; }
     
-    /* 2. Hero Section Refinements */
     .hero-stats {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-around !important;
+        align-items: center !important;
         text-align: center;
-        gap: 1.5rem;
+        gap: 0.35rem !important;
+        padding-top: 1.25rem !important;
+        border-top: 1px solid rgba(22, 42, 59, 0.08) !important;
+        width: 100% !important;
     }
-    .stat-item {
+    .hero-stats .stat-item {
         align-items: center;
+        flex: 1;
     }
-    .stat-divider { display: none; }
+    .hero-stats .stat-number {
+        font-size: 1.35rem !important;
+    }
+    .hero-stats .stat-label {
+        font-size: 0.7rem !important;
+        line-height: 1.2;
+    }
+    .hero-stats .stat-divider {
+        display: block !important;
+        height: 26px !important;
+        width: 1px !important;
+        background: rgba(22, 42, 59, 0.12) !important;
+        margin: 0 !important;
+    }
     .hero-image-box { height: 420px; }
     .floating-card { padding: 0.6rem 1rem; }
     .badge-1 { top: 20px; left: -10px; }

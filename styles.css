@@ -3,18 +3,18 @@
    ========================================================================== */
 
 :root {
-    /* Palette: Modern Luxury - Black and Gold (Dark Mode Editorial) */
-    --color-navy: #0A0D14; /* Preto profundo obsidiana para seções escuras */
-    --color-navy-light: #121722;
-    --color-sage: #0E131C;
-    --color-sage-light: #151C28;
+    /* Palette: Dark Warm Luxury — Preto Café + Dourado (Acolhedor & Editorial) */
+    --color-navy: #0E0D0A; /* Preto quente profundo para seções escuras */
+    --color-navy-light: #1A1814;
+    --color-sage: #11100D;
+    --color-sage-light: #1E1C18;
     --color-terracotta: #C5A059; /* Dourado nobre */
     --color-terracotta-hover: #D4AF37; /* Dourado mais brilhante */
     --color-terracotta-glow: rgba(197, 160, 89, 0.25);
     
-    --color-bg-main: #07090E; /* Preto absoluto e luxuoso */
-    --color-bg-surface: #0D1118; /* Preto grafite para seções */
-    --color-bg-card: #121824; /* Cards com fundo profundo */
+    --color-bg-main: #0C0B09; /* Preto café quente e luxuoso */
+    --color-bg-surface: #13120F; /* Café grafite para seções alternadas */
+    --color-bg-card: #1A1814; /* Cards mocha profundo */
     
     --color-title: #FFFFFF; /* Títulos em branco puro de alto impacto */
     --color-text-main: #FFFFFF;
@@ -134,7 +134,7 @@ img {
 
 .section-tag.light {
     background: rgba(255, 255, 255, 0.15);
-    color: var(--color-sage-light);
+    color: rgba(255, 255, 255, 0.85);
 }
 
 .section-title {
@@ -199,7 +199,7 @@ img {
 
 .btn-secondary,
 .btn-google-review {
-    background: #121824;
+    background: #1A1814;
     color: var(--color-title);
     border: 1.5px solid rgba(197, 160, 89, 0.25);
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
@@ -207,7 +207,7 @@ img {
 
 .btn-secondary:hover,
 .btn-google-review:hover {
-    background: #182030;
+    background: #22201A;
     color: var(--color-terracotta);
     border-color: var(--color-terracotta);
     transform: translateY(-2px);
@@ -234,7 +234,7 @@ img {
 
 .btn-whatsapp-header:hover {
     background: #25D366;
-    color: #0C1014;
+    color: #0E0D0A;
     border-color: #25D366;
     box-shadow: 0 8px 24px rgba(37, 211, 102, 0.45);
 }
@@ -260,7 +260,7 @@ img {
     z-index: 1000;
     padding: 1rem 0;
     transition: var(--transition);
-    background: rgba(12, 16, 20, 0.94);
+    background: rgba(14, 13, 10, 0.94);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(197, 160, 89, 0.22);
@@ -269,7 +269,7 @@ img {
 
 .header.scrolled {
     padding: 0.85rem 0;
-    background: rgba(10, 14, 18, 0.98);
+    background: rgba(12, 11, 9, 0.98);
     border-bottom: 1px solid rgba(197, 160, 89, 0.35);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.65);
 }
@@ -498,7 +498,7 @@ img {
     position: relative;
     border-radius: var(--radius-lg);
     padding: 12px;
-    background: #121824;
+    background: #1A1814;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
     border: 1px solid rgba(197, 160, 89, 0.25);
 }
@@ -546,7 +546,7 @@ img {
 
 .floating-card {
     position: absolute;
-    background: rgba(18, 24, 36, 0.88);
+    background: rgba(26, 24, 20, 0.88);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     padding: 0.85rem 1.25rem;
@@ -631,7 +631,7 @@ img {
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(to top, rgba(22, 42, 59, 0.95) 0%, rgba(22, 42, 59, 0.7) 70%, transparent 100%);
+    background: linear-gradient(to top, rgba(14, 13, 10, 0.95) 0%, rgba(14, 13, 10, 0.7) 70%, transparent 100%);
     padding: 2rem 1.5rem 1.5rem;
     color: #FFFFFF;
 }
@@ -665,7 +665,7 @@ img {
     position: relative;
     margin: 2.5rem 0;
     padding: 2rem 2.2rem;
-    background: #121824;
+    background: #1A1814;
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-subtle);
     border: 1px solid rgba(197, 160, 89, 0.2);
@@ -847,7 +847,7 @@ img {
 }
 
 .pill {
-    background: #121824;
+    background: #1A1814;
     padding: 0.45rem 1.1rem;
     border-radius: var(--radius-pill);
     font-size: 0.88rem;
@@ -886,7 +886,7 @@ img {
 }
 
 .treatment-card {
-    background: #121824;
+    background: #1A1814;
     border: 1px solid rgba(197, 160, 89, 0.15);
     border-radius: var(--radius-md);
     padding: 1.85rem 1.6rem;
@@ -960,7 +960,7 @@ img {
     display: flex;
     align-items: center;
     gap: 1.5rem;
-    background: #121824;
+    background: #1A1814;
     border: 1px solid rgba(197, 160, 89, 0.25);
     border-left: 4px solid var(--color-terracotta);
     border-radius: var(--radius-md);
@@ -1037,7 +1037,7 @@ img {
 }
 
 .method-card {
-    background: #121824;
+    background: #1A1814;
     padding: 2.5rem 2rem;
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-subtle);
@@ -1164,7 +1164,7 @@ img {
 .video-card {
     display: flex;
     flex-direction: column;
-    background: #121824;
+    background: #1A1814;
     border-radius: var(--radius-md);
     overflow: hidden;
     box-shadow: var(--shadow-subtle);
@@ -1287,7 +1287,7 @@ img {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+    background: linear-gradient(135deg, #13120F 0%, #1E1C18 100%);
     border-radius: var(--radius-lg);
     padding: 2.2rem 2.5rem;
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -1425,7 +1425,7 @@ img {
 .step-badge {
     width: 64px;
     height: 64px;
-    background: #121824;
+    background: #1A1814;
     color: var(--color-terracotta);
     font-family: var(--font-serif);
     font-size: 1.6rem;
@@ -1449,7 +1449,7 @@ img {
 }
 
 .step-content {
-    background: #121824;
+    background: #1A1814;
     padding: 2rem 1.5rem;
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-subtle);
@@ -1517,7 +1517,7 @@ img {
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
-    background: #121824;
+    background: #1A1814;
     padding: 0.6rem 1.4rem;
     border-radius: var(--radius-pill);
     box-shadow: 0 4px 15px rgba(0,0,0,0.4);
@@ -1600,7 +1600,7 @@ img {
     flex: 0 0 calc(33.333% - 1.2rem);
     min-width: 320px;
     scroll-snap-align: center;
-    background: #121824;
+    background: #1A1814;
     padding: 2.2rem 2rem 2rem;
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
@@ -1648,7 +1648,7 @@ img {
     width: 52px;
     height: 52px;
     border-radius: 50%;
-    background: #121824;
+    background: #1A1814;
     color: var(--color-title);
     border: 1px solid rgba(197, 160, 89, 0.3);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
@@ -1858,7 +1858,7 @@ img {
 }
 
 .faq-item {
-    background: #121824;
+    background: #1A1814;
     border-radius: var(--radius-md);
     border: 1px solid rgba(197, 160, 89, 0.18);
     overflow: hidden;
@@ -1916,7 +1916,7 @@ img {
 
 /* --- NEW SECTION 4: LOCALIZAÇÃO & MODALIDADES --- */
 .location-box {
-    background: #121824;
+    background: #1A1814;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-card);
     display: grid;
@@ -1984,7 +1984,7 @@ img {
 }
 
 .clinic-badge-card {
-    background: #0D1118;
+    background: #13120F;
     padding: 2.5rem;
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-subtle);
@@ -2005,7 +2005,7 @@ img {
 
 /* --- 6. SEÇÃO AGENDAMENTO & CONTATO --- */
 .contact-card-frame {
-    background: #121824;
+    background: #1A1814;
     border-radius: var(--radius-lg);
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -2017,7 +2017,7 @@ img {
 
 .contact-info-col {
     padding: 4.5rem;
-    background: linear-gradient(135deg, #0A0D14 0%, #10151F 100%);
+    background: linear-gradient(135deg, #0E0D0A 0%, #16140F 100%);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -2075,7 +2075,7 @@ img {
 
 .contact-form-col {
     padding: 4.5rem;
-    background: #121824;
+    background: #1A1814;
     color: var(--color-text-body);
 }
 
@@ -2103,7 +2103,7 @@ img {
 .form-group textarea {
     width: 100%;
     padding: 0.95rem 1.1rem;
-    background: #07090E;
+    background: #0C0B09;
     border: 1px solid rgba(197, 160, 89, 0.2);
     border-radius: var(--radius-sm);
     font-family: var(--font-sans);
@@ -2116,7 +2116,7 @@ img {
 .form-group textarea:focus {
     outline: none;
     border-color: var(--color-terracotta);
-    background: #0B0F17;
+    background: #110F0C;
     box-shadow: 0 0 0 4px rgba(197, 160, 89, 0.15);
 }
 
@@ -2139,7 +2139,7 @@ img {
 
 /* --- 7. RODAPÉ (FOOTER) --- */
 .footer {
-    background: #05070A;
+    background: #080705;
     color: rgba(255, 255, 255, 0.82);
     padding-top: 5rem;
     border-top: 1px solid rgba(197, 160, 89, 0.2);
@@ -2422,7 +2422,7 @@ img {
         width: 100%;
         height: 100vh;
         height: 100dvh;
-        background: #0C1014;
+        background: #0F0E0B;
         padding: 6rem 2rem 3rem;
         box-shadow: none;
         border-bottom: none;
@@ -2503,7 +2503,7 @@ img {
 }
 
 .review-modal-content {
-    background: #121824;
+    background: #1A1814;
     border-radius: var(--radius-md);
     width: 100%;
     max-width: 500px;
@@ -2682,7 +2682,7 @@ img {
     padding: 1.25rem 0;
     border-top: 1px solid rgba(197, 160, 89, 0.18);
     border-bottom: 1px solid rgba(197, 160, 89, 0.18);
-    background: linear-gradient(90deg, var(--color-bg-surface) 0%, rgba(255, 255, 255, 0.95) 50%, var(--color-bg-surface) 100%);
+    background: linear-gradient(90deg, var(--color-bg-surface) 0%, var(--color-bg-card) 50%, var(--color-bg-surface) 100%);
     position: relative;
 }
 
@@ -2702,7 +2702,7 @@ img {
     font-size: 1.05rem;
     font-weight: 500;
     letter-spacing: 0.04em;
-    color: var(--color-navy);
+    color: rgba(255, 255, 255, 0.6);
     white-space: nowrap;
     display: flex;
     align-items: center;
@@ -3356,7 +3356,7 @@ body {
    EFEITO GLASSMORPHISM MAIS PREMIUM NO HEADER SCROLLED
    ========================================================================== */
 .header.scrolled {
-    background: rgba(10, 14, 18, 0.98);
+    background: rgba(12, 11, 9, 0.98);
     border-bottom: 1px solid rgba(197, 160, 89, 0.35);
     box-shadow: 0 1px 0 rgba(197, 160, 89, 0.15), 0 12px 40px rgba(0, 0, 0, 0.7);
 }
@@ -3514,7 +3514,7 @@ body {
 }
 
 .loc-card {
-    background: #121824;
+    background: #1A1814;
     border: 1px solid rgba(197, 160, 89, 0.15);
     border-radius: var(--radius-md);
     padding: 1.75rem;
@@ -3524,7 +3524,7 @@ body {
 }
 
 .loc-card:hover {
-    background: #182030;
+    background: #22201A;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
     border-color: rgba(197, 160, 89, 0.35);
     transform: translateY(-3px);
@@ -3603,7 +3603,7 @@ body {
     position: absolute;
     bottom: 20px;
     left: 20px;
-    background: rgba(18, 24, 36, 0.95);
+    background: rgba(26, 24, 20, 0.95);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     padding: 1.25rem;
@@ -3774,7 +3774,7 @@ body {
         text-align: center;
         gap: 0.35rem !important;
         padding-top: 1.25rem !important;
-        border-top: 1px solid rgba(22, 42, 59, 0.08) !important;
+        border-top: 1px solid rgba(197, 160, 89, 0.15) !important;
         width: 100% !important;
     }
     .hero-stats .stat-item {
@@ -3792,7 +3792,7 @@ body {
         display: block !important;
         height: 26px !important;
         width: 1px !important;
-        background: rgba(22, 42, 59, 0.12) !important;
+        background: rgba(197, 160, 89, 0.2) !important;
         margin: 0 !important;
     }
     .hero-image-box { height: 420px; }
@@ -4061,7 +4061,7 @@ textarea:focus-visible {
    LUXURY CTA BANNER
    ========================================================================== */
 .luxury-cta-banner {
-    background: linear-gradient(135deg, var(--color-navy) 0%, #111a24 50%, var(--color-navy) 100%);
+    background: linear-gradient(135deg, var(--color-navy) 0%, #1A1612 50%, var(--color-navy) 100%);
     padding: 6rem 0;
     text-align: center;
     position: relative;
@@ -4270,8 +4270,8 @@ textarea:focus-visible {
    ========================================================================== */
 .instagram-feed-section {
     background: var(--color-bg-surface);
-    border-top: 1px solid rgba(22, 42, 59, 0.05);
-    border-bottom: 1px solid rgba(22, 42, 59, 0.05);
+    border-top: 1px solid rgba(197, 160, 89, 0.1);
+    border-bottom: 1px solid rgba(197, 160, 89, 0.1);
     position: relative;
     overflow: hidden;
 }
@@ -4357,7 +4357,7 @@ textarea:focus-visible {
     width: 100%;
     aspect-ratio: 4 / 3;
     overflow: hidden;
-    background: #0A0E16;
+    background: #0E0D0A;
 }
 
 .insta-card-img {
@@ -4518,7 +4518,7 @@ textarea:focus-visible {
 .insta-skeleton-media {
     width: 100%;
     aspect-ratio: 4 / 3;
-    background: linear-gradient(90deg, #141B26 0%, #1E2738 50%, #141B26 100%);
+    background: linear-gradient(90deg, #17150F 0%, #221F18 50%, #17150F 100%);
     background-size: 200% 100%;
     animation: insta-shimmer 1.5s infinite;
 }
@@ -4534,7 +4534,7 @@ textarea:focus-visible {
 .insta-skeleton-line {
     height: 14px;
     border-radius: 6px;
-    background: linear-gradient(90deg, #141B26 0%, #1E2738 50%, #141B26 100%);
+    background: linear-gradient(90deg, #17150F 0%, #221F18 50%, #17150F 100%);
     background-size: 200% 100%;
     animation: insta-shimmer 1.5s infinite;
 }

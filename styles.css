@@ -221,18 +221,19 @@ img {
 }
 
 .btn-whatsapp-header {
-    background: rgba(37, 211, 102, 0.1);
-    color: #128C7E;
-    border: 1px solid rgba(37, 211, 102, 0.25);
+    background: rgba(37, 211, 102, 0.15);
+    color: #25D366;
+    border: 1px solid rgba(37, 211, 102, 0.4);
     padding: 0.65rem 1.3rem;
     font-size: 0.88rem;
+    font-weight: 600;
 }
 
 .btn-whatsapp-header:hover {
     background: #25D366;
-    color: #FFFFFF;
+    color: #0C1014;
     border-color: #25D366;
-    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+    box-shadow: 0 8px 24px rgba(37, 211, 102, 0.45);
 }
 
 .btn-whatsapp-solid {
@@ -256,17 +257,18 @@ img {
     z-index: 1000;
     padding: 1rem 0;
     transition: var(--transition);
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+    background: rgba(12, 16, 20, 0.94);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(197, 160, 89, 0.22);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
 }
 
 .header.scrolled {
     padding: 0.85rem 0;
-    background: rgba(255, 255, 255, 0.98);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+    background: rgba(10, 14, 18, 0.98);
+    border-bottom: 1px solid rgba(197, 160, 89, 0.35);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.65);
 }
 
 .header-inner {
@@ -298,14 +300,14 @@ img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    filter: drop-shadow(0 2px 6px rgba(197, 160, 89, 0.4));
+    filter: drop-shadow(0 2px 8px rgba(197, 160, 89, 0.45));
     transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
     display: block;
 }
 
 .logo-link:hover .logo-img {
     transform: scale(1.1);
-    filter: drop-shadow(0 4px 14px rgba(197, 160, 89, 0.65));
+    filter: drop-shadow(0 4px 14px rgba(197, 160, 89, 0.75));
 }
 
 .logo-name {
@@ -313,16 +315,16 @@ img {
     font-family: var(--font-serif);
     font-size: 1.25rem;
     font-weight: 700;
-    color: var(--color-navy);
+    color: #FFFFFF;
     line-height: 1.1;
 }
 
 .logo-title {
     display: block;
     font-size: 0.68rem;
-    color: var(--color-text-muted);
+    color: var(--color-terracotta);
     font-weight: 500;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.04em;
     line-height: 1.25;
 }
 
@@ -342,7 +344,7 @@ img {
     font-size: 0.9rem;
     font-weight: 500;
     letter-spacing: 0.02em;
-    color: var(--color-navy);
+    color: rgba(255, 255, 255, 0.88);
     position: relative;
     padding: 0.3rem 0;
     transition: color 0.3s ease;
@@ -372,7 +374,7 @@ img {
     display: none;
     background: transparent;
     border: none;
-    color: var(--color-navy);
+    color: #FFFFFF;
     cursor: pointer;
 }
 
@@ -2407,7 +2409,7 @@ img {
         width: 100%;
         height: 100vh;
         height: 100dvh;
-        background: #FAF8F5;
+        background: #0C1014;
         padding: 6rem 2rem 3rem;
         box-shadow: none;
         border-bottom: none;
@@ -2432,7 +2434,7 @@ img {
     .nav-list a {
         font-size: 1.25rem;
         font-weight: 500;
-        color: var(--color-navy);
+        color: #FFFFFF;
         padding: 0.4rem 1.2rem;
         text-align: center;
     }
@@ -3340,8 +3342,9 @@ body {
    EFEITO GLASSMORPHISM MAIS PREMIUM NO HEADER SCROLLED
    ========================================================================== */
 .header.scrolled {
-    background: rgba(252, 252, 252, 0.92);
-    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.04), 0 8px 40px rgba(0, 0, 0, 0.04);
+    background: rgba(10, 14, 18, 0.98);
+    border-bottom: 1px solid rgba(197, 160, 89, 0.35);
+    box-shadow: 0 1px 0 rgba(197, 160, 89, 0.15), 0 12px 40px rgba(0, 0, 0, 0.7);
 }
 
 /* ==========================================================================

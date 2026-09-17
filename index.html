@@ -346,12 +346,12 @@
         <div class="w-12 h-12 rounded-2xl bg-[#151619] border border-[#8E6547]/50 flex items-center justify-center p-1 group-hover:border-[#8E6547] group-hover:bg-[#202228] transition-all duration-300 shadow-sm shrink-0 group-hover:shadow-md group-hover:-translate-y-0.5">
           <img src="assets/logo.png" alt="Helena Ávila Logomarca Oficial" class="w-full h-full object-contain" />
         </div>
-        <div class="flex flex-col">
+        <div class="flex flex-col min-w-0">
           <div class="flex items-center gap-1.5">
-            <span class="font-serif text-xl sm:text-2xl font-semibold tracking-tight text-[#151619] leading-none group-hover:text-[#8E6547] transition-colors">Helena Ávila</span>
-            <span class="w-2 h-2 rounded-full bg-emerald-500" title="Atendimentos Abertos 2026"></span>
+            <span class="font-serif text-lg sm:text-2xl font-semibold tracking-tight text-[#151619] leading-none whitespace-nowrap group-hover:text-[#8E6547] transition-colors">Helena Ávila</span>
+            <span class="w-2 h-2 rounded-full bg-emerald-500 shrink-0" title="Atendimentos Abertos 2026"></span>
           </div>
-          <span class="text-[10px] tracking-[0.18em] uppercase font-bold text-[#8E6547] mt-1">Psicoterapia Integrativa &amp; Comportamento</span>
+          <span class="text-[9px] sm:text-[10px] tracking-[0.12em] sm:tracking-[0.18em] uppercase font-bold text-[#8E6547] mt-1 whitespace-nowrap">Psicoterapia Integrativa</span>
         </div>
       </a>
 
@@ -371,7 +371,7 @@
       <div class="flex items-center gap-3">
         <a href="https://wa.me/5511995235839?text=Ol%C3%A1%2C%20Helena.%20Acessei%20o%20seu%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20o%20agendamento%20para%20sess%C3%A3o%20de%20terapia." 
            target="_blank"
-           class="inline-flex items-center gap-2 bg-[#151619] hover:bg-[#8E6547] text-[#FAF8F5] px-5 py-3 rounded-full text-xs font-semibold tracking-wide uppercase shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+           class="hidden md:inline-flex items-center gap-2 bg-[#151619] hover:bg-[#8E6547] text-[#FAF8F5] px-5 py-3 rounded-full text-xs font-semibold tracking-wide uppercase shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
           <span>Agendar Consulta</span>
           <svg class="w-3.5 h-3.5 text-[#C8A78A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
         </a>
@@ -392,6 +392,11 @@
       <a href="#reembolso" class="block text-sm font-semibold text-zinc-800 hover:text-[#8E6547]">Reembolso de Plano de Saúde</a>
       <a href="#avaliacoes" class="block text-sm font-semibold text-zinc-800 hover:text-[#8E6547]">Depoimentos de Pacientes</a>
       <a href="#faq" class="block text-sm font-semibold text-zinc-800 hover:text-[#8E6547]">Perguntas Frequentes (FAQ)</a>
+      <div class="pt-2 border-t border-[#E6DFD5]">
+        <a href="https://wa.me/5511995235839?text=Ol%C3%A1%2C%20Helena.%20Acessei%20o%20seu%20site%20e%20gostaria%20de%20agendar%20minha%20consulta." target="_blank" class="w-full flex items-center justify-center gap-2 bg-[#151619] hover:bg-[#8E6547] text-white py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors shadow-sm">
+          <span>Agendar Consulta no WhatsApp &rarr;</span>
+        </a>
+      </div>
     </div>
   </header>
 
@@ -1838,7 +1843,7 @@
           counters.forEach(c => {
             const target = +c.getAttribute('data-target');
             let curr = 0;
-            const stepVal = Math.ceil(target / 35);
+            const stepVal = Math.max(1, Math.ceil(target / 20));
             const intv = setInterval(() => {
               curr += stepVal;
               if (curr >= target) {
@@ -1847,7 +1852,7 @@
               } else {
                 c.innerText = curr;
               }
-            }, 30);
+            }, 20);
           });
         }
       });

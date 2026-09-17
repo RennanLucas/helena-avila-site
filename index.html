@@ -210,6 +210,88 @@
       opacity: 1;
       transform: translateY(0);
     }
+
+    /* Anchor offset for sticky header */
+    section[id] {
+      scroll-margin-top: 6rem;
+    }
+
+    /* Smooth location tab transitions */
+    .loc-view {
+      animation: fadeSlideIn 0.4s ease-out;
+    }
+    @keyframes fadeSlideIn {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Nav link hover underline */
+    nav a {
+      position: relative;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #8E6547;
+      transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Button shimmer effect */
+    .shimmer-btn {
+      position: relative;
+      overflow: hidden;
+    }
+    .shimmer-btn::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    }
+    .shimmer-btn:hover::after {
+      animation: shimmerPass 0.6s ease forwards;
+    }
+    @keyframes shimmerPass {
+      0% { left: -100%; }
+      100% { left: 100%; }
+    }
+
+    /* WhatsApp floating pulse */
+    .wa-float-pulse {
+      position: relative;
+    }
+    .wa-float-pulse::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: inherit;
+      opacity: 0.4;
+      animation: waPulse 2s ease-in-out infinite;
+      z-index: -1;
+    }
+    @keyframes waPulse {
+      0%, 100% { transform: scale(1); opacity: 0.4; }
+      50% { transform: scale(1.35); opacity: 0; }
+    }
+
+    /* Page entrance animation */
+    body {
+      animation: pageIn 0.6s ease-out;
+    }
+    @keyframes pageIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
   </style>
 </head>
 
@@ -356,7 +438,7 @@
           <div class="flex flex-wrap items-center gap-4 pt-2 reveal-elem">
             <a href="https://wa.me/5511995235839?text=Ol%C3%A1%2C%20Helena.%20Acessei%20o%20seu%20site%20e%20gostaria%20de%20agendar%20minha%20primeira%20sess%C3%A3o%20de%20psicoterapia." 
                target="_blank"
-               class="inline-flex items-center gap-3 bg-[#151619] hover:bg-[#8E6547] text-white px-8 py-4 rounded-2xl text-xs sm:text-sm font-bold tracking-wider uppercase shadow-xl hover:shadow-2xl hover:-translate-y-0.5 transition-all duration-300">
+               class="shimmer-btn inline-flex items-center gap-3 bg-[#151619] hover:bg-[#8E6547] text-white px-8 py-4 rounded-2xl text-xs sm:text-sm font-bold tracking-wider uppercase shadow-xl hover:shadow-2xl hover:-translate-y-0.5 transition-all duration-300">
               <span>Agendar no WhatsApp</span>
               <svg class="w-4 h-4 text-[#C8A78A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
             </a>
@@ -1528,7 +1610,7 @@
       <div class="pt-4 flex justify-center">
         <a href="https://wa.me/5511995235839?text=Ol%C3%A1%2C%20Helena.%20Acessei%20o%20seu%20site%20e%20gostaria%20de%20agendar%20minha%20primeira%20sess%C3%A3o." 
            target="_blank"
-           class="inline-flex items-center gap-3 bg-white text-zinc-950 hover:bg-[#8E6547] hover:text-white px-9 py-4 rounded-2xl text-sm font-bold uppercase tracking-wider transition-all duration-300 shadow-2xl hover:scale-105">
+           class="shimmer-btn inline-flex items-center gap-3 bg-white text-zinc-950 hover:bg-[#8E6547] hover:text-white px-9 py-4 rounded-2xl text-sm font-bold uppercase tracking-wider transition-all duration-300 shadow-2xl hover:scale-105">
           <span>Agendar Primeira Consulta</span>
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
         </a>
@@ -1656,7 +1738,7 @@
   </div>
 
   <!-- ================= MODAL INTERATIVO: PROTOCOLO DA SESSÃO ================= -->
-  <div id="infoModal" onclick="if(event.target === this) closeModal();" class="fixed inset-0 z-50 hidden bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 cursor-pointer">
+  <div id="infoModal" onclick="if(event.target === this) closeModal();" class="fixed inset-0 z-50 flex items-center justify-center p-4 cursor-pointer bg-black/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300" style="display:none;">
     <div id="infoModalContent" onclick="event.stopPropagation();" class="bg-white rounded-3xl max-w-lg w-full p-8 shadow-2xl border border-stone-200 transform scale-95 relative max-h-[90vh] overflow-y-auto cursor-default">
       
       <div class="flex items-center justify-between pb-4 border-b border-stone-100">
@@ -1853,7 +1935,13 @@
 
       document.querySelectorAll('.loc-view').forEach(p => p.classList.add('hidden'));
       const activePanel = document.getElementById('panel-' + key);
-      if (activePanel) activePanel.classList.remove('hidden');
+      if (activePanel) {
+        activePanel.classList.remove('hidden');
+        // Re-trigger fade animation
+        activePanel.style.animation = 'none';
+        activePanel.offsetHeight; // Force reflow
+        activePanel.style.animation = '';
+      }
     }
 
     // 7. FAQ Accordion
@@ -1871,7 +1959,7 @@
       }
     }
 
-    // 8. Mobile Menu Drawer
+    // 8. Mobile Menu Drawer & Smooth Scroll for Anchor Links
     const mobileBtn = document.getElementById('mobileToggleBtn');
     const mobileDrawer = document.getElementById('mobileDrawer');
     if (mobileBtn && mobileDrawer) {
@@ -1885,16 +1973,31 @@
       });
     }
 
+    // Smooth scroll for all anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        const target = document.querySelector(targetId);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+
     // 9. Modal de Protocolo da 1ª Sessão
     function openModal() {
       const modal = document.getElementById('infoModal');
       const content = document.getElementById('infoModalContent');
       if (modal && content) {
-        modal.classList.remove('hidden');
-        setTimeout(() => {
+        modal.style.display = 'flex';
+        requestAnimationFrame(() => {
+          modal.classList.remove('opacity-0', 'pointer-events-none');
+          modal.classList.add('opacity-100', 'pointer-events-auto');
           content.classList.remove('scale-95');
           content.classList.add('scale-100');
-        }, 10);
+        });
       }
     }
 
@@ -1902,11 +2005,13 @@
       const modal = document.getElementById('infoModal');
       const content = document.getElementById('infoModalContent');
       if (modal && content) {
+        modal.classList.remove('opacity-100', 'pointer-events-auto');
+        modal.classList.add('opacity-0', 'pointer-events-none');
         content.classList.remove('scale-100');
         content.classList.add('scale-95');
         setTimeout(() => {
-          modal.classList.add('hidden');
-        }, 200);
+          modal.style.display = 'none';
+        }, 300);
       }
     }
 

@@ -50,6 +50,39 @@
       --text-muted: #6E685F;
     }
 
+    
+    /* ==========================================================================
+       1. SISTEMA GLOBAL DE GRID E ALINHAMENTO (.site-container)
+       ========================================================================== */
+    .site-container {
+      width: 100%;
+      max-width: 1280px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    @media (min-width: 640px) {
+      .site-container {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+      }
+    }
+    @media (min-width: 1024px) {
+      .site-container {
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+    }
+
+    /* Foto Editorial Padronizada */
+    .profile-editorial {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 50% 38%;
+    }
+
     body {
       font-family: var(--font-sans);
       background-color: var(--bg);
@@ -318,7 +351,7 @@
 
   <!-- ================= TOP STATUS BAR ================= -->
   <div class="bg-[#151619] text-[#FAF8F5] text-xs py-2.5 px-4 border-b border-white/5 relative z-50">
-    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
+    <div class="site-container flex flex-col sm:flex-row items-center justify-between gap-2 text-center sm:text-left">
       <div class="flex items-center gap-2">
         <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 pulse-indicator"></span>
         <span class="font-light tracking-wide text-zinc-300">
@@ -339,7 +372,7 @@
 
   <!-- ================= NAVIGATION ================= -->
   <header id="mainNav" class="sticky top-0 z-50 bg-[#FAF8F5]/90 backdrop-blur-xl border-b border-[#E6DFD5] transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+    <div class="site-container h-20 flex items-center justify-between">
       
       <!-- Brand Logomarca Oficial -->
       <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="flex items-center gap-3.5 group cursor-pointer" aria-label="Helena Ávila Psicoterapia - Ir para o início">
@@ -356,24 +389,24 @@
       </a>
 
       <!-- Desktop Navlinks -->
-      <nav class="hidden xl:flex items-center gap-7 text-xs font-bold uppercase tracking-wider text-zinc-600">
-        <a href="#caminhos" class="hover:text-[#8E6547] transition-colors">Atendimentos</a>
-        <a href="#consultorios" class="hover:text-[#8E6547] transition-colors">Praia Grande &amp; Online</a>
-        <a href="#triagem" class="hover:text-[#8E6547] transition-colors">Orientador</a>
-        <a href="#metodologia" class="hover:text-[#8E6547] transition-colors">Metodologia</a>
-        <a href="#sobre" class="hover:text-[#8E6547] transition-colors">Sobre Helena</a>
-        <a href="#reembolso" class="hover:text-[#8E6547] transition-colors">Reembolso</a>
-        <a href="#avaliacoes" class="hover:text-[#8E6547] transition-colors">Depoimentos</a>
-        <a href="#faq" class="hover:text-[#8E6547] transition-colors">Dúvidas</a>
+      <nav class="hidden xl:flex items-center gap-3.5 2xl:gap-6 text-[11px] 2xl:text-xs font-bold uppercase tracking-wider text-zinc-600">
+        <a href="#caminhos" class="whitespace-nowrap hover:text-[#8E6547] transition-colors">Atendimentos</a>
+        <a href="#consultorios" class="whitespace-nowrap hover:text-[#8E6547] transition-colors">Praia Grande &amp; Online</a>
+        <a href="#triagem" class="whitespace-nowrap hover:text-[#8E6547] transition-colors">Orientador</a>
+        <a href="#metodologia" class="whitespace-nowrap hover:text-[#8E6547] transition-colors">Metodologia</a>
+        <a href="#sobre" class="whitespace-nowrap hover:text-[#8E6547] transition-colors">Sobre Helena</a>
+        <a href="#reembolso" class="whitespace-nowrap hover:text-[#8E6547] transition-colors">Reembolso</a>
+        <a href="#avaliacoes" class="whitespace-nowrap hover:text-[#8E6547] transition-colors">Depoimentos</a>
+        <a href="#faq" class="whitespace-nowrap hover:text-[#8E6547] transition-colors">Dúvidas</a>
       </nav>
 
       <!-- CTA Principal & Botão Mobile -->
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-3 shrink-0">
         <a href="https://wa.me/5511995235839?text=Ol%C3%A1%2C%20Helena.%20Acessei%20o%20seu%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20o%20agendamento%20para%20sess%C3%A3o%20de%20terapia." 
            target="_blank"
-           class="hidden md:inline-flex items-center gap-2 bg-[#151619] hover:bg-[#8E6547] text-[#FAF8F5] px-5 py-3 rounded-full text-xs font-semibold tracking-wide uppercase shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+           class="hidden md:inline-flex items-center gap-2 bg-[#151619] hover:bg-[#8E6547] text-[#FAF8F5] px-4.5 py-2.5 2xl:px-6 2xl:py-3 rounded-full text-[11px] 2xl:text-xs font-bold tracking-wider uppercase shadow-sm hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 whitespace-nowrap shrink-0">
           <span>Agendar Consulta</span>
-          <svg class="w-3.5 h-3.5 text-[#C8A78A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+          <svg class="w-3 h-3 text-[#C8A78A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
         </a>
 
         <button id="mobileToggleBtn" class="xl:hidden p-2 text-zinc-800 hover:text-[#8E6547] cursor-pointer" aria-label="Abrir Menu">
@@ -405,7 +438,7 @@
     
     <canvas id="cloudCanvas" class="absolute inset-0 pointer-events-none opacity-40 z-0"></canvas>
 
-    <div class="max-w-7xl mx-auto px-6 relative z-10">
+    <div class="site-container relative z-10">
       
       <!-- Badges de Autoridade -->
       <div class="flex flex-wrap items-center gap-3 mb-8 reveal-elem">
@@ -478,65 +511,54 @@
 
         </div>
 
-        <!-- Coluna Direita: Cartão de Identidade com Spotlight & Foto Real de Helena -->
-        <div class="lg:col-span-5 reveal-elem">
-          <div class="spotlight-card p-8 sm:p-10 shadow-xl relative bg-white/95 border border-[#D8D1C7]">
+        <!-- Coluna Direita: Composição Editorial Nobre da Helena Ávila (Aspect Ratio 4/5) -->
+        <div class="lg:col-span-5 reveal-elem flex flex-col items-center">
+          
+          <div class="relative w-full max-w-[360px] sm:max-w-[380px] lg:max-w-[400px]">
             
-            <div class="flex items-center justify-between pb-6 border-b border-stone-100">
-              <div class="flex items-center gap-2">
-                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 pulse-indicator"></span>
-                <span class="text-xs font-bold uppercase tracking-wider text-zinc-700">Agenda Ativa 2026</span>
-              </div>
-              <span class="text-xs font-semibold px-2.5 py-1 bg-[#F4EDE6] text-[#8E6547] rounded-md font-mono">Atendimento Humanizado</span>
-            </div>
+            <!-- Moldura Nobre Editorial 4/5 -->
+            <div class="w-full aspect-[4/5] rounded-[32px] overflow-hidden bg-stone-100 border-2 border-[#8E6547]/30 shadow-[0_20px_50px_rgba(30,20,15,0.08)] relative group">
+              <img src="assets/helena-portrait.jpg" 
+                   alt="Helena Ávila — Psicoterapeuta Integrativa e Psicanalista" 
+                   class="w-full h-full object-cover object-center group-hover:scale-102 transition-transform duration-700" 
+                   loading="eager" />
+              
+              <!-- Gradiente sutil na base da foto -->
+              <div class="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent pointer-events-none"></div>
 
-            <div class="text-center my-6">
-              <!-- Moldura de Luxo com a Foto Real de Helena Ávila -->
-              <div class="w-32 h-32 mx-auto rounded-3xl p-1 mb-4 shadow-xl border-2 border-[#8E6547]/50 relative group bg-gradient-to-tr from-[#8E6547] via-[#C5A059] to-[#DFBA97]">
-                <div class="w-full h-full rounded-[22px] overflow-hidden bg-stone-100">
-                  <img src="assets/helena.jpg" alt="Helena Ávila Psicoterapeuta" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500" />
-                </div>
-                <div class="absolute -bottom-2 -right-2 bg-[#151619] text-[#C5A059] p-1.5 rounded-xl border border-[#8E6547] shadow-md">
-                  <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-                </div>
-              </div>
-              <h2 class="font-serif text-2xl text-zinc-900 font-medium">Helena Ávila</h2>
-              <div class="flex items-center justify-center gap-2 mt-1">
-                <span class="text-xs font-semibold uppercase tracking-widest text-[#8E6547]">Psicoterapeuta Integrativa</span>
-                <span class="text-stone-300">•</span>
-                <span class="text-xs font-semibold text-zinc-600">Comportamento Humano</span>
-              </div>
-              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#F4EDE6] border border-[#DFCBB9] text-[11px] font-medium text-[#8E6547] mt-3">
-                <span>📍 Praia Grande (SP) &amp; 🌐 Online Global</span>
+              <!-- Tipografia Editorial na Base -->
+              <div class="absolute bottom-6 left-6 right-16 text-white pointer-events-none">
+                <div class="font-serif text-2xl sm:text-3xl font-normal leading-tight drop-shadow-sm">Helena Ávila</div>
+                <div class="text-[11px] font-medium tracking-[0.16em] uppercase text-[#EAD8C7] mt-0.5">Psicoterapia &amp; Comportamento Humano</div>
               </div>
             </div>
 
-            <div class="space-y-3 mb-8 text-xs text-zinc-700">
-              <div class="p-3.5 rounded-xl bg-stone-50 border border-stone-100 flex items-start gap-3">
-                <svg class="w-4 h-4 text-[#8E6547] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                <span><strong>Corpo, Mente &amp; Emoção:</strong> Integração de psicanálise, neurociência, PNL, hipnose clínica e constelação familiar.</span>
-              </div>
-              <div class="p-3.5 rounded-xl bg-stone-50 border border-stone-100 flex items-start gap-3">
-                <svg class="w-4 h-4 text-[#8E6547] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/></svg>
-                <span><strong>Acolhimento Exclusivo:</strong> Consultório privativo no bairro Guilhermina (Praia Grande) e teleterapia em plataforma segura.</span>
-              </div>
+            <!-- Estrela Oficial no Canto Inferior Direito -->
+            <div class="absolute -bottom-3 -right-3 w-12 h-12 rounded-2xl bg-[#151619] border-2 border-[#8E6547] text-[#C5A059] flex items-center justify-center shadow-lg transform group-hover:rotate-12 transition-transform duration-300">
+              <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
             </div>
 
-            <a href="https://wa.me/5511995235839?text=Ol%C3%A1%2C%20Helena.%20Acessei%20o%20seu%20site%20e%20gostaria%20de%20conversar%20sobre%20as%20sess%C3%B5es%20de%20terapia." 
-               target="_blank"
-               class="block w-full text-center bg-stone-900 hover:bg-[#8E6547] text-white py-3.5 rounded-xl text-xs font-bold uppercase tracking-wider transition-colors shadow-sm">
-              Conversar com Helena no WhatsApp &rarr;
-            </a>
-
-            <div class="mt-4 pt-4 border-t border-stone-100 flex items-center justify-between text-xs text-zinc-500">
-              <span class="flex items-center gap-1.5">
-                <svg class="w-3.5 h-3.5 text-emerald-600" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                Atendimento Confidencial
-              </span>
-              <span class="text-amber-700 font-bold">★★★★★ 5.0 Google Reviews</span>
+            <!-- Badge Superior Flutuante: Agenda Ativa -->
+            <div class="absolute -top-3.5 left-6 inline-flex items-center gap-2 bg-white/95 backdrop-blur-md px-4 py-1.5 rounded-full border border-[#D8D1C7] shadow-sm text-xs font-bold uppercase tracking-wider text-zinc-800">
+              <span class="w-2 h-2 rounded-full bg-emerald-500 pulse-indicator"></span>
+              <span>Agenda Ativa 2026</span>
             </div>
 
           </div>
+
+          <!-- Micro-Card de Credenciais e Agendamento Imediato -->
+          <div class="w-full max-w-[360px] sm:max-w-[380px] lg:max-w-[400px] mt-6 p-4 sm:p-5 rounded-2xl bg-white border border-[#E6DFD5] shadow-xs flex items-center justify-between gap-4">
+            <div class="min-w-0">
+              <div class="text-[11px] font-bold uppercase tracking-wider text-[#8E6547]">Atendimento Presencial &amp; Online</div>
+              <div class="text-xs text-zinc-600 font-light truncate mt-0.5">Praia Grande - SP • Teleterapia Global</div>
+            </div>
+            <a href="https://wa.me/5511995235839?text=Ol%C3%A1%2C%20Helena.%20Acessei%20o%20seu%20site%20e%20gostaria%20de%20conversar%20sobre%20as%20sess%C3%B5es." 
+               target="_blank" 
+               class="shrink-0 px-4 py-2 rounded-full bg-[#151619] hover:bg-[#8E6547] text-white text-xs font-bold uppercase tracking-wider transition-colors shadow-xs">
+              Conversar &rarr;
+            </a>
+          </div>
+
         </div>
 
       </div>
@@ -575,7 +597,7 @@
 
   <!-- ================= MODALIDADES CLÍNICAS & ESPECIALIDADES ================= -->
   <section id="caminhos" class="py-24 bg-white border-b border-[#E6DFD5]">
-    <div class="max-w-7xl mx-auto px-6">
+    <div class="site-container">
       
       <div class="text-center max-w-3xl mx-auto mb-16 reveal-elem">
         <span class="text-xs font-bold uppercase tracking-[0.2em] text-[#8E6547] block mb-3">Acolhimento &amp; Transformação</span>
@@ -591,13 +613,15 @@
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         
         <!-- CARD 1: Psicoterapia Individual -->
-        <div class="spotlight-card p-8 sm:p-10 flex flex-col justify-between reveal-elem">
+        <div class="spotlight-card p-7 sm:p-8 flex flex-col justify-between h-full reveal-elem">
           <div>
-            <div class="flex items-center justify-between mb-6">
-              <span class="text-xs font-bold uppercase tracking-wider text-[#8E6547] bg-[#F4EDE6] px-3.5 py-1.5 rounded-full">
+            <div class="flex items-center justify-between gap-3 mb-6 pb-2 border-b border-stone-100">
+              <span class="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase bg-[#F4EDE6] text-[#8E6547] whitespace-nowrap">
                 Clínica Individual
               </span>
-              <span class="text-xs font-mono text-zinc-400 font-bold">01 // INDIVIDUAL</span>
+              <span class="text-xs font-mono font-bold tracking-wider text-zinc-400 shrink-0 whitespace-nowrap">
+                01 // INDIVIDUAL
+              </span>
             </div>
 
             <h3 class="font-serif text-3xl text-zinc-900 mb-3 font-normal">Psicoterapia Individual</h3>
@@ -641,13 +665,15 @@
         </div>
 
         <!-- CARD 2: Terapia de Casal & Casamento -->
-        <div class="spotlight-card p-8 sm:p-10 flex flex-col justify-between reveal-elem">
+        <div class="spotlight-card p-7 sm:p-8 flex flex-col justify-between h-full reveal-elem">
           <div>
-            <div class="flex items-center justify-between mb-6">
-              <span class="text-xs font-bold uppercase tracking-wider text-[#8E6547] bg-[#F4EDE6] px-3.5 py-1.5 rounded-full">
+            <div class="flex items-center justify-between gap-3 mb-6 pb-2 border-b border-stone-100">
+              <span class="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase bg-[#F4EDE6] text-[#8E6547] whitespace-nowrap">
                 Vínculos &amp; Relações
               </span>
-              <span class="text-xs font-mono text-zinc-400 font-bold">02 // CASAL &amp; CASAMENTO</span>
+              <span class="text-xs font-mono font-bold tracking-wider text-zinc-400 shrink-0 whitespace-nowrap">
+                02 // CASAL
+              </span>
             </div>
 
             <h3 class="font-serif text-3xl text-zinc-900 mb-3 font-normal">Terapia de Casal &amp; Casamento</h3>
@@ -691,13 +717,15 @@
         </div>
 
         <!-- CARD 3: Roda de Mulheres & Saúde Mental Feminina -->
-        <div id="roda-mulheres" class="spotlight-card p-8 sm:p-10 flex flex-col justify-between reveal-elem border-2 border-[#8E6547]/30 bg-gradient-to-b from-white to-[#FAF8F5]">
+        <div id="roda-mulheres" class="spotlight-card p-7 sm:p-8 flex flex-col justify-between h-full reveal-elem border-2 border-[#8E6547]/30 bg-gradient-to-b from-white to-[#FAF8F5]">
           <div>
-            <div class="flex items-center justify-between mb-6">
-              <span class="text-xs font-bold uppercase tracking-wider text-white bg-[#8E6547] px-3.5 py-1.5 rounded-full shadow-xs">
+            <div class="flex items-center justify-between gap-3 mb-6 pb-2 border-b border-[#8E6547]/20">
+              <span class="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase bg-[#8E6547] text-white whitespace-nowrap shadow-xs">
                 Destaque Especial
               </span>
-              <span class="text-xs font-mono text-[#8E6547] font-bold">03 // RODA DE MULHERES</span>
+              <span class="text-xs font-mono font-bold tracking-wider text-[#8E6547] shrink-0 whitespace-nowrap">
+                03 // RODA DE MULHERES
+              </span>
             </div>
 
             <h3 class="font-serif text-3xl text-zinc-900 mb-3 font-normal">Roda de Mulheres &amp; Saúde Feminina</h3>
@@ -741,13 +769,15 @@
         </div>
 
         <!-- CARD 4: Grupos Terapêuticos & Rodas -->
-        <div class="spotlight-card p-8 sm:p-10 flex flex-col justify-between reveal-elem">
+        <div class="spotlight-card p-7 sm:p-8 flex flex-col justify-between h-full reveal-elem">
           <div>
-            <div class="flex items-center justify-between mb-6">
-              <span class="text-xs font-bold uppercase tracking-wider text-[#45634E] bg-[#EBF2ED] px-3.5 py-1.5 rounded-full">
+            <div class="flex items-center justify-between gap-3 mb-6 pb-2 border-b border-stone-100">
+              <span class="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase bg-[#EBF2ED] text-[#45634E] whitespace-nowrap">
                 Terapia Coletiva
               </span>
-              <span class="text-xs font-mono text-zinc-400 font-bold">04 // GRUPOS TERAPÊUTICOS</span>
+              <span class="text-xs font-mono font-bold tracking-wider text-zinc-400 shrink-0 whitespace-nowrap">
+                04 // GRUPOS
+              </span>
             </div>
 
             <h3 class="font-serif text-3xl text-zinc-900 mb-3 font-normal">Grupos &amp; Rodas Terapêuticas</h3>
@@ -791,13 +821,15 @@
         </div>
 
         <!-- CARD 5: Traição, Luto e Perdão -->
-        <div class="spotlight-card p-8 sm:p-10 flex flex-col justify-between reveal-elem">
+        <div class="spotlight-card p-7 sm:p-8 flex flex-col justify-between h-full reveal-elem">
           <div>
-            <div class="flex items-center justify-between mb-6">
-              <span class="text-xs font-bold uppercase tracking-wider text-[#8E6547] bg-[#F4EDE6] px-3.5 py-1.5 rounded-full">
+            <div class="flex items-center justify-between gap-3 mb-6 pb-2 border-b border-stone-100">
+              <span class="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase bg-[#F4EDE6] text-[#8E6547] whitespace-nowrap">
                 Superação &amp; Cura
               </span>
-              <span class="text-xs font-mono text-zinc-400 font-bold">05 // TRAIÇÃO &amp; LUTO</span>
+              <span class="text-xs font-mono font-bold tracking-wider text-zinc-400 shrink-0 whitespace-nowrap">
+                05 // TRAIÇÃO &amp; LUTO
+              </span>
             </div>
 
             <h3 class="font-serif text-3xl text-zinc-900 mb-3 font-normal">Traição, Luto &amp; o Caminho do Perdão</h3>
@@ -841,13 +873,15 @@
         </div>
 
         <!-- CARD 6: Família & Infanto/Juvenil -->
-        <div class="spotlight-card p-8 sm:p-10 flex flex-col justify-between reveal-elem">
+        <div class="spotlight-card p-7 sm:p-8 flex flex-col justify-between h-full reveal-elem">
           <div>
-            <div class="flex items-center justify-between mb-6">
-              <span class="text-xs font-bold uppercase tracking-wider text-zinc-800 bg-stone-100 px-3.5 py-1.5 rounded-full">
+            <div class="flex items-center justify-between gap-3 mb-6 pb-2 border-b border-stone-100">
+              <span class="inline-flex items-center px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase bg-stone-100 text-zinc-800 whitespace-nowrap">
                 Sistemas Familiares
               </span>
-              <span class="text-xs font-mono text-zinc-400 font-bold">06 // FAMÍLIA &amp; JOVENS</span>
+              <span class="text-xs font-mono font-bold tracking-wider text-zinc-400 shrink-0 whitespace-nowrap">
+                06 // FAMÍLIA
+              </span>
             </div>
 
             <h3 class="font-serif text-3xl text-zinc-900 mb-3 font-normal">Terapia Familiar &amp; Jovens</h3>
@@ -960,7 +994,7 @@
   </section>
 
   <!-- ================= ATENDIMENTO PRESENCIAL & ONLINE ================= -->
-  <section id="consultorios" class="py-24 max-w-7xl mx-auto px-6">
+  <section id="consultorios" class="py-24 site-container">
     
     <div class="text-center max-w-2xl mx-auto mb-16 reveal-elem">
       <span class="text-xs font-bold uppercase tracking-[0.2em] text-[#8E6547] block mb-3">Localização &amp; Conectividade</span>
@@ -1126,7 +1160,7 @@
   </section>
 
   <!-- ================= SIMULADOR INTERATIVO / ORIENTADOR DE AGENDAMENTO ================= -->
-  <section id="triagem" class="py-24 max-w-7xl mx-auto px-6">
+  <section id="triagem" class="py-24 site-container">
     <div class="text-center max-w-2xl mx-auto mb-16 reveal-elem">
       <span class="text-xs font-bold uppercase tracking-[0.2em] text-[#8E6547] block mb-3">Experiência Personalizada</span>
       <h2 class="font-serif text-3xl sm:text-4xl md:text-5xl font-light text-zinc-950 tracking-tight">
@@ -1204,7 +1238,7 @@
     <div class="absolute -top-40 -left-40 w-96 h-96 rounded-full bg-[#8E6547]/20 blur-3xl pointer-events-none"></div>
     <div class="absolute -bottom-40 -right-40 w-96 h-96 rounded-full bg-[#45634E]/20 blur-3xl pointer-events-none"></div>
 
-    <div class="max-w-7xl mx-auto px-6 relative z-10">
+    <div class="site-container relative z-10">
       
       <div class="max-w-3xl mb-16 reveal-elem">
         <span class="text-xs font-bold uppercase tracking-[0.2em] text-[#C5A059] block mb-3">Ciência, Inconsciente &amp; Vínculo</span>
@@ -1302,7 +1336,7 @@
 
   <!-- ================= SOBRE A PROFISSIONAL: HELENA ÁVILA ================= -->
   <section id="sobre" class="py-24 bg-white border-b border-[#E6DFD5]">
-    <div class="max-w-7xl mx-auto px-6">
+    <div class="site-container">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
         
         <!-- Coluna da Foto com Moldura Nobre -->
@@ -1310,7 +1344,7 @@
           <div class="relative">
             <div class="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-[#8E6547]/20 via-[#C5A059]/15 to-transparent blur-xl"></div>
             <div class="relative rounded-3xl overflow-hidden shadow-2xl border-2 border-[#D8D1C7] aspect-[4/5] bg-stone-100">
-              <img src="assets/helena.jpg" alt="Helena Ávila Psicoterapeuta Integrativa" class="w-full h-full object-cover object-top hover:scale-102 transition-transform duration-700" />
+              <img src="assets/helena-portrait.jpg" alt="Helena Ávila Psicoterapeuta Integrativa" class="w-full h-full object-cover object-center hover:scale-102 transition-transform duration-700" />
             </div>
             <div class="absolute -bottom-6 -right-4 sm:right-6 bg-white p-4 rounded-2xl shadow-xl border border-[#D8D1C7] flex items-center gap-3">
               <div class="w-12 h-12 rounded-xl bg-[#8E6547] text-white flex items-center justify-center font-serif text-xl font-bold">
@@ -1385,7 +1419,7 @@
 
   <!-- ================= GUIA DE REEMBOLSO DE PLANO DE SAÚDE ================= -->
   <section id="reembolso" class="py-20 bg-white border-y border-[#E6DFD5]">
-    <div class="max-w-7xl mx-auto px-6">
+    <div class="site-container">
       
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         
@@ -1433,7 +1467,7 @@
 
   <!-- ================= DEPOIMENTOS & AVALIAÇÕES GOOGLE ================= -->
   <section id="avaliacoes" class="py-24 bg-[#FAF8F5]">
-    <div class="max-w-7xl mx-auto px-6">
+    <div class="site-container">
       
       <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6 reveal-elem">
         <div>
@@ -1629,7 +1663,7 @@
 
   <!-- ================= FOOTER COM CRÉDITO KUBOWEB.COM.BR ================= -->
   <footer class="bg-[#0D0E10] text-zinc-400 py-16 border-t border-zinc-900 text-xs">
-    <div class="max-w-7xl mx-auto px-6">
+    <div class="site-container">
       <div class="grid grid-cols-1 md:grid-cols-12 gap-12 pb-12 border-b border-zinc-900">
         
         <div class="md:col-span-5 space-y-4">
@@ -1693,35 +1727,35 @@
   </footer>
 
   <!-- ================= CÁPSULA FLUTUANTE DE AGENDAMENTO (DYNAMIC ISLAND STYLE) ================= -->
-  <div id="bottomStickyBar" class="fixed bottom-5 left-4 right-4 md:left-auto md:right-6 md:max-w-lg z-40">
-    <div class="p-3.5 sm:p-4 rounded-2xl bg-white/95 backdrop-blur-2xl border border-[#D8D1C7] shadow-[0_20px_50px_rgba(21,22,25,0.18)] flex items-center justify-between gap-3.5">
+  <div id="bottomStickyBar" class="fixed bottom-4 sm:bottom-6 left-3 right-3 sm:left-auto sm:right-8 sm:max-w-md z-40">
+    <div class="p-3 sm:p-4.5 rounded-[22px] sm:rounded-[26px] bg-[#FAF8F5]/95 backdrop-blur-xl border border-[#E6DFD5] shadow-[0_20px_50px_rgba(30,20,15,0.08)] flex items-center justify-between gap-3 sm:gap-4">
       
-      <!-- Identidade & Credenciais em Estilo Premium -->
-      <div class="flex items-center gap-3 min-w-0">
-        <div class="w-10 h-10 rounded-xl overflow-hidden border border-[#8E6547]/50 shrink-0 shadow-xs bg-stone-100">
-          <img src="assets/helena.jpg" alt="Helena Ávila" class="w-full h-full object-cover object-top" />
+      <!-- Foto Quadrada Bem Enquadrada (1:1) -->
+      <div class="w-11 h-11 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl overflow-hidden border border-[#8E6547]/30 shrink-0 bg-stone-100 shadow-xs aspect-square">
+        <img src="assets/helena-square.jpg" alt="Helena Ávila" class="w-full h-full object-cover object-center" />
+      </div>
+
+      <!-- Informações com Hierarquia Refinada -->
+      <div class="min-w-0 flex flex-col gap-0.5">
+        <div class="flex items-center gap-1.5 sm:gap-2">
+          <span class="font-serif font-bold text-zinc-950 text-sm sm:text-base leading-tight truncate">Helena Ávila</span>
+          <span class="text-[9px] sm:text-[10px] font-semibold text-[#8E6547] bg-[#F4EDE6] px-1.5 sm:px-2 py-0.5 rounded-full border border-[#DFCBB9]/50 shrink-0">
+            Psicoterapia
+          </span>
         </div>
-        <div class="min-w-0">
-          <div class="flex items-center gap-1.5">
-            <span class="font-bold text-zinc-950 text-xs sm:text-sm truncate">Helena Ávila</span>
-            <span class="text-[10px] font-semibold text-[#8E6547] bg-[#F4EDE6] px-1.5 py-0.5 rounded border border-[#DFCBB9]/60 shrink-0">
-              Psicoterapia
-            </span>
-          </div>
-          <div class="flex items-center gap-1.5 text-[11px] text-zinc-500 truncate mt-0.5">
-            <span class="inline-block w-2 h-2 rounded-full bg-emerald-500 pulse-indicator shrink-0"></span>
-            <span class="truncate font-medium text-zinc-600">Praia Grande &amp; Online Global</span>
-          </div>
+        <div class="flex items-center gap-1.5 text-[11px] sm:text-xs text-zinc-500 truncate">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 pulse-indicator shrink-0"></span>
+          <span class="truncate font-light text-zinc-600">Praia Grande &amp; Online Global</span>
         </div>
       </div>
 
-      <!-- Ação Direta de Agendamento -->
+      <!-- Botão com margin-left auto que nunca esmaga o texto -->
       <a href="https://wa.me/5511995235839?text=Ol%C3%A1%2C%20Helena.%20Acessei%20o%20seu%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20o%20agendamento%20para%20sess%C3%A3o%20de%20terapia." 
          target="_blank"
          aria-label="Agendar consulta no WhatsApp"
-         class="bg-[#151619] hover:bg-[#8E6547] text-white px-4 py-2.5 rounded-xl text-xs font-bold uppercase tracking-wider shrink-0 transition-all duration-300 shadow-sm hover:shadow-md flex items-center gap-1.5 hover:-translate-y-0.5">
+         class="ml-auto shrink-0 bg-[#151619] hover:bg-[#8E6547] text-white px-3.5 sm:px-5 py-2 sm:py-2.5 rounded-full text-[11px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-300 shadow-sm hover:shadow-md flex items-center gap-1 sm:gap-1.5 hover:-translate-y-0.5 whitespace-nowrap">
         <span>Agendar</span>
-        <svg class="w-3 h-3 text-[#C8A78A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        <svg class="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#C8A78A]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
       </a>
     </div>
   </div>

@@ -3,39 +3,44 @@
    ========================================================================== */
 
 :root {
-    /* Palette: Modern Luxury - Black and Gold */
-    --color-navy: #111111; /* Preto profundo para os títulos */
-    --color-navy-light: #222222;
-    --color-sage: #F8F9FA; /* Fundo suave */
+    /* Palette: Porcelain Ivory, Obsidian & Noble Bronze (Ellen Folly Clinical Luxury Blueprint) */
+    --color-navy: #151619; /* Preto obsidiana para títulos e elementos de prestígio */
+    --color-navy-light: #202227;
+    --color-sage: #FAF8F5; /* Fundo suave porcelana */
     --color-sage-light: #FFFFFF;
-    --color-terracotta: #C5A059; /* Dourado elegante */
-    --color-terracotta-hover: #A78644; /* Dourado mais escuro para hover */
-    --color-terracotta-glow: rgba(197, 160, 89, 0.15);
+    --color-terracotta: #8E6547; /* Bronze nobre / terracota refinado */
+    --color-terracotta-hover: #755136;
+    --color-terracotta-glow: rgba(142, 101, 71, 0.16);
+    --color-accent-light: #F4EDE6;
+    --color-botanical-sage: #45634E;
+    --color-border-subtle: #E6DFD5;
+    --color-border-focus: #C4B19F;
     
-    --color-bg-main: #FCFCFC; /* Fundo off-white macio e luxuoso */
+    --color-bg-main: #FAF8F5; /* Fundo porcelana nobre */
     --color-bg-surface: #FFFFFF;
     --color-bg-card: #FFFFFF;
     
-    --color-text-main: #111111;
-    --color-text-body: #444444;
-    --color-text-muted: #94A3B8;
+    --color-text-main: #151619;
+    --color-text-body: #3A3835;
+    --color-text-muted: #6E685F;
     
-    /* Fonts */
-    --font-serif: 'Playfair Display', serif; /* Títulos em Playfair */
-    --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    /* Fonts: Cormorant Garamond (Editorial Serif) + Plus Jakarta Sans (Modern Medical Sans) */
+    --font-serif: 'Cormorant Garamond', Georgia, serif;
+    --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     
     /* Layout & Shadows */
     --container-width: 1240px;
     --radius-sm: 8px;
-    --radius-md: 12px; /* Reduzindo um pouco para ficar mais elegante e menos arredondado */
-    --radius-lg: 16px;
+    --radius-md: 14px;
+    --radius-lg: 20px;
+    --radius-xl: 24px;
     --radius-pill: 100px;
     
-    /* Sombras Hiper-Suaves para visual Premium */
-    --shadow-subtle: 0 2px 10px rgba(0, 0, 0, 0.03);
-    --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.04);
-    --shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.08);
-    --shadow-glow: 0 8px 20px rgba(197, 160, 89, 0.1);
+    /* Sombras Hiper-Suaves para visual Premium Editorial */
+    --shadow-subtle: 0 2px 10px rgba(21, 22, 25, 0.03);
+    --shadow-card: 0 8px 24px rgba(21, 22, 25, 0.04);
+    --shadow-hover: 0 20px 40px -12px rgba(21, 22, 25, 0.08);
+    --shadow-glow: 0 8px 24px rgba(142, 101, 71, 0.15);
     
     --transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -49,6 +54,7 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 90px;
     font-size: 16px;
 }
 
@@ -247,26 +253,143 @@ img {
     box-shadow: 0 10px 24px rgba(37, 211, 102, 0.35);
 }
 
+/* ==========================================================================
+   TOP READING PROGRESS BAR & TOP STATUS BAR (ELLEN FOLLY CLINICAL SIGNATURE)
+   ========================================================================== */
+#topProgressBar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #8E6547 0%, #45634E 50%, #C8A78A 100%);
+    width: 0%;
+    z-index: 1200;
+    transition: width 0.08s ease-out;
+}
+
+.top-status-bar {
+    background: #151619;
+    color: #DFDAD2;
+    font-size: 0.78rem;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    position: relative;
+    z-index: 1001;
+}
+
+.top-status-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+}
+
+.top-status-left {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+}
+
+.top-status-right {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #C8A78A;
+}
+
+.status-agenda {
+    font-weight: 600;
+    color: #FFFFFF;
+    letter-spacing: 0.02em;
+}
+
+.status-divider {
+    color: rgba(255, 255, 255, 0.25);
+}
+
+.status-location {
+    color: #BDB7AB;
+}
+
+.status-tag {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    color: #FFFFFF;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+}
+
+.status-link {
+    color: #DFDAD2;
+    transition: color 0.2s ease;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.status-link:hover {
+    color: #FFFFFF;
+    text-decoration: underline;
+}
+
+@keyframes pulseRing {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); }
+    70% { transform: scale(1); box-shadow: 0 0 0 7px rgba(74, 222, 128, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+}
+
+.pulse-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #4ADE80;
+    animation: pulseRing 2.2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+    flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+    .top-status-bar {
+        font-size: 0.72rem;
+        padding: 0.45rem 0;
+    }
+    .top-status-inner {
+        justify-content: center;
+        gap: 0.5rem;
+        text-align: center;
+    }
+    .status-location,
+    .top-status-right .status-tag {
+        display: none;
+    }
+}
+
 /* --- 1. CABEÇALHO (HEADER) --- */
 .header {
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     width: 100%;
     z-index: 1000;
-    padding: 1rem 0;
+    padding: 0.95rem 0;
     transition: var(--transition);
-    background: rgba(255, 255, 255, 0.92);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
+    background: rgba(250, 248, 245, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--color-border-subtle);
+    box-shadow: 0 2px 20px rgba(21, 22, 25, 0.03);
 }
 
 .header.scrolled {
-    padding: 0.85rem 0;
-    background: rgba(255, 255, 255, 0.98);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+    padding: 0.8rem 0;
+    background: rgba(250, 248, 245, 0.98);
+    box-shadow: 0 8px 30px rgba(21, 22, 25, 0.06);
 }
 
 .header-inner {
@@ -378,8 +501,8 @@ img {
 
 /* --- 2. SEÇÃO HERO (DOBRA PRINCIPAL) --- */
 .hero {
-    min-height: 100vh;
-    padding-top: 130px;
+    min-height: calc(100vh - 120px);
+    padding-top: 3.5rem;
     padding-bottom: 5rem;
     display: flex;
     align-items: center;
@@ -3404,7 +3527,7 @@ body {
    ========================================================================== */
 .page-hero {
     background: var(--color-navy);
-    padding: 10rem 0 4rem;
+    padding: 5.5rem 0 4rem;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -3626,7 +3749,7 @@ body {
 
 @media (max-width: 768px) {
     .page-hero {
-        padding: 8rem 0 3rem;
+        padding: 4.5rem 0 3rem;
     }
     .page-hero-title {
         font-size: 2.2rem;
@@ -4572,5 +4695,126 @@ textarea:focus-visible {
         aspect-ratio: 16 / 10;
     }
 }
+
+/* ==========================================================================
+   SPOTLIGHT CARDS ENGINE (ELLEN FOLLY CLINICAL LUXURY)
+   ========================================================================== */
+.spotlight-card,
+.specialty-card,
+.treatment-card,
+.method-card {
+    position: relative;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--color-border-subtle) !important;
+    border-radius: 1.5rem !important;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, border-color 0.3s ease;
+    overflow: hidden;
+}
+
+.spotlight-card::before,
+.specialty-card::before,
+.treatment-card::before,
+.method-card::before {
+    content: '';
+    position: absolute;
+    top: var(--mouse-y, -200px);
+    left: var(--mouse-x, -200px);
+    width: 380px;
+    height: 380px;
+    background: radial-gradient(circle, rgba(142, 101, 71, 0.14), transparent 70%);
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 1;
+}
+
+.spotlight-card:hover::before,
+.specialty-card:hover::before,
+.treatment-card:hover::before,
+.method-card:hover::before {
+    opacity: 1;
+}
+
+.spotlight-card:hover,
+.specialty-card:hover,
+.treatment-card:hover,
+.method-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--color-border-focus) !important;
+    box-shadow: 0 24px 48px -12px rgba(21, 22, 25, 0.08) !important;
+}
+
+.specialty-card > *,
+.treatment-card > *,
+.method-card > * {
+    position: relative;
+    z-index: 2;
+}
+
+/* Button & Badge Refinements (Ellen Folly Luxury Palette) */
+.btn-terracotta {
+    background: var(--color-terracotta);
+    color: #FFFFFF;
+    border-radius: 14px;
+    font-weight: 600;
+}
+
+.btn-terracotta:hover {
+    background: var(--color-terracotta-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px -6px rgba(142, 101, 71, 0.35);
+}
+
+.btn-outline {
+    background: #FFFFFF;
+    color: var(--color-navy);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 14px;
+}
+
+.btn-outline:hover {
+    background: #F4EDE6;
+    color: var(--color-terracotta-hover);
+    border-color: var(--color-border-focus);
+    transform: translateY(-2px);
+}
+
+.section-tag {
+    background: #F4EDE6;
+    color: var(--color-terracotta);
+    border: 1px solid rgba(142, 101, 71, 0.2);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.4rem 1.1rem;
+    border-radius: var(--radius-pill);
+}
+
+.hero-badge {
+    background: #F4EDE6;
+    border: 1px solid rgba(142, 101, 71, 0.25);
+    color: var(--color-terracotta);
+    border-radius: var(--radius-pill);
+}
+
+.pill {
+    background: #F4EDE6;
+    border: 1px solid rgba(142, 101, 71, 0.18);
+    color: #3A3835;
+    border-radius: var(--radius-pill);
+}
+
+.pill:hover {
+    background: var(--color-terracotta);
+    border-color: var(--color-terracotta);
+    color: #FFFFFF;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--color-terracotta-glow);
+}
+
 
 

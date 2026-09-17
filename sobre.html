@@ -12,10 +12,10 @@
     <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64x64.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180x180.png">
     
-    <!-- Google Fonts -->
+    <!-- Google Fonts: Cormorant Garamond + Plus Jakarta Sans (Ellen Folly Blueprint) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Open Graph / Meta -->
     <meta property="og:type" content="website">
@@ -31,12 +31,32 @@
     <meta name="twitter:image" content="assets/helena.jpg">
     
     <link rel="canonical" href="https://helenaavilapsi.com.br/sobre.html">
-    <link rel="stylesheet" href="styles.css?v=30">
+    <link rel="stylesheet" href="styles.css?v=35">
     <script src="https://gitzmynfamubetgujtmm.supabase.co/functions/v1/tracker-script?pid=a3b953c6-503e-4ae1-a17d-d6e2c3d93dae" defer></script>
 </head>
 <body>
 
+    <!-- ================= TOP READING PROGRESS BAR ================= -->
+    <div id="topProgressBar"></div>
 
+    <!-- ================= TOP STATUS BAR (ELLEN FOLLY CLINICAL SIGNATURE) ================= -->
+    <div class="top-status-bar">
+        <div class="container top-status-inner">
+            <div class="top-status-left">
+                <span class="pulse-indicator"></span>
+                <span class="status-agenda">Agenda Ativa 2026</span>
+                <span class="status-divider">•</span>
+                <span class="status-location">Presencial (Praia Grande) & Atendimento Online Global</span>
+            </div>
+            <div class="top-status-right">
+                <span class="status-tag">Psicoterapeuta Integrativa & Psicanalista</span>
+                <span class="status-divider">•</span>
+                <a href="https://wa.me/5511995235839?text=Ol%C3%A1%20Helena,%20gostaria%20de%20consultar%20a%20disponibilidade%20de%20hor%C3%A1rios." target="_blank" rel="noopener noreferrer" class="status-link">
+                    Checar Horários &rarr;
+                </a>
+            </div>
+        </div>
+    </div>
 
     <!-- 1. CABEÇALHO (HEADER) - Sticky & Glassmorphism -->
     <header class="header" id="header">
@@ -136,70 +156,81 @@
             </div>
             
             <div class="specialties-grid">
-                <!-- 1. Terapia Infanto/Juvenil -->
-                <div class="specialty-card reveal reveal-delay-1">
-                    <div class="card-glass-glow"></div>
-                    <div class="card-icon-wrapper">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/><path d="M6 21v-2a6 6 0 0 1 12 0v2"/><circle cx="9" cy="6" r="1" fill="currentColor"/><circle cx="15" cy="6" r="1" fill="currentColor"/></svg>
-                    </div>
-                    <h3>Terapia Infanto/Juvenil</h3>
-                    <p>Acompanhamento sensível e acolhedor voltado aos desafios emocionais, comportamentais e do desenvolvimento de crianças e adolescentes.</p>
-                    <a href="https://wa.me/5511995235839?text=Ol%C3%A1%20Helena,%20gostaria%20de%20saber%20mais%20sobre%20a%20Terapia%20Infanto/Juvenil" target="_blank" class="card-link">Agendar Sessão <span>&rarr;</span></a>
-                </div>
-                
-                <!-- 2. Terapia Casal -->
-                <div class="specialty-card reveal reveal-delay-2">
-                    <div class="card-glass-glow"></div>
-                    <div class="card-icon-wrapper">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
-                    </div>
-                    <h3>Terapia de Casal</h3>
-                    <p>Reconstrução do diálogo, alinhamento de expectativas e superação de crises afetivas para restaurar a cumplicidade e intimidade a dois.</p>
-                    <a href="https://wa.me/5511995235839?text=Ol%C3%A1%20Helena,%20gostaria%20de%20saber%20mais%20sobre%20a%20Terapia%20de%20Casal" target="_blank" class="card-link">Agendar Sessão <span>&rarr;</span></a>
-                </div>
-                
-                <!-- 3. Terapia Familiar -->
-                <div class="specialty-card reveal reveal-delay-3">
-                    <div class="card-glass-glow"></div>
-                    <div class="card-icon-wrapper">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                    </div>
-                    <h3>Terapia Familiar</h3>
-                    <p>Harmonização das relações e mediação de conflitos sob a perspectiva sistêmica, restabelecendo a ordem, paz e união no convívio familiar.</p>
-                    <a href="https://wa.me/5511995235839?text=Ol%C3%A1%20Helena,%20gostaria%20de%20saber%20mais%20sobre%20a%20Terapia%20Familiar" target="_blank" class="card-link">Agendar Sessão <span>&rarr;</span></a>
-                </div>
-                
-                <!-- 4. Terapia Individual -->
+                <!-- 1. Terapia Individual -->
                 <div class="specialty-card reveal reveal-delay-1">
                     <div class="card-glass-glow"></div>
                     <div class="card-icon-wrapper">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                     </div>
                     <h3>Terapia Individual</h3>
-                    <p>Atendimento exclusivo e profundo para adultos, focado no autoconhecimento, inteligência emocional e libertação de padrões limitantes.</p>
-                    <a href="https://wa.me/5511995235839?text=Ol%C3%A1%20Helena,%20gostaria%20de%20saber%20mais%20sobre%20a%20Terapia%20Individual" target="_blank" class="card-link">Agendar Sessão <span>&rarr;</span></a>
+                    <p>Atendimento exclusivo e profundo para adultos, focado no autoconhecimento, inteligência emocional, superação de traumas e autonomia.</p>
+                    <a href="https://wa.me/5511995235839?text=Ol%C3%A1%20Helena,%20gostaria%20de%20saber%20mais%20sobre%20a%20Terapia%20Individual." target="_blank" rel="noopener noreferrer" class="card-link">Agendar Sessão <span>&rarr;</span></a>
                 </div>
 
-                <!-- 5. Terapia em Grupo -->
+                <!-- 2. Terapia de Casal & Casamento -->
                 <div class="specialty-card reveal reveal-delay-2">
+                    <div class="card-glass-glow"></div>
+                    <div class="card-icon-wrapper">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                    </div>
+                    <h3>Terapia de Casal & Casamento</h3>
+                    <p>Reconstrução do diálogo, superação de crises conjugais, traição e quebra de confiança, alinhando expectativas para restaurar a cumplicidade a dois.</p>
+                    <a href="https://wa.me/5511995235839?text=Ol%C3%A1%20Helena,%20gostaria%20de%20saber%20mais%20sobre%20a%20Terapia%20de%20Casal%20e%20Casamento." target="_blank" rel="noopener noreferrer" class="card-link">Agendar Sessão <span>&rarr;</span></a>
+                </div>
+
+                <!-- 3. Roda de Mulheres & Saúde Mental Feminina -->
+                <div class="specialty-card reveal reveal-delay-3">
+                    <div class="card-glass-glow"></div>
+                    <div class="card-icon-wrapper">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="7" r="4"/><path d="M12 11v10M9 15h6"/><circle cx="12" cy="12" r="9"/></svg>
+                    </div>
+                    <h3>Roda de Mulheres & Saúde Mental</h3>
+                    <p>Espaço terapêutico seguro e acolhedor de cura feminina, fortalecimento da identidade, liberação de sobrecargas e reconexão com sua potência.</p>
+                    <a href="https://wa.me/5511995235839?text=Ol%C3%A1%20Helena,%20gostaria%20de%20saber%20mais%20sobre%20a%20Roda%20de%20Mulheres%20e%20Sa%C3%BAde%20Mental%20Feminina." target="_blank" rel="noopener noreferrer" class="card-link">Conhecer a Roda <span>&rarr;</span></a>
+                </div>
+
+                <!-- 4. Grupos Terapêuticos & Rodas Terapêuticas -->
+                <div class="specialty-card reveal reveal-delay-1">
                     <div class="card-glass-glow"></div>
                     <div class="card-icon-wrapper">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="5" r="3"/><circle cx="5" cy="12" r="3"/><circle cx="19" cy="12" r="3"/><path d="M12 14c-4 0-7 2.5-7 5v1h14v-1c0-2.5-3-5-7-5z"/></svg>
                     </div>
-                    <h3>Terapia em Grupo</h3>
-                    <p>Espaço colaborativo e confidencial para troca de vivências, acolhimento mútuo, sensação de pertencimento e evolução pessoal compartilhada.</p>
-                    <a href="https://wa.me/5511995235839?text=Ol%C3%A1%20Helena,%20gostaria%20de%20saber%20mais%20sobre%20a%20Terapia%20em%20Grupo" target="_blank" class="card-link">Agendar Sessão <span>&rarr;</span></a>
+                    <h3>Grupos & Rodas Terapêuticas</h3>
+                    <p>Vivências em grupo com escuta acolhedora, sensação de pertencimento e evolução pessoal mútua através de dinâmicas circulares profundas e transformadoras.</p>
+                    <a href="https://wa.me/5511995235839?text=Ol%C3%A1%20Helena,%20gostaria%20de%20saber%20mais%20sobre%20os%20Grupos%20e%20Rodas%20Terap%C3%AAuticas." target="_blank" rel="noopener noreferrer" class="card-link">Participar do Grupo <span>&rarr;</span></a>
                 </div>
 
-                <!-- 6. Palestras Empresariais -->
+                <!-- 5. Terapia Familiar -->
+                <div class="specialty-card reveal reveal-delay-2">
+                    <div class="card-glass-glow"></div>
+                    <div class="card-icon-wrapper">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    </div>
+                    <h3>Terapia Familiar</h3>
+                    <p>Harmonização das relações e mediação de conflitos sob a perspectiva sistêmica, restabelecendo a ordem, paz e compreensão no convívio familiar.</p>
+                    <a href="https://wa.me/5511995235839?text=Ol%C3%A1%20Helena,%20gostaria%20de%20saber%20mais%20sobre%20a%20Terapia%20Familiar." target="_blank" rel="noopener noreferrer" class="card-link">Agendar Sessão <span>&rarr;</span></a>
+                </div>
+
+                <!-- 6. Terapia Infanto/Juvenil -->
                 <div class="specialty-card reveal reveal-delay-3">
+                    <div class="card-glass-glow"></div>
+                    <div class="card-icon-wrapper">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2a4 4 0 1 0 0 8 4 4 0 0 0 0-8z"/><path d="M6 21v-2a6 6 0 0 1 12 0v2"/><circle cx="9" cy="6" r="1" fill="currentColor"/><circle cx="15" cy="6" r="1" fill="currentColor"/></svg>
+                    </div>
+                    <h3>Terapia Infanto/Juvenil</h3>
+                    <p>Acompanhamento sensível e acolhedor voltado aos desafios emocionais, comportamentais e do desenvolvimento de crianças e adolescentes.</p>
+                    <a href="https://wa.me/5511995235839?text=Ol%C3%A1%20Helena,%20gostaria%20de%20saber%20mais%20sobre%20a%20Terapia%20Infanto/Juvenil." target="_blank" rel="noopener noreferrer" class="card-link">Agendar Sessão <span>&rarr;</span></a>
+                </div>
+
+                <!-- 7. Palestras Empresariais -->
+                <div class="specialty-card reveal reveal-delay-1">
                     <div class="card-glass-glow"></div>
                     <div class="card-icon-wrapper">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
                     </div>
                     <h3>Palestras Empresariais</h3>
                     <p>Treinamentos e palestras corporativas de alto impacto sobre saúde mental no trabalho, prevenção do burnout, gestão do estresse e liderança emocional.</p>
-                    <a href="https://wa.me/5511995235839?text=Ol%C3%A1%20Helena,%20gostaria%20de%20saber%20mais%20sobre%20Palestras%20Empresariais" target="_blank" class="card-link">Solicitar Proposta <span>&rarr;</span></a>
+                    <a href="https://wa.me/5511995235839?text=Ol%C3%A1%20Helena,%20gostaria%20de%20saber%20mais%20sobre%20Palestras%20Empresariais." target="_blank" rel="noopener noreferrer" class="card-link">Solicitar Proposta <span>&rarr;</span></a>
                 </div>
             </div>
 
@@ -283,6 +314,35 @@
                         <h4>Burnout</h4>
                         <p>Tratamento do esgotamento físico e mental extremo, readequação da rotina, manejo do estresse crônico e recuperação da vitalidade.</p>
                     </div>
+
+                    <!-- 9. Traição & Luto da Relação -->
+                    <div class="treatment-card">
+                        <div class="treatment-icon-box">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M12 5 9.04 11l6.92 3-5.96 5"/></svg>
+                        </div>
+                        <h4>Traição & Luto da Relação</h4>
+                        <p>Acolhimento da dor profunda da quebra de confiança, elaboração do luto pelo término ou idealização conjugal e reconstrução da autoestima e dignidade.</p>
+                    </div>
+
+                    <!-- 10. Perdão após Luto -->
+                    <div class="treatment-card">
+                        <div class="treatment-icon-box">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                        </div>
+                        <h4>Perdão após Luto</h4>
+                        <p>O processo do perdão como libertação emocional definitiva de ressentimentos, ressignificação de perdas dolorosas e reencontro com a paz interior.</p>
+                    </div>
+
+                    <!-- 11. Saúde Mental Feminina -->
+                    <div class="treatment-card">
+                        <div class="treatment-icon-box">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="5"/><path d="M12 13v8M9 17h6"/></svg>
+                        </div>
+                        <h4>Saúde Mental Feminina</h4>
+                        <p>Cuidado integral com a sobrecarga da mulher contemporânea, maternidade, fases de transição de vida, alívio de culpas e resgate da força pessoal.</p>
+                    </div>
+                </div>
+            </div>
                 </div>
             </div>
             
@@ -325,7 +385,7 @@
                     <span>Helena Ávila</span>
                 </div>
                 <p class="footer-tagline">Psicoterapeuta Integrativa e Psicanalista</p>
-                <p class="footer-audience" style="font-size:0.83rem; line-height:1.5; color:rgba(255,255,255,0.7);"><strong>Especialidades & Tratamentos:</strong><br>Terapia Infanto/Juvenil • Terapia de Casal • Terapia Familiar • Terapia Individual • Terapia em Grupo • Palestras Empresariais<br><span style="color:rgba(255,255,255,0.55);">Ansiedade e Depressão • Conflitos Familiares/Casal • Traumas e Fobias • Dependência Emocional • Vícios • Sexualidade • Narcisismo • Burnout</span></p>
+                <p class="footer-audience" style="font-size:0.83rem; line-height:1.5; color:rgba(255,255,255,0.7);"><strong>Especialidades & Tratamentos:</strong><br>Terapia Individual • Terapia de Casal & Casamento • Roda de Mulheres & Saúde Mental Feminina • Grupos & Rodas Terapêuticas • Terapia Familiar • Terapia Infanto/Juvenil • Palestras Empresariais<br><span style="color:rgba(255,255,255,0.55);">Ansiedade e Depressão • Traição e o Luto • Perdão após Luto • Casamento • Conflitos Familiares/Casal • Traumas e Fobias • Dependência Emocional • Vícios • Sexualidade • Narcisismo • Burnout</span></p>
                 <p class="footer-address mt-sm" style="font-size:0.82rem; color:rgba(255,255,255,0.7); display:flex; align-items:center; gap:0.4rem;"><a href="https://maps.app.goo.gl/bXotk5yftdAp8iNk8" target="_blank" rel="noopener noreferrer" style="color:inherit; text-decoration:none; display:flex; align-items:center; gap:0.4rem;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-terracotta)" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> R. Botafogo, 442 - Guilhermina, Praia Grande – SP, 11701-400</a></p>
             </div>
             

@@ -49,15 +49,35 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', closeMobileMenu);
     });
 
-    // --- Header Blur on Scroll ---
+    // --- Top Reading Progress Bar & Header Blur on Scroll ---
+    const topProgressBar = document.getElementById('topProgressBar');
     const header = document.getElementById('header');
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 40) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
+        if (topProgressBar) {
+            const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = totalHeight > 0 ? (window.scrollY / totalHeight) * 100 : 0;
+            topProgressBar.style.width = `${progress}%`;
+        }
+        if (header) {
+            if (window.scrollY > 30) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
         }
     }, { passive: true });
+
+    // --- Spotlight Cards Mouse Follow Effect (Ellen Folly Signature) ---
+    const spotlightCards = document.querySelectorAll('.spotlight-card, .specialty-card, .treatment-card, .method-card, .review-card, .luxury-card');
+    spotlightCards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+        });
+    });
 
     // --- FAQ Accordion Interactivity with ARIA ---
     const faqItems = document.querySelectorAll('.faq-item');

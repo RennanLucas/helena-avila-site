@@ -1,4 +1,4 @@
-﻿User-agent: *
+User-agent: *
 Allow: /
 
-Sitemap: https://helenaavila.com.br/sitemap.xml
+Sitemap: https://www.helenaavilapsi.com.br/sitemap.xml

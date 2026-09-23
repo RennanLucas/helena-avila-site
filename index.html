@@ -465,6 +465,36 @@
       50% { transform: scale(1.35); opacity: 0; }
     }
 
+    /* Hero Metrics Interactivity & Motions */
+    .metric-item {
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
+      will-change: transform;
+    }
+    .metric-item:hover {
+      transform: translateY(-3px);
+    }
+    .font-variant-tabular {
+      font-variant-numeric: tabular-nums;
+      -webkit-font-feature-settings: "tnum";
+      font-feature-settings: "tnum";
+      display: inline-block;
+    }
+    @keyframes starShine {
+      0%, 100% {
+        transform: scale(1) rotate(0deg);
+        filter: drop-shadow(0 0 0px rgba(197, 160, 89, 0));
+      }
+      50% {
+        transform: scale(1.15) rotate(4deg);
+        filter: drop-shadow(0 0 5px rgba(197, 160, 89, 0.6));
+      }
+    }
+    .star-sparkle {
+      display: inline-block;
+      animation: starShine 2.8s ease-in-out infinite;
+      transform-origin: center;
+    }
+
     /* Page entrance animation */
     body {
       animation: pageIn 0.6s ease-out;
@@ -619,25 +649,42 @@
             </button>
           </div>
 
-          <!-- Métricas Animadas -->
-          <div class="grid grid-cols-3 gap-6 pt-6 border-t border-[#E6DFD5] reveal-elem">
-            <div>
-              <div class="font-serif text-3xl sm:text-4xl text-zinc-900 font-normal">
-                <span class="counter" data-target="15">0</span><span class="text-[#8E6547]">+</span>
+          <!-- Métricas de Credibilidade com Micro-Movimentos Nobres -->
+          <div class="grid grid-cols-3 gap-3 sm:gap-6 pt-6 border-t border-[#E6DFD5]">
+            <!-- Métrica 1: 15+ Anos -->
+            <div class="metric-item group p-3 sm:p-4 rounded-2xl bg-white/60 hover:bg-white border border-stone-200/70 hover:border-[#8E6547]/40 shadow-xs hover:shadow-md transition-all duration-300 cursor-default relative overflow-hidden">
+              <div class="absolute bottom-0 left-0 right-0 h-[2px] bg-[#8E6547] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+              <div class="font-serif text-2xl sm:text-4xl text-zinc-900 font-normal flex items-baseline leading-none">
+                <span class="counter font-variant-tabular" data-target="15">15</span>
+                <span class="text-[#8E6547] font-light text-xl sm:text-3xl ml-0.5 group-hover:scale-125 transition-transform duration-300 inline-block">+</span>
               </div>
-              <div class="text-[11px] font-bold text-zinc-500 uppercase tracking-wider mt-1">Anos de Dedicação Clínica</div>
+              <div class="text-[10px] sm:text-[11px] font-bold text-zinc-500 uppercase tracking-wider mt-1.5 sm:mt-2 group-hover:text-zinc-800 transition-colors">
+                Anos de Dedicação Clínica
+              </div>
             </div>
-            <div>
-              <div class="font-serif text-3xl sm:text-4xl text-zinc-900 font-normal">
-                <span class="counter" data-target="5">0</span><span class="text-[#C5A059]">.0 ★</span>
+
+            <!-- Métrica 2: 5.0 ★ Google -->
+            <div class="metric-item group p-3 sm:p-4 rounded-2xl bg-white/60 hover:bg-white border border-stone-200/70 hover:border-[#C5A059]/40 shadow-xs hover:shadow-md transition-all duration-300 cursor-default relative overflow-hidden">
+              <div class="absolute bottom-0 left-0 right-0 h-[2px] bg-[#C5A059] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+              <div class="font-serif text-2xl sm:text-4xl text-zinc-900 font-normal flex items-baseline leading-none">
+                <span class="counter font-variant-tabular" data-target="5.0" data-decimals="1">5.0</span>
+                <span class="text-[#C5A059] ml-1 sm:ml-1.5 text-lg sm:text-2xl star-sparkle inline-block">★</span>
               </div>
-              <div class="text-[11px] font-bold text-zinc-500 uppercase tracking-wider mt-1">Avaliações no Google</div>
+              <div class="text-[10px] sm:text-[11px] font-bold text-zinc-500 uppercase tracking-wider mt-1.5 sm:mt-2 group-hover:text-zinc-800 transition-colors">
+                Avaliações no Google
+              </div>
             </div>
-            <div>
-              <div class="font-serif text-3xl sm:text-4xl text-zinc-900 font-normal">
-                <span class="counter" data-target="100">0</span><span class="text-[#45634E]">%</span>
+
+            <!-- Métrica 3: 100% Sigilo -->
+            <div class="metric-item group p-3 sm:p-4 rounded-2xl bg-white/60 hover:bg-white border border-stone-200/70 hover:border-[#45634E]/40 shadow-xs hover:shadow-md transition-all duration-300 cursor-default relative overflow-hidden">
+              <div class="absolute bottom-0 left-0 right-0 h-[2px] bg-[#45634E] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+              <div class="font-serif text-2xl sm:text-4xl text-zinc-900 font-normal flex items-baseline leading-none">
+                <span class="counter font-variant-tabular" data-target="100">100</span>
+                <span class="text-[#45634E] font-light text-xl sm:text-3xl ml-0.5 group-hover:scale-110 transition-transform duration-300 inline-block">%</span>
               </div>
-              <div class="text-[11px] font-bold text-zinc-500 uppercase tracking-wider mt-1">Sigilo Ético Profissional</div>
+              <div class="text-[10px] sm:text-[11px] font-bold text-zinc-500 uppercase tracking-wider mt-1.5 sm:mt-2 group-hover:text-zinc-800 transition-colors">
+                Sigilo Ético Profissional
+              </div>
             </div>
           </div>
 
@@ -2197,37 +2244,11 @@
       updateStickyBar();
     });
 
-    // 3. Scroll Reveal Engine & Contadores Numéricos
+    // 3. Scroll Reveal Engine
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('revealed');
-
-          const counters = entry.target.querySelectorAll('.counter:not(.counted)');
-          counters.forEach(c => {
-            c.classList.add('counted');
-            const target = +c.getAttribute('data-target');
-            const duration = 2000; // 2 seconds for smooth animation
-            const start = performance.now();
-            
-            const updateCounter = (time) => {
-              const elapsed = time - start;
-              const progress = Math.min(elapsed / duration, 1);
-              // Ease-out function for slowing down at the end
-              const easeOut = 1 - Math.pow(1 - progress, 4);
-              const current = Math.floor(easeOut * target);
-              
-              c.innerText = current;
-              
-              if (progress < 1) {
-                requestAnimationFrame(updateCounter);
-              } else {
-                c.innerText = target;
-              }
-            };
-            
-            requestAnimationFrame(updateCounter);
-          });
         }
       });
     }, {
@@ -2236,6 +2257,53 @@
     });
 
     document.querySelectorAll('.reveal-elem').forEach(el => observer.observe(el));
+
+    // Contador de Métricas Nobres (Suave, Ágil e Sem Trepidação)
+    function animateCounters() {
+      const counters = document.querySelectorAll('.counter:not(.counted)');
+      counters.forEach(c => {
+        c.classList.add('counted');
+        const target = parseFloat(c.getAttribute('data-target'));
+        const decimals = parseInt(c.getAttribute('data-decimals') || '0', 10);
+        const duration = 1200; // 1.2s: ritmo ágil, natural e luxuoso
+        // Para avaliações (5.0), inicia em 4.0 para nunca exibir nota zero; para os demais, inicia em 0
+        const startVal = decimals > 0 ? 4.0 : 0;
+        const start = performance.now();
+
+        const updateCounter = (time) => {
+          const elapsed = time - start;
+          const progress = Math.min(elapsed / duration, 1);
+          // Ease-out cúbico fluido (desaceleração natural e elegante)
+          const easeOut = 1 - Math.pow(1 - progress, 3);
+          const current = startVal + (target - startVal) * easeOut;
+
+          c.innerText = decimals > 0 ? current.toFixed(decimals) : Math.floor(current);
+
+          if (progress < 1) {
+            requestAnimationFrame(updateCounter);
+          } else {
+            c.innerText = decimals > 0 ? target.toFixed(decimals) : target;
+          }
+        };
+
+        requestAnimationFrame(updateCounter);
+      });
+    }
+
+    // Dispara animação das métricas no carregamento inicial da página e no scroll
+    const firstMetric = document.querySelector('.metric-item');
+    if (firstMetric && firstMetric.parentElement) {
+      const metricsObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            animateCounters();
+            metricsObserver.disconnect();
+          }
+        });
+      }, { threshold: 0.1 });
+      metricsObserver.observe(firstMetric.parentElement);
+      setTimeout(animateCounters, 300);
+    }
 
     // 4. Mouse Spotlight Glow em Cartões
     document.querySelectorAll('.spotlight-card, .spotlight-card-dark').forEach(card => {

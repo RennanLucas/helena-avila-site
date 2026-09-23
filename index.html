@@ -2203,20 +2203,30 @@
         if (entry.isIntersecting) {
           entry.target.classList.add('revealed');
 
-          const counters = entry.target.querySelectorAll('.counter');
+          const counters = entry.target.querySelectorAll('.counter:not(.counted)');
           counters.forEach(c => {
+            c.classList.add('counted');
             const target = +c.getAttribute('data-target');
-            let curr = 0;
-            const stepVal = Math.max(1, Math.ceil(target / 20));
-            const intv = setInterval(() => {
-              curr += stepVal;
-              if (curr >= target) {
-                c.innerText = target;
-                clearInterval(intv);
+            const duration = 2000; // 2 seconds for smooth animation
+            const start = performance.now();
+            
+            const updateCounter = (time) => {
+              const elapsed = time - start;
+              const progress = Math.min(elapsed / duration, 1);
+              // Ease-out function for slowing down at the end
+              const easeOut = 1 - Math.pow(1 - progress, 4);
+              const current = Math.floor(easeOut * target);
+              
+              c.innerText = current;
+              
+              if (progress < 1) {
+                requestAnimationFrame(updateCounter);
               } else {
-                c.innerText = curr;
+                c.innerText = target;
               }
-            }, 20);
+            };
+            
+            requestAnimationFrame(updateCounter);
           });
         }
       });

@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const encodedText = encodeURIComponent(text);
             
             // Redirect to Helena's direct WhatsApp (using location.href to prevent popup blocking on mobile)
-            const waUrl = `https://wa.me/5511995235839?text=${encodedText}`;
+            const waUrl = `https://wa.me/5511945035218?text=${encodedText}`;
             window.location.href = waUrl;
 
             contactForm.reset();

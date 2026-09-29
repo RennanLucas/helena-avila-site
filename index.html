@@ -156,9 +156,17 @@
   }
   </script>
 
-  <!-- Tipografia Editorial: Plus Jakarta Sans + Cormorant Garamond -->
+  <!-- Otimizações de Desempenho & Resource Hints -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://www.gstatic.com" crossorigin />
+  <link rel="dns-prefetch" href="https://www.gstatic.com" />
+  <link rel="preconnect" href="https://gitzmynfamubetgujtmm.supabase.co" crossorigin />
+  <link rel="dns-prefetch" href="https://gitzmynfamubetgujtmm.supabase.co" />
+  <link rel="preload" as="image" href="assets/helena-sobre.jpg" fetchpriority="high" />
+  <link rel="preload" as="image" href="assets/logo.png" />
+
+  <!-- Tipografia Editorial: Plus Jakarta Sans + Cormorant Garamond -->
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 
   <!-- Tailwind CSS Engine -->
@@ -322,7 +330,7 @@
       box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.5);
     }
 
-    /* Infinite Marquee */
+    /* Infinite Marquee - Velocidade Ágil e Fluida */
     .marquee-container {
       display: flex;
       overflow: hidden;
@@ -336,7 +344,7 @@
       min-width: 100%;
       gap: 2.5rem;
       white-space: nowrap;
-      animation: marqueeScroll 28s linear infinite;
+      animation: marqueeScroll 17s linear infinite;
     }
     .marquee-content span {
       white-space: nowrap;
@@ -364,13 +372,13 @@
     .loc-tab-btn {
       background: transparent;
       color: #3f3f46;
-      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
       cursor: pointer;
       outline: none;
     }
     .loc-tab-btn .loc-sub {
       opacity: 0.7;
-      transition: opacity 0.25s ease;
+      transition: opacity 0.2s ease;
     }
     .loc-tab-btn:hover:not(.active) {
       background: rgba(255, 255, 255, 0.75);
@@ -393,11 +401,11 @@
       color: #F4EDE6;
     }
 
-    /* Accordion transitions */
+    /* Accordion transitions - Rápido & Sem Atraso */
     .accordion-body {
       max-height: 0;
       overflow: hidden;
-      transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+      transition: max-height 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.2s ease;
       opacity: 0;
     }
     .accordion-body.open {
@@ -408,17 +416,17 @@
     /* Bottom sticky capsule (dynamic island) */
     #bottomStickyBar {
       transform: translateY(140%);
-      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
     }
     #bottomStickyBar.visible {
       transform: translateY(0);
     }
 
-    /* Scroll reveal transitions */
+    /* Scroll reveal transitions - Rápido, Instantâneo & Suave */
     .reveal-elem {
       opacity: 0;
-      transform: translateY(22px);
-      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(14px);
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1), transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .reveal-elem.revealed {
       opacity: 1;
@@ -432,10 +440,10 @@
 
     /* Smooth location tab transitions */
     .loc-view {
-      animation: fadeSlideIn 0.4s ease-out;
+      animation: fadeSlideIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
     }
     @keyframes fadeSlideIn {
-      from { opacity: 0; transform: translateY(12px); }
+      from { opacity: 0; transform: translateY(8px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
@@ -575,7 +583,7 @@
       <!-- Brand Logomarca Oficial -->
       <a href="#" onclick="window.scrollTo({top: 0, behavior: 'smooth'}); return false;" class="flex items-center gap-3 group cursor-pointer shrink-0" aria-label="Helena Ávila Psicoterapia - Ir para o início">
         <div class="w-11 h-11 sm:w-13 sm:h-13 flex items-center justify-center shrink-0 transition-transform duration-300 group-hover:scale-105">
-          <img src="assets/logo.png" alt="Helena Ávila Logomarca Oficial" class="w-full h-full object-contain" />
+          <img src="assets/logo.png" alt="Helena Ávila Logomarca Oficial" width="52" height="52" fetchpriority="high" decoding="async" class="w-full h-full object-contain" />
         </div>
         <div class="flex flex-col min-w-0">
           <div class="flex items-center gap-1.5">
@@ -735,8 +743,12 @@
             <div class="w-full aspect-[4/5] rounded-[32px] overflow-hidden bg-stone-100 border-2 border-[#8E6547]/30 shadow-[0_20px_50px_rgba(30,20,15,0.08)] relative group">
               <img src="assets/helena-sobre.jpg" 
                    alt="Helena Ávila — Psicoterapeuta Integrativa e Psicanalista" 
-                   class="w-full h-full object-cover object-center group-hover:scale-102 transition-transform duration-700" 
-                   loading="eager" />
+                   width="400" 
+                   height="500" 
+                   fetchpriority="high" 
+                   decoding="async" 
+                   loading="eager" 
+                   class="w-full h-full object-cover object-center group-hover:scale-102 transition-transform duration-700" />
               
               <!-- Gradiente sutil na base da foto -->
               <div class="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent to-transparent pointer-events-none"></div>
@@ -1343,7 +1355,7 @@
               loading="lazy" 
               allowfullscreen 
               referrerpolicy="no-referrer-when-downgrade"
-              src="https://maps.google.com/maps?q=R.+Botafogo,+442+-+Guilhermina,+Praia+Grande+-+SP&t=&z=16&ie=UTF8&iwloc=&output=embed">
+              data-map-src="https://maps.google.com/maps?q=R.+Botafogo,+442+-+Guilhermina,+Praia+Grande+-+SP&t=&z=16&ie=UTF8&iwloc=&output=embed">
             </iframe>
             <div class="absolute bottom-2 left-2 right-2 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-lg border border-stone-200 text-[11px] text-zinc-600 flex items-center justify-between pointer-events-none">
               <span class="font-medium text-zinc-900 truncate">R. Botafogo, 442 • Guilhermina</span>
@@ -1420,7 +1432,7 @@
               loading="lazy" 
               allowfullscreen 
               referrerpolicy="no-referrer-when-downgrade"
-              src="https://maps.google.com/maps?q=Av.+Conselheiro+N%C3%A9bias,+756+-+Boqueir%C3%A3o,+Santos+-+SP,+11045-002&t=&z=16&ie=UTF8&iwloc=&output=embed">
+              data-map-src="https://maps.google.com/maps?q=Av.+Conselheiro+N%C3%A9bias,+756+-+Boqueir%C3%A3o,+Santos+-+SP,+11045-002&t=&z=16&ie=UTF8&iwloc=&output=embed">
             </iframe>
             <div class="absolute bottom-2 left-2 right-2 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-lg border border-stone-200 text-[11px] text-zinc-600 flex items-center justify-between pointer-events-none">
               <span class="font-medium text-zinc-900 truncate">Av. Conselheiro Nébias • Boqueirão</span>
@@ -1497,7 +1509,7 @@
               loading="lazy" 
               allowfullscreen 
               referrerpolicy="no-referrer-when-downgrade"
-              src="https://maps.google.com/maps?q=Av.+Jos%C3%A9+Versolato,+111+-+Centro,+S%C3%A3o+Bernardo+do+Campo+-+SP&t=&z=16&ie=UTF8&iwloc=&output=embed">
+              data-map-src="https://maps.google.com/maps?q=Av.+Jos%C3%A9+Versolato,+111+-+Centro,+S%C3%A3o+Bernardo+do+Campo+-+SP&t=&z=16&ie=UTF8&iwloc=&output=embed">
             </iframe>
             <div class="absolute bottom-2 left-2 right-2 bg-white/95 backdrop-blur-md px-3 py-1.5 rounded-lg border border-stone-200 text-[11px] text-zinc-600 flex items-center justify-between pointer-events-none">
               <span class="font-medium text-zinc-900 truncate">Av. José Versolato, 111 • Sala 704</span>
@@ -1769,7 +1781,7 @@
           <div class="relative">
             <div class="absolute -inset-4 rounded-3xl bg-gradient-to-tr from-[#8E6547]/20 via-[#C5A059]/15 to-transparent blur-xl"></div>
             <div class="relative rounded-3xl overflow-hidden shadow-2xl border-2 border-[#D8D1C7] aspect-[4/5] bg-stone-100">
-              <img src="assets/helena-portrait.jpg" alt="Helena Ávila Psicoterapeuta Integrativa" class="w-full h-full object-cover object-center hover:scale-102 transition-transform duration-700" />
+              <img src="assets/helena-portrait.jpg" alt="Helena Ávila Psicoterapeuta Integrativa" width="480" height="600" loading="lazy" decoding="async" class="w-full h-full object-cover object-center hover:scale-102 transition-transform duration-700" />
             </div>
             <div class="absolute -bottom-6 -right-4 sm:right-6 bg-white p-4 rounded-2xl shadow-xl border border-[#D8D1C7] flex items-center gap-3">
               <div class="w-12 h-12 rounded-xl bg-[#8E6547] text-white flex items-center justify-center font-serif text-xl font-bold">
@@ -2094,7 +2106,7 @@
         <div class="md:col-span-5 space-y-4">
           <div class="flex items-center gap-3.5">
             <div class="w-12 h-12 flex items-center justify-center shrink-0">
-              <img src="assets/logo.png" alt="Helena Ávila Logomarca Oficial" class="w-full h-full object-contain drop-shadow-sm" />
+              <img src="assets/logo.png" alt="Helena Ávila Logomarca Oficial" width="48" height="48" loading="lazy" decoding="async" class="w-full h-full object-contain drop-shadow-sm" />
             </div>
             <div>
               <div class="font-serif text-xl text-white font-medium">Helena Ávila</div>
@@ -2160,7 +2172,7 @@
       
       <!-- Foto Quadrada Bem Enquadrada (1:1) -->
       <div class="w-11 h-11 sm:w-14 sm:h-14 rounded-xl sm:rounded-2xl overflow-hidden border border-[#8E6547]/30 shrink-0 bg-stone-100 shadow-xs aspect-square">
-        <img src="assets/helena-square.jpg" alt="Helena Ávila" class="w-full h-full object-cover object-center" />
+        <img src="assets/helena-square.jpg" alt="Helena Ávila" width="56" height="56" loading="lazy" decoding="async" class="w-full h-full object-cover object-center" />
       </div>
 
       <!-- Informações com Hierarquia Refinada -->
@@ -2234,20 +2246,23 @@
 
   <!-- ================= JAVASCRIPT ENGINE ================= -->
   <script>
-    // 1. Canvas Orgânico de Fundo Suave
+    // 1. Canvas Orgânico de Fundo Suave (Com Pause Inteligente Fora da Tela)
     const canvas = document.getElementById('cloudCanvas');
     if (canvas) {
       const ctx = canvas.getContext('2d');
       let w = canvas.width = window.innerWidth;
       let h = canvas.height = window.innerHeight;
+      let isHeroVisible = true;
+      let animId = null;
 
       window.addEventListener('resize', () => {
         w = canvas.width = window.innerWidth;
         h = canvas.height = window.innerHeight;
-      });
+      }, { passive: true });
 
       let step = 0;
       function drawClouds() {
+        if (!isHeroVisible) return;
         ctx.clearRect(0, 0, w, h);
         step += 0.003;
 
@@ -2271,12 +2286,24 @@
           ctx.fill();
         }
 
-        requestAnimationFrame(drawClouds);
+        animId = requestAnimationFrame(drawClouds);
       }
-      drawClouds();
+
+      // Otimização Crítica: Pausa o Canvas quando fora de vista para economizar 100% da CPU/GPU
+      const canvasObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          isHeroVisible = entry.isIntersecting;
+          if (isHeroVisible) {
+            cancelAnimationFrame(animId);
+            animId = requestAnimationFrame(drawClouds);
+          }
+        });
+      }, { threshold: 0.05 });
+      canvasObserver.observe(canvas);
+      animId = requestAnimationFrame(drawClouds);
     }
 
-    // 2. Barra de Progresso Superior & Dynamic Island Sticky Bar
+    // 2. Barra de Progresso Superior & Dynamic Island Sticky Bar (Rolagem Fluida a 120Hz)
     const progressBar = document.getElementById('topProgressBar');
     const bottomBar = document.getElementById('bottomStickyBar');
     const footerElement = document.querySelector('footer');
@@ -2306,14 +2333,21 @@
       footerObserver.observe(footerElement);
     }
 
+    let scrollTicking = false;
     window.addEventListener('scroll', () => {
-      const winScroll = document.documentElement.scrollTop || window.pageYOffset;
-      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-      const scrolled = (winScroll / height) * 100;
-      if (progressBar) progressBar.style.width = scrolled + '%';
-
-      updateStickyBar();
-    });
+      if (!scrollTicking) {
+        requestAnimationFrame(() => {
+          const winScroll = document.documentElement.scrollTop || window.pageYOffset;
+          const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+          if (progressBar && height > 0) {
+            progressBar.style.width = ((winScroll / height) * 100) + '%';
+          }
+          updateStickyBar();
+          scrollTicking = false;
+        });
+        scrollTicking = true;
+      }
+    }, { passive: true });
 
     // 3. Scroll Reveal Engine
     const observer = new IntersectionObserver((entries) => {
@@ -2324,27 +2358,25 @@
       });
     }, {
       threshold: 0.1,
-      rootMargin: '0px 0px -30px 0px'
+      rootMargin: '0px 0px -20px 0px'
     });
 
     document.querySelectorAll('.reveal-elem').forEach(el => observer.observe(el));
 
-    // Contador de Métricas Nobres (Suave, Ágil e Sem Trepidação)
+    // Contador de Métricas Nobres (Ágil, Fluido & Instantâneo)
     function animateCounters() {
       const counters = document.querySelectorAll('.counter:not(.counted)');
       counters.forEach(c => {
         c.classList.add('counted');
         const target = parseFloat(c.getAttribute('data-target'));
         const decimals = parseInt(c.getAttribute('data-decimals') || '0', 10);
-        const duration = 1200; // 1.2s: ritmo ágil, natural e luxuoso
-        // Para avaliações (5.0), inicia em 4.0 para nunca exibir nota zero; para os demais, inicia em 0
+        const duration = 750; // 0.75s: ritmo ágil, sem espera
         const startVal = decimals > 0 ? 4.0 : 0;
         const start = performance.now();
 
         const updateCounter = (time) => {
           const elapsed = time - start;
           const progress = Math.min(elapsed / duration, 1);
-          // Ease-out cúbico fluido (desaceleração natural e elegante)
           const easeOut = 1 - Math.pow(1 - progress, 3);
           const current = startVal + (target - startVal) * easeOut;
 
@@ -2426,7 +2458,15 @@
       if (link) link.href = `https://wa.me/5511945035218?text=${msg}`;
     }
 
-    // 6. Abas de Consultórios
+    // 6. Abas de Consultórios & Carregamento Inteligente de Mapas
+    function loadMapForPanel(panel) {
+      if (!panel) return;
+      const iframe = panel.querySelector('iframe[data-map-src]');
+      if (iframe && !iframe.getAttribute('src')) {
+        iframe.setAttribute('src', iframe.getAttribute('data-map-src'));
+      }
+    }
+
     function changeLoc(key, btn) {
       document.querySelectorAll('#locTabButtons .loc-tab-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
@@ -2435,11 +2475,27 @@
       const activePanel = document.getElementById('panel-' + key);
       if (activePanel) {
         activePanel.classList.remove('hidden');
+        loadMapForPanel(activePanel);
         // Re-trigger fade animation
         activePanel.style.animation = 'none';
         activePanel.offsetHeight; // Force reflow
         activePanel.style.animation = '';
       }
+    }
+
+    // Carrega o mapa interativo apenas quando o visitante se aproxima da seção de consultórios
+    const consultoriosSection = document.getElementById('consultorios');
+    if (consultoriosSection) {
+      const mapObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const activePanel = document.querySelector('.loc-view:not(.hidden)');
+            loadMapForPanel(activePanel);
+            mapObserver.disconnect();
+          }
+        });
+      }, { rootMargin: '600px 0px 600px 0px' });
+      mapObserver.observe(consultoriosSection);
     }
 
     // 7. FAQ Accordion

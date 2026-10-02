@@ -140,7 +140,18 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Redirect to Helena's direct WhatsApp (using location.href to prevent popup blocking on mobile)
             const waUrl = `https://wa.me/5511945035218?text=${encodedText}`;
-            window.location.href = waUrl;
+            
+            // Dispara evento de conversão do Google Ads antes do redirecionamento
+            if (typeof gtag === 'function') {
+                gtag('event', 'ads_conversion_Solicitar_cota_o_1', {
+                    'event_callback': function() {
+                        window.location.href = waUrl;
+                    },
+                    'event_timeout': 2000
+                });
+            } else {
+                window.location.href = waUrl;
+            }
 
             contactForm.reset();
         });
@@ -508,5 +519,36 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.warn('Could not load custom Instagram feed:', err);
             });
     }
+
+    // --- Google Ads Conversion Tracking (WhatsApp Clicks) ---
+    // Intercepta cliques em botões do WhatsApp para registrar conversão
+    document.addEventListener('click', function(e) {
+        const anchor = e.target.closest('a');
+        if (!anchor) return;
+        
+        const href = anchor.getAttribute('href') || '';
+        if (href.includes('wa.me/')) {
+            if (typeof gtag === 'function') {
+                const isNewTab = anchor.getAttribute('target') === '_blank';
+                
+                if (isNewTab) {
+                    // Para links que abrem em nova aba, a página atual não é fechada,
+                    // então podemos enviar o evento normalmente sem atrasar o clique.
+                    gtag('event', 'ads_conversion_Solicitar_cota_o_1');
+                } else {
+                    // Para links na mesma aba, atrasamos o redirecionamento
+                    // para garantir que o evento seja disparado antes de sair da página.
+                    e.preventDefault();
+                    var callback = function () {
+                        window.location = href;
+                    };
+                    gtag('event', 'ads_conversion_Solicitar_cota_o_1', {
+                        'event_callback': callback,
+                        'event_timeout': 2000
+                    });
+                }
+            }
+        }
+    });
 
 });

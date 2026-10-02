@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Dispara evento de conversão do Google Ads antes do redirecionamento
             if (typeof gtag === 'function') {
                 gtag('event', 'conversion', {
-                    'send_to': 'AW-17979954388/srRbCOT7uY0dENSpwf1C',
+                    'send_to': 'AW-17979954388/pxQ1CMjYrI4dENSpwf1C',
                     'event_callback': function() {
                         window.location.href = waUrl;
                     },
@@ -536,7 +536,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Para links que abrem em nova aba, a página atual não é fechada,
                     // então podemos enviar o evento normalmente sem atrasar o clique.
                     gtag('event', 'conversion', {
-                        'send_to': 'AW-17979954388/srRbCOT7uY0dENSpwf1C'
+                        'send_to': 'AW-17979954388/pxQ1CMjYrI4dENSpwf1C'
                     });
                 } else {
                     // Para links na mesma aba, atrasamos o redirecionamento
@@ -546,7 +546,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         window.location = href;
                     };
                     gtag('event', 'conversion', {
-                        'send_to': 'AW-17979954388/srRbCOT7uY0dENSpwf1C',
+                        'send_to': 'AW-17979954388/pxQ1CMjYrI4dENSpwf1C',
                         'event_callback': callback,
                         'event_timeout': 2000
                     });

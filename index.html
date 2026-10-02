@@ -1433,6 +1433,28 @@
     function openModal() { const modal = document.getElementById('infoModal'); const content = document.getElementById('infoModalContent'); if (modal && content) { modal.style.display = 'flex'; requestAnimationFrame(() => { modal.classList.remove('opacity-0', 'pointer-events-none'); modal.classList.add('opacity-100', 'pointer-events-auto'); content.classList.remove('scale-95'); content.classList.add('scale-100'); }); } }
     function closeModal() { const modal = document.getElementById('infoModal'); const content = document.getElementById('infoModalContent'); if (modal && content) { modal.classList.remove('opacity-100', 'pointer-events-auto'); modal.classList.add('opacity-0', 'pointer-events-none'); content.classList.remove('scale-100'); content.classList.add('scale-95'); setTimeout(() => { modal.style.display = 'none'; }, 300); } }
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+    // --- Google Ads Conversion Tracking (WhatsApp Clicks) ---
+    document.addEventListener('click', function(e) {
+        const anchor = e.target.closest('a');
+        if (!anchor) return;
+        const href = anchor.getAttribute('href') || '';
+        if (href.includes('wa.me/')) {
+            if (typeof gtag === 'function') {
+                const isNewTab = anchor.getAttribute('target') === '_blank';
+                if (isNewTab) {
+                    gtag('event', 'conversion', { 'send_to': 'AW-17979954388/srRbCOT7uY0dENSpwf1C' });
+                } else {
+                    e.preventDefault();
+                    gtag('event', 'conversion', {
+                        'send_to': 'AW-17979954388/srRbCOT7uY0dENSpwf1C',
+                        'event_callback': function () { window.location = href; },
+                        'event_timeout': 2000
+                    });
+                }
+            }
+        }
+    });
   </script>
 
 </body>

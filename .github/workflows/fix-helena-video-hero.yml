@@ -1,0 +1,56 @@
+name: Fix Helena video hero
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  patch-homepage:
+    if: ${{ !contains(github.event.head_commit.message, '[video-hero-patched]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Patch homepage video loader
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          index = Path('index.html')
+          html = index.read_text(encoding='utf-8')
+          loader = '  <script src="script.js?v=20"></script>\n'
+          if 'script.js?v=20' not in html:
+              if '</body>' not in html:
+                  raise SystemExit('index.html sem </body>')
+              html = html.replace('</body>', loader + '</body>', 1)
+              index.write_text(html, encoding='utf-8')
+
+          script = Path('script.js')
+          js = script.read_text(encoding='utf-8')
+          old = "  document.write('<script src=\"script-original.js?v=18\"><\\/script>');"
+          new = "  if (!document.getElementById('inicio')) { document.write('<script src=\"script-original.js?v=18\"><\\/script>'); }"
+          if old in js:
+              js = js.replace(old, new, 1)
+              script.write_text(js, encoding='utf-8')
+          elif new not in js:
+              raise SystemExit('Trecho esperado de script.js não encontrado')
+          PY
+
+      - name: Commit patch
+        shell: bash
+        run: |
+          if git diff --quiet; then
+            echo "Nada para alterar"
+            exit 0
+          fi
+          git config user.name "Kubo Web Automation"
+          git config user.email "dev@kuboweb.com"
+          git add index.html script.js
+          git commit -m "fix: carregar vídeos no hero da homepage [video-hero-patched]"
+          git push

@@ -17,10 +17,10 @@ for (const name of fs.readdirSync(root)) {
 
 const indexPath = path.join(out, 'index.html');
 let html = fs.readFileSync(indexPath, 'utf8');
-const loader = '  <script src="script.js?v=21"></script>\n';
-if (!html.includes('script.js?v=21')) {
+const hasVideoLoader = /<script\s+src=["']script\.js\?v=\d+["']><\/script>/.test(html);
+if (!hasVideoLoader) {
   if (!html.includes('</body>')) throw new Error('index.html sem </body>');
-  html = html.replace('</body>', loader + '</body>');
+  html = html.replace('</body>', '  <script src="script.js?v=20"></script>\n</body>');
   fs.writeFileSync(indexPath, html, 'utf8');
 }
 

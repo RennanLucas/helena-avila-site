@@ -1,0 +1,37 @@
+name: Review Helena native video assets
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/review-video-assets.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Prepare review samples
+        run: |
+          if ! command -v ffmpeg >/dev/null 2>&1; then sudo apt-get update && sudo apt-get install -y ffmpeg; fi
+          mkdir -p tmp-review
+          ffmpeg -loglevel error -y -i assets/videos/helena-video-02-cover.jpg -vf scale=120:-2 -q:v 5 tmp-review/cover2-small.jpg
+          ffmpeg -loglevel error -y -ss 8 -i assets/videos/helena-video-02.mp4 -frames:v 1 -vf scale=120:-2 -q:v 5 tmp-review/frame2-8s.jpg
+          ffmpeg -loglevel error -y -ss 8 -i assets/videos/helena-video-01.mp4 -frames:v 1 -vf scale=120:-2 -q:v 5 tmp-review/frame1-8s.jpg
+          base64 -w0 tmp-review/cover2-small.jpg > tmp-review/cover2-small.b64
+          base64 -w0 tmp-review/frame2-8s.jpg > tmp-review/frame2-8s.b64
+          base64 -w0 tmp-review/frame1-8s.jpg > tmp-review/frame1-8s.b64
+          rm tmp-review/*.jpg
+      - name: Commit review samples and remove workflow
+        run: |
+          git config user.name "RennanLucas"
+          git config user.email "rennanlucas27oficial@gmail.com"
+          git add tmp-review
+          git rm .github/workflows/review-video-assets.yml
+          git commit -m "chore: adicionar amostras temporárias de revisão dos vídeos"
+          git push origin main

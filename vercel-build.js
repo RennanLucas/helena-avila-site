@@ -84,7 +84,7 @@ const premiumRules = `
       .hv-cover-title em{display:block;color:#e3bd7b;font-weight:400}
       .hv-cover-badge{position:absolute;z-index:3;left:50%;bottom:16px;transform:translateX(-50%);display:flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;background:rgba(197,160,89,.94);color:#fff;white-space:nowrap;font:800 7px/1 var(--font-sans,Arial,sans-serif);letter-spacing:.12em;text-transform:uppercase;box-shadow:0 7px 20px rgba(0,0,0,.24)}
       .hv-cover-play{display:grid;place-items:center;width:12px;height:12px}.hv-cover-play svg{width:12px;height:12px}
-      @media(max-width:600px){.hv-card{width:min(82vw,320px);border-radius:24px}.hv-card-title{font-size:22px;line-height:1.03}.hv-card-bottom{left:18px;right:18px;bottom:18px}.hv-card-play{margin-top:11px;font-size:9px}.hv-play{width:38px;height:38px}.hv-card-top{top:14px;left:14px;right:14px}.hv-pill{font-size:8px;padding:6px 8px}.hv-about{grid-template-columns:118px 1fr;gap:16px}.hv-about-poster{width:118px;aspect-ratio:9/16}.hv-cover-brand{top:10px;left:8px;right:8px}.hv-cover-brand strong{font-size:12px}.hv-cover-brand small{font-size:4.8px}.hv-cover-title{left:8px;right:8px;bottom:38px;font-size:14px}.hv-cover-badge{bottom:10px;padding:5px 7px;font-size:5.5px;gap:4px}.hv-cover-play,.hv-cover-play svg{width:9px;height:9px}}
+      @media(max-width:600px){.hv-card{width:min(76vw,300px)!important;border-radius:22px!important}.hv-card-title{font-size:20px!important;line-height:1.04}.hv-card-bottom{left:18px;right:18px;bottom:18px}.hv-card-play{margin-top:11px;font-size:9px}.hv-play{width:38px;height:38px}.hv-card-top{top:14px;left:14px;right:14px}.hv-pill{font-size:8px;padding:6px 8px}.hv-about{grid-template-columns:118px 1fr!important;gap:16px!important}.hv-about-poster{width:118px!important;aspect-ratio:9/16!important}.hv-cover-brand{top:10px;left:8px;right:8px}.hv-cover-brand strong{font-size:12px}.hv-cover-brand small{font-size:4.8px}.hv-cover-title{left:8px;right:8px;bottom:38px;font-size:14px}.hv-cover-badge{bottom:10px;padding:5px 7px;font-size:5.5px;gap:4px}.hv-cover-play,.hv-cover-play svg{width:9px;height:9px}}
 `;
 js = js.replace('      body.hv-lock{overflow:hidden}', premiumRules + '      body.hv-lock{overflow:hidden}');
 
@@ -95,7 +95,7 @@ fs.rmSync(path.join(out, 'assets', 'video-data'), { recursive: true, force: true
 
 const indexPath = path.join(out, 'index.html');
 let html = fs.readFileSync(indexPath, 'utf8');
-const loader = '<script src="script.js?v=28"></script>';
+const loader = '<script src="script.js?v=29"></script>';
 const loaderRegex = /<script\s+src=["']script\.js\?v=\d+["']><\/script>/g;
 if (loaderRegex.test(html)) {
   html = html.replace(loaderRegex, loader);
@@ -105,4 +105,4 @@ if (loaderRegex.test(html)) {
 }
 fs.writeFileSync(indexPath, html, 'utf8');
 
-console.log('Build v28: capas reais + capa editorial premium em CSS + mobile refinado.');
+console.log('Build v29: capa válida + editorial premium + mobile final sem sobrescrita.');

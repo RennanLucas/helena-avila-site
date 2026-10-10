@@ -1,164 +1,93 @@
-/* Helena Ávila — premium video hero bootstrap
-   Preserves the original site script and upgrades only the homepage hero. */
+/* Helena Ávila — editorial video experience */
 (function () {
   'use strict';
 
-  // Keep all original site behavior intact. This script is parser-inserted at the end
-  // of the page, so document.write loads the preserved original synchronously.
-  if (!document.getElementById('inicio')) { document.write('<script src="script-original.js?v=18"><\/script>'); }
-
-  const REDUCED_MOTION = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  const VIDEO_SOURCES = {
-    one: {
-      count: 3,
-      prefix: 'assets/video-data/helena-video-01.part',
-      title: 'Reflexões sobre vínculos e emoções',
-      eyebrow: 'Psicoterapia na prática',
-      duration: '1:35',
-    },
-    two: {
-      count: 4,
-      prefix: 'assets/video-data/helena-video-02.part',
-      title: 'Um olhar sobre conflitos e relações',
-      eyebrow: 'Com Helena Ávila',
-      duration: '2:45',
-    }
-  };
-
-  const videoUrlCache = new Map();
-
-  function partPath(source, index) {
-    return `${source.prefix}${String(index + 1).padStart(2, '0')}.txt`;
+  if (!document.getElementById('inicio')) {
+    document.write('<script src="script-original.js?v=18"><\\/script>');
+    return;
   }
 
+  const VIDEO_SOURCES = {
+    one: { count: 3, prefix: 'assets/video-data/helena-video-01.part', title: 'Uma conversa com Helena Ávila', duration: '1:35', poster: 'assets/helena-sobre.jpg' },
+    two: { count: 4, prefix: 'assets/video-data/helena-video-02.part', title: 'Uma reflexão com Helena', duration: '2:45', poster: 'assets/helena-portrait.jpg' }
+  };
+
+  const cache = new Map();
+  const pad = n => String(n + 1).padStart(2, '0');
+
   async function buildVideoUrl(key) {
-    if (videoUrlCache.has(key)) return videoUrlCache.get(key);
+    if (cache.has(key)) return cache.get(key);
     const source = VIDEO_SOURCES[key];
-    const requests = Array.from({ length: source.count }, (_, index) =>
-      fetch(partPath(source, index), { cache: 'force-cache' }).then(response => {
-        if (!response.ok) throw new Error(`Falha ao carregar ${response.url}`);
-        return response.text();
+    const encoded = await Promise.all(Array.from({ length: source.count }, (_, i) =>
+      fetch(`${source.prefix}${pad(i)}.txt`, { cache: 'force-cache' }).then(r => {
+        if (!r.ok) throw new Error(`Falha ao carregar ${r.url}`);
+        return r.text();
       })
-    );
-    const encodedParts = await Promise.all(requests);
-    const byteParts = encodedParts.map(encoded => {
-      const clean = encoded.trim();
-      const binary = atob(clean);
-      const bytes = new Uint8Array(binary.length);
-      for (let i = 0; i < binary.length; i += 1) bytes[i] = binary.charCodeAt(i);
+    ));
+    const parts = encoded.map(value => {
+      const bin = atob(value.trim());
+      const bytes = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
       return bytes;
     });
-    const url = URL.createObjectURL(new Blob(byteParts, { type: 'video/mp4' }));
-    videoUrlCache.set(key, url);
+    const url = URL.createObjectURL(new Blob(parts, { type: 'video/mp4' }));
+    cache.set(key, url);
     return url;
   }
 
-  function iconPlay() {
-    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.8 6.5v11l9-5.5-9-5.5Z" fill="currentColor"/></svg>';
-  }
+  const playIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 6.4v11.2L18 12 8.5 6.4Z" fill="currentColor"/></svg>';
+  const closeIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6.4 5 12.6 12.6-1.4 1.4L5 6.4 6.4 5Zm11.2 0L19 6.4 6.4 19 5 17.6 17.6 5Z" fill="currentColor"/></svg>';
 
-  function iconVolume() {
-    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h4l5 4V5.5l-5 4H4Zm12.6-.9a5 5 0 0 1 0 6.8l1.4 1.4a7 7 0 0 0 0-9.6l-1.4 1.4Z" fill="currentColor"/></svg>';
-  }
-
-  function iconClose() {
-    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6.4 5 12.6 12.6-1.4 1.4L5 6.4 6.4 5Zm11.2 0L19 6.4 6.4 19 5 17.6 17.6 5Z" fill="currentColor"/></svg>';
-  }
-
-  function injectStyles() {
-    if (document.getElementById('helena-video-hero-styles')) return;
+  function addStyles() {
+    if (document.getElementById('helena-editorial-video-styles')) return;
     const style = document.createElement('style');
-    style.id = 'helena-video-hero-styles';
+    style.id = 'helena-editorial-video-styles';
     style.textContent = `
-      .hv-stage{position:relative;width:100%;max-width:430px;margin:0 auto;padding:18px 18px 42px;isolation:isolate}
-      .hv-stage::before{content:"";position:absolute;inset:4% -8% 12%;z-index:-2;background:
-        radial-gradient(circle at 34% 28%,rgba(197,160,89,.24),transparent 33%),
-        radial-gradient(circle at 80% 70%,rgba(142,101,71,.16),transparent 38%);
-        filter:blur(24px);opacity:.9;pointer-events:none}
-      .hv-stage::after{content:"";position:absolute;inset:0;z-index:-1;border-radius:42px;
-        border:1px solid rgba(142,101,71,.14);background:linear-gradient(145deg,rgba(255,255,255,.72),rgba(250,248,245,.38));
-        backdrop-filter:blur(14px);box-shadow:0 30px 90px rgba(35,24,17,.08)}
-      .hv-kicker{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 4px 14px}
-      .hv-kicker-left{display:flex;align-items:center;gap:8px;color:#72503a;font:700 10px/1.2 var(--font-sans,Arial,sans-serif);
-        letter-spacing:.16em;text-transform:uppercase}
-      .hv-live-dot{width:7px;height:7px;border-radius:99px;background:#477053;box-shadow:0 0 0 5px rgba(71,112,83,.10)}
-      .hv-kicker-note{color:#8a8178;font:600 9px/1.2 var(--font-sans,Arial,sans-serif);letter-spacing:.08em;text-transform:uppercase}
-      .hv-main{position:relative;overflow:hidden;width:min(100%,340px);aspect-ratio:9/15;margin:0 auto;border-radius:30px;
-        background:#171717;border:1px solid rgba(255,255,255,.45);box-shadow:0 30px 70px rgba(28,18,12,.22);
-        transform:translateZ(0);cursor:pointer}
-      .hv-main::after,.hv-mini::after{content:"";position:absolute;inset:0;pointer-events:none;background:
-        linear-gradient(to bottom,rgba(9,8,7,.13) 0%,transparent 32%,transparent 58%,rgba(9,8,7,.72) 100%)}
-      .hv-main video,.hv-main img,.hv-mini img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
-      .hv-main img{transition:opacity .55s ease}
-      .hv-main.is-video-ready img{opacity:0}
-      .hv-noise{position:absolute;inset:0;z-index:2;opacity:.055;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.58'/%3E%3C/svg%3E")}
-      .hv-topline{position:absolute;z-index:4;top:18px;left:18px;right:18px;display:flex;align-items:center;justify-content:space-between;gap:10px}
-      .hv-chip{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border-radius:99px;background:rgba(17,17,17,.50);
-        backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.20);color:#fff;font:700 9px/1 var(--font-sans,Arial,sans-serif);
-        letter-spacing:.12em;text-transform:uppercase}
-      .hv-chip--light{background:rgba(255,255,255,.84);color:#29231f;border-color:rgba(255,255,255,.75)}
-      .hv-bottom{position:absolute;z-index:4;left:20px;right:20px;bottom:20px;color:#fff}
-      .hv-eyebrow{font:700 9px/1.3 var(--font-sans,Arial,sans-serif);letter-spacing:.17em;text-transform:uppercase;color:#e9d3bd;margin-bottom:7px}
-      .hv-title{font:500 clamp(22px,3vw,29px)/1.02 var(--font-serif,Georgia,serif);letter-spacing:-.02em;text-shadow:0 2px 15px rgba(0,0,0,.20)}
-      .hv-watch{display:flex;align-items:center;gap:9px;margin-top:13px;font:700 10px/1.2 var(--font-sans,Arial,sans-serif);
-        letter-spacing:.08em;text-transform:uppercase;color:#f7f2ec}
-      .hv-play{width:36px;height:36px;border-radius:99px;display:grid;place-items:center;background:#fff;color:#161412;
-        box-shadow:0 8px 25px rgba(0,0,0,.22);transition:transform .25s ease,background .25s ease}
-      .hv-play svg{width:17px;height:17px;margin-left:1px}
-      .hv-main:hover .hv-play,.hv-mini:hover .hv-play{transform:scale(1.08);background:#f2e5d8}
-      .hv-mini{position:absolute;z-index:7;right:-2px;bottom:2px;width:148px;aspect-ratio:9/15;border-radius:23px;overflow:hidden;
-        background:#191817;border:5px solid #faf8f5;box-shadow:0 24px 55px rgba(22,14,10,.24);cursor:pointer;
-        transform:rotate(2.25deg);transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s ease}
-      .hv-mini:hover{transform:rotate(0deg) translateY(-5px);box-shadow:0 30px 70px rgba(22,14,10,.28)}
-      .hv-mini-info{position:absolute;z-index:4;left:12px;right:12px;bottom:13px;color:white}
-      .hv-mini-info .hv-play{width:30px;height:30px;margin-bottom:8px}
-      .hv-mini-info .hv-play svg{width:14px;height:14px}
-      .hv-mini-label{font:700 8px/1.2 var(--font-sans,Arial,sans-serif);letter-spacing:.12em;text-transform:uppercase;color:#ecd7c3}
-      .hv-mini-title{font:600 15px/1.04 var(--font-serif,Georgia,serif);margin-top:4px}
-      .hv-stage-caption{display:flex;align-items:center;gap:8px;margin:16px 0 0 9px;color:#777068;font:600 10px/1.3 var(--font-sans,Arial,sans-serif)}
-      .hv-stage-caption svg{width:14px;height:14px;color:#8e6547}
-      .hv-loader{position:absolute;z-index:5;inset:0;display:grid;place-items:center;opacity:0;pointer-events:none;background:rgba(18,16,15,.10);
-        backdrop-filter:blur(1px);transition:opacity .2s ease}
-      .hv-main.is-loading .hv-loader{opacity:1}
-      .hv-spinner{width:28px;height:28px;border-radius:50%;border:2px solid rgba(255,255,255,.36);border-top-color:#fff;animation:hv-spin .8s linear infinite}
-      @keyframes hv-spin{to{transform:rotate(360deg)}}
-      .hv-modal{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:22px;background:rgba(12,11,10,.88);
-        backdrop-filter:blur(18px);opacity:0;visibility:hidden;transition:opacity .28s ease,visibility .28s ease}
-      .hv-modal.is-open{opacity:1;visibility:visible}
-      .hv-modal-shell{position:relative;width:min(94vw,430px);max-height:92vh;display:flex;flex-direction:column;align-items:stretch}
-      .hv-modal-video-wrap{position:relative;width:100%;aspect-ratio:9/16;max-height:82vh;border-radius:28px;overflow:hidden;background:#000;
-        border:1px solid rgba(255,255,255,.18);box-shadow:0 40px 120px rgba(0,0,0,.55)}
+      .hv-section{position:relative;padding:96px 0;background:#f5f0e9;border-bottom:1px solid #e6dfd5;overflow:hidden}
+      .hv-section:before{content:"";position:absolute;width:540px;height:540px;border-radius:50%;right:-260px;top:-280px;background:radial-gradient(circle,rgba(197,160,89,.15),transparent 68%);pointer-events:none}
+      .hv-wrap{width:100%;max-width:1280px;margin:auto;padding:0 2rem;display:grid;grid-template-columns:minmax(0,1.02fr) minmax(340px,.78fr);gap:76px;align-items:center}
+      .hv-copy{max-width:620px}
+      .hv-kicker{display:inline-flex;align-items:center;gap:9px;margin-bottom:18px;color:#8e6547;font:800 10px/1.2 var(--font-sans,Arial,sans-serif);letter-spacing:.18em;text-transform:uppercase}
+      .hv-kicker:before{content:"";width:26px;height:1px;background:#c5a059}
+      .hv-heading{margin:0;color:#171719;font:400 clamp(38px,4.3vw,64px)/.98 var(--font-serif,Georgia,serif);letter-spacing:-.035em}
+      .hv-heading em{font-weight:400;color:#8e6547}
+      .hv-lead{margin:24px 0 0;max-width:560px;color:#665f58;font:400 16px/1.75 var(--font-sans,Arial,sans-serif)}
+      .hv-meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+      .hv-meta span{padding:8px 11px;border-radius:999px;background:rgba(255,255,255,.72);border:1px solid #ded5ca;color:#655d55;font:700 10px/1 var(--font-sans,Arial,sans-serif);letter-spacing:.06em;text-transform:uppercase}
+      .hv-actions{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-top:30px}
+      .hv-cta{display:inline-flex;align-items:center;gap:10px;padding:14px 20px;border-radius:14px;background:#171719;color:#fff;text-decoration:none;font:800 11px/1 var(--font-sans,Arial,sans-serif);letter-spacing:.08em;text-transform:uppercase;transition:.25s ease}
+      .hv-cta:hover{background:#8e6547;transform:translateY(-2px)}
+      .hv-small-note{color:#8d8379;font:600 10px/1.4 var(--font-sans,Arial,sans-serif);letter-spacing:.04em}
+      .hv-media{position:relative;display:flex;justify-content:center}
+      .hv-media:before{content:"";position:absolute;inset:8% 2% -4% 16%;border:1px solid rgba(142,101,71,.20);border-radius:38px;transform:rotate(3deg);background:rgba(255,255,255,.36)}
+      .hv-card{position:relative;width:min(100%,390px);aspect-ratio:9/15.4;border:0;border-radius:32px;overflow:hidden;padding:0;background:#171719;cursor:pointer;box-shadow:0 34px 80px rgba(40,27,18,.20);transform:translateZ(0)}
+      .hv-card img,.hv-about-poster img{width:100%;height:100%;object-fit:cover;display:block}
+      .hv-card:after,.hv-about-poster:after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(12,10,9,.05),rgba(12,10,9,.03) 52%,rgba(12,10,9,.64));pointer-events:none}
+      .hv-card-top{position:absolute;z-index:2;top:18px;left:18px;right:18px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+      .hv-pill{display:inline-flex;padding:7px 10px;border-radius:999px;background:rgba(255,255,255,.90);backdrop-filter:blur(12px);color:#221f1d;font:800 9px/1 var(--font-sans,Arial,sans-serif);letter-spacing:.10em;text-transform:uppercase}
+      .hv-card-bottom{position:absolute;z-index:2;left:22px;right:22px;bottom:22px;color:#fff;text-align:left}
+      .hv-card-label{font:800 9px/1.2 var(--font-sans,Arial,sans-serif);letter-spacing:.16em;text-transform:uppercase;color:#ecd8c3;margin-bottom:8px}
+      .hv-card-title{font:500 27px/1.02 var(--font-serif,Georgia,serif)}
+      .hv-card-play{display:flex;align-items:center;gap:10px;margin-top:14px;font:800 10px/1 var(--font-sans,Arial,sans-serif);letter-spacing:.08em;text-transform:uppercase}
+      .hv-play{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#fff;color:#171719;box-shadow:0 10px 30px rgba(0,0,0,.18);transition:.25s ease}
+      .hv-play svg{width:18px;height:18px;margin-left:2px}.hv-card:hover .hv-play,.hv-about-poster:hover .hv-play{transform:scale(1.08);background:#f1dfcf}
+      .hv-about{max-width:1040px;margin:70px auto 0;padding:28px;border:1px solid #e6dfd5;border-radius:28px;background:#faf8f5;display:grid;grid-template-columns:190px 1fr auto;gap:30px;align-items:center;box-shadow:0 18px 45px rgba(30,20,15,.05)}
+      .hv-about-poster{position:relative;width:170px;aspect-ratio:9/14;border:0;border-radius:20px;overflow:hidden;padding:0;background:#171719;cursor:pointer;box-shadow:0 18px 45px rgba(30,20,15,.16)}
+      .hv-about-poster .hv-play{position:absolute;z-index:2;left:50%;top:50%;transform:translate(-50%,-50%)}
+      .hv-about-poster:hover .hv-play{transform:translate(-50%,-50%) scale(1.08)}
+      .hv-about-copy small{display:block;color:#8e6547;font:800 9px/1.2 var(--font-sans,Arial,sans-serif);letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px}
+      .hv-about-copy h3{margin:0;color:#181719;font:500 30px/1.05 var(--font-serif,Georgia,serif)}
+      .hv-about-copy p{margin:10px 0 0;color:#6d655e;font:400 13px/1.7 var(--font-sans,Arial,sans-serif);max-width:560px}
+      .hv-about-action{display:flex;align-items:center;gap:8px;color:#8e6547;font:800 10px/1.2 var(--font-sans,Arial,sans-serif);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+      .hv-modal{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:22px;background:rgba(12,11,10,.90);backdrop-filter:blur(18px);opacity:0;visibility:hidden;transition:.25s ease}
+      .hv-modal.is-open{opacity:1;visibility:visible}.hv-modal-shell{position:relative;width:min(94vw,430px)}
+      .hv-modal-frame{width:100%;aspect-ratio:9/16;max-height:84vh;background:#000;border-radius:28px;overflow:hidden;border:1px solid rgba(255,255,255,.14);box-shadow:0 40px 120px rgba(0,0,0,.56)}
       .hv-modal video{width:100%;height:100%;object-fit:contain;background:#000}
-      .hv-close{position:absolute;z-index:4;top:-13px;right:-13px;width:43px;height:43px;border:0;border-radius:99px;background:#faf8f5;color:#161412;
-        display:grid;place-items:center;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.30)}
-      .hv-close svg{width:19px;height:19px}
-      .hv-modal-copy{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:14px 5px 0;color:#fff}
-      .hv-modal-copy strong{display:block;font:600 18px/1.05 var(--font-serif,Georgia,serif)}
-      .hv-modal-copy span{display:block;margin-top:4px;color:#bbb5ae;font:600 9px/1.3 var(--font-sans,Arial,sans-serif);letter-spacing:.12em;text-transform:uppercase}
-      .hv-modal-cta{flex:0 0 auto;text-decoration:none;color:#171514;background:#f4e7da;padding:10px 13px;border-radius:99px;
-        font:800 9px/1 var(--font-sans,Arial,sans-serif);letter-spacing:.10em;text-transform:uppercase}
-      body.hv-modal-lock{overflow:hidden}
-      @media(max-width:1023px){
-        .hv-stage{max-width:430px;margin-top:10px}
-        .hv-main{width:min(88%,340px)}
-        .hv-mini{right:1%;bottom:4px}
-      }
-      @media(max-width:520px){
-        .hv-stage{padding:12px 8px 28px}
-        .hv-stage::after{border-radius:30px}
-        .hv-main{width:82%;margin-left:4%;border-radius:25px;aspect-ratio:9/15.4}
-        .hv-mini{width:35%;right:1%;bottom:8px;border-width:4px;border-radius:20px}
-        .hv-kicker{margin-inline:7px}
-        .hv-kicker-note{display:none}
-        .hv-title{font-size:23px}
-        .hv-bottom{left:16px;right:16px;bottom:17px}
-        .hv-stage-caption{margin-left:10px;font-size:9px;max-width:68%}
-      }
-      @media(prefers-reduced-motion:reduce){
-        .hv-mini,.hv-play{transition:none!important}
-        .hv-spinner{animation:none!important}
-      }
+      .hv-close{position:absolute;z-index:3;right:-12px;top:-12px;width:42px;height:42px;border:0;border-radius:50%;display:grid;place-items:center;background:#faf8f5;color:#171719;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+      .hv-close svg{width:18px;height:18px}.hv-modal-caption{padding:13px 4px 0;color:#fff}.hv-modal-caption strong{font:500 20px/1.1 var(--font-serif,Georgia,serif)}
+      body.hv-lock{overflow:hidden}
+      @media(max-width:900px){.hv-section{padding:72px 0}.hv-wrap{grid-template-columns:1fr;gap:42px;padding:0 1.5rem}.hv-copy{max-width:700px}.hv-media{justify-content:flex-start}.hv-card{width:min(82vw,390px)}.hv-about{grid-template-columns:150px 1fr;margin-top:52px}.hv-about-poster{width:140px}.hv-about-action{display:none}}
+      @media(max-width:600px){.hv-section{padding:58px 0}.hv-wrap{padding:0 1rem;gap:32px}.hv-heading{font-size:40px}.hv-lead{font-size:15px}.hv-media{justify-content:center}.hv-card{width:min(88vw,350px);border-radius:27px}.hv-about{margin:42px 16px 0;padding:16px;grid-template-columns:105px 1fr;gap:16px;border-radius:22px}.hv-about-poster{width:105px;border-radius:16px}.hv-about-copy h3{font-size:23px}.hv-about-copy p{font-size:12px;line-height:1.55}.hv-meta{gap:7px}.hv-meta span{font-size:9px}}
     `;
     document.head.appendChild(style);
   }
@@ -166,153 +95,82 @@
   function createModal() {
     const modal = document.createElement('div');
     modal.className = 'hv-modal';
-    modal.setAttribute('role', 'dialog');
-    modal.setAttribute('aria-modal', 'true');
-    modal.setAttribute('aria-label', 'Vídeo de Helena Ávila');
-    modal.innerHTML = `
-      <div class="hv-modal-shell">
-        <div class="hv-modal-video-wrap">
-          <button class="hv-close" type="button" aria-label="Fechar vídeo">${iconClose()}</button>
-          <video controls playsinline preload="metadata"></video>
-        </div>
-        <div class="hv-modal-copy">
-          <div><strong></strong><span>Helena Ávila · Psicoterapia Integrativa</span></div>
-          <a class="hv-modal-cta" href="https://wa.me/5511945035218?text=Ol%C3%A1%2C%20Helena.%20Vi%20seus%20v%C3%ADdeos%20no%20site%20e%20gostaria%20de%20conversar%20sobre%20uma%20sess%C3%A3o." target="_blank" rel="noopener">Conversar</a>
-        </div>
-      </div>`;
+    modal.innerHTML = `<div class="hv-modal-shell"><button class="hv-close" type="button" aria-label="Fechar vídeo">${closeIcon}</button><div class="hv-modal-frame"><video controls playsinline preload="metadata"></video></div><div class="hv-modal-caption"><strong></strong></div></div>`;
     document.body.appendChild(modal);
-
     const video = modal.querySelector('video');
     const title = modal.querySelector('strong');
-    const closeButton = modal.querySelector('.hv-close');
-
-    function close() {
-      video.pause();
-      modal.classList.remove('is-open');
-      document.body.classList.remove('hv-modal-lock');
-    }
-    closeButton.addEventListener('click', close);
-    modal.addEventListener('click', event => {
-      if (event.target === modal) close();
-    });
-    document.addEventListener('keydown', event => {
-      if (event.key === 'Escape' && modal.classList.contains('is-open')) close();
-    });
-
+    const close = () => { video.pause(); modal.classList.remove('is-open'); document.body.classList.remove('hv-lock'); };
+    modal.querySelector('.hv-close').addEventListener('click', close);
+    modal.addEventListener('click', e => { if (e.target === modal) close(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
     return {
       async open(key) {
-        const source = VIDEO_SOURCES[key];
-        title.textContent = source.title;
+        title.textContent = VIDEO_SOURCES[key].title;
         modal.classList.add('is-open');
-        document.body.classList.add('hv-modal-lock');
+        document.body.classList.add('hv-lock');
         try {
-          const url = await buildVideoUrl(key);
-          if (video.src !== url) video.src = url;
+          video.src = await buildVideoUrl(key);
           video.muted = false;
+          video.currentTime = 0;
           await video.play().catch(() => {});
-        } catch (error) {
-          console.error('[Helena Video]', error);
-        }
+        } catch (err) { console.error('[Helena vídeo]', err); }
       }
     };
   }
 
-  function createStage(modal, fallbackPoster) {
-    const stage = document.createElement('div');
-    stage.className = 'hv-stage';
-    stage.innerHTML = `
-      <div class="hv-kicker">
-        <div class="hv-kicker-left"><span class="hv-live-dot"></span><span>Conheça a Helena em vídeo</span></div>
-        <span class="hv-kicker-note">Conteúdo original · com som</span>
-      </div>
-
-      <button class="hv-main" type="button" aria-label="Assistir vídeo: ${VIDEO_SOURCES.one.title}">
-        <img src="${fallbackPoster}" alt="Helena Ávila falando sobre saúde emocional" />
-        <video muted loop playsinline preload="none" aria-hidden="true"></video>
-        <span class="hv-noise"></span>
-        <span class="hv-topline">
-          <span class="hv-chip">Vídeo · ${VIDEO_SOURCES.one.duration}</span>
-          <span class="hv-chip hv-chip--light">Helena Ávila</span>
-        </span>
-        <span class="hv-bottom">
-          <span class="hv-eyebrow">${VIDEO_SOURCES.one.eyebrow}</span>
-          <span class="hv-title">${VIDEO_SOURCES.one.title}</span>
-          <span class="hv-watch"><span class="hv-play">${iconPlay()}</span><span>Assistir com som</span></span>
-        </span>
-        <span class="hv-loader"><span class="hv-spinner"></span></span>
-      </button>
-
-      <button class="hv-mini" type="button" aria-label="Assistir vídeo: ${VIDEO_SOURCES.two.title}">
-        <img src="${fallbackPoster}" alt="Helena Ávila em uma segunda reflexão em vídeo" />
-        <span class="hv-noise"></span>
-        <span class="hv-mini-info">
-          <span class="hv-play">${iconPlay()}</span>
-          <span class="hv-mini-label">Outro vídeo · ${VIDEO_SOURCES.two.duration}</span>
-          <span class="hv-mini-title">Conflitos &amp; relações</span>
-        </span>
-      </button>
-
-      <div class="hv-stage-caption">${iconVolume()}<span>O primeiro vídeo começa sem som. Toque para ouvir a Helena.</span></div>
-    `;
-
-    const main = stage.querySelector('.hv-main');
-    const mini = stage.querySelector('.hv-mini');
-    const preview = main.querySelector('video');
-
-    main.addEventListener('click', () => modal.open('one'));
-    mini.addEventListener('click', () => modal.open('two'));
-
-    if (!REDUCED_MOTION) {
-      const startPreview = async () => {
-        if (main.dataset.previewLoaded) return;
-        main.dataset.previewLoaded = 'true';
-        main.classList.add('is-loading');
-        try {
-          preview.src = await buildVideoUrl('one');
-          preview.muted = true;
-          preview.loop = true;
-          preview.playsInline = true;
-          await preview.play().catch(() => {});
-          main.classList.add('is-video-ready');
-        } catch (error) {
-          console.error('[Helena Video Preview]', error);
-        } finally {
-          main.classList.remove('is-loading');
-        }
-      };
-
-      if ('requestIdleCallback' in window) {
-        requestIdleCallback(startPreview, { timeout: 1100 });
-      } else {
-        setTimeout(startPreview, 450);
-      }
-    }
-
-    return stage;
+  function createMainSection(modal) {
+    const section = document.createElement('section');
+    section.className = 'hv-section';
+    section.setAttribute('aria-label', 'Conheça Helena Ávila em vídeo');
+    section.innerHTML = `
+      <div class="hv-wrap">
+        <div class="hv-copy">
+          <div class="hv-kicker">Conheça Helena Ávila</div>
+          <h2 class="hv-heading">Uma conversa antes da <em>primeira sessão.</em></h2>
+          <p class="hv-lead">Mais do que conhecer uma formação, é importante perceber a presença, a forma de escutar e o cuidado de quem vai acompanhar o seu processo. Assista a uma breve apresentação da Helena.</p>
+          <div class="hv-meta"><span>Psicoterapia Integrativa</span><span>Atendimento presencial &amp; online</span><span>${VIDEO_SOURCES.one.duration}</span></div>
+          <div class="hv-actions"><a class="hv-cta" href="https://wa.me/5511945035218?text=Ol%C3%A1%2C%20Helena.%20Conheci%20um%20pouco%20mais%20do%20seu%20trabalho%20pelo%20site%20e%20gostaria%20de%20conversar%20sobre%20uma%20sess%C3%A3o." target="_blank" rel="noopener">Agendar uma conversa →</a><span class="hv-small-note">O vídeo só começa quando você tocar.</span></div>
+        </div>
+        <div class="hv-media">
+          <button class="hv-card" type="button" aria-label="Assistir vídeo de Helena Ávila">
+            <img src="${VIDEO_SOURCES.one.poster}" alt="Helena Ávila em vídeo" loading="lazy" decoding="async" />
+            <span class="hv-card-top"><span class="hv-pill">Vídeo · ${VIDEO_SOURCES.one.duration}</span><span class="hv-pill">Helena Ávila</span></span>
+            <span class="hv-card-bottom"><span class="hv-card-label">Conheça a terapeuta</span><span class="hv-card-title">Uma apresentação em primeira pessoa.</span><span class="hv-card-play"><span class="hv-play">${playIcon}</span><span>Assistir com som</span></span></span>
+          </button>
+        </div>
+      </div>`;
+    section.querySelector('.hv-card').addEventListener('click', () => modal.open('one'));
+    return section;
   }
 
-  function initPremiumVideoHero() {
-    const hero = document.getElementById('inicio');
-    if (!hero || document.querySelector('.hv-stage')) return;
+  function createAboutVideo(modal) {
+    const block = document.createElement('div');
+    block.className = 'hv-about';
+    block.innerHTML = `
+      <button class="hv-about-poster" type="button" aria-label="Assistir segunda reflexão em vídeo">
+        <img src="${VIDEO_SOURCES.two.poster}" alt="Helena Ávila em uma reflexão em vídeo" loading="lazy" decoding="async" />
+        <span class="hv-play">${playIcon}</span>
+      </button>
+      <div class="hv-about-copy"><small>Uma reflexão da Helena · ${VIDEO_SOURCES.two.duration}</small><h3>Escuta, relações e os movimentos da vida.</h3><p>Um conteúdo complementar para conhecer mais de perto a forma como Helena fala sobre emoções, vínculos e processo terapêutico.</p></div>
+      <div class="hv-about-action">Assistir vídeo →</div>`;
+    block.querySelector('.hv-about-poster').addEventListener('click', () => modal.open('two'));
+    block.querySelector('.hv-about-action').addEventListener('click', () => modal.open('two'));
+    block.querySelector('.hv-about-action').style.cursor = 'pointer';
+    return block;
+  }
 
-    injectStyles();
-
-    // The current homepage hero has a direct grid with text in the first column
-    // and Helena's editorial portrait in the second. Replace only that visual
-    // column, leaving all copy, authority metrics, CTAs, analytics and SEO intact.
-    const heroGrid = hero.querySelector('.site-container > .grid');
-    if (!heroGrid || heroGrid.children.length < 2) return;
-    const visualColumn = heroGrid.children[1];
-    const existingPortrait = visualColumn.querySelector('img');
-    const fallbackPoster = existingPortrait ? (existingPortrait.currentSrc || existingPortrait.src) : '';
-
+  function init() {
+    if (document.querySelector('.hv-section')) return;
+    addStyles();
     const modal = createModal();
-    const stage = createStage(modal, fallbackPoster);
-
-    visualColumn.innerHTML = '';
-    visualColumn.classList.add('hv-video-column');
-    visualColumn.appendChild(stage);
+    const hero = document.getElementById('inicio');
+    const marquee = hero && hero.nextElementSibling;
+    if (marquee) marquee.insertAdjacentElement('afterend', createMainSection(modal));
+    const about = document.getElementById('sobre');
+    const aboutContainer = about && about.querySelector('.site-container');
+    if (aboutContainer) aboutContainer.appendChild(createAboutVideo(modal));
   }
 
-  document.addEventListener('DOMContentLoaded', initPremiumVideoHero, { once: true });
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
+  else init();
 })();

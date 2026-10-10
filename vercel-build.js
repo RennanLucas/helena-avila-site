@@ -18,7 +18,7 @@ const nativeAssets = [
   'assets/videos/helena-video-01.mp4',
   'assets/videos/helena-video-02.mp4',
   'assets/videos/helena-video-01-cover.jpg',
-  'assets/videos/helena-video-02-cover.jpg'
+  'assets/videos/helena-video-02-cover-premium.jpg'
 ];
 for (const rel of nativeAssets) {
   const full = path.join(out, rel);
@@ -33,7 +33,7 @@ let js = fs.readFileSync(scriptPath, 'utf8');
 // Fontes diretas: sem Descript, sem autor/data de terceiros, sem base64 no navegador.
 const sourcesPattern = /  const VIDEO_SOURCES = \{[\s\S]*?  const playIcon =/;
 if (!sourcesPattern.test(js)) throw new Error('Bloco VIDEO_SOURCES não encontrado');
-js = js.replace(sourcesPattern, `  const VIDEO_SOURCES = {\n    one: { src: 'assets/videos/helena-video-01.mp4', title: 'Uma conversa com Helena Ávila', duration: '1:35', poster: 'assets/videos/helena-video-01-cover.jpg' },\n    two: { src: 'assets/videos/helena-video-02.mp4', title: 'Uma reflexão com Helena', duration: '2:45', poster: 'assets/videos/helena-video-02-cover.jpg' }\n  };\n\n  const playIcon =`);
+js = js.replace(sourcesPattern, `  const VIDEO_SOURCES = {\n    one: { src: 'assets/videos/helena-video-01.mp4', title: 'Uma conversa com Helena Ávila', duration: '1:35', poster: 'assets/videos/helena-video-01-cover.jpg' },\n    two: { src: 'assets/videos/helena-video-02.mp4', title: 'Uma reflexão com Helena', duration: '2:45', poster: 'assets/videos/helena-video-02-cover-premium.jpg' }\n  };\n\n  const playIcon =`);
 
 // Player nativo do site.
 const modalPattern = /  function createModal\(\) \{[\s\S]*?\n  \}\n\n  function createMainSection/;
@@ -41,14 +41,25 @@ if (!modalPattern.test(js)) throw new Error('Função createModal não encontrad
 const modalReplacement = `  function createModal() {\n    const modal = document.createElement('div');\n    modal.className = 'hv-modal';\n    modal.innerHTML = \`<div class=\"hv-modal-shell\"><button class=\"hv-close\" type=\"button\" aria-label=\"Fechar vídeo\">\${closeIcon}</button><div class=\"hv-modal-frame\"><video controls playsinline preload=\"metadata\"></video></div><div class=\"hv-modal-caption\"><strong></strong></div></div>\`;\n    document.body.appendChild(modal);\n    const video = modal.querySelector('video');\n    const title = modal.querySelector('strong');\n    const close = () => {\n      video.pause();\n      video.currentTime = 0;\n      video.removeAttribute('src');\n      video.load();\n      modal.classList.remove('is-open');\n      document.body.classList.remove('hv-lock');\n    };\n    modal.querySelector('.hv-close').addEventListener('click', close);\n    modal.addEventListener('click', e => { if (e.target === modal) close(); });\n    document.addEventListener('keydown', e => { if (e.key === 'Escape' && modal.classList.contains('is-open')) close(); });\n    return {\n      open(key) {\n        const source = VIDEO_SOURCES[key];\n        title.textContent = source.title;\n        video.poster = source.poster;\n        video.src = source.src;\n        video.muted = false;\n        video.load();\n        modal.classList.add('is-open');\n        document.body.classList.add('hv-lock');\n        const attempt = video.play();\n        if (attempt && typeof attempt.catch === 'function') attempt.catch(() => {});\n      }\n    };\n  }\n\n  function createMainSection`;
 js = js.replace(modalPattern, modalReplacement);
 
+// Segundo vídeo: capa oficial premium e texto editorial.
+const aboutPattern = /  function createAboutVideo\(modal\) \{[\s\S]*?\n  \}\n\n  function init/;
+if (!aboutPattern.test(js)) throw new Error('Função createAboutVideo não encontrada');
+const aboutReplacement = `  function createAboutVideo(modal) {\n    const block = document.createElement('div');\n    block.className = 'hv-about';\n    block.innerHTML = \`\n      <button class=\"hv-about-poster\" type=\"button\" aria-label=\"Assistir vídeo Uma reflexão com Helena\">\n        <img src=\"\${VIDEO_SOURCES.two.poster}\" alt=\"Capa oficial do vídeo Uma reflexão com Helena\" loading=\"lazy\" decoding=\"async\" />\n      </button>\n      <div class=\"hv-about-copy\"><small>Vídeo oficial · \${VIDEO_SOURCES.two.duration}</small><h3>Uma reflexão com Helena.</h3><p>Um conteúdo complementar para conhecer mais de perto a forma como Helena fala sobre emoções, vínculos e processo terapêutico.</p></div>\n      <div class=\"hv-about-action\">Assistir vídeo →</div>\`;
+    block.querySelector('.hv-about-poster').addEventListener('click', () => modal.open('two'));\n    block.querySelector('.hv-about-action').addEventListener('click', () => modal.open('two'));\n    block.querySelector('.hv-about-action').style.cursor = 'pointer';\n    return block;\n  }\n\n  function init`;
+js = js.replace(aboutPattern, aboutReplacement);
+
 // Capa editorial: frame oficial do próprio vídeo + painel inferior limpo.
 js = js.replace(
   '.hv-card img,.hv-about-poster img{width:100%;height:100%;object-fit:cover;display:block}',
-  '.hv-card img{width:100%;height:72%;object-fit:cover;object-position:center 18%;display:block}.hv-about-poster img{width:100%;height:100%;object-fit:cover;object-position:center 18%;display:block}'
+  '.hv-card img{width:100%;height:72%;object-fit:cover;object-position:center 18%;display:block}.hv-about-poster img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}'
 );
 js = js.replace(
   '.hv-card:after,.hv-about-poster:after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(12,10,9,.05),rgba(12,10,9,.03) 52%,rgba(12,10,9,.64));pointer-events:none}',
-  '.hv-card:after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(12,10,9,.03) 0%,rgba(12,10,9,.02) 48%,rgba(12,10,9,.22) 58%,rgba(12,10,9,.96) 72%,#171719 100%);pointer-events:none}.hv-about-poster:after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(12,10,9,.02) 45%,rgba(12,10,9,.38) 62%,rgba(12,10,9,.94) 82%,#171719 100%);pointer-events:none}'
+  '.hv-card:after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(12,10,9,.03) 0%,rgba(12,10,9,.02) 48%,rgba(12,10,9,.22) 58%,rgba(12,10,9,.96) 72%,#171719 100%);pointer-events:none}.hv-about-poster:after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 1px rgba(255,255,255,.22);pointer-events:none}'
+);
+js = js.replace(
+  '.hv-about-poster{position:relative;width:170px;aspect-ratio:9/14;',
+  '.hv-about-poster{position:relative;width:170px;aspect-ratio:9/16;'
 );
 js = js.replace(
   '.hv-modal video{width:100%;height:100%;object-fit:contain;background:#000}',
@@ -65,7 +76,7 @@ fs.rmSync(path.join(out, 'assets', 'video-data'), { recursive: true, force: true
 
 const indexPath = path.join(out, 'index.html');
 let html = fs.readFileSync(indexPath, 'utf8');
-const loader = '<script src="script.js?v=26"></script>';
+const loader = '<script src="script.js?v=27"></script>';
 const loaderRegex = /<script\s+src=["']script\.js\?v=\d+["']><\/script>/g;
 if (loaderRegex.test(html)) {
   html = html.replace(loaderRegex, loader);
@@ -75,4 +86,4 @@ if (loaderRegex.test(html)) {
 }
 fs.writeFileSync(indexPath, html, 'utf8');
 
-console.log('Build v26: MP4 nativo + capas oficiais + player sem metadados externos.');
+console.log('Build v27: capa premium oficial + MP4 nativo + player sem metadados externos.');

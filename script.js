@@ -1,558 +1,318 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // --- Mobile Menu Toggle with Scroll Lock & ARIA ---
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const nav = document.getElementById('nav');
-    const navLinks = document.querySelectorAll('.nav-list a');
+/* Helena Ávila — premium video hero bootstrap
+   Preserves the original site script and upgrades only the homepage hero. */
+(function () {
+  'use strict';
 
-    function closeMobileMenu() {
-        if (nav && nav.classList.contains('active')) {
-            nav.classList.remove('active');
-            document.body.classList.remove('no-scroll');
-            if (mobileMenuBtn) {
-                mobileMenuBtn.setAttribute('aria-expanded', 'false');
-                mobileMenuBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
-            }
-        }
+  // Keep all original site behavior intact. This script is parser-inserted at the end
+  // of the page, so document.write loads the preserved original synchronously.
+  document.write('<script src="script-original.js?v=18"><\/script>');
+
+  const REDUCED_MOTION = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const VIDEO_SOURCES = {
+    one: {
+      count: 3,
+      prefix: 'assets/video-data/helena-video-01.part',
+      title: 'Reflexões sobre vínculos e emoções',
+      eyebrow: 'Psicoterapia na prática',
+      duration: '1:35',
+    },
+    two: {
+      count: 4,
+      prefix: 'assets/video-data/helena-video-02.part',
+      title: 'Um olhar sobre conflitos e relações',
+      eyebrow: 'Com Helena Ávila',
+      duration: '2:45',
     }
+  };
 
-    if (mobileMenuBtn && nav) {
-        mobileMenuBtn.setAttribute('aria-expanded', 'false');
-        mobileMenuBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const isActive = nav.classList.toggle('active');
-            document.body.classList.toggle('no-scroll', isActive);
-            mobileMenuBtn.setAttribute('aria-expanded', isActive ? 'true' : 'false');
-            
-            if (isActive) {
-                mobileMenuBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
-            } else {
-                mobileMenuBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>';
-            }
-        });
+  const videoUrlCache = new Map();
 
-        // Close when clicking outside
-        document.addEventListener('click', (e) => {
-            if (nav.classList.contains('active') && !nav.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
-                closeMobileMenu();
-            }
-        });
+  function partPath(source, index) {
+    return `${source.prefix}${String(index + 1).padStart(2, '0')}.txt`;
+  }
 
-        // Close on Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeMobileMenu();
-            }
-        });
+  async function buildVideoUrl(key) {
+    if (videoUrlCache.has(key)) return videoUrlCache.get(key);
+    const source = VIDEO_SOURCES[key];
+    const requests = Array.from({ length: source.count }, (_, index) =>
+      fetch(partPath(source, index), { cache: 'force-cache' }).then(response => {
+        if (!response.ok) throw new Error(`Falha ao carregar ${response.url}`);
+        return response.text();
+      })
+    );
+    const encodedParts = await Promise.all(requests);
+    const byteParts = encodedParts.map(encoded => {
+      const clean = encoded.trim();
+      const binary = atob(clean);
+      const bytes = new Uint8Array(binary.length);
+      for (let i = 0; i < binary.length; i += 1) bytes[i] = binary.charCodeAt(i);
+      return bytes;
+    });
+    const url = URL.createObjectURL(new Blob(byteParts, { type: 'video/mp4' }));
+    videoUrlCache.set(key, url);
+    return url;
+  }
+
+  function iconPlay() {
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.8 6.5v11l9-5.5-9-5.5Z" fill="currentColor"/></svg>';
+  }
+
+  function iconVolume() {
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h4l5 4V5.5l-5 4H4Zm12.6-.9a5 5 0 0 1 0 6.8l1.4 1.4a7 7 0 0 0 0-9.6l-1.4 1.4Z" fill="currentColor"/></svg>';
+  }
+
+  function iconClose() {
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6.4 5 12.6 12.6-1.4 1.4L5 6.4 6.4 5Zm11.2 0L19 6.4 6.4 19 5 17.6 17.6 5Z" fill="currentColor"/></svg>';
+  }
+
+  function injectStyles() {
+    if (document.getElementById('helena-video-hero-styles')) return;
+    const style = document.createElement('style');
+    style.id = 'helena-video-hero-styles';
+    style.textContent = `
+      .hv-stage{position:relative;width:100%;max-width:430px;margin:0 auto;padding:18px 18px 42px;isolation:isolate}
+      .hv-stage::before{content:"";position:absolute;inset:4% -8% 12%;z-index:-2;background:
+        radial-gradient(circle at 34% 28%,rgba(197,160,89,.24),transparent 33%),
+        radial-gradient(circle at 80% 70%,rgba(142,101,71,.16),transparent 38%);
+        filter:blur(24px);opacity:.9;pointer-events:none}
+      .hv-stage::after{content:"";position:absolute;inset:0;z-index:-1;border-radius:42px;
+        border:1px solid rgba(142,101,71,.14);background:linear-gradient(145deg,rgba(255,255,255,.72),rgba(250,248,245,.38));
+        backdrop-filter:blur(14px);box-shadow:0 30px 90px rgba(35,24,17,.08)}
+      .hv-kicker{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 4px 14px}
+      .hv-kicker-left{display:flex;align-items:center;gap:8px;color:#72503a;font:700 10px/1.2 var(--font-sans,Arial,sans-serif);
+        letter-spacing:.16em;text-transform:uppercase}
+      .hv-live-dot{width:7px;height:7px;border-radius:99px;background:#477053;box-shadow:0 0 0 5px rgba(71,112,83,.10)}
+      .hv-kicker-note{color:#8a8178;font:600 9px/1.2 var(--font-sans,Arial,sans-serif);letter-spacing:.08em;text-transform:uppercase}
+      .hv-main{position:relative;overflow:hidden;width:min(100%,340px);aspect-ratio:9/15;margin:0 auto;border-radius:30px;
+        background:#171717;border:1px solid rgba(255,255,255,.45);box-shadow:0 30px 70px rgba(28,18,12,.22);
+        transform:translateZ(0);cursor:pointer}
+      .hv-main::after,.hv-mini::after{content:"";position:absolute;inset:0;pointer-events:none;background:
+        linear-gradient(to bottom,rgba(9,8,7,.13) 0%,transparent 32%,transparent 58%,rgba(9,8,7,.72) 100%)}
+      .hv-main video,.hv-main img,.hv-mini img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center}
+      .hv-main img{transition:opacity .55s ease}
+      .hv-main.is-video-ready img{opacity:0}
+      .hv-noise{position:absolute;inset:0;z-index:2;opacity:.055;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.58'/%3E%3C/svg%3E")}
+      .hv-topline{position:absolute;z-index:4;top:18px;left:18px;right:18px;display:flex;align-items:center;justify-content:space-between;gap:10px}
+      .hv-chip{display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border-radius:99px;background:rgba(17,17,17,.50);
+        backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.20);color:#fff;font:700 9px/1 var(--font-sans,Arial,sans-serif);
+        letter-spacing:.12em;text-transform:uppercase}
+      .hv-chip--light{background:rgba(255,255,255,.84);color:#29231f;border-color:rgba(255,255,255,.75)}
+      .hv-bottom{position:absolute;z-index:4;left:20px;right:20px;bottom:20px;color:#fff}
+      .hv-eyebrow{font:700 9px/1.3 var(--font-sans,Arial,sans-serif);letter-spacing:.17em;text-transform:uppercase;color:#e9d3bd;margin-bottom:7px}
+      .hv-title{font:500 clamp(22px,3vw,29px)/1.02 var(--font-serif,Georgia,serif);letter-spacing:-.02em;text-shadow:0 2px 15px rgba(0,0,0,.20)}
+      .hv-watch{display:flex;align-items:center;gap:9px;margin-top:13px;font:700 10px/1.2 var(--font-sans,Arial,sans-serif);
+        letter-spacing:.08em;text-transform:uppercase;color:#f7f2ec}
+      .hv-play{width:36px;height:36px;border-radius:99px;display:grid;place-items:center;background:#fff;color:#161412;
+        box-shadow:0 8px 25px rgba(0,0,0,.22);transition:transform .25s ease,background .25s ease}
+      .hv-play svg{width:17px;height:17px;margin-left:1px}
+      .hv-main:hover .hv-play,.hv-mini:hover .hv-play{transform:scale(1.08);background:#f2e5d8}
+      .hv-mini{position:absolute;z-index:7;right:-2px;bottom:2px;width:148px;aspect-ratio:9/15;border-radius:23px;overflow:hidden;
+        background:#191817;border:5px solid #faf8f5;box-shadow:0 24px 55px rgba(22,14,10,.24);cursor:pointer;
+        transform:rotate(2.25deg);transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s ease}
+      .hv-mini:hover{transform:rotate(0deg) translateY(-5px);box-shadow:0 30px 70px rgba(22,14,10,.28)}
+      .hv-mini-info{position:absolute;z-index:4;left:12px;right:12px;bottom:13px;color:white}
+      .hv-mini-info .hv-play{width:30px;height:30px;margin-bottom:8px}
+      .hv-mini-info .hv-play svg{width:14px;height:14px}
+      .hv-mini-label{font:700 8px/1.2 var(--font-sans,Arial,sans-serif);letter-spacing:.12em;text-transform:uppercase;color:#ecd7c3}
+      .hv-mini-title{font:600 15px/1.04 var(--font-serif,Georgia,serif);margin-top:4px}
+      .hv-stage-caption{display:flex;align-items:center;gap:8px;margin:16px 0 0 9px;color:#777068;font:600 10px/1.3 var(--font-sans,Arial,sans-serif)}
+      .hv-stage-caption svg{width:14px;height:14px;color:#8e6547}
+      .hv-loader{position:absolute;z-index:5;inset:0;display:grid;place-items:center;opacity:0;pointer-events:none;background:rgba(18,16,15,.10);
+        backdrop-filter:blur(1px);transition:opacity .2s ease}
+      .hv-main.is-loading .hv-loader{opacity:1}
+      .hv-spinner{width:28px;height:28px;border-radius:50%;border:2px solid rgba(255,255,255,.36);border-top-color:#fff;animation:hv-spin .8s linear infinite}
+      @keyframes hv-spin{to{transform:rotate(360deg)}}
+      .hv-modal{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:22px;background:rgba(12,11,10,.88);
+        backdrop-filter:blur(18px);opacity:0;visibility:hidden;transition:opacity .28s ease,visibility .28s ease}
+      .hv-modal.is-open{opacity:1;visibility:visible}
+      .hv-modal-shell{position:relative;width:min(94vw,430px);max-height:92vh;display:flex;flex-direction:column;align-items:stretch}
+      .hv-modal-video-wrap{position:relative;width:100%;aspect-ratio:9/16;max-height:82vh;border-radius:28px;overflow:hidden;background:#000;
+        border:1px solid rgba(255,255,255,.18);box-shadow:0 40px 120px rgba(0,0,0,.55)}
+      .hv-modal video{width:100%;height:100%;object-fit:contain;background:#000}
+      .hv-close{position:absolute;z-index:4;top:-13px;right:-13px;width:43px;height:43px;border:0;border-radius:99px;background:#faf8f5;color:#161412;
+        display:grid;place-items:center;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.30)}
+      .hv-close svg{width:19px;height:19px}
+      .hv-modal-copy{display:flex;justify-content:space-between;gap:14px;align-items:center;padding:14px 5px 0;color:#fff}
+      .hv-modal-copy strong{display:block;font:600 18px/1.05 var(--font-serif,Georgia,serif)}
+      .hv-modal-copy span{display:block;margin-top:4px;color:#bbb5ae;font:600 9px/1.3 var(--font-sans,Arial,sans-serif);letter-spacing:.12em;text-transform:uppercase}
+      .hv-modal-cta{flex:0 0 auto;text-decoration:none;color:#171514;background:#f4e7da;padding:10px 13px;border-radius:99px;
+        font:800 9px/1 var(--font-sans,Arial,sans-serif);letter-spacing:.10em;text-transform:uppercase}
+      body.hv-modal-lock{overflow:hidden}
+      @media(max-width:1023px){
+        .hv-stage{max-width:430px;margin-top:10px}
+        .hv-main{width:min(88%,340px)}
+        .hv-mini{right:1%;bottom:4px}
+      }
+      @media(max-width:520px){
+        .hv-stage{padding:12px 8px 28px}
+        .hv-stage::after{border-radius:30px}
+        .hv-main{width:82%;margin-left:4%;border-radius:25px;aspect-ratio:9/15.4}
+        .hv-mini{width:35%;right:1%;bottom:8px;border-width:4px;border-radius:20px}
+        .hv-kicker{margin-inline:7px}
+        .hv-kicker-note{display:none}
+        .hv-title{font-size:23px}
+        .hv-bottom{left:16px;right:16px;bottom:17px}
+        .hv-stage-caption{margin-left:10px;font-size:9px;max-width:68%}
+      }
+      @media(prefers-reduced-motion:reduce){
+        .hv-mini,.hv-play{transition:none!important}
+        .hv-spinner{animation:none!important}
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  function createModal() {
+    const modal = document.createElement('div');
+    modal.className = 'hv-modal';
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Vídeo de Helena Ávila');
+    modal.innerHTML = `
+      <div class="hv-modal-shell">
+        <div class="hv-modal-video-wrap">
+          <button class="hv-close" type="button" aria-label="Fechar vídeo">${iconClose()}</button>
+          <video controls playsinline preload="metadata"></video>
+        </div>
+        <div class="hv-modal-copy">
+          <div><strong></strong><span>Helena Ávila · Psicoterapia Integrativa</span></div>
+          <a class="hv-modal-cta" href="https://wa.me/5511945035218?text=Ol%C3%A1%2C%20Helena.%20Vi%20seus%20v%C3%ADdeos%20no%20site%20e%20gostaria%20de%20conversar%20sobre%20uma%20sess%C3%A3o." target="_blank" rel="noopener">Conversar</a>
+        </div>
+      </div>`;
+    document.body.appendChild(modal);
+
+    const video = modal.querySelector('video');
+    const title = modal.querySelector('strong');
+    const closeButton = modal.querySelector('.hv-close');
+
+    function close() {
+      video.pause();
+      modal.classList.remove('is-open');
+      document.body.classList.remove('hv-modal-lock');
     }
-
-    navLinks.forEach(link => {
-        link.addEventListener('click', closeMobileMenu);
+    closeButton.addEventListener('click', close);
+    modal.addEventListener('click', event => {
+      if (event.target === modal) close();
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && modal.classList.contains('is-open')) close();
     });
 
-    // --- Top Reading Progress Bar & Header Blur on Scroll ---
-    const topProgressBar = document.getElementById('topProgressBar');
-    const header = document.getElementById('header');
-    window.addEventListener('scroll', () => {
-        if (topProgressBar) {
-            const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-            const progress = totalHeight > 0 ? (window.scrollY / totalHeight) * 100 : 0;
-            topProgressBar.style.width = `${progress}%`;
+    return {
+      async open(key) {
+        const source = VIDEO_SOURCES[key];
+        title.textContent = source.title;
+        modal.classList.add('is-open');
+        document.body.classList.add('hv-modal-lock');
+        try {
+          const url = await buildVideoUrl(key);
+          if (video.src !== url) video.src = url;
+          video.muted = false;
+          await video.play().catch(() => {});
+        } catch (error) {
+          console.error('[Helena Video]', error);
         }
-        if (header) {
-            if (window.scrollY > 30) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        }
-    }, { passive: true });
-
-    // --- Spotlight Cards Mouse Follow Effect (Ellen Folly Signature) ---
-    const spotlightCards = document.querySelectorAll('.spotlight-card, .specialty-card, .treatment-card, .method-card, .review-card, .luxury-card');
-    spotlightCards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            card.style.setProperty('--mouse-x', `${x}px`);
-            card.style.setProperty('--mouse-y', `${y}px`);
-        });
-    });
-
-    // --- FAQ Accordion Interactivity with ARIA ---
-    const faqItems = document.querySelectorAll('.faq-item');
-    faqItems.forEach(item => {
-        const questionBtn = item.querySelector('.faq-question');
-        if (questionBtn) {
-            questionBtn.setAttribute('aria-expanded', item.classList.contains('active') ? 'true' : 'false');
-            questionBtn.addEventListener('click', () => {
-                const isOpen = item.classList.contains('active');
-                
-                // Close other items
-                faqItems.forEach(otherItem => {
-                    otherItem.classList.remove('active');
-                    const otherBtn = otherItem.querySelector('.faq-question');
-                    if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
-                });
-                
-                // Toggle current item
-                if (!isOpen) {
-                    item.classList.add('active');
-                    questionBtn.setAttribute('aria-expanded', 'true');
-                } else {
-                    questionBtn.setAttribute('aria-expanded', 'false');
-                }
-            });
-        }
-    });
-
-    // --- Automatic Phone / WhatsApp Mask: (XX) XXXXX-XXXX ---
-    const phoneInput = document.getElementById('telefone');
-    if (phoneInput) {
-        phoneInput.addEventListener('input', (e) => {
-            let val = e.target.value.replace(/\D/g, '');
-            if (val.length > 11) val = val.substring(0, 11);
-            if (val.length > 6) {
-                val = `(${val.substring(0, 2)}) ${val.substring(2, 7)}-${val.substring(7)}`;
-            } else if (val.length > 2) {
-                val = `(${val.substring(0, 2)}) ${val.substring(2)}`;
-            } else if (val.length > 0) {
-                val = `(${val}`;
-            }
-            e.target.value = val;
-        });
-    }
-
-    // --- High-Conversion Form to WhatsApp Redirect ---
-    const contactForm = document.getElementById('contactForm');
-    if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const formData = new FormData(contactForm);
-            const nome = formData.get('nome');
-            const email = formData.get('email');
-            const telefone = formData.get('telefone');
-            const mensagem = formData.get('mensagem');
-
-            // Format message for WhatsApp
-            const text = `Olá Helena, meu nome é *${nome}*.\n\n*E-mail:* ${email}\n*Telefone:* ${telefone}\n*Mensagem:* ${mensagem}`;
-            const encodedText = encodeURIComponent(text);
-            
-            // Redirect to Helena's direct WhatsApp (using location.href to prevent popup blocking on mobile)
-            const waUrl = `https://wa.me/5511945035218?text=${encodedText}`;
-            
-            // Dispara evento de conversão do Google Ads antes do redirecionamento
-            if (typeof gtag === 'function') {
-                gtag('event', 'conversion', {
-                    'send_to': 'AW-17979954388/pxQ1CMjYrI4dENSpwf1C',
-                    'event_callback': function() {
-                        window.location.href = waUrl;
-                    },
-                    'event_timeout': 2000
-                });
-            } else {
-                window.location.href = waUrl;
-            }
-
-            contactForm.reset();
-        });
-    }
-
-    // --- Intersection Observer for Scroll Animations ---
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px 0px -50px 0px',
-        threshold: 0.1
+      }
     };
+  }
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-            }
-        });
-    }, observerOptions);
+  function createStage(modal, fallbackPoster) {
+    const stage = document.createElement('div');
+    stage.className = 'hv-stage';
+    stage.innerHTML = `
+      <div class="hv-kicker">
+        <div class="hv-kicker-left"><span class="hv-live-dot"></span><span>Conheça a Helena em vídeo</span></div>
+        <span class="hv-kicker-note">Conteúdo original · com som</span>
+      </div>
 
-    const fadeElements = document.querySelectorAll('.fade-in, .fade-in-up');
-    fadeElements.forEach(el => observer.observe(el));
+      <button class="hv-main" type="button" aria-label="Assistir vídeo: ${VIDEO_SOURCES.one.title}">
+        <img src="${fallbackPoster}" alt="Helena Ávila falando sobre saúde emocional" />
+        <video muted loop playsinline preload="none" aria-hidden="true"></video>
+        <span class="hv-noise"></span>
+        <span class="hv-topline">
+          <span class="hv-chip">Vídeo · ${VIDEO_SOURCES.one.duration}</span>
+          <span class="hv-chip hv-chip--light">Helena Ávila</span>
+        </span>
+        <span class="hv-bottom">
+          <span class="hv-eyebrow">${VIDEO_SOURCES.one.eyebrow}</span>
+          <span class="hv-title">${VIDEO_SOURCES.one.title}</span>
+          <span class="hv-watch"><span class="hv-play">${iconPlay()}</span><span>Assistir com som</span></span>
+        </span>
+        <span class="hv-loader"><span class="hv-spinner"></span></span>
+      </button>
 
-    // --- Testimonials Carousel Slider Interactivity ---
-    const testimonialsSlider = document.getElementById('testimonialsSlider');
-    const prevReviewBtn = document.getElementById('prevReviewBtn');
-    const nextReviewBtn = document.getElementById('nextReviewBtn');
+      <button class="hv-mini" type="button" aria-label="Assistir vídeo: ${VIDEO_SOURCES.two.title}">
+        <img src="${fallbackPoster}" alt="Helena Ávila em uma segunda reflexão em vídeo" />
+        <span class="hv-noise"></span>
+        <span class="hv-mini-info">
+          <span class="hv-play">${iconPlay()}</span>
+          <span class="hv-mini-label">Outro vídeo · ${VIDEO_SOURCES.two.duration}</span>
+          <span class="hv-mini-title">Conflitos &amp; relações</span>
+        </span>
+      </button>
 
-    const renderReviewCard = (review, prepend = true) => {
-        const initial = review.nome.charAt(0).toUpperCase();
-        const starsString = '★'.repeat(review.nota) + '☆'.repeat(5 - review.nota);
-        
-        const card = document.createElement('div');
-        card.className = 'testimonial-card google-card fade-in-up is-visible';
-        card.innerHTML = `
-            <div class="google-card-header">
-                <div class="author-avatar-google" style="background:${review.color};">${initial}</div>
-                <div class="author-info">
-                    <strong>${review.nome}</strong>
-                    <span class="review-date">${review.date || 'Avaliação recente'}</span>
-                </div>
-                <svg class="google-g-icon" width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
-            </div>
-            <div class="stars-gold mb-sm">${starsString}</div>
-            <p class="testimonial-quote">"${review.depoimento}"</p>
-        `;
-        
-        if (prepend) {
-            testimonialsSlider.insertBefore(card, testimonialsSlider.firstChild);
-        } else {
-            testimonialsSlider.appendChild(card);
+      <div class="hv-stage-caption">${iconVolume()}<span>O primeiro vídeo começa sem som. Toque para ouvir a Helena.</span></div>
+    `;
+
+    const main = stage.querySelector('.hv-main');
+    const mini = stage.querySelector('.hv-mini');
+    const preview = main.querySelector('video');
+
+    main.addEventListener('click', () => modal.open('one'));
+    mini.addEventListener('click', () => modal.open('two'));
+
+    if (!REDUCED_MOTION) {
+      const startPreview = async () => {
+        if (main.dataset.previewLoaded) return;
+        main.dataset.previewLoaded = 'true';
+        main.classList.add('is-loading');
+        try {
+          preview.src = await buildVideoUrl('one');
+          preview.muted = true;
+          preview.loop = true;
+          preview.playsInline = true;
+          await preview.play().catch(() => {});
+          main.classList.add('is-video-ready');
+        } catch (error) {
+          console.error('[Helena Video Preview]', error);
+        } finally {
+          main.classList.remove('is-loading');
         }
-    };
+      };
 
-    if (testimonialsSlider && prevReviewBtn && nextReviewBtn) {
-        prevReviewBtn.addEventListener('click', () => {
-            const cardWidth = testimonialsSlider.querySelector('.testimonial-card').offsetWidth + 32;
-            testimonialsSlider.scrollBy({ left: -cardWidth, behavior: 'smooth' });
-        });
-
-        nextReviewBtn.addEventListener('click', () => {
-            const cardWidth = testimonialsSlider.querySelector('.testimonial-card').offsetWidth + 32;
-            testimonialsSlider.scrollBy({ left: cardWidth, behavior: 'smooth' });
-        });
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(startPreview, { timeout: 1100 });
+      } else {
+        setTimeout(startPreview, 450);
+      }
     }
 
-    // =================================================================
-    // PROFESSIONAL ANIMATION ENGINE
-    // =================================================================
+    return stage;
+  }
 
-    // --- 1. Scroll Reveal com Stagger Real ---
-    const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
-    
-    if (revealElements.length > 0) {
-        const revealOptions = {
-            threshold: 0.1,
-            rootMargin: "0px 0px -60px 0px"
-        };
-        
-        const revealOnScroll = new IntersectionObserver(function(entries, observer) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, revealOptions);
-        
-        revealElements.forEach(el => {
-            revealOnScroll.observe(el);
-        });
-    }
+  function initPremiumVideoHero() {
+    const hero = document.getElementById('inicio');
+    if (!hero || document.querySelector('.hv-stage')) return;
 
-    // --- 2. Stagger automático para grids de cartões ---
-    const staggerContainers = document.querySelectorAll('.methodology-grid, .journey-steps, .faq-accordion, .videos-grid');
-    
-    staggerContainers.forEach(container => {
-        const children = container.children;
-        const staggerObserver = new IntersectionObserver(function(entries, observer) {
-            if (entries[0].isIntersecting) {
-                Array.from(children).forEach((child, index) => {
-                    child.style.opacity = '0';
-                    child.style.transform = 'translateY(30px)';
-                    child.style.transition = `all 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.12}s`;
-                    
-                    requestAnimationFrame(() => {
-                        setTimeout(() => {
-                            child.style.opacity = '1';
-                            child.style.transform = 'translateY(0)';
-                        }, 50);
-                    });
-                });
-                observer.unobserve(entries[0].target);
-            }
-        }, { threshold: 0.1 });
-        
-        staggerObserver.observe(container);
-    });
+    injectStyles();
 
-    // --- 3. Parallax suave no Hero ---
-    const heroImage = document.querySelector('.hero-image-wrapper');
-    const heroText = document.querySelector('.hero-text');
-    
-    if (heroImage && heroText) {
-        let ticking = false;
-        window.addEventListener('scroll', function() {
-            if (!ticking) {
-                requestAnimationFrame(function() {
-                    const scrollY = window.scrollY;
-                    if (scrollY < 800) {
-                        heroImage.style.transform = `translateY(${scrollY * 0.04}px)`;
-                        heroText.style.transform = `translateY(${scrollY * 0.02}px)`;
-                    }
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        });
-    }
+    // The current homepage hero has a direct grid with text in the first column
+    // and Helena's editorial portrait in the second. Replace only that visual
+    // column, leaving all copy, authority metrics, CTAs, analytics and SEO intact.
+    const heroGrid = hero.querySelector('.site-container > .grid');
+    if (!heroGrid || heroGrid.children.length < 2) return;
+    const visualColumn = heroGrid.children[1];
+    const existingPortrait = visualColumn.querySelector('img');
+    const fallbackPoster = existingPortrait ? (existingPortrait.currentSrc || existingPortrait.src) : '';
 
-    // --- 4. Smooth reveal para links de navegação (scroll suave refinado) ---
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                e.preventDefault();
-                const headerHeight = document.querySelector('.header').offsetHeight;
-                const targetPos = target.getBoundingClientRect().top + window.scrollY - headerHeight - 20;
-                
-                window.scrollTo({
-                    top: targetPos,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
+    const modal = createModal();
+    const stage = createStage(modal, fallbackPoster);
 
-    // --- 6. Hover tilt sutil nos cartões (efeito 3D leve) ---
-    const tiltCards = document.querySelectorAll('.method-card, .video-card, .floating-card');
-    
-    tiltCards.forEach(card => {
-        card.addEventListener('mousemove', function(e) {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            const rotateX = (y - centerY) / centerY * -2;
-            const rotateY = (x - centerX) / centerX * 2;
-            
-            card.style.transform = `translateY(-8px) perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            card.style.transform = 'translateY(0) perspective(1000px) rotateX(0) rotateY(0)';
-        });
-    });
+    visualColumn.innerHTML = '';
+    visualColumn.classList.add('hv-video-column');
+    visualColumn.appendChild(stage);
+  }
 
-    // --- 6. Lógica do Carrossel de Credenciais ---
-    const credSlider = document.getElementById('credentialsSlider');
-    const credPrevBtn = document.getElementById('credPrevBtn');
-    const credNextBtn = document.getElementById('credNextBtn');
-
-    if (credSlider && credPrevBtn && credNextBtn) {
-        credPrevBtn.addEventListener('click', () => {
-            const cardWidth = credSlider.querySelector('.credential-card').offsetWidth + 24;
-            credSlider.scrollBy({ left: -cardWidth, behavior: 'smooth' });
-        });
-        credNextBtn.addEventListener('click', () => {
-            const cardWidth = credSlider.querySelector('.credential-card').offsetWidth + 24;
-            credSlider.scrollBy({ left: cardWidth, behavior: 'smooth' });
-        });
-    }
-
-    // --- 8. Lógica do Carrossel de Metodologia (Mobile) ---
-    const methodSlider = document.getElementById('methodologyGrid');
-    const methodPrevBtn = document.getElementById('methodPrevBtn');
-    const methodNextBtn = document.getElementById('methodNextBtn');
-
-    if (methodSlider && methodPrevBtn && methodNextBtn) {
-        methodPrevBtn.addEventListener('click', () => {
-            const cardWidth = methodSlider.querySelector('.method-card').offsetWidth + 20;
-            methodSlider.scrollBy({ left: -cardWidth, behavior: 'smooth' });
-        });
-        methodNextBtn.addEventListener('click', () => {
-            const cardWidth = methodSlider.querySelector('.method-card').offsetWidth + 20;
-            methodSlider.scrollBy({ left: cardWidth, behavior: 'smooth' });
-        });
-    }
-
-    // --- 9. Modal Lightbox de Vídeos do YouTube ---
-    const videoCards = document.querySelectorAll('.video-card[data-video-id]');
-    const videoModal = document.getElementById('videoModal');
-    const videoModalIframe = document.getElementById('videoModalIframe');
-    const videoModalClose = document.getElementById('videoModalClose');
-    const videoModalBackdrop = document.getElementById('videoModalBackdrop');
-
-    if (videoModal && videoCards.length > 0) {
-        function closeVideoModal() {
-            videoModal.classList.remove('active');
-            videoModal.setAttribute('aria-hidden', 'true');
-            if (videoModalIframe) videoModalIframe.src = '';
-        }
-
-        videoCards.forEach(card => {
-            card.addEventListener('click', (e) => {
-                e.preventDefault();
-                const videoId = card.getAttribute('data-video-id');
-                if (videoId && videoModalIframe) {
-                    videoModalIframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0`;
-                    videoModal.classList.add('active');
-                    videoModal.setAttribute('aria-hidden', 'false');
-                }
-            });
-        });
-
-        if (videoModalClose) videoModalClose.addEventListener('click', closeVideoModal);
-        if (videoModalBackdrop) videoModalBackdrop.addEventListener('click', closeVideoModal);
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && videoModal.classList.contains('active')) {
-                closeVideoModal();
-            }
-        });
-    }
-
-    // --- 10. Analytics & Tracking Integral de Visitantes (Kuboweb) ---
-    function sendKubowebConsent(granted) {
-        if (window.kuboweb && typeof window.kuboweb.consent === 'function') {
-            window.kuboweb.consent(granted);
-        } else {
-            let attempts = 0;
-            const interval = setInterval(() => {
-                attempts++;
-                if (window.kuboweb && typeof window.kuboweb.consent === 'function') {
-                    window.kuboweb.consent(granted);
-                    clearInterval(interval);
-                } else if (attempts > 30) {
-                    clearInterval(interval);
-                }
-            }, 150);
-        }
-    }
-
-    // Coleta total de dados e métricas para identificar visitantes com potencial
-    sendKubowebConsent(true);
-
-    // --- 11. Feed Dinâmico & Luxuoso de Reels do Instagram (@psihelenaavila) ---
-    const instaGrid = document.getElementById('instagramFeedGrid');
-    if (instaGrid) {
-        const BEHOLD_FEED_URL = 'https://feeds.behold.so/oPeaUWUGBRU0YXSGihg0';
-
-        function sanitizeText(str) {
-            if (!str) return '';
-            const temp = document.createElement('div');
-            temp.textContent = str;
-            return temp.innerHTML;
-        }
-
-        fetch(BEHOLD_FEED_URL)
-            .then(res => {
-                if (!res.ok) throw new Error('HTTP error ' + res.status);
-                return res.json();
-            })
-            .then(data => {
-                if (!data || !data.posts || data.posts.length === 0) return;
-
-                const cardsHtml = data.posts.slice(0, 6).map((post, idx) => {
-                    const rawCaption = post.prunedCaption || post.caption || '';
-                    const lines = rawCaption.split('\n').map(l => l.trim()).filter(Boolean);
-
-                    // Título editorial limpo extraído do início da legenda
-                    let title = lines[0] || 'Reflexão Clínica';
-                    if (title.length > 80) {
-                        title = title.slice(0, 78) + '...';
-                    }
-
-                    // Resumo explicativo da reflexão clínica
-                    let desc = '';
-                    for (let i = 1; i < lines.length; i++) {
-                        const line = lines[i];
-                        if (!line.startsWith('#') && !line.startsWith('http') && line.length > 15) {
-                            desc = line;
-                            break;
-                        }
-                    }
-                    if (!desc && lines.length > 1) desc = lines[1];
-                    if (desc.length > 115) desc = desc.slice(0, 112) + '...';
-
-                    // Categoria temática
-                    let category = 'Saúde Mental & Emoções';
-                    if (post.hashtags && post.hashtags.length > 0) {
-                        const h = post.hashtags[0].toLowerCase();
-                        if (h.includes('casal')) category = 'Terapia de Casal';
-                        else if (h.includes('auto')) category = 'Autoconhecimento';
-                        else if (h.includes('mente') || h.includes('saude')) category = 'Saúde Mental & Emoções';
-                        else if (h.includes('psico')) category = 'Psicanálise Clínica';
-                        else category = post.hashtags[0].replace(/^#/, '');
-                    } else if (post.mediaType === 'VIDEO') {
-                        category = 'Reel Clínico';
-                    }
-
-                    const isVideo = post.mediaType === 'VIDEO';
-                    const typeBadgeLabel = isVideo ? 'Reel' : 'Carrossel';
-                    const typeBadgeIcon = isVideo
-                        ? '<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>'
-                        : '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>';
-
-                    const thumbUrl = (post.sizes && post.sizes.medium && post.sizes.medium.mediaUrl)
-                        || post.thumbnailUrl
-                        || post.mediaUrl;
-
-                    return `
-                        <a href="${post.permalink}" target="_blank" rel="noopener noreferrer" class="insta-luxury-card" style="animation-delay: ${idx * 0.09}s;" aria-label="Ver no Instagram: ${sanitizeText(title)}">
-                            <div class="insta-card-media">
-                                <img src="${thumbUrl}" alt="${sanitizeText(title)}" class="insta-card-img" loading="lazy" decoding="async">
-                                <span class="insta-type-badge">${typeBadgeIcon} ${typeBadgeLabel}</span>
-                                <div class="insta-card-overlay">
-                                    <div class="insta-play-btn" title="Assistir no Instagram">
-                                        <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="insta-card-body">
-                                <span class="insta-card-category">${sanitizeText(category)}</span>
-                                <h3 class="insta-card-title">${sanitizeText(title)}</h3>
-                                <p class="insta-card-desc">${sanitizeText(desc)}</p>
-                                <div class="insta-card-footer">
-                                    <div class="insta-profile-tag">
-                                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
-                                        <span>@psihelenaavila</span>
-                                    </div>
-                                    <span class="insta-cta-link">
-                                        <span>${isVideo ? 'Assistir Reel' : 'Ver Post'}</span>
-                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                                    </span>
-                                </div>
-                            </div>
-                        </a>
-                    `;
-                }).join('');
-
-                instaGrid.innerHTML = cardsHtml;
-            })
-            .catch(err => {
-                console.warn('Could not load custom Instagram feed:', err);
-            });
-    }
-
-    // --- Google Ads Conversion Tracking (WhatsApp Clicks) ---
-    // Intercepta cliques em botões do WhatsApp para registrar conversão
-    document.addEventListener('click', function(e) {
-        const anchor = e.target.closest('a');
-        if (!anchor) return;
-        
-        const href = anchor.getAttribute('href') || '';
-        if (href.includes('wa.me/')) {
-            if (typeof gtag === 'function') {
-                const isNewTab = anchor.getAttribute('target') === '_blank';
-                
-                if (isNewTab) {
-                    // Para links que abrem em nova aba, a página atual não é fechada,
-                    // então podemos enviar o evento normalmente sem atrasar o clique.
-                    gtag('event', 'conversion', {
-                        'send_to': 'AW-17979954388/pxQ1CMjYrI4dENSpwf1C'
-                    });
-                } else {
-                    // Para links na mesma aba, atrasamos o redirecionamento
-                    // para garantir que o evento seja disparado antes de sair da página.
-                    e.preventDefault();
-                    var callback = function () {
-                        window.location = href;
-                    };
-                    gtag('event', 'conversion', {
-                        'send_to': 'AW-17979954388/pxQ1CMjYrI4dENSpwf1C',
-                        'event_callback': callback,
-                        'event_timeout': 2000
-                    });
-                }
-            }
-        }
-    });
-
-});
+  document.addEventListener('DOMContentLoaded', initPremiumVideoHero, { once: true });
+})();

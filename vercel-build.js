@@ -18,14 +18,17 @@ function buildMp4(name, partCount) {
   const targetDir = path.join(out, 'assets', 'videos');
   fs.mkdirSync(targetDir, { recursive: true });
 
-  let encoded = '';
+  const buffers = [];
   for (let i = 1; i <= partCount; i += 1) {
     const part = path.join(sourceDir, `${name}.part${String(i).padStart(2, '0')}.txt`);
     if (!fs.existsSync(part)) throw new Error(`Parte de vídeo ausente: ${part}`);
-    encoded += fs.readFileSync(part, 'utf8').replace(/\s+/g, '');
+    const encoded = fs.readFileSync(part, 'utf8').replace(/\s+/g, '');
+    const decoded = Buffer.from(encoded, 'base64');
+    if (!decoded.length) throw new Error(`Parte de vídeo vazia ou inválida: ${part}`);
+    buffers.push(decoded);
   }
 
-  const buffer = Buffer.from(encoded, 'base64');
+  const buffer = Buffer.concat(buffers);
   if (buffer.length < 1024 || buffer.subarray(4, 8).toString('ascii') !== 'ftyp') {
     throw new Error(`MP4 inválido gerado para ${name}`);
   }

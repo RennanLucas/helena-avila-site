@@ -5,7 +5,7 @@
 
   // Keep all original site behavior intact. This script is parser-inserted at the end
   // of the page, so document.write loads the preserved original synchronously.
-  document.write('<script src="script-original.js?v=18"><\/script>');
+  if (!document.getElementById('inicio')) { document.write('<script src="script-original.js?v=18"><\/script>'); }
 
   const REDUCED_MOTION = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 

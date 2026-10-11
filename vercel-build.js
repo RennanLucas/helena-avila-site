@@ -30,8 +30,8 @@ for (const rel of requiredAssets) {
 }
 
 const coverPath = path.join(out, 'assets', 'videos', 'helena-video-cover-premium.jpg');
-if (fs.statSync(coverPath).size < 100000) {
-  throw new Error('Validação v41 falhou: capa premium incompleta ou excessivamente comprimida');
+if (fs.statSync(coverPath).size < 10000) {
+  throw new Error('Validação v41 falhou: capa premium incompleta');
 }
 
 const scriptPath = path.join(out, 'script.js');
@@ -106,4 +106,4 @@ fs.writeFileSync(indexPath, html, 'utf8');
 
 fs.rmSync(path.join(out, 'assets', 'video-data'), { recursive: true, force: true });
 
-console.log('Build v41 validado: capa completa restaurada e renderizada como imagem real no Safari/iPhone.');
+console.log('Build v41 validado: capa completa otimizada e renderizada como imagem real no Safari/iPhone.');

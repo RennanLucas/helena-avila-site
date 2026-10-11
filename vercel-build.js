@@ -17,7 +17,7 @@ for (const name of fs.readdirSync(root)) {
 const requiredAssets = [
   'assets/videos/helena-video-01.mp4',
   'assets/videos/helena-video-02.mp4',
-  'assets/videos/helena-video-01-cover.jpg',
+  'assets/helena-sobre.jpg',
   'assets/helena-portrait.jpg'
 ];
 
@@ -33,12 +33,15 @@ if (!fs.existsSync(scriptPath)) throw new Error('script.js não encontrado');
 const js = fs.readFileSync(scriptPath, 'utf8');
 
 const checks = [
+  ["premium editorial video experience v34", 'versão v34 do player'],
   ["src: 'assets/videos/helena-video-01.mp4'", 'fonte nativa do vídeo 1'],
   ["src: 'assets/videos/helena-video-02.mp4'", 'fonte nativa do vídeo 2'],
+  ["poster: 'assets/helena-sobre.jpg'", 'capa limpa do vídeo 1'],
   ["poster: 'assets/helena-portrait.jpg'", 'capa visível do vídeo 2'],
-  ['function createModal()', 'player modal'],
+  ['hv-poster-layer', 'fallback visual até o vídeo tocar'],
+  ["video.addEventListener('playing'", 'troca do poster somente após reprodução'],
   ['function createAboutVideo(modal)', 'bloco responsivo do segundo vídeo'],
-  ['hv-watermark-mask', 'máscara visual que elimina a marca do editor'],
+  ['hv-watermark-mask', 'máscara localizada da marca do editor'],
   ['@media(max-width:600px)', 'layout mobile dedicado']
 ];
 
@@ -49,7 +52,7 @@ for (const [needle, label] of checks) {
 const indexPath = path.join(out, 'index.html');
 if (!fs.existsSync(indexPath)) throw new Error('index.html não encontrado');
 let html = fs.readFileSync(indexPath, 'utf8');
-const loader = '<script src="script.js?v=31"></script>';
+const loader = '<script src="script.js?v=34"></script>';
 const loaderRegex = /<script\s+src=["']script\.js\?v=\d+["']><\/script>/g;
 if (loaderRegex.test(html)) {
   html = html.replace(loaderRegex, loader);
@@ -62,4 +65,4 @@ fs.writeFileSync(indexPath, html, 'utf8');
 // Chunks base64 legados não entram no bundle final; os MP4 nativos são servidos diretamente.
 fs.rmSync(path.join(out, 'assets', 'video-data'), { recursive: true, force: true });
 
-console.log('Build v31 validado: vídeos nativos, poster visível, mobile premium e máscara sem Descript.');
+console.log('Build v34 validado: poster fallback, vídeos nativos, responsividade e máscara localizada.');

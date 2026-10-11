@@ -1,4 +1,4 @@
-/* Helena Ávila — premium editorial video experience v31 */
+/* Helena Ávila — premium editorial video experience v32 */
 (function () {
   'use strict';
 
@@ -181,4 +181,94 @@
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
   else init();
+})();
+
+/* Helena Ávila — premium interaction engine v32 */
+(function () {
+  'use strict';
+
+  const start = () => {
+    const nav = document.getElementById('mainNav');
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const finePointer = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
+
+    /* Compact glass navigation after the first scroll. */
+    if (nav) {
+      let navTicking = false;
+      const updateNav = () => {
+        nav.classList.toggle('lux-scrolled', window.scrollY > 24);
+        navTicking = false;
+      };
+      window.addEventListener('scroll', () => {
+        if (navTicking) return;
+        navTicking = true;
+        requestAnimationFrame(updateNav);
+      }, { passive: true });
+      updateNav();
+    }
+
+    /* Active navigation follows the section in view. */
+    const navLinks = Array.from(document.querySelectorAll('#mainNav nav a[href^="#"]'));
+    const sectionPairs = navLinks.map(link => {
+      const id = link.getAttribute('href');
+      const section = id && id.length > 1 ? document.querySelector(id) : null;
+      return section ? { link, section } : null;
+    }).filter(Boolean);
+
+    if ('IntersectionObserver' in window && sectionPairs.length) {
+      const activeObserver = new IntersectionObserver(entries => {
+        const visible = entries
+          .filter(entry => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (!visible) return;
+        navLinks.forEach(link => link.classList.remove('lux-active'));
+        const pair = sectionPairs.find(item => item.section === visible.target);
+        if (pair) pair.link.classList.add('lux-active');
+      }, { rootMargin: '-26% 0px -58% 0px', threshold: [0, .08, .18, .32] });
+      sectionPairs.forEach(item => activeObserver.observe(item.section));
+    }
+
+    if (!finePointer || reducedMotion) return;
+
+    /* Subtle cinematic parallax on the hero portrait only. */
+    const heroPortrait = document.querySelector('#inicio .lg\\:col-span-5 > div:first-child');
+    if (heroPortrait) {
+      heroPortrait.classList.add('lux-hero-portrait');
+      heroPortrait.addEventListener('pointermove', event => {
+        const rect = heroPortrait.getBoundingClientRect();
+        const nx = ((event.clientX - rect.left) / rect.width) - .5;
+        const ny = ((event.clientY - rect.top) / rect.height) - .5;
+        heroPortrait.style.setProperty('--lux-rx', `${(-ny * 2.4).toFixed(2)}deg`);
+        heroPortrait.style.setProperty('--lux-ry', `${(nx * 2.8).toFixed(2)}deg`);
+        heroPortrait.style.setProperty('--lux-tx', `${(nx * 5).toFixed(2)}px`);
+        heroPortrait.style.setProperty('--lux-ty', `${(ny * 5).toFixed(2)}px`);
+      });
+      heroPortrait.addEventListener('pointerleave', () => {
+        heroPortrait.style.removeProperty('--lux-rx');
+        heroPortrait.style.removeProperty('--lux-ry');
+        heroPortrait.style.removeProperty('--lux-tx');
+        heroPortrait.style.removeProperty('--lux-ty');
+      });
+    }
+
+    /* Magnetic response for only the primary high-value CTAs. */
+    const magnetic = document.querySelectorAll('.shimmer-btn, .hv-cta, #bottomStickyBar a');
+    magnetic.forEach(element => {
+      element.classList.add('lux-magnetic');
+      element.addEventListener('pointermove', event => {
+        const rect = element.getBoundingClientRect();
+        const x = event.clientX - rect.left - rect.width / 2;
+        const y = event.clientY - rect.top - rect.height / 2;
+        element.style.setProperty('--lux-mx', `${(x * .055).toFixed(2)}px`);
+        element.style.setProperty('--lux-my', `${(y * .075).toFixed(2)}px`);
+      });
+      element.addEventListener('pointerleave', () => {
+        element.style.removeProperty('--lux-mx');
+        element.style.removeProperty('--lux-my');
+      });
+    });
+  };
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true });
+  else start();
 })();

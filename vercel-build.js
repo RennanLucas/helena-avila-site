@@ -17,7 +17,8 @@ const requiredAssets = [
   'assets/videos/helena-video-01.mp4',
   'assets/helena-sobre.jpg',
   'assets/helena-portrait.jpg',
-  'video-fix.js'
+  'video-fix.js',
+  'video-ios-guard.js'
 ];
 
 for (const rel of requiredAssets) {
@@ -42,11 +43,9 @@ const checks = [
   ["video.addEventListener('playing'", 'troca do poster após reprodução'],
   ['@media(max-width:600px)', 'layout mobile dedicado']
 ];
-
 for (const [needle, label] of checks) {
   if (!js.includes(needle)) throw new Error(`Validação falhou: ${label}`);
 }
-
 if (js.includes('helena-video-02.mp4') || js.includes('createAboutVideo')) {
   throw new Error('Validação falhou: referências ao vídeo 2 ainda existem');
 }
@@ -62,31 +61,38 @@ const fixChecks = [
   ['video.controls = false', 'remoção dos controles nativos'],
   ['height: 15%', 'faixa integral sobre a região da marca'],
   ['data-hv-clean-player', 'marcação do player v38'],
-  ['MutationObserver', 'proteção contra reconstrução do DOM'],
   ['hv-watermark-mask', 'camada de limpeza do vídeo']
 ];
 for (const [needle, label] of fixChecks) {
   if (!fixJs.includes(needle)) throw new Error(`Validação v38 falhou: ${label}`);
 }
 
+const guardPath = path.join(out, 'video-ios-guard.js');
+const guardJs = fs.readFileSync(guardPath, 'utf8');
+const guardChecks = [
+  ['iOS fullscreen guard v39', 'versão v39 do guard'],
+  ['frameFullscreenSupported', 'detecção de fullscreen do container'],
+  ['data-hv-native-fullscreen-blocked', 'bloqueio do fullscreen nativo'],
+  ['fullButton.hidden = true', 'remoção do botão inseguro no iOS']
+];
+for (const [needle, label] of guardChecks) {
+  if (!guardJs.includes(needle)) throw new Error(`Validação v39 falhou: ${label}`);
+}
+
 const indexPath = path.join(out, 'index.html');
 if (!fs.existsSync(indexPath)) throw new Error('index.html não encontrado');
 let html = fs.readFileSync(indexPath, 'utf8');
+
 const mainLoader = '<script src="script.js?v=36"></script>';
-const mainRegex = /<script\s+src=["']script\.js\?v=\d+["']><\/script>/g;
-if (mainRegex.test(html)) {
-  html = html.replace(mainRegex, mainLoader);
-} else {
-  if (!html.includes('</body>')) throw new Error('index.html sem </body>');
-  html = html.replace('</body>', `  ${mainLoader}\n</body>`);
-}
+html = html.replace(/<script\s+src=["']script\.js\?v=\d+["']><\/script>/g, mainLoader);
 
 const fixLoader = '<script src="video-fix.js?v=38"></script>';
 html = html.replace(/\s*<script\s+src=["']video-fix\.js\?v=\d+["']><\/script>/g, '');
-if (!html.includes('</body>')) throw new Error('index.html sem </body> para video-fix');
-html = html.replace('</body>', `  ${fixLoader}\n</body>`);
+html = html.replace(/\s*<script\s+src=["']video-ios-guard\.js\?v=\d+["']><\/script>/g, '');
+if (!html.includes('</body>')) throw new Error('index.html sem </body>');
+html = html.replace('</body>', `  ${fixLoader}\n  <script src="video-ios-guard.js?v=39"></script>\n</body>`);
 fs.writeFileSync(indexPath, html, 'utf8');
 
 fs.rmSync(path.join(out, 'assets', 'video-data'), { recursive: true, force: true });
 
-console.log('Build v38 validado: player próprio cobre integralmente a marca Descript sem alterar o enquadramento.');
+console.log('Build v39 validado: Descript oculto pelo player próprio e fullscreen nativo inseguro bloqueado no iOS.');

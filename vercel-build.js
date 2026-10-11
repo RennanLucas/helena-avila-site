@@ -15,6 +15,7 @@ for (const name of fs.readdirSync(root)) {
 
 const requiredAssets = [
   'assets/videos/helena-video-01.mp4',
+  'assets/videos/helena-video-cover-premium.jpg',
   'assets/helena-sobre.jpg',
   'assets/helena-portrait.jpg',
   'video-fix.js',
@@ -73,10 +74,13 @@ const guardChecks = [
   ['iOS fullscreen guard v39', 'versão v39 do guard'],
   ['frameFullscreenSupported', 'detecção de fullscreen do container'],
   ['data-hv-native-fullscreen-blocked', 'bloqueio do fullscreen nativo'],
-  ['fullButton.hidden = true', 'remoção do botão inseguro no iOS']
+  ['fullButton.hidden = true', 'remoção do botão inseguro no iOS'],
+  ['premium video cover v40', 'versão v40 da nova capa'],
+  ["CARD_COVER = 'assets/videos/helena-video-cover-premium.jpg'", 'asset da nova capa premium'],
+  ['data-hv-premium-cover', 'aplicação da capa premium no card']
 ];
 for (const [needle, label] of guardChecks) {
-  if (!guardJs.includes(needle)) throw new Error(`Validação v39 falhou: ${label}`);
+  if (!guardJs.includes(needle)) throw new Error(`Validação v40 falhou: ${label}`);
 }
 
 const indexPath = path.join(out, 'index.html');
@@ -90,9 +94,9 @@ const fixLoader = '<script src="video-fix.js?v=38"></script>';
 html = html.replace(/\s*<script\s+src=["']video-fix\.js\?v=\d+["']><\/script>/g, '');
 html = html.replace(/\s*<script\s+src=["']video-ios-guard\.js\?v=\d+["']><\/script>/g, '');
 if (!html.includes('</body>')) throw new Error('index.html sem </body>');
-html = html.replace('</body>', `  ${fixLoader}\n  <script src="video-ios-guard.js?v=39"></script>\n</body>`);
+html = html.replace('</body>', `  ${fixLoader}\n  <script src="video-ios-guard.js?v=40"></script>\n</body>`);
 fs.writeFileSync(indexPath, html, 'utf8');
 
 fs.rmSync(path.join(out, 'assets', 'video-data'), { recursive: true, force: true });
 
-console.log('Build v39 validado: Descript oculto pelo player próprio e fullscreen nativo inseguro bloqueado no iOS.');
+console.log('Build v40 validado: nova capa premium aplicada ao card do vídeo, mantendo player e proteção iOS.');

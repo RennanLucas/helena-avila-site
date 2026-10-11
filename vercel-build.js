@@ -32,7 +32,7 @@ if (!fs.existsSync(scriptPath)) throw new Error('script.js não encontrado');
 const js = fs.readFileSync(scriptPath, 'utf8');
 
 const checks = [
-  ['premium editorial video experience v36', 'versão v36 do player'],
+  ['premium editorial video experience v36', 'versão v36 do player base'],
   ["src: 'assets/videos/helena-video-01.mp4'", 'fonte nativa do vídeo principal'],
   ['hv-mobile-open', 'botão mobile dedicado'],
   ['bindMobileSafeOpen', 'tratamento de toque mobile'],
@@ -54,13 +54,19 @@ if (js.includes('helena-video-02.mp4') || js.includes('createAboutVideo')) {
 const fixPath = path.join(out, 'video-fix.js');
 const fixJs = fs.readFileSync(fixPath, 'utf8');
 const fixChecks = [
+  ['clean video player v38', 'versão v38 da correção'],
   ["CLEAN_POSTER = 'assets/helena-portrait.jpg'", 'capa limpa da Helena'],
-  ['hv-clean-poster-styles', 'estilos de limpeza visual'],
-  ['MutationObserver', 'proteção contra restauração da capa antiga'],
-  ['hv-watermark-mask', 'reforço da máscara no player']
+  ['hv-clean-player-styles', 'estilos do player limpo'],
+  ['hv-clean-controls', 'controles premium próprios'],
+  ['hv-clean-progress', 'controle de progresso'],
+  ['video.controls = false', 'remoção dos controles nativos'],
+  ['height: 15%', 'faixa integral sobre a região da marca'],
+  ['data-hv-clean-player', 'marcação do player v38'],
+  ['MutationObserver', 'proteção contra reconstrução do DOM'],
+  ['hv-watermark-mask', 'camada de limpeza do vídeo']
 ];
 for (const [needle, label] of fixChecks) {
-  if (!fixJs.includes(needle)) throw new Error(`Validação v37 falhou: ${label}`);
+  if (!fixJs.includes(needle)) throw new Error(`Validação v38 falhou: ${label}`);
 }
 
 const indexPath = path.join(out, 'index.html');
@@ -75,7 +81,7 @@ if (mainRegex.test(html)) {
   html = html.replace('</body>', `  ${mainLoader}\n</body>`);
 }
 
-const fixLoader = '<script src="video-fix.js?v=37"></script>';
+const fixLoader = '<script src="video-fix.js?v=38"></script>';
 html = html.replace(/\s*<script\s+src=["']video-fix\.js\?v=\d+["']><\/script>/g, '');
 if (!html.includes('</body>')) throw new Error('index.html sem </body> para video-fix');
 html = html.replace('</body>', `  ${fixLoader}\n</body>`);
@@ -83,4 +89,4 @@ fs.writeFileSync(indexPath, html, 'utf8');
 
 fs.rmSync(path.join(out, 'assets', 'video-data'), { recursive: true, force: true });
 
-console.log('Build v37 validado: capa limpa + proteção contra marca Descript + player mobile v36.');
+console.log('Build v38 validado: player próprio cobre integralmente a marca Descript sem alterar o enquadramento.');

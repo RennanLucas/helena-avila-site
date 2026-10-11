@@ -13,7 +13,6 @@ for (const name of fs.readdirSync(root)) {
   fs.cpSync(path.join(root, name), path.join(out, name), { recursive: true });
 }
 
-// Validação simples e determinística: apenas o vídeo principal permanece no site.
 const requiredAssets = [
   'assets/videos/helena-video-01.mp4',
   'assets/helena-sobre.jpg'
@@ -31,12 +30,15 @@ if (!fs.existsSync(scriptPath)) throw new Error('script.js não encontrado');
 const js = fs.readFileSync(scriptPath, 'utf8');
 
 const checks = [
-  ['premium editorial video experience v35', 'versão v35 do player'],
+  ['premium editorial video experience v36', 'versão v36 do player'],
   ["src: 'assets/videos/helena-video-01.mp4'", 'fonte nativa do vídeo principal'],
   ["poster: 'assets/helena-sobre.jpg'", 'capa do vídeo principal'],
-  ['hv-poster-layer', 'fallback visual até o vídeo tocar'],
-  ["video.addEventListener('playing'", 'troca do poster somente após reprodução'],
-  ['hv-watermark-mask', 'máscara localizada da marca do editor'],
+  ['hv-mobile-open', 'botão mobile dedicado'],
+  ['bindMobileSafeOpen', 'tratamento de toque mobile'],
+  ['content-visibility:visible!important', 'hit testing mobile sem content-visibility'],
+  ['webkit-playsinline', 'compatibilidade iPhone'],
+  ['hv-poster-layer', 'fallback visual do player'],
+  ["video.addEventListener('playing'", 'troca do poster após reprodução'],
   ['@media(max-width:600px)', 'layout mobile dedicado']
 ];
 
@@ -51,7 +53,7 @@ if (js.includes('helena-video-02.mp4') || js.includes('createAboutVideo')) {
 const indexPath = path.join(out, 'index.html');
 if (!fs.existsSync(indexPath)) throw new Error('index.html não encontrado');
 let html = fs.readFileSync(indexPath, 'utf8');
-const loader = '<script src="script.js?v=35"></script>';
+const loader = '<script src="script.js?v=36"></script>';
 const loaderRegex = /<script\s+src=["']script\.js\?v=\d+["']><\/script>/g;
 if (loaderRegex.test(html)) {
   html = html.replace(loaderRegex, loader);
@@ -61,7 +63,6 @@ if (loaderRegex.test(html)) {
 }
 fs.writeFileSync(indexPath, html, 'utf8');
 
-// Chunks base64 legados não entram no bundle final; o MP4 principal é servido diretamente.
 fs.rmSync(path.join(out, 'assets', 'video-data'), { recursive: true, force: true });
 
-console.log('Build v35 validado: apenas o vídeo principal permanece no site.');
+console.log('Build v36 validado: botão mobile, toque seguro e player principal.');

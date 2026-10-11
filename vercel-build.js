@@ -29,6 +29,11 @@ for (const rel of requiredAssets) {
   }
 }
 
+const coverPath = path.join(out, 'assets', 'videos', 'helena-video-cover-premium.jpg');
+if (fs.statSync(coverPath).size < 100000) {
+  throw new Error('Validação v41 falhou: capa premium incompleta ou excessivamente comprimida');
+}
+
 const scriptPath = path.join(out, 'script.js');
 if (!fs.existsSync(scriptPath)) throw new Error('script.js não encontrado');
 const js = fs.readFileSync(scriptPath, 'utf8');
@@ -75,12 +80,14 @@ const guardChecks = [
   ['frameFullscreenSupported', 'detecção de fullscreen do container'],
   ['data-hv-native-fullscreen-blocked', 'bloqueio do fullscreen nativo'],
   ['fullButton.hidden = true', 'remoção do botão inseguro no iOS'],
-  ['premium video cover v40', 'versão v40 da nova capa'],
+  ['premium video cover v41', 'versão v41 da nova capa'],
   ["CARD_COVER = 'assets/videos/helena-video-cover-premium.jpg'", 'asset da nova capa premium'],
-  ['data-hv-premium-cover', 'aplicação da capa premium no card']
+  ['CARD_COVER_VERSIONED', 'cache-bust da capa no Safari'],
+  ['data-hv-premium-cover', 'aplicação da capa premium no card'],
+  ['object-fit: cover', 'renderização da capa como imagem real']
 ];
 for (const [needle, label] of guardChecks) {
-  if (!guardJs.includes(needle)) throw new Error(`Validação v40 falhou: ${label}`);
+  if (!guardJs.includes(needle)) throw new Error(`Validação v41 falhou: ${label}`);
 }
 
 const indexPath = path.join(out, 'index.html');
@@ -94,9 +101,9 @@ const fixLoader = '<script src="video-fix.js?v=38"></script>';
 html = html.replace(/\s*<script\s+src=["']video-fix\.js\?v=\d+["']><\/script>/g, '');
 html = html.replace(/\s*<script\s+src=["']video-ios-guard\.js\?v=\d+["']><\/script>/g, '');
 if (!html.includes('</body>')) throw new Error('index.html sem </body>');
-html = html.replace('</body>', `  ${fixLoader}\n  <script src="video-ios-guard.js?v=40"></script>\n</body>`);
+html = html.replace('</body>', `  ${fixLoader}\n  <script src="video-ios-guard.js?v=41"></script>\n</body>`);
 fs.writeFileSync(indexPath, html, 'utf8');
 
 fs.rmSync(path.join(out, 'assets', 'video-data'), { recursive: true, force: true });
 
-console.log('Build v40 validado: nova capa premium aplicada ao card do vídeo, mantendo player e proteção iOS.');
+console.log('Build v41 validado: capa completa restaurada e renderizada como imagem real no Safari/iPhone.');

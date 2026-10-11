@@ -1,0 +1,44 @@
+name: Replace site video
+
+on:
+  push:
+    branches:
+      - fix/video-ios-guard-v39
+
+permissions:
+  contents: write
+
+jobs:
+  replace-video:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    env:
+      VIDEO_URL: "https://media.descriptusercontent.com/v2/proxy/remux?url=https%3A%2F%2Fapi.descript.com%2Fv2%2Fpublished_projects%2Fa62ad842-5b87-493c-9d09-e25160f49f8f%2Fhls%3Fexpiration%3D1791845999226%26signature%3D1a9c95336671db234ee8c4eaf4151c210b3938a366ba27e33b8a85f5836567bb&filename=V+deo+do+site.mp4&mediaCacheBucketName=production-273614-media-cache&expiration=1791842399&signature=820a7668ec6ee62a6f2d00c3d705ab6ad5d15a006cfa03b58f3a8a12ed757968"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download replacement video
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets/videos
+          curl --location --fail --retry 3 --retry-delay 2 "$VIDEO_URL" --output assets/videos/helena-video-01.mp4
+          size=$(stat -c%s assets/videos/helena-video-01.mp4)
+          echo "Downloaded bytes: $size"
+          test "$size" -gt 1000000
+          ffprobe -v error -show_entries format=duration,size -show_entries stream=codec_name,codec_type,width,height,r_frame_rate -of json assets/videos/helena-video-01.mp4
+
+      - name: Commit replacement
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/videos/helena-video-01.mp4
+          if git diff --cached --quiet; then
+            echo "Video is already current."
+            exit 0
+          fi
+          git commit -m "chore: replace site video with uploaded MP4"
+          git push origin "HEAD:${GITHUB_REF_NAME}"

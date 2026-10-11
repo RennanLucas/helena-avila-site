@@ -38,26 +38,32 @@
   else document.addEventListener('DOMContentLoaded', start, { once: true });
 })();
 
-/* Helena Ávila — premium video cover v40 */
+/* Helena Ávila — premium video cover v41 — Safari/iPhone safe */
 (function () {
   'use strict';
 
   const CARD_COVER = 'assets/videos/helena-video-cover-premium.jpg';
+  const CARD_COVER_VERSIONED = CARD_COVER + '?v=41';
 
   function ensureCoverStyles() {
-    if (document.getElementById('hv-premium-cover-v40')) return;
+    if (document.getElementById('hv-premium-cover-v41')) return;
     const style = document.createElement('style');
-    style.id = 'hv-premium-cover-v40';
+    style.id = 'hv-premium-cover-v41';
     style.textContent = `
       .hv-card {
-        background-image: url('${CARD_COVER}') !important;
-        background-size: cover !important;
-        background-position: center center !important;
-        background-repeat: no-repeat !important;
+        background: #171719 !important;
+        background-image: none !important;
       }
       .hv-card > img {
-        opacity: 0 !important;
-        visibility: hidden !important;
+        display: block !important;
+        width: 100% !important;
+        height: 100% !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        object-fit: cover !important;
+        object-position: center center !important;
+        transform: translateZ(0);
+        -webkit-transform: translateZ(0);
       }
       .hv-card::before,
       .hv-card::after,
@@ -65,13 +71,8 @@
       .hv-card-bottom {
         display: none !important;
       }
-      .hv-card[data-hv-premium-cover="v40"] {
+      .hv-card[data-hv-premium-cover="v41"] {
         box-shadow: 0 34px 80px rgba(40,27,18,.20) !important;
-      }
-      @media (max-width: 600px) {
-        .hv-card {
-          background-position: center center !important;
-        }
       }
     `;
     document.head.appendChild(style);
@@ -81,8 +82,22 @@
     ensureCoverStyles();
     const card = document.querySelector('.hv-card');
     if (!card) return false;
-    card.setAttribute('data-hv-premium-cover', 'v40');
+
+    const image = card.querySelector(':scope > img') || card.querySelector('img');
+    if (!image) return false;
+
+    card.setAttribute('data-hv-premium-cover', 'v41');
     card.setAttribute('aria-label', 'Assistir vídeo de Helena Ávila');
+
+    image.removeAttribute('loading');
+    image.loading = 'eager';
+    image.decoding = 'async';
+    image.alt = 'Helena Ávila — apresentação em vídeo';
+
+    if (!image.src.includes('helena-video-cover-premium.jpg') || !image.src.includes('v=41')) {
+      image.src = CARD_COVER_VERSIONED;
+    }
+
     return true;
   }
 

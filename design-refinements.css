@@ -54,7 +54,7 @@ section[id]{scroll-margin-top:94px}
   contain-intrinsic-size:900px;
 }
 
-body>div:first-of-type.bg-\[\#151619\]{
+body>.bg-\[\#151619\]{
   background:linear-gradient(90deg,#111214 0%,#181719 48%,#111214 100%)!important;
   border-bottom-color:rgba(255,255,255,.075)!important;
   box-shadow:0 1px 0 rgba(197,160,89,.08) inset;
@@ -201,7 +201,6 @@ body>div:first-of-type.bg-\[\#151619\]{
   will-change:transform;
 }
 
-/* ===== BUTTON SYSTEM ===== */
 a[class*="bg-[#151619]"],button[class*="bg-[#151619]"]{
   border:1px solid rgba(255,255,255,.06)!important;
   box-shadow:0 10px 28px rgba(21,22,25,.18),inset 0 1px 0 rgba(255,255,255,.09)!important;

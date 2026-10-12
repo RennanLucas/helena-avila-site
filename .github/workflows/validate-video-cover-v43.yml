@@ -1,0 +1,31 @@
+name: Validate video cover v43
+
+on:
+  push:
+    branches:
+      - fix/video-cover-v43
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          persist-credentials: false
+      - name: Validate Vercel build output
+        run: node vercel-build.js
+      - name: Check v43 output markers
+        run: |
+          grep -q 'video-fix.js?v=43' public/index.html
+          grep -q 'video-ios-guard.js?v=43' public/index.html
+          grep -q "CLEAN_POSTER = 'assets/videos/helena-video-cover-premium.jpg?v=43'" public/video-fix.js
+          grep -q "scope.querySelectorAll('.hv-poster-layer img')" public/video-fix.js
+          if grep -q "scope.querySelectorAll('.hv-card img, .hv-poster-layer img')" public/video-fix.js; then
+            echo 'v38 ainda sobrescreve o card'
+            exit 1
+          fi
+          grep -q "CARD_COVER_VERSIONED = CARD_COVER + '?v=43'" public/video-ios-guard.js

@@ -1,4 +1,4 @@
-/* Helena Ávila — iOS fullscreen guard v39 */
+/* Helena Ávila — iOS fullscreen guard v45 */
 (function () {
   'use strict';
 
@@ -38,32 +38,34 @@
   else document.addEventListener('DOMContentLoaded', start, { once: true });
 })();
 
-/* Helena Ávila — premium video cover v42 — Safari/iPhone safe */
+/* Helena Ávila — premium video cover v45 — Safari/iPhone safe.
+ * A capa é renderizada como background do card, e não como <img>.
+ * Isso elimina o ícone azul de imagem quebrada que o Safari estava exibindo.
+ */
 (function () {
   'use strict';
 
   const CARD_COVER = 'assets/videos/helena-video-cover-premium.jpg';
-  const CARD_COVER_VERSIONED = CARD_COVER + '?v=42';
+  const CARD_COVER_VERSIONED = CARD_COVER + '?v=45';
 
   function ensureCoverStyles() {
-    if (document.getElementById('hv-premium-cover-v42')) return;
+    if (document.getElementById('hv-premium-cover-v45')) return;
     const style = document.createElement('style');
-    style.id = 'hv-premium-cover-v42';
+    style.id = 'hv-premium-cover-v45';
     style.textContent = `
       .hv-card {
-        background: #171719 !important;
-        background-image: none !important;
+        background-color: #171719 !important;
+        background-image: url("${CARD_COVER_VERSIONED}") !important;
+        background-repeat: no-repeat !important;
+        background-position: center center !important;
+        background-size: cover !important;
+        -webkit-background-size: cover !important;
       }
-      .hv-card > img {
-        display: block !important;
-        width: 100% !important;
-        height: 100% !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-        object-fit: cover !important;
-        object-position: center center !important;
-        transform: translateZ(0);
-        -webkit-transform: translateZ(0);
+      .hv-card > img,
+      .hv-card > picture {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
       }
       .hv-card::before,
       .hv-card::after,
@@ -71,7 +73,7 @@
       .hv-card-bottom {
         display: none !important;
       }
-      .hv-card[data-hv-premium-cover="v42"] {
+      .hv-card[data-hv-premium-cover="v45"] {
         box-shadow: 0 34px 80px rgba(40,27,18,.20) !important;
       }
     `;
@@ -83,29 +85,26 @@
     const card = document.querySelector('.hv-card');
     if (!card) return false;
 
-    const image = card.querySelector(':scope > img') || card.querySelector('img');
-    if (!image) return false;
-
-    card.setAttribute('data-hv-premium-cover', 'v42');
+    card.setAttribute('data-hv-premium-cover', 'v45');
     card.setAttribute('aria-label', 'Assistir vídeo de Helena Ávila');
+    card.style.setProperty('background-image', `url("${CARD_COVER_VERSIONED}")`, 'important');
+    card.style.setProperty('background-size', 'cover', 'important');
+    card.style.setProperty('background-position', 'center center', 'important');
 
-    image.removeAttribute('loading');
-    image.loading = 'eager';
-    image.decoding = 'async';
-    image.alt = 'Helena Ávila — apresentação em vídeo';
-
-    if (!image.src.includes('helena-video-cover-premium.jpg') || !image.src.includes('v=42')) {
-      image.src = CARD_COVER_VERSIONED;
+    const legacyImage = card.querySelector(':scope > img, :scope > picture');
+    if (legacyImage) {
+      legacyImage.setAttribute('aria-hidden', 'true');
+      legacyImage.style.setProperty('display', 'none', 'important');
     }
 
     return true;
   }
 
   function boot() {
-    if (applyPremiumCover()) return;
-    const observer = new MutationObserver(() => {
-      if (applyPremiumCover()) observer.disconnect();
-    });
+    ensureCoverStyles();
+    applyPremiumCover();
+
+    const observer = new MutationObserver(() => applyPremiumCover());
     if (document.body) observer.observe(document.body, { childList: true, subtree: true });
   }
 

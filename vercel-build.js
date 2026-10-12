@@ -7,7 +7,7 @@ const out = path.join(root, 'public');
 fs.rmSync(out, { recursive: true, force: true });
 fs.mkdirSync(out, { recursive: true });
 
-const excluded = new Set(['.git', '.github', 'public', 'node_modules', '.tmp-cover-v42']);
+const excluded = new Set(['.git', '.github', 'public', 'node_modules']);
 for (const name of fs.readdirSync(root)) {
   if (excluded.has(name)) continue;
   fs.cpSync(path.join(root, name), path.join(out, name), { recursive: true });

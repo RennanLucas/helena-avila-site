@@ -86,10 +86,10 @@ const indexPath = path.join(out, 'index.html');
 if (!fs.existsSync(indexPath)) throw new Error('index.html não encontrado');
 let html = fs.readFileSync(indexPath, 'utf8');
 
-const mainLoader = '<script src="script.js?v=48"></script>';
+const mainLoader = '<script src="script.js?v=49"></script>';
 html = html.replace(/<script\s+src=["']script\.js\?v=\d+["']><\/script>/g, mainLoader);
 
-const fixLoader = '<script src="video-fix.js?v=48"></script>';
+const fixLoader = '<script src="video-fix.js?v=49"></script>';
 html = html.replace(/\s*<script\s+src=["']video-fix\.js\?v=\d+["']><\/script>/g, '');
 html = html.replace(/\s*<script\s+src=["']video-ios-guard\.js\?v=\d+["']><\/script>/g, '');
 if (!html.includes('</body>')) throw new Error('index.html sem </body>');

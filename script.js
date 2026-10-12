@@ -201,12 +201,13 @@
         video.src = VIDEO.src;
         video.muted = false;
         video.playsInline = true;
-        showPoster('Carregando vídeo…');
+        video.pause();
+        video.removeAttribute('autoplay');
+        showPoster('Tocar para reproduzir');
         modal.classList.add('is-open');
         modal.setAttribute('aria-hidden', 'false');
         document.body.classList.add('hv-lock');
         video.load();
-        tryPlay();
       }
     };
   }

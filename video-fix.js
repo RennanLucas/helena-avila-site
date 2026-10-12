@@ -227,7 +227,6 @@
     };
 
     playButton.addEventListener('click', togglePlay);
-    video.addEventListener('click', togglePlay);
     video.addEventListener('play', updatePlayState);
     video.addEventListener('pause', updatePlayState);
     video.addEventListener('ended', updatePlayState);

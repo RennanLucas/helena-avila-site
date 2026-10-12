@@ -69,7 +69,7 @@ for (const [needle, label] of fixChecks) {
 fixJs = fixJs
   .replace(
     "const CLEAN_POSTER = 'assets/helena-portrait.jpg';",
-    "const CLEAN_POSTER = 'assets/videos/helena-video-cover-premium.jpg?v=46';"
+    "const CLEAN_POSTER = 'assets/videos/helena-video-cover-premium.jpg?v=47';"
   )
   .replace(
     '.hv-card img,\n      .hv-poster-layer img {',
@@ -81,25 +81,23 @@ fixJs = fixJs
   );
 
 if (!fixJs.includes("scope.querySelectorAll('.hv-poster-layer img')")) {
-  throw new Error('Validação v46 falhou: correção do player não está isolada do card');
+  throw new Error('Validação v47 falhou: correção do player não está isolada do card');
 }
 fs.writeFileSync(fixPath, fixJs, 'utf8');
 
 const guardPath = path.join(out, 'video-ios-guard.js');
 const guardJs = fs.readFileSync(guardPath, 'utf8');
 const guardChecks = [
-  ['iOS fullscreen guard v46', 'versão v46 do guard'],
-  ['crisp video cover v46', 'capa nítida v46'],
-  ["VIDEO_SRC = 'assets/videos/helena-video-01.mp4?v=46'", 'frame vindo do MP4 original'],
-  ['hv-crisp-cover-video', 'vídeo de fundo nítido'],
-  ['preload', 'carregamento controlado'],
-  ['freezeFrame', 'congelamento do frame'],
-  ["data-hv-crisp-cover', 'v46'", 'marcação v46'],
-  ['object-fit: cover', 'enquadramento da capa'],
-  ['pointer-events: none', 'card continua clicável']
+  ['real video frame cover v47', 'capa v47 com frame real'],
+  ["video.src = 'assets/videos/helena-video-01.mp4?v=47'", 'frame vindo do vídeo real da Helena'],
+  ['video.currentTime = 1.0', 'frame escolhido da Helena'],
+  ['hv-real-frame', 'vídeo usado como capa real'],
+  ['data-hv-real-frame', 'marcação v47'],
+  ['object-fit:cover', 'enquadramento da capa'],
+  ['pointer-events:none', 'card continua clicável']
 ];
 for (const [needle, label] of guardChecks) {
-  if (!guardJs.includes(needle)) throw new Error(`Validação v46 falhou: ${label}`);
+  if (!guardJs.includes(needle)) throw new Error(`Validação v47 falhou: ${label}`);
 }
 
 const indexPath = path.join(out, 'index.html');
@@ -109,13 +107,13 @@ let html = fs.readFileSync(indexPath, 'utf8');
 const mainLoader = '<script src="script.js?v=36"></script>';
 html = html.replace(/<script\s+src=["']script\.js\?v=\d+["']><\/script>/g, mainLoader);
 
-const fixLoader = '<script src="video-fix.js?v=46"></script>';
+const fixLoader = '<script src="video-fix.js?v=47"></script>';
 html = html.replace(/\s*<script\s+src=["']video-fix\.js\?v=\d+["']><\/script>/g, '');
 html = html.replace(/\s*<script\s+src=["']video-ios-guard\.js\?v=\d+["']><\/script>/g, '');
 if (!html.includes('</body>')) throw new Error('index.html sem </body>');
-html = html.replace('</body>', `  ${fixLoader}\n  <script src="video-ios-guard.js?v=46"></script>\n</body>`);
+html = html.replace('</body>', `  ${fixLoader}\n  <script src="video-ios-guard.js?v=47"></script>\n</body>`);
 fs.writeFileSync(indexPath, html, 'utf8');
 
 fs.rmSync(path.join(out, 'assets', 'video-data'), { recursive: true, force: true });
 
-console.log('Build v46 validado: capa nítida capturada do MP4 original no Safari/iPhone.');
+console.log('Build v47 validado: capa usando frame real da Helena, sem imagem gerada por IA.');

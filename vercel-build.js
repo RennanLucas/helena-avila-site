@@ -7,7 +7,7 @@ const out = path.join(root, 'public');
 fs.rmSync(out, { recursive: true, force: true });
 fs.mkdirSync(out, { recursive: true });
 
-const excluded = new Set(['.git', '.github', 'public', 'node_modules']);
+const excluded = new Set(['.git', '.github', 'public', 'node_modules', '.tmp-cover-v42']);
 for (const name of fs.readdirSync(root)) {
   if (excluded.has(name)) continue;
   fs.cpSync(path.join(root, name), path.join(out, name), { recursive: true });
@@ -105,6 +105,5 @@ html = html.replace('</body>', `  ${fixLoader}\n  <script src="video-ios-guard.j
 fs.writeFileSync(indexPath, html, 'utf8');
 
 fs.rmSync(path.join(out, 'assets', 'video-data'), { recursive: true, force: true });
-fs.rmSync(path.join(out, '.tmp-cover-v42'), { recursive: true, force: true });
 
 console.log('Build v42 validado: capa exata aprovada, cache renovado e renderização Safari/iPhone preservada.');

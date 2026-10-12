@@ -88,7 +88,7 @@ const indexPath = path.join(out, 'index.html');
 if (!fs.existsSync(indexPath)) throw new Error('index.html não encontrado');
 let html = fs.readFileSync(indexPath, 'utf8');
 
-const mainLoader = '<script src="script.js?v=51"></script>';
+const mainLoader = '<script src="script.js?v=52"></script>';
 html = html.replace(/<script\s+src=["']script\.js\?v=\d+["']><\/script>/g, mainLoader);
 
 const fixLoader = '<script src="video-fix.js?v=51"></script>';

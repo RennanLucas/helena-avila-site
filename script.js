@@ -125,6 +125,22 @@
         .hv-poster-center{width:64px;height:64px}
         .hv-watermark-mask{width:46%;height:6%}
       }
+      .hv-wrap{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:40px}
+      .hv-gallery{min-width:0;width:100%}
+      .hv-video-rail{display:flex;gap:18px;width:100%;align-items:flex-start}
+      .hv-video-rail>.hv-media{flex:1;min-width:0}
+      .hv-gallery-note{margin:18px 0 0;text-align:center;color:#8e6547;font:600 12px/1.5 var(--font-sans,Arial,sans-serif)}
+      .hv-video-rail .hv-mobile-open{width:100%}
+      @media(max-width:900px){
+        .hv-wrap{grid-template-columns:minmax(0,1fr)}
+        .hv-gallery{overflow:hidden}
+        .hv-video-rail{overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;gap:16px;padding:8px 2px 28px;scrollbar-width:none}
+        .hv-video-rail::-webkit-scrollbar{display:none}
+        .hv-video-rail>.hv-media{flex:0 0 min(82vw,350px);scroll-snap-align:start;scroll-snap-stop:always}
+        .hv-video-rail .hv-card{width:100%}
+        .hv-video-rail .hv-media:before{display:none}
+        .hv-gallery-note{margin:0}
+      }
       @media(max-height:620px) and (orientation:landscape){
         .hv-modal{padding:8px}
         .hv-modal-shell{width:min(350px,calc((100dvh - 18px) * .5625),calc(100vw - 70px))}
@@ -303,7 +319,30 @@
     if (marquee) {
       const introduction = createMainSection(modal);
       marquee.insertAdjacentElement('afterend', introduction);
-      introduction.insertAdjacentElement('afterend', createMainSection(modal, REFLECTION));
+      const reflection = createMainSection(modal, REFLECTION);
+      const gallery = document.createElement('div');
+      gallery.className = 'hv-gallery';
+      const rail = document.createElement('div');
+      rail.className = 'hv-video-rail';
+      rail.setAttribute('aria-label', 'Vídeos de Helena Ávila');
+      rail.setAttribute('tabindex', '0');
+      rail.append(introduction.querySelector('.hv-media'), reflection.querySelector('.hv-media'));
+      gallery.appendChild(rail);
+      const note = document.createElement('p');
+      note.className = 'hv-gallery-note';
+      note.textContent = '1 de 2 · Arraste para ver o próximo vídeo →';
+      gallery.appendChild(note);
+      introduction.querySelector('.hv-wrap').appendChild(gallery);
+      rail.addEventListener('scroll', () => {
+        const second = rail.children[1];
+        const index = rail.scrollLeft > (second.offsetLeft - rail.children[0].offsetLeft) / 2 ? 2 : 1;
+        note.textContent = index === 1 ? '1 de 2 · Arraste para ver o próximo vídeo →' : '2 de 2 · ← Arraste para voltar';
+      }, { passive: true });
+      rail.addEventListener('keydown', event => {
+        if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') return;
+        event.preventDefault();
+        rail.scrollBy({ left: (event.key === 'ArrowRight' ? 1 : -1) * rail.children[0].getBoundingClientRect().width, behavior: 'smooth' });
+      });
     }
     requestAnimationFrame(initReveal);
   }

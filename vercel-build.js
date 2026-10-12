@@ -15,6 +15,8 @@ for (const name of fs.readdirSync(root)) {
 
 const requiredAssets = [
   'assets/videos/helena-video-01.mp4',
+  'assets/videos/helena-reflexao-20261012.mp4',
+  'assets/videos/helena-reflexao-cover-20261012.jpg',
   'assets/videos/helena-video-cover-final.jpg',
   'assets/helena-sobre.jpg',
   'assets/helena-portrait.jpg',
@@ -86,10 +88,10 @@ const indexPath = path.join(out, 'index.html');
 if (!fs.existsSync(indexPath)) throw new Error('index.html não encontrado');
 let html = fs.readFileSync(indexPath, 'utf8');
 
-const mainLoader = '<script src="script.js?v=50"></script>';
+const mainLoader = '<script src="script.js?v=51"></script>';
 html = html.replace(/<script\s+src=["']script\.js\?v=\d+["']><\/script>/g, mainLoader);
 
-const fixLoader = '<script src="video-fix.js?v=49"></script>';
+const fixLoader = '<script src="video-fix.js?v=51"></script>';
 html = html.replace(/\s*<script\s+src=["']video-fix\.js\?v=\d+["']><\/script>/g, '');
 html = html.replace(/\s*<script\s+src=["']video-ios-guard\.js\?v=\d+["']><\/script>/g, '');
 if (!html.includes('</body>')) throw new Error('index.html sem </body>');

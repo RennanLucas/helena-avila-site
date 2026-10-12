@@ -147,7 +147,8 @@
   function cleanPosterImages(root) {
     const scope = root || document;
     scope.querySelectorAll('.hv-poster-layer img').forEach(img => {
-      if (img.getAttribute('src') !== CLEAN_POSTER) img.setAttribute('src', CLEAN_POSTER);
+      const poster = scope.querySelector('video')?.poster || CLEAN_POSTER;
+      if (img.getAttribute('src') !== poster) img.setAttribute('src', poster);
       img.setAttribute('data-hv-clean-poster', 'true');
     });
   }

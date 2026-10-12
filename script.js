@@ -14,6 +14,13 @@
     poster: 'assets/videos/helena-video-cover-final.jpg?v=48'
   };
 
+  const REFLECTION = {
+    src: 'assets/videos/helena-reflexao-20261012.mp4',
+    title: 'Uma reflexão com Helena Ávila',
+    duration: '2:45',
+    poster: 'assets/videos/helena-reflexao-cover-20261012.jpg'
+  };
+
   const playIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 6.4v11.2L18 12 8.5 6.4Z" fill="currentColor"/></svg>';
   const closeIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6.4 5 12.6 12.6-1.4 1.4L5 6.4 6.4 5Zm11.2 0L19 6.4 6.4 19 5 17.6 17.6 5Z" fill="currentColor"/></svg>';
 
@@ -197,13 +204,13 @@
     });
 
     return {
-      open() {
+      open(selectedVideo = VIDEO) {
         hasStarted = false;
-        title.textContent = VIDEO.title;
-        posterImg.src = VIDEO.poster;
-        posterImg.alt = VIDEO.title;
-        video.poster = VIDEO.poster;
-        video.src = VIDEO.src;
+        title.textContent = selectedVideo.title;
+        posterImg.src = selectedVideo.poster;
+        posterImg.alt = selectedVideo.title;
+        video.poster = selectedVideo.poster;
+        video.src = selectedVideo.src;
         video.muted = false;
         video.playsInline = true;
         video.pause();
@@ -217,40 +224,41 @@
     };
   }
 
-  function bindMobileSafeOpen(element, modal) {
+  function bindMobileSafeOpen(element, modal, selectedVideo = VIDEO) {
     if (!element) return;
     let lastTouch = 0;
 
     element.addEventListener('touchend', event => {
       event.preventDefault();
       lastTouch = Date.now();
-      modal.open();
+      modal.open(selectedVideo);
     }, { passive: false });
 
     element.addEventListener('click', event => {
       event.preventDefault();
       if (Date.now() - lastTouch < 700) return;
-      modal.open();
+      modal.open(selectedVideo);
     });
   }
 
-  function createMainSection(modal) {
+  function createMainSection(modal, selectedVideo = VIDEO) {
     const section = document.createElement('section');
     section.className = 'hv-section hv-reveal';
-    section.setAttribute('aria-label', 'Conheça Helena Ávila em vídeo');
+    section.setAttribute('aria-label', selectedVideo.title);
+    if (selectedVideo === REFLECTION) section.id = 'reflexao-helena';
     section.innerHTML = `
       <div class="hv-wrap">
         <div class="hv-copy">
           <div class="hv-kicker">Conheça Helena Ávila</div>
           <h2 class="hv-heading">Uma conversa antes da <em>primeira sessão.</em></h2>
           <p class="hv-lead">Mais do que conhecer uma formação, é importante perceber a presença, a forma de escutar e o cuidado de quem vai acompanhar o seu processo. Assista a uma breve apresentação da Helena.</p>
-          <div class="hv-meta"><span>Psicoterapia Integrativa</span><span>Presencial & online</span><span>${VIDEO.duration}</span></div>
+          <div class="hv-meta"><span>Psicoterapia Integrativa</span><span>Presencial & online</span><span>${selectedVideo.duration}</span></div>
           <div class="hv-actions"><a class="hv-cta" href="https://wa.me/5511945035218?text=Ol%C3%A1%2C%20Helena.%20Conheci%20um%20pouco%20mais%20do%20seu%20trabalho%20pelo%20site%20e%20gostaria%20de%20conversar%20sobre%20uma%20sess%C3%A3o." target="_blank" rel="noopener">Agendar uma conversa →</a><span class="hv-small-note">Toque no botão de play para assistir.</span></div>
         </div>
         <div class="hv-media">
           <div class="hv-card">
-            <img src="${VIDEO.poster}" alt="Helena Ávila" loading="lazy" decoding="async" />
-            <span class="hv-card-top"><span class="hv-pill">Vídeo · ${VIDEO.duration}</span><span class="hv-pill">Helena Ávila</span></span>
+            <img src="${selectedVideo.poster}" alt="Helena Ávila" loading="lazy" decoding="async" />
+            <span class="hv-card-top"><span class="hv-pill">Vídeo · ${selectedVideo.duration}</span><span class="hv-pill">Helena Ávila</span></span>
             <span class="hv-card-bottom"><span class="hv-card-label">Conheça a terapeuta</span><span class="hv-card-title">Uma apresentação em primeira pessoa.</span><span class="hv-card-play"><span class="hv-play">${playIcon}</span><span>Assistir com som</span></span></span>
             <button class="hv-cover-play" type="button" aria-label="Assistir vídeo de Helena Ávila"></button>
           </div>
@@ -258,8 +266,13 @@
         </div>
       </div>`;
 
-    bindMobileSafeOpen(section.querySelector('.hv-cover-play'), modal);
-    bindMobileSafeOpen(section.querySelector('.hv-mobile-open'), modal);
+    if (selectedVideo === REFLECTION) {
+      section.querySelector('.hv-kicker').textContent = 'Reflexões com Helena';
+      section.querySelector('.hv-heading').innerHTML = 'Um momento para <em>escutar e refletir.</em>';
+      section.querySelector('.hv-lead').textContent = 'Acompanhe mais uma reflexão da Helena Ávila. Um convite para fazer uma pausa e olhar com atenção para a sua própria experiência.';
+    }
+    bindMobileSafeOpen(section.querySelector('.hv-cover-play'), modal, selectedVideo);
+    bindMobileSafeOpen(section.querySelector('.hv-mobile-open'), modal, selectedVideo);
     return section;
   }
 
@@ -287,7 +300,11 @@
     const modal = createModal();
     const hero = document.getElementById('inicio');
     const marquee = hero && hero.nextElementSibling;
-    if (marquee) marquee.insertAdjacentElement('afterend', createMainSection(modal));
+    if (marquee) {
+      const introduction = createMainSection(modal);
+      marquee.insertAdjacentElement('afterend', introduction);
+      introduction.insertAdjacentElement('afterend', createMainSection(modal, REFLECTION));
+    }
     requestAnimationFrame(initReveal);
   }
 

@@ -43,6 +43,11 @@
       .hv-media:before{content:"";position:absolute;inset:8% 2% -4% 16%;border:1px solid rgba(142,101,71,.20);border-radius:38px;transform:rotate(3deg);background:rgba(255,255,255,.36);pointer-events:none}
       .hv-card{position:relative;z-index:3;width:min(100%,370px);aspect-ratio:9/16;border:0;border-radius:30px;overflow:hidden;padding:0;background:#171719;cursor:pointer;box-shadow:0 34px 80px rgba(40,27,18,.20);transform:translateZ(0);transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease;touch-action:manipulation;isolation:isolate;-webkit-tap-highlight-color:transparent;pointer-events:auto}
       .hv-card>*{pointer-events:none}
+      .hv-card{cursor:default}
+      .hv-cover-play{position:absolute;z-index:7;left:6.8%;bottom:5.6%;width:11.7%;aspect-ratio:1;min-width:44px;border:0;border-radius:50%;background:transparent;cursor:pointer;pointer-events:auto!important;padding:0}
+      .hv-cover-play:focus-visible{outline:3px solid #c5a059;outline-offset:4px}
+      .hv-poster-layer{pointer-events:none!important}
+      .hv-poster-center{pointer-events:auto!important;cursor:pointer}
       .hv-card:hover{transform:translateY(-6px) scale(1.012);box-shadow:0 42px 95px rgba(40,27,18,.26)}
       .hv-card img{width:100%;height:100%;object-fit:cover;object-position:center 35%;display:block}
       .hv-card:after{content:"";position:absolute;z-index:1;inset:0;background:linear-gradient(to bottom,rgba(12,10,9,.02) 0%,rgba(12,10,9,.04) 45%,rgba(12,10,9,.66) 72%,rgba(12,10,9,.96) 100%);pointer-events:none}
@@ -240,19 +245,20 @@
           <h2 class="hv-heading">Uma conversa antes da <em>primeira sessão.</em></h2>
           <p class="hv-lead">Mais do que conhecer uma formação, é importante perceber a presença, a forma de escutar e o cuidado de quem vai acompanhar o seu processo. Assista a uma breve apresentação da Helena.</p>
           <div class="hv-meta"><span>Psicoterapia Integrativa</span><span>Presencial & online</span><span>${VIDEO.duration}</span></div>
-          <div class="hv-actions"><a class="hv-cta" href="https://wa.me/5511945035218?text=Ol%C3%A1%2C%20Helena.%20Conheci%20um%20pouco%20mais%20do%20seu%20trabalho%20pelo%20site%20e%20gostaria%20de%20conversar%20sobre%20uma%20sess%C3%A3o." target="_blank" rel="noopener">Agendar uma conversa →</a><span class="hv-small-note">O vídeo só começa quando você tocar.</span></div>
+          <div class="hv-actions"><a class="hv-cta" href="https://wa.me/5511945035218?text=Ol%C3%A1%2C%20Helena.%20Conheci%20um%20pouco%20mais%20do%20seu%20trabalho%20pelo%20site%20e%20gostaria%20de%20conversar%20sobre%20uma%20sess%C3%A3o." target="_blank" rel="noopener">Agendar uma conversa →</a><span class="hv-small-note">Toque no botão de play para assistir.</span></div>
         </div>
         <div class="hv-media">
-          <button class="hv-card" type="button" aria-label="Assistir vídeo de Helena Ávila">
+          <div class="hv-card">
             <img src="${VIDEO.poster}" alt="Helena Ávila" loading="lazy" decoding="async" />
             <span class="hv-card-top"><span class="hv-pill">Vídeo · ${VIDEO.duration}</span><span class="hv-pill">Helena Ávila</span></span>
             <span class="hv-card-bottom"><span class="hv-card-label">Conheça a terapeuta</span><span class="hv-card-title">Uma apresentação em primeira pessoa.</span><span class="hv-card-play"><span class="hv-play">${playIcon}</span><span>Assistir com som</span></span></span>
-          </button>
+            <button class="hv-cover-play" type="button" aria-label="Assistir vídeo de Helena Ávila"></button>
+          </div>
           <button class="hv-mobile-open" type="button" aria-label="Abrir vídeo de Helena Ávila">${playIcon}<span>Assistir vídeo</span></button>
         </div>
       </div>`;
 
-    bindMobileSafeOpen(section.querySelector('.hv-card'), modal);
+    bindMobileSafeOpen(section.querySelector('.hv-cover-play'), modal);
     bindMobileSafeOpen(section.querySelector('.hv-mobile-open'), modal);
     return section;
   }

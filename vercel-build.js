@@ -122,7 +122,7 @@ for (const [needle, label] of guardChecks) {
   if (!guardJs.includes(needle)) throw new Error(`Validação v42 falhou: ${label}`);
 }
 
-guardJs = guardJs.replace(/v42/g, 'v43');
+guardJs = guardJs.replace(/v42/g, 'v43').replace(/v=42/g, 'v=43');
 if (!guardJs.includes("CARD_COVER_VERSIONED = CARD_COVER + '?v=43'")) {
   throw new Error('Validação v43 falhou: cache-bust da capa não atualizado');
 }

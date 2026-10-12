@@ -30,14 +30,15 @@ for (const rel of requiredAssets) {
 }
 
 const coverPath = path.join(out, 'assets', 'videos', 'helena-video-cover-premium.jpg');
-if (fs.statSync(coverPath).size < 10000) {
-  throw new Error('Validação v43 falhou: capa premium incompleta');
+const cover = fs.readFileSync(coverPath);
+if (cover.length < 12000) throw new Error('Validação v44 falhou: capa premium pequena demais');
+if (cover[0] !== 0xff || cover[1] !== 0xd8 || cover[cover.length - 2] !== 0xff || cover[cover.length - 1] !== 0xd9) {
+  throw new Error('Validação v44 falhou: capa premium não é um JPEG íntegro');
 }
 
 const scriptPath = path.join(out, 'script.js');
 if (!fs.existsSync(scriptPath)) throw new Error('script.js não encontrado');
 const js = fs.readFileSync(scriptPath, 'utf8');
-
 const checks = [
   ['premium editorial video experience v36', 'versão v36 do player base'],
   ["src: 'assets/videos/helena-video-01.mp4'", 'fonte nativa do vídeo principal'],
@@ -56,12 +57,7 @@ if (js.includes('helena-video-02.mp4') || js.includes('createAboutVideo')) {
   throw new Error('Validação falhou: referências ao vídeo 2 ainda existem');
 }
 
-/*
- * v43: o v38 antigo corrigia o player, mas também observava a imagem do card e
- * a substituía por helena-portrait.jpg. Isso fazia a capa antiga reaparecer no
- * iPhone mesmo depois da v42. No artefato publicado, o v38 continua cuidando
- * somente do player/modal; o card fica exclusivamente com a capa premium.
- */
+/* v44: o script de correção atua somente dentro do modal/player. */
 const fixPath = path.join(out, 'video-fix.js');
 let fixJs = fs.readFileSync(fixPath, 'utf8');
 const fixChecks = [
@@ -78,11 +74,10 @@ const fixChecks = [
 for (const [needle, label] of fixChecks) {
   if (!fixJs.includes(needle)) throw new Error(`Validação v38 falhou: ${label}`);
 }
-
 fixJs = fixJs
   .replace(
     "const CLEAN_POSTER = 'assets/helena-portrait.jpg';",
-    "const CLEAN_POSTER = 'assets/videos/helena-video-cover-premium.jpg?v=43';"
+    "const CLEAN_POSTER = 'assets/videos/helena-video-cover-premium.jpg?v=44';"
   )
   .replace(
     '.hv-card img,\n      .hv-poster-layer img {',
@@ -92,19 +87,18 @@ fixJs = fixJs
     "scope.querySelectorAll('.hv-card img, .hv-poster-layer img')",
     "scope.querySelectorAll('.hv-poster-layer img')"
   );
-
-if (!fixJs.includes("CLEAN_POSTER = 'assets/videos/helena-video-cover-premium.jpg?v=43'")) {
-  throw new Error('Validação v43 falhou: poster premium não aplicado ao modal');
+if (!fixJs.includes("CLEAN_POSTER = 'assets/videos/helena-video-cover-premium.jpg?v=44'")) {
+  throw new Error('Validação v44 falhou: poster premium não aplicado ao modal');
 }
 if (!fixJs.includes("scope.querySelectorAll('.hv-poster-layer img')")) {
-  throw new Error('Validação v43 falhou: correção do player ainda não foi isolada do card');
+  throw new Error('Validação v44 falhou: correção do player ainda não foi isolada do card');
 }
 if (fixJs.includes("scope.querySelectorAll('.hv-card img, .hv-poster-layer img')")) {
-  throw new Error('Validação v43 falhou: v38 ainda pode sobrescrever a capa do card');
+  throw new Error('Validação v44 falhou: correção ainda pode sobrescrever a capa do card');
 }
 fs.writeFileSync(fixPath, fixJs, 'utf8');
 
-/* Cache-bust e marcação v43 da capa no card. */
+/* Safari/iPhone: força a capa íntegra e um cache key novo. */
 const guardPath = path.join(out, 'video-ios-guard.js');
 let guardJs = fs.readFileSync(guardPath, 'utf8');
 const guardChecks = [
@@ -119,32 +113,27 @@ const guardChecks = [
   ['object-fit: cover', 'renderização da capa como imagem real']
 ];
 for (const [needle, label] of guardChecks) {
-  if (!guardJs.includes(needle)) throw new Error(`Validação v42 falhou: ${label}`);
+  if (!guardJs.includes(needle)) throw new Error(`Validação da capa falhou: ${label}`);
 }
-
-guardJs = guardJs.replace(/v42/g, 'v43').replace(/v=42/g, 'v=43');
-if (!guardJs.includes("CARD_COVER_VERSIONED = CARD_COVER + '?v=43'")) {
-  throw new Error('Validação v43 falhou: cache-bust da capa não atualizado');
+guardJs = guardJs.replace(/v42/g, 'v44').replace(/v=42/g, 'v=44');
+if (!guardJs.includes("CARD_COVER_VERSIONED = CARD_COVER + '?v=44'")) {
+  throw new Error('Validação v44 falhou: cache-bust da capa não atualizado');
 }
-if (!guardJs.includes("data-hv-premium-cover', 'v43'")) {
-  throw new Error('Validação v43 falhou: card não marcado como v43');
+if (!guardJs.includes("data-hv-premium-cover', 'v44'")) {
+  throw new Error('Validação v44 falhou: card não marcado como v44');
 }
 fs.writeFileSync(guardPath, guardJs, 'utf8');
 
 const indexPath = path.join(out, 'index.html');
 if (!fs.existsSync(indexPath)) throw new Error('index.html não encontrado');
 let html = fs.readFileSync(indexPath, 'utf8');
-
 const mainLoader = '<script src="script.js?v=36"></script>';
 html = html.replace(/<script\s+src=["']script\.js\?v=\d+["']><\/script>/g, mainLoader);
-
-const fixLoader = '<script src="video-fix.js?v=43"></script>';
 html = html.replace(/\s*<script\s+src=["']video-fix\.js\?v=\d+["']><\/script>/g, '');
 html = html.replace(/\s*<script\s+src=["']video-ios-guard\.js\?v=\d+["']><\/script>/g, '');
 if (!html.includes('</body>')) throw new Error('index.html sem </body>');
-html = html.replace('</body>', `  ${fixLoader}\n  <script src="video-ios-guard.js?v=43"></script>\n</body>`);
+html = html.replace('</body>', '  <script src="video-fix.js?v=44"></script>\n  <script src="video-ios-guard.js?v=44"></script>\n</body>');
 fs.writeFileSync(indexPath, html, 'utf8');
 
 fs.rmSync(path.join(out, 'assets', 'video-data'), { recursive: true, force: true });
-
-console.log('Build v43 validado: capa premium fixa no card e vídeo isolado para abrir somente após interação.');
+console.log('Build v44 validado: JPEG íntegro no card; vídeo permanece isolado até a interação.');

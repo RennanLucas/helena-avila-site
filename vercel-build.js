@@ -15,7 +15,7 @@ for (const name of fs.readdirSync(root)) {
 
 const requiredAssets = [
   'assets/videos/helena-video-01.mp4',
-  'assets/videos/helena-video-cover-premium.jpg',
+  'assets/videos/helena-video-cover-final.jpg',
   'assets/helena-sobre.jpg',
   'assets/helena-portrait.jpg',
   'video-fix.js',
@@ -55,7 +55,7 @@ const fixPath = path.join(out, 'video-fix.js');
 let fixJs = fs.readFileSync(fixPath, 'utf8');
 const fixChecks = [
   ['clean video player v38', 'versão v38 da correção'],
-  ["CLEAN_POSTER = 'assets/helena-portrait.jpg'", 'poster legado a ser substituído no build'],
+  ["CLEAN_POSTER = 'assets/videos/helena-video-cover-final.jpg?v=48'", 'poster legado a ser substituído no build'],
   ['hv-clean-player-styles', 'estilos do player limpo'],
   ['hv-clean-controls', 'controles premium próprios'],
   ['hv-clean-progress', 'controle de progresso'],
@@ -66,20 +66,6 @@ for (const [needle, label] of fixChecks) {
   if (!fixJs.includes(needle)) throw new Error(`Validação v38 falhou: ${label}`);
 }
 
-fixJs = fixJs
-  .replace(
-    "const CLEAN_POSTER = 'assets/helena-portrait.jpg';",
-    "const CLEAN_POSTER = 'assets/videos/helena-video-cover-premium.jpg?v=47';"
-  )
-  .replace(
-    '.hv-card img,\n      .hv-poster-layer img {',
-    '.hv-poster-layer img {'
-  )
-  .replace(
-    "scope.querySelectorAll('.hv-card img, .hv-poster-layer img')",
-    "scope.querySelectorAll('.hv-poster-layer img')"
-  );
-
 if (!fixJs.includes("scope.querySelectorAll('.hv-poster-layer img')")) {
   throw new Error('Validação v47 falhou: correção do player não está isolada do card');
 }
@@ -88,13 +74,9 @@ fs.writeFileSync(fixPath, fixJs, 'utf8');
 const guardPath = path.join(out, 'video-ios-guard.js');
 const guardJs = fs.readFileSync(guardPath, 'utf8');
 const guardChecks = [
-  ['real video frame cover v47', 'capa v47 com frame real'],
-  ["video.src = 'assets/videos/helena-video-01.mp4?v=47'", 'frame vindo do vídeo real da Helena'],
-  ['video.currentTime = 1.0', 'frame escolhido da Helena'],
-  ['hv-real-frame', 'vídeo usado como capa real'],
-  ['data-hv-real-frame', 'marcação v47'],
+  ['original uploaded image cover v48', 'imagem original anexada'],
   ['object-fit:cover', 'enquadramento da capa'],
-  ['pointer-events:none', 'card continua clicável']
+  ['applyFullscreenGuard', 'compatibilidade iPhone']
 ];
 for (const [needle, label] of guardChecks) {
   if (!guardJs.includes(needle)) throw new Error(`Validação v47 falhou: ${label}`);
@@ -104,16 +86,16 @@ const indexPath = path.join(out, 'index.html');
 if (!fs.existsSync(indexPath)) throw new Error('index.html não encontrado');
 let html = fs.readFileSync(indexPath, 'utf8');
 
-const mainLoader = '<script src="script.js?v=36"></script>';
+const mainLoader = '<script src="script.js?v=48"></script>';
 html = html.replace(/<script\s+src=["']script\.js\?v=\d+["']><\/script>/g, mainLoader);
 
-const fixLoader = '<script src="video-fix.js?v=47"></script>';
+const fixLoader = '<script src="video-fix.js?v=48"></script>';
 html = html.replace(/\s*<script\s+src=["']video-fix\.js\?v=\d+["']><\/script>/g, '');
 html = html.replace(/\s*<script\s+src=["']video-ios-guard\.js\?v=\d+["']><\/script>/g, '');
 if (!html.includes('</body>')) throw new Error('index.html sem </body>');
-html = html.replace('</body>', `  ${fixLoader}\n  <script src="video-ios-guard.js?v=47"></script>\n</body>`);
+html = html.replace('</body>', `  ${fixLoader}\n  <script src="video-ios-guard.js?v=48"></script>\n</body>`);
 fs.writeFileSync(indexPath, html, 'utf8');
 
 fs.rmSync(path.join(out, 'assets', 'video-data'), { recursive: true, force: true });
 
-console.log('Build v47 validado: capa usando frame real da Helena, sem imagem gerada por IA.');
+console.log('Build v48 validado: capa original anexada, sem frame automático.');

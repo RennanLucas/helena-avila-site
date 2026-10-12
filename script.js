@@ -11,7 +11,7 @@
     src: 'assets/videos/helena-video-01.mp4',
     title: 'Uma conversa com Helena Ávila',
     duration: '1:35',
-    poster: 'assets/helena-sobre.jpg'
+    poster: 'assets/videos/helena-video-cover-final.jpg?v=48'
   };
 
   const playIcon = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 6.4v11.2L18 12 8.5 6.4Z" fill="currentColor"/></svg>';

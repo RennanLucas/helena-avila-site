@@ -2,14 +2,13 @@
 (function () {
   'use strict';
 
-  const CLEAN_POSTER = 'assets/helena-portrait.jpg';
+  const CLEAN_POSTER = 'assets/videos/helena-video-cover-final.jpg?v=48';
 
   function ensureStyles() {
     if (document.getElementById('hv-clean-player-styles')) return;
     const style = document.createElement('style');
     style.id = 'hv-clean-player-styles';
     style.textContent = `
-      .hv-card img,
       .hv-poster-layer img {
         object-position: center 24% !important;
       }
@@ -147,7 +146,7 @@
 
   function cleanPosterImages(root) {
     const scope = root || document;
-    scope.querySelectorAll('.hv-card img, .hv-poster-layer img').forEach(img => {
+    scope.querySelectorAll('.hv-poster-layer img').forEach(img => {
       if (img.getAttribute('src') !== CLEAN_POSTER) img.setAttribute('src', CLEAN_POSTER);
       img.setAttribute('data-hv-clean-poster', 'true');
     });

@@ -234,7 +234,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 
   <!-- Tailwind CSS Engine -->
-  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+
 
   <style>
     :root {
@@ -615,6 +615,7 @@
 
   <!-- Kuboweb Analytics Tracker -->
   <script src="https://gitzmynfamubetgujtmm.supabase.co/functions/v1/tracker-script?pid=cbdbd815-af28-4b9f-b7bf-52ee57c35ff8" defer></script>
+  <link rel="stylesheet" href="assets/site-utilities.min.css?v=53" />
 </head>
 
 <body class="antialiased selection:bg-[#8E6547] selection:text-white">
@@ -1377,18 +1378,23 @@
       let animId = null;
       window.addEventListener('resize', () => { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }, { passive: true });
       let step = 0;
-      function drawClouds() {
-        if (!isHeroVisible) return;
+      let lastFrame = 0;
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+      function drawClouds(timestamp = 0) {
+        if (!isHeroVisible || document.hidden) return;
+        if (timestamp - lastFrame < 33) { animId = requestAnimationFrame(drawClouds); return; }
+        lastFrame = timestamp;
         ctx.clearRect(0, 0, w, h); step += 0.003;
         for (let i = 0; i < 3; i++) {
           ctx.beginPath(); const grad = ctx.createLinearGradient(0, 0, w, h); grad.addColorStop(0, 'rgba(142, 101, 71, 0.04)'); grad.addColorStop(0.5, 'rgba(197, 160, 89, 0.03)'); grad.addColorStop(1, 'rgba(69, 99, 78, 0.03)'); ctx.fillStyle = grad; ctx.moveTo(0, h * 0.5);
           for (let x = 0; x <= w; x += 60) { const y = Math.sin(x * 0.002 + step + i) * 80 + Math.cos(x * 0.0015 + step * 0.8) * 50 + (h * 0.45 + i * 50); ctx.lineTo(x, y); }
           ctx.lineTo(w, h); ctx.lineTo(0, h); ctx.closePath(); ctx.fill();
         }
-        animId = requestAnimationFrame(drawClouds);
+        if (!reducedMotion.matches) animId = requestAnimationFrame(drawClouds);
       }
       const canvasObserver = new IntersectionObserver((entries) => { entries.forEach(entry => { isHeroVisible = entry.isIntersecting; if (isHeroVisible) { cancelAnimationFrame(animId); animId = requestAnimationFrame(drawClouds); } }); }, { threshold: 0.05 });
       canvasObserver.observe(canvas); animId = requestAnimationFrame(drawClouds);
+      document.addEventListener('visibilitychange', () => { cancelAnimationFrame(animId); if (!document.hidden && isHeroVisible) animId = requestAnimationFrame(drawClouds); });
     }
 
     const progressBar = document.getElementById('topProgressBar');

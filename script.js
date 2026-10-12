@@ -8,7 +8,7 @@
   }
 
   const VIDEO = {
-    src: 'assets/videos/helena-video-01.mp4',
+    src: 'assets/videos/helena-video-01-web.mp4',
     title: 'Uma conversa com Helena Ávila',
     duration: '1:35',
     poster: 'assets/videos/helena-video-cover-final.jpg?v=48'

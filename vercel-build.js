@@ -14,6 +14,8 @@ for (const name of fs.readdirSync(root)) {
 }
 
 const requiredAssets = [
+  'assets/site-utilities.min.css',
+  'assets/videos/helena-video-01-web.mp4',
   'assets/videos/helena-video-01.mp4',
   'assets/videos/helena-reflexao-20261012.mp4',
   'assets/videos/helena-reflexao-cover-20261012.jpg',
@@ -37,7 +39,7 @@ const js = fs.readFileSync(scriptPath, 'utf8');
 
 const checks = [
   ['premium editorial video experience v36', 'versão v36 do player base'],
-  ["src: 'assets/videos/helena-video-01.mp4'", 'fonte nativa do vídeo principal'],
+  ["src: 'assets/videos/helena-video-01-web.mp4'", 'fonte nativa do vídeo principal'],
   ['hv-mobile-open', 'botão mobile dedicado'],
   ['bindMobileSafeOpen', 'tratamento de toque mobile'],
   ['content-visibility:visible!important', 'hit testing mobile sem content-visibility'],
@@ -88,7 +90,7 @@ const indexPath = path.join(out, 'index.html');
 if (!fs.existsSync(indexPath)) throw new Error('index.html não encontrado');
 let html = fs.readFileSync(indexPath, 'utf8');
 
-const mainLoader = '<script src="script.js?v=52"></script>';
+const mainLoader = '<script src="script.js?v=53"></script>';
 html = html.replace(/<script\s+src=["']script\.js\?v=\d+["']><\/script>/g, mainLoader);
 
 const fixLoader = '<script src="video-fix.js?v=51"></script>';

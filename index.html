@@ -9,6 +9,7 @@
     gtag('js', new Date());
 
     gtag('config', 'AW-17979954388');
+    gtag('config', 'AW-16466782455');
   </script>
 
   <meta charset="UTF-8" />
@@ -1459,11 +1460,11 @@
             if (typeof gtag === 'function') {
                 const isNewTab = anchor.getAttribute('target') === '_blank';
                 if (isNewTab) {
-                    gtag('event', 'conversion', { 'send_to': 'AW-17979954388/pxQ1CMjYrI4dENSpwf1C' });
+                    gtag('event', 'conversion', { 'send_to': ['AW-17979954388/pxQ1CMjYrI4dENSpwf1C', 'AW-16466782455/ku32CMDSmaUdEPfR_Ks9'] });
                 } else {
                     e.preventDefault();
                     gtag('event', 'conversion', {
-                        'send_to': 'AW-17979954388/pxQ1CMjYrI4dENSpwf1C',
+                        'send_to': ['AW-17979954388/pxQ1CMjYrI4dENSpwf1C', 'AW-16466782455/ku32CMDSmaUdEPfR_Ks9'],
                         'event_callback': function () { window.location = href; },
                         'event_timeout': 2000
                     });

@@ -143,8 +143,9 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // Dispara evento de conversão do Google Ads antes do redirecionamento
             if (typeof gtag === 'function') {
+                gtag('event', 'conversion', { 'send_to': 'AW-17979954388/pxQ1CMjYrI4dENSpwf1C' });
                 gtag('event', 'conversion', {
-                    'send_to': 'AW-17979954388/pxQ1CMjYrI4dENSpwf1C',
+                    'send_to': 'AW-16466782455/ku32CMDSmaUdEPfR_Ks9',
                     'event_callback': function() {
                         window.location.href = waUrl;
                     },
@@ -533,20 +534,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 const isNewTab = anchor.getAttribute('target') === '_blank';
                 
                 if (isNewTab) {
-                    // Para links que abrem em nova aba, a página atual não é fechada,
-                    // então podemos enviar o evento normalmente sem atrasar o clique.
+                    gtag('event', 'conversion', {
+                        'send_to': 'AW-16466782455/ku32CMDSmaUdEPfR_Ks9'
+                    });
                     gtag('event', 'conversion', {
                         'send_to': 'AW-17979954388/pxQ1CMjYrI4dENSpwf1C'
                     });
                 } else {
-                    // Para links na mesma aba, atrasamos o redirecionamento
-                    // para garantir que o evento seja disparado antes de sair da página.
                     e.preventDefault();
+                    gtag('event', 'conversion', {
+                        'send_to': 'AW-17979954388/pxQ1CMjYrI4dENSpwf1C'
+                    });
                     var callback = function () {
                         window.location = href;
                     };
                     gtag('event', 'conversion', {
-                        'send_to': 'AW-17979954388/pxQ1CMjYrI4dENSpwf1C',
+                        'send_to': 'AW-16466782455/ku32CMDSmaUdEPfR_Ks9',
                         'event_callback': callback,
                         'event_timeout': 2000
                     });

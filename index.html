@@ -2,14 +2,14 @@
 <html lang="pt-BR" class="scroll-smooth">
 <head>
   <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17979954388"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=AW-16466782455"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    gtag('config', 'AW-17979954388');
     gtag('config', 'AW-16466782455');
+    gtag('config', 'AW-17979954388');
   </script>
 
   <meta charset="UTF-8" />
@@ -1460,11 +1460,13 @@
             if (typeof gtag === 'function') {
                 const isNewTab = anchor.getAttribute('target') === '_blank';
                 if (isNewTab) {
-                    gtag('event', 'conversion', { 'send_to': ['AW-17979954388/pxQ1CMjYrI4dENSpwf1C', 'AW-16466782455/ku32CMDSmaUdEPfR_Ks9'] });
+                    gtag('event', 'conversion', { 'send_to': 'AW-16466782455/ku32CMDSmaUdEPfR_Ks9' });
+                    gtag('event', 'conversion', { 'send_to': 'AW-17979954388/pxQ1CMjYrI4dENSpwf1C' });
                 } else {
                     e.preventDefault();
+                    gtag('event', 'conversion', { 'send_to': 'AW-17979954388/pxQ1CMjYrI4dENSpwf1C' });
                     gtag('event', 'conversion', {
-                        'send_to': ['AW-17979954388/pxQ1CMjYrI4dENSpwf1C', 'AW-16466782455/ku32CMDSmaUdEPfR_Ks9'],
+                        'send_to': 'AW-16466782455/ku32CMDSmaUdEPfR_Ks9',
                         'event_callback': function () { window.location = href; },
                         'event_timeout': 2000
                     });
